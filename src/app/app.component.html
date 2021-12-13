@@ -1,0 +1,868 @@
+<div class="site">
+
+  <!-- navbar -->
+  <nav class="nav_color nav_shadow" style="height:70px;">
+    <div class="row">
+      <div class="nav_logo_box" style="align-items: center">
+        <div class="overlay_alt2 mar_left15 center_center mar_right5" style="height:50px;width:100px;">LOGO</div>
+        <div class="nav_title_box">
+          <div class="nav_title">Particle Angular Commons</div>
+          <div class="nav_subtitle" style="opacity:0.8;">The coolest place</div>
+        </div>
+      </div>
+    </div>
+    <div class="center_right mar_right10">
+      <particle-theming></particle-theming>
+    </div>
+  </nav>
+
+  <!-- main content -->
+  <div class="site-content" id="site-content">
+    <main class="col size_1 position_relative" style="-ms-flex:1 0 auto;">
+      <div class="row_block width100">
+        <!-- HEADER -->
+        <div class="row v_center min_h40 menu_color pad_5">
+          <!-- left push button -->
+          <button class="access btn_pulse xsm page_container_color" (click)="pushContainerLeft.toggle()" aria-label="Toggle Left Push">
+            <i class="fas fa-bars"></i>
+          </button>
+          <!-- page description -->
+          <div class="col size_1 text sm mar_5">
+            You can mess with components made for the module here and make sure they work before package and release.
+          </div>
+          <!-- right push button -->
+          <button class="access btn_pulse xsm page_container_color" (click)="pushContainerRight.toggle()" aria-label="Toggle Right Push">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+        <!-- CONTENT -->
+        <div class="row column pad_10">
+
+          <!-- ROW -->
+          <div class="col wrap">
+
+            <!-- SLIDER SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_blue mar_right5"><i class="fas fa-sliders-h"></i></div>
+                  Slider
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot3">Basic Slider</div>
+                  <particle-slider [(ngModel)]="sliderValue" unit="%"></particle-slider>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="col wrap">
+
+            <!-- COLOR PICKER SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_purple mar_right5"><i class="fas fa-paint-brush"></i></div>
+                  Color Picker
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot3">Basic Color Picker</div>
+                  <particle-color-picker [(ngModel)]="colorPickerValue" (ngModelChange)="console.log(colorPickerValue); console.log('Color picker model change')"></particle-color-picker>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Styled Color Picker</div>
+                  <particle-color-picker
+                    [classList]="'form_input'"
+                    [(ngModel)]="colorPickerValue"
+                    (ngModelChange)="console.log(colorPickerValue); console.log('Color picker model change')">
+                  </particle-color-picker>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Disabled Color Picker</div>
+                  <particle-color-picker [disabled]="true"></particle-color-picker>
+                </div>
+              </div>
+            </div>
+
+            <!-- KEYFILTER SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_grey mar_right5"><i class="fas fa-keyboard"></i></div>
+                  KeyFilter
+                </div>
+                <div class="pad_15">
+                  <!-- alpha text -->
+                  <div class="form_label mar_bot5">Alpha Text Only</div>
+                  <input particleKeyfilter="alpha" class="access input md"
+                         aria-label="Alpha Text Only" placeholder="Abc..." />
+                  <div class="pad_10"></div>
+                  <!-- numeric text -->
+                  <div class="form_label mar_bot5">Numeric Text Only</div>
+                  <input particleKeyfilter="numeric" class="access input md"
+                         aria-label="Numeric Text Only" placeholder="123..." />
+                  <div class="pad_10"></div>
+                  <!-- alphanumeric text with spaces -->
+                  <div class="form_label mar_bot5">Alphanumeric Text Only (with spaces)</div>
+                  <input particleKeyfilter="alphanumeric" [allowSpaces]="true" class="access input md"
+                         aria-label="Alphanumeric Text" placeholder="Abc 123..." />
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="col wrap">
+
+            <!-- DATE PICKER SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_green mar_right5"><i class="fas fa-calendar-alt"></i></div>
+                  Date Picker
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot3">Basic Date Picker</div>
+                  <particle-date-picker [(ngModel)]="datePickerValue"
+                                    (ngModelChange)="console.log(datePickerValue); console.log('Date picker model change')"
+                                    (dateSelected)="console.log($event); console.log('Date selected')"
+                                    (input)="console.log('Date picker input')"
+                                    [disabled]="false"
+                                    [inputClassList]="'form_input page_container_color'"
+                                    [calendarButtonClassList]="'overlay border_left brad_0'">
+                  </particle-date-picker>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Week Picker</div>
+                  <particle-week-picker
+                    [(ngModel)]="weekPickerValue"
+                    (ngModelChange)="console.log(weekPickerValue); console.log('Week picker model change')"
+                    (weekSelected)="console.log($event); console.log('Week selected')"
+                    [disabled]="false">
+                  </particle-week-picker>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Disabled date picker</div>
+                  <particle-date-picker
+                    [disabled]="true">
+                  </particle-date-picker>
+                </div>
+              </div>
+            </div>
+
+            <!-- EDITOR SECTION -->
+            <div class="col size_2 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_orange mar_right5"><i class="fas fa-edit"></i></div>
+                  Editor
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot3">Enter some formatted text below</div>
+                  <particle-rich-text
+                    [placeholder]="'Some placeholder text...'"
+                    [(ngModel)]="textEditorValue"
+                    (ngModelChange)="console.log(textEditorValue); console.log('text editor model change')"
+                    (textChanged)="handleEditorTextChange($event)">
+                  </particle-rich-text>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="col wrap">
+
+            <!-- DROPDOWN SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_blue mar_right5"><i class="fas fa-caret-square-down"></i></div>
+                  Dropdown
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot3">Basic Dropdown</div>
+                  <particle-dropdown
+                    [(ngModel)]="dropdownValue"
+                    (ngModelChange)="console.log(dropdownValue); console.log('dropdown model changed')"
+                    (change)="console.log(dropdownValue); console.log('dropdown value changed')"
+                    [placeholder]="'Select an option...'"
+                    [options]="[
+                           { value: 'red', label: 'Option A' },
+                           { value: 'green', label: 'Disabled Option', disabled: true },
+                           { value: 'blue', label: 'Option C' },
+                           {
+                             groupLabel: 'Option Group',
+                             options: [
+                               { value: 'darkPurple', label: 'Group Option 1' },
+                               { value: 'purple', label: 'Group Option $' },
+                               { value: 'lightPurple', label: 'Group Option X' }
+                             ]
+                           }
+                         ]"
+                    [disabled]="false">
+                  </particle-dropdown>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Dropdown with Templating</div>
+                  <particle-dropdown
+                    [placeholder]="'Select a color...'"
+                    [options]="[
+                           { value: 'red', label: 'Red', dataContext: { 'colorClass': 'bg_red' } },
+                           { value: 'green', label: 'Green', disabled: true, dataContext: { 'colorClass': 'bg_green' } },
+                           { value: 'blue', label: 'Blue', dataContext: { 'colorClass': 'bg_blue' } },
+                           {
+                             groupLabel: 'Purple Values',
+                             options: [
+                               { value: 'darkPurple', label: 'Dark Purple', dataContext: { 'colorClass': 'bg_purple_dark_4' } },
+                               { value: 'purple', label: 'Purple', dataContext: { 'colorClass': 'bg_purple' } },
+                               { value: 'lightPurple', label: 'Light Purple', dataContext: { 'colorClass': 'bg_purple_light_4' } }
+                             ]
+                           }
+                         ]"
+                    [classList]="'form_input page_container_color'"
+                    [disabled]="false">
+                    <ng-template let-colorClass="colorClass" let-label>
+                      <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{label}}
+                    </ng-template>
+                  </particle-dropdown>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Disabled Dropdown</div>
+                  <particle-dropdown
+                    [placeholder]="'Select nothing...'"
+                    [disabled]="true">
+                  </particle-dropdown>
+                </div>
+              </div>
+            </div>
+
+            <!-- MULTI SELECT SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_green mar_right5"><i class="fas fa-check-square"></i></div>
+                  MultiSelect
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot3">Basic MultiSelect</div>
+                  <particle-multi-select
+                    [options]="[
+                         { value: 'a', label: 'Option A' },
+                         { value: 'b', label: 'Disabled Option', disabled: true },
+                         { value: 'c', label: 'Option C' },
+                         {
+                           groupLabel: 'Option Group',
+                           options: [
+                             { value: '1', label: 'Group Option 1' },
+                             { value: '2', label: 'Group Option $' },
+                             { value: '3', label: 'Group Option X' }
+                           ]
+                         }
+                       ]"
+                    [classList]="'form_input page_container_color'" [disabled]="false">
+                  </particle-multi-select>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Select one or more options from the dropdown below</div>
+                  <particle-multi-select
+                    [(ngModel)]="multiSelectValue"
+                    (ngModelChange)="console.log(multiSelectValue); console.log('Multi-select model change')"
+                    (change)="console.log(multiSelectValue); console.log('Multi-select value change')"
+                    [placeholder]="'Select your favorite foods...'"
+                    [options]="[
+                         { value: 'chicken', label: 'Chicken', dataContext: { 'iconClass': 'fas fa-drumstick-bite' } },
+                         { value: 'apples', label: 'Apples', disabled: true, dataContext: { 'iconClass': 'fas fa-apple-alt' } },
+                         { value: 'cheese', label: 'Cheese', dataContext: { 'iconClass': 'fas fa-cheese' } },
+                         {
+                           groupLabel: 'Forbidden Foods',
+                           options: [
+                             { value: 'lemon', label: 'Lemon', dataContext: { 'iconClass': 'fas fa-lemon' } },
+                             { value: 'stroopwafel', label: 'Stroopwafel', dataContext: { 'iconClass': 'fas fa-stroopwafel' } },
+                             { value: 'fish', label: 'Fish', dataContext: { 'iconClass': 'fas fa-fish' } }
+                           ]
+                         }
+                       ]"
+                    [disabled]="false" [classList]="'input md overlay_alt2 page_container_color'">
+                    <ng-template let-iconClass="iconClass" let-label>
+                      <i [ngClass]="iconClass + ' fa-fw mar_right5'"></i> {{label}}
+                    </ng-template>
+                  </particle-multi-select>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Disabled MultiSelect</div>
+                  <particle-multi-select
+                    [disabled]="true">
+                  </particle-multi-select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="col wrap">
+
+            <!-- DIALOG SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_purple mar_right5"><i class="far fa-window-restore"></i></div>
+                  Dialog
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Select the button below to preview the dialog</div>
+                  <button class="access btn sm overlay_alt2 bg_purple_alt" (click)="obj2 = {}">
+                    Preview Dialog
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ICON SELECT SECTION -->
+            <div class="col size_1 min_w280 page_container_color card_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_blue mar_right5"><i class="fas fa-hand-point-up"></i></div>
+                  Icon Select
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Select the button below to open the icon select</div>
+                  <particle-icon-select [(ngModel)]="icon"
+                                    (opened)="iconSelectOpened()"
+                                    (closed)="iconSelectClosed()"
+                                    (selected)="iconSelected($event); console.log('icon selected')"
+                                    (ngModelChange)="console.log(icon); console.log('icon select model change')">
+                  </particle-icon-select>
+                </div>
+              </div>
+            </div>
+
+            <!-- NOTIFICATION SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_grey mar_right5"><i class="fas fa-ellipsis-h"></i></div>
+                  Popover
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Select the button below to open the popover</div>
+                  <button class="access btn sm overlay_alt2 bg_grey_alt" (click)="popover.toggle($event)">
+                    Preview Popover
+                  </button>
+                  <particle-popover width="500" #popover>
+                    <div class="pad_10">
+                      <div class="mar_bot10">This is some popover content</div>
+                      <button (click)="popover.toggle($event)" class="access btn overlay sm mar_5">
+                        <i class="fas fa-times mar_right5"></i>Close Popover
+                      </button>
+                    </div>
+                  </particle-popover>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="col wrap">
+
+            <!-- NOTIFICATION SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_orange mar_right5"><i class="fas fa-exclamation-circle"></i></div>
+                  Notification
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Select a button below to preview a notification type</div>
+                  <div class="row wrap v_center" style="margin:0 -5px;">
+                    <button (click)="addNotification('success')"
+                            class="access btn sm overlay_alt2 bg_green_alt mar_5">
+                      Show Success
+                    </button>
+                    <button (click)="addNotification('warn')"
+                            class="access btn sm overlay_alt2 bg_orange_alt mar_5">
+                      Show Warning
+                    </button>
+                    <button (click)="addNotification('error')"
+                            class="access btn sm overlay_alt2 bg_red_alt mar_5">
+                      Show Error
+                    </button>
+                    <button (click)="addNotification('info')"
+                            class="access btn sm overlay_alt2 bg_purple_alt mar_5">
+                      Show Info
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TOOLTIP SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_red mar_right5"><i class="fas fa-comment-alt"></i></div>
+                  Tooltip
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Hover a box below to see a tooltip</div>
+                  <div class="row wrap v_center" style="margin:0 -5px;">
+                    <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
+                         particleTooltip="I'm left out" tooltipPosition="left">
+                      <i class="fas fa-arrow-left mar_right5"></i>Left Tooltip
+                    </div>
+                    <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
+                         particleTooltip="I'm always right" tooltipPosition="right">
+                      <i class="fas fa-arrow-right mar_right5"></i>Right Tooltip
+                    </div>
+                    <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
+                         particleTooltip="I'm above it" tooltipPosition="top">
+                      <i class="fas fa-arrow-up mar_right5"></i>Top Tooltip
+                    </div>
+                    <div class="overlay text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
+                         particleTooltip="I'm feeling down" tooltipPosition="bottom">
+                      <i class="fas fa-arrow-down mar_right5"></i>Bottom Tooltip
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="col wrap">
+
+            <!-- THEMING SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_brown mar_down5 mar_right5"><i class="fas fa-paint-brush"></i></div>
+                  Theming
+                </div>
+                <div class="pad_15">
+                  <particle-theming></particle-theming>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="col wrap">
+
+            <!-- ACCORDION SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_blue mar_down5 mar_right5"><i class="fas fa-angle-down"></i></div>
+                  Accordion
+                </div>
+
+                <!-- Default -->
+                <p class="pad_15 text lg">Default</p>
+                <div class="pad_15">
+                    <particle-accordion collapsing="collapsing">
+                      <!-- Item 1 -->
+                      <particle-accordion-item header="Header I">
+                        <ng-template particleAccordionContent>
+                          <div class="pad_15 text md">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                            aliquip ex ea commodo consequat.
+                          </div>
+                        </ng-template>
+                      </particle-accordion-item>
+                       <!-- Item 2 -->
+                       <particle-accordion-item header="Header II">
+                        <ng-template particleAccordionContent>
+                          <div class="pad_15 text md">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                            aliquip ex ea commodo consequat.
+                          </div>
+                        </ng-template>
+                      </particle-accordion-item>
+                      <!-- Item 3 -->
+                      <particle-accordion-item header="Header III">
+                        <ng-template particleAccordionContent>
+                          <div class="pad_15 text md">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                            aliquip ex ea commodo consequat.
+                          </div>
+                        </ng-template>
+                      </particle-accordion-item>
+                       <!-- Item 4 -->
+                       <particle-accordion-item header="Header IV (Disabled)" disabled="disabled">
+                        <ng-template particleAccordionContent>
+                          <div class="pad_15 text md">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                            aliquip ex ea commodo consequat.
+                          </div>
+                        </ng-template>
+                      </particle-accordion-item>
+                    </particle-accordion>
+                </div>
+
+                <!-- Multiple -->
+                <p class="pad_15 text lg">Multiple</p>
+                <div class="pad_15">
+                    <particle-accordion>
+                      <!-- Item 1 -->
+                      <particle-accordion-item header="Header I">
+                        <ng-template particleAccordionContent>
+                          <div class="pad_15 text md">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                            aliquip ex ea commodo consequat.
+                          </div>
+                        </ng-template>
+                      </particle-accordion-item>
+                       <!-- Item 2 -->
+                       <particle-accordion-item header="Header II">
+                        <ng-template particleAccordionContent>
+                          <div class="pad_15 text md">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                            aliquip ex ea commodo consequat.
+                          </div>
+                        </ng-template>
+                      </particle-accordion-item>
+                      <!-- Item 3 -->
+                      <particle-accordion-item header="Header III">
+                        <ng-template particleAccordionContent>
+                          <div class="pad_15 text md">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                            aliquip ex ea commodo consequat.
+                          </div>
+                        </ng-template>
+                      </particle-accordion-item>
+                       <!-- Item 4 -->
+                       <particle-accordion-item header="Header IV (Disabled)" disabled="disabled">
+                        <ng-template particleAccordionContent>
+                          <div class="pad_15 text md">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                            aliquip ex ea commodo consequat.
+                          </div>
+                        </ng-template>
+                      </particle-accordion-item>
+                    </particle-accordion>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ROW -->
+          <div class="col wrap">
+
+            <!-- PAGINATOR SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_green mar_right5"><i class="fas fa-arrow-circle-right"></i></div>
+                  Paginator
+                </div>
+                <div class="pad_15">
+                  <div class="bg_everyodd">
+                    <!-- version 1 -->
+                    <div class="row wrap brad_3 pad_x5 mar_y10">
+                      <div class="col size_1 mar_10 pad_y5">
+                        <div class="text md bolder">Version 1</div>
+                      </div>
+                      <div class="col size_3 center_center mar_10">
+                        <particle-paginator
+                          version="1"
+                          [totalLength]="100"
+                          [pageSizeOptions]="[10,25,50]"
+                          [pageSize]="10"
+                        ></particle-paginator>
+                      </div>
+                    </div>
+                    <!-- version 2 -->
+                    <div class="row wrap brad_3 pad_x5 mar_y10">
+                      <div class="col size_1 mar_10 pad_y5">
+                        <div class="text md bolder">Version 2</div>
+                      </div>
+                      <div class="col size_3 center_center mar_10">
+                        <particle-paginator
+                          version="2"
+                          [totalLength]="200"
+                          [pageSizeOptions]="[10,25,50]"
+                          [pageSize]="25"
+                        ></particle-paginator>
+                      </div>
+                    </div>
+                    <!-- version 3 -->
+                    <div class="row wrap brad_3 pad_x5 mar_y10">
+                      <div class="col size_1 mar_10 pad_y5">
+                        <div class="text md bolder">Version 3</div>
+                      </div>
+                      <div class="col size_3 center_center mar_10">
+                        <particle-paginator
+                          version="3"
+                          [totalLength]="30000"
+                          [pageSizeOptions]="[10,25,50]"
+                          [pageSize]="50"
+                        ></particle-paginator>
+                      </div>
+                    </div>
+                    <!-- version 4 -->
+                    <div class="row wrap brad_3 pad_x5 mar_y10">
+                      <div class="col size_1 mar_10 pad_y5">
+                        <div class="text md bolder">Version 4</div>
+                      </div>
+                      <div class="col size_3 center_center mar_10">
+                        <particle-paginator
+                          version="4"
+                          [totalLength]="30000"
+                          [pageSizeOptions]="[10,25,50]"
+                          [pageSize]="50"
+                        ></particle-paginator>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="col wrap">
+
+            <!-- PROFILE PIC SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_grey mar_right5"><i class="fas fa-user-circle"></i></div>
+                  Profile Picture
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Check this guy out</div>
+                  <particle-profile-pic
+                    toolTip="Some Guy"
+                    imageUrl="https://s3.amazonaws.com/transcend-project-management-files/public/5e5b8204-955f-4ccf-9c57-8efd02faa70c-1544366755611.jpeg">
+                  </particle-profile-pic>
+                </div>
+              </div>
+            </div>
+
+            <!-- PIPES SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_orange mar_right5"><i class="fas fa-filter"></i></div>
+                  Pipes
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Ordinal Number</div>
+                  <div class="text md">1 -> {{1 | ordinalNumber}}, 2 -> {{2 | ordinalNumber}}, 3 -> {{3 | ordinalNumber}}</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="col wrap">
+
+            <!-- ENDPOINT STATE SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_green mar_right5"><i class="fas fa-hourglass-half"></i></div>
+                  Endpoint State
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">A loading state</div>
+                  <particle-endpoint-state
+                    [loadingOverlay]="false"
+                    [loading]="true"
+                    [loadingOverlayText]="'Please wait while we get things ready for you'"
+                    [loadingOverlaySubtext]="'This may take a few minutes...'"
+                    [loadingIcon]="'bars_vertical'">
+                  </particle-endpoint-state>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ROW -->
+          <div class="col wrap">
+
+            <!-- ICONS SECTION -->
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_blue mar_right5"><i class="fas fa-icons"></i></div>
+                  Icons
+                </div>
+                <div class="pad_10">
+                  <div class="row">
+                    <!-- solid icons -->
+                    <div class="col size_1">
+                      <div class="row_block width100">
+<!--                        <div class="text lg center bolder mar_5 mar_bot15">Solid Icons</div>-->
+                        <div class="row wrap">
+                          <div *ngFor="let icon of icons" class="col size_1 min_w100 column center_center mar_5">
+                            <div class="col size_1 center_center">
+                              <i class="wis {{icon.class}} fa-2x fa-fw"></i>
+                            </div>
+                            <div class="text sm center mar_top5">{{icon.class}}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+<!--        &lt;!&ndash; DIALOG DEMONSTRATION &ndash;&gt;-->
+<!--        <particle-dialog title="This thing" [object]="obj" (closed)="obj = null;" #dialog>-->
+<!--          <div class="center_center" style="font-size: 24pt;height: 100%;text-align: center;">-->
+<!--            <div>Here's some text dawg</div>-->
+<!--          </div>-->
+<!--        </particle-dialog>-->
+
+        <!-- DIALOG DEMONSTRATION -->
+        <particle-dialog title="Parent Dialog" [object]="obj2" (closed)="obj2 = null" [allowClose]="true"
+                     width="300px" height="200px">
+          <div class="pad_10">
+          <div class="form_label mar_bot3">Basic Dropdown</div>
+            <particle-dropdown
+              [placeholder]="'Select an option...'"
+              [options]="[
+                             { value: 'red', label: 'Option A' },
+                             { value: 'green', label: 'Disabled Option', disabled: true },
+                             { value: 'blue', label: 'Option C' },
+                             {
+                               groupLabel: 'Option Group',
+                               options: [
+                                 { value: 'darkPurple', label: 'Group Option 1' },
+                                 { value: 'purple', label: 'Group Option $' },
+                                 { value: 'lightPurple', label: 'Group Option X' }
+                               ]
+                             }
+                           ]"
+              [disabled]="false">
+            </particle-dropdown>
+            <button class="access btn md overlay_alt2 bg_blue_alt mar_10" (click)="obj3 = {}">Open Child</button>
+          </div>
+          <!-- CHILD DIALOG -->
+          <particle-dialog title="Child of Parent Dialog" [object]="obj3" (closed)="obj3 = null"
+                       [allowClose]="false"
+                       width="350px" height="250px">
+            <div class="pad_10">
+              <div class="form_label mar_bot3">Basic Date Picker</div>
+              <particle-date-picker
+                [disabled]="false"
+                [inputClassList]="'form_input page_container_color'"
+                [calendarButtonClassList]="'overlay border_left brad_0'">
+              </particle-date-picker>
+              <button class="access btn md overlay_alt2 bg_blue_alt mar_10" (click)="obj4 = {}">Open Child</button>
+              <button class="access btn md overlay_alt2 bg_blue_alt mar_10" (click)="obj3 = null">Close</button>
+            </div>
+            <!-- SECOND CHILD DIALOG -->
+            <particle-dialog title="Child of Child of Parent Dialog" [object]="obj4" (closed)="obj4 = null"
+                         width="400px" height="300px">
+              <div class="pad_15">
+                <div class="form_label mar_bot5">Select the button below to open the popover</div>
+                <button class="access btn sm overlay_alt2 bg_grey_alt" (click)="dialogPopover.toggle($event)">
+                  Preview Popover
+                </button>
+                <particle-popover width="500" #dialogPopover>
+                  <div class="pad_10">
+                    <div class="mar_bot10">This is some popover content</div>
+                    <button (click)="dialogPopover.toggle($event)" class="access btn overlay sm mar_5">
+                      <i class="fas fa-times mar_right5"></i>Close Popover
+                    </button>
+                  </div>
+                </particle-popover>
+              </div>
+            </particle-dialog>
+          </particle-dialog>
+        </particle-dialog>
+
+        <!-- LEFT PUSH CONTAINER -->
+        <particle-push-container
+          mainContentId="site-content"
+          side="left"
+          [width]="250"
+          topOffset="70px"
+          [closeOnResize]="true"
+          [showSidePanel]="true"
+          [hideCloseButton]="false"
+          (closed)="onPushContainerClose()"
+          #pushContainerLeft>
+          <div class="menu_color min_h40 pad_10 pad_x15 text md bold v_center">
+            Left Push Container
+          </div>
+          <div class="pad_10">
+            <div class="row bottom_left mar_5" style="height:32px;">
+              <div class="text md bolder">
+                This is a push container
+              </div>
+            </div>
+            <div class="overlay_alt2 hr mar_y15 mar_x5"></div>
+            <!-- informational text -->
+            <div class="mar_5 mar_y10 pad_bot5">
+              <div class="text sm paragraph">
+                The push container is a sidebar container that pushes the contents of the page over while it's opened.
+                It can be toggled to open or close, and the width and background color can be configured.
+                <br/><br/>
+                Try it now by clicking the toggle button at the top of the page, to the right of this sidebar.
+              </div>
+            </div>
+          </div>
+        </particle-push-container>
+
+        <!-- RIGHT PUSH CONTAINER -->
+        <particle-push-container
+          mainContentId="site-content"
+          side="right"
+          topOffset="70px"
+          [closeOnResize]="true"
+          [showSidePanel]='true'
+          [width]="250"
+          #pushContainerRight>
+          <div class="menu_color min_h40 pad_10 pad_x15 text md bold v_center">
+            Right Push Container
+          </div>
+          <div class="pad_10">
+            <div class="row bottom_left mar_5" style="height:32px;">
+              <div class="text md bolder">
+                This is a push container
+              </div>
+            </div>
+            <div class="overlay_alt2 hr mar_y15 mar_x5"></div>
+            <!-- informational text -->
+            <div class="mar_5 mar_y10 pad_bot5">
+              <div class="text sm paragraph">
+                The push container is a sidebar container that pushes the contents of the page over while it's opened.
+                It can be toggled to open or close, and the width and background color can be configured.
+                <br/><br/>
+                Try it now by clicking the toggle button at the top of the page, to the right of this sidebar.
+              </div>
+            </div>
+          </div>
+        </particle-push-container>
+
+        <!-- NOTIFICATION CONTAINER -->
+        <particle-notification></particle-notification>
+
+      </div>
+    </main>
+  </div>
+
+
+
+</div>

@@ -1,0 +1,16 @@
+<ng-container *ngIf="themes$ | async as themes">
+  <ng-container *ngIf="options$ | async as options">
+    <particle-dropdown
+      [placeholder]="'Select a Theme...'"
+      [options]="options"
+      [classList]="'form_input page_container_color'"
+      [disabled]="false"
+      [ariaLabel]="'Select a Theme'"
+      [value]="themeId"
+      (change)="changeTheme($event, themes)">
+      <ng-template let-colorClass="colorClass" let-label>
+        <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{label}}
+      </ng-template>
+    </particle-dropdown>
+  </ng-container>
+</ng-container>

@@ -1,0 +1,75 @@
+<div class="particle_richtext_container brad_3">
+  <!-- editor toolbar -->
+  <div class="particle_richtext_toolbar overlay_alt2" [ngClass]="toolbarClassList" #toolbar>
+    <span class="ql-formats">
+      <div *ngIf="!editorFocused" class="ql-header-placeholder">Style</div>
+      <select aria-label="Text Style" class="access ql-header" particleTooltip="Text Style" tooltipPosition="top">
+        <option class="h1" value="1" aria-label="Heading">Heading</option>
+        <option class="h2" value="2" aria-label="Subheading">Subheading</option>
+        <option selected aria-label="Normal">Normal</option>
+      </select>
+    </span>
+    <div class="overlay_alt2 vr mar_x5"></div>
+    <span class="ql-formats">
+      <button class="access ql-bold" aria-label="Bold" particleTooltip="Bold" tooltipPosition="top">
+        <i class="fas fa-bold fa-fw"></i>
+      </button>
+      <button class="access ql-italic" aria-label="Italic" particleTooltip="Italic" tooltipPosition="top">
+        <i class="fas fa-italic fa-fw"></i>
+      </button>
+      <button class="access ql-underline" aria-label="Underline" particleTooltip="Underline" tooltipPosition="top">
+        <i class="fas fa-underline fa-fw"></i>
+      </button>
+    </span>
+    <div class="overlay_alt2 vr mar_x5"></div>
+<!--    <span class="ql-formats">-->
+<!--      <select aria-label="Color" class="ql-color"></select>-->
+<!--      <select aria-label="Background" class="ql-background"></select>-->
+<!--    </span>-->
+    <span class="ql-formats">
+      <div *ngIf="!editorFocused" class="ql-align-placeholder">Align</div>
+      <button class="access ql-list" value="ordered" aria-label="Ordered List"
+              particleTooltip="Ordered List" tooltipPosition="top">
+        <i class="fas fa-list-ol fa-fw"></i>
+      </button>
+      <button class="access ql-list" value="bullet" aria-label="Unordered List"
+              particleTooltip="Unordered List" tooltipPosition="top">
+        <i class="fas fa-list-ul fa-fw"></i>
+      </button>
+      <select aria-label="Alignment" class="access ql-align" particleTooltip="Alignment" tooltipPosition="top">
+        <option selected>Left</option>
+        <option value="center">Center</option>
+        <option value="right">Right</option>
+        <option value="justify">Justify</option>
+      </select>
+    </span>
+    <div class="overlay_alt2 vr mar_x5"></div>
+    <span class="ql-formats">
+      <button class="access ql-link" aria-label="Insert Link" particleTooltip="Insert Link" tooltipPosition="top">
+        <i class="fas fa-link fa-fw"></i>
+      </button>
+<!--      <button class="ql-image" aria-label="Insert Image"></button>-->
+<!--      <button class="ql-code-block" aria-label="Insert Code Block"></button>-->
+    </span>
+    <div class="overlay_alt2 vr mar_x5"></div>
+    <span class="ql-formats">
+      <button class="access ql-clean" aria-label="Remove Styles" particleTooltip="Remove Styles" tooltipPosition="top">
+        <i class="fas fa-remove-format fa-fw"></i>
+      </button>
+    </span>
+    <div class="overlay_alt2 toolbar_wrap_separator"></div>
+  </div>
+
+  <div class="particle_richtext_editor overlay_alt2" #editor
+       [ngClass]="editorClassList" [ngStyle]="{height: height}"></div>
+</div>
+
+<!--<p-editor #editor-->
+<!--          [style]="{width: '100%', height: height, fontFamily: 'Montserrat, sans-serif'}"-->
+<!--          [readonly]="readonly"-->
+<!--          [placeholder]="placeholder"-->
+<!--          (onTextChange)="textChanged.emit($event)">-->
+<!--  <p-header>-->
+
+<!--  </p-header>-->
+<!--</p-editor>-->
