@@ -1,6 +1,6 @@
-# Particle Angular Commons
+# Particle - Angular
 
-This package offers a small selection of reusable components that interoperate with the rest of the Particle offering. If you're interested in contributing or find any bugs, feel free to catch us on GitHub.
+This package offers a small selection of reusable components that are meant to replace usage of other Angular component libraries, like Angular Material and PrimeNG. If you're looking for a themeable alternative that gives you unprecedented control of your Angular components, give Particle a chance! If you're interested in contributing or find any bugs, feel free to catch us on GitHub.
 
 ## ParticleColorPickerModule
 ### ColorPickerComponent
