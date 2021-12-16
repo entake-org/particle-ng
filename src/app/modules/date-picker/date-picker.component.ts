@@ -145,6 +145,12 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   calendarButtonClassList = '';
 
   /**
+   * Close the picker when a selection is made
+   */
+  @Input()
+  closeOnSelect: boolean = true;
+
+  /**
    * Event emitted on date picker input
    */
   @Output()
@@ -415,6 +421,10 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
 
         if (!isEqual(this.value, valueBeforeUpdate)) {
           this.dateSelected.emit(value);
+
+          if (this.closeOnSelect) {
+            this.handleCalendarClose();
+          }
         }
       } else {
         this.value = null as any;

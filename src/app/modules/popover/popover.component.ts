@@ -233,9 +233,8 @@ export class PopoverComponent implements OnDestroy, OnInit {
 
   /**
    * Close the popover
-   * @private
    */
-  private close(): void {
+  public close(): void {
     this.visible = false;
   }
 

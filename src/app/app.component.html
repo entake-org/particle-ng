@@ -129,6 +129,7 @@
                                     (dateSelected)="console.log($event); console.log('Date selected')"
                                     (input)="console.log('Date picker input')"
                                     [disabled]="false"
+                                    [closeOnSelect]="false"
                                     [inputClassList]="'form_input page_container_color'"
                                     [calendarButtonClassList]="'overlay border_left brad_0'">
                   </particle-date-picker>
@@ -137,7 +138,8 @@
                   <particle-week-picker
                     [(ngModel)]="weekPickerValue"
                     (ngModelChange)="console.log(weekPickerValue); console.log('Week picker model change')"
-                    (weekSelected)="console.log($event); console.log('Week selected')"
+                    (weekSelected)="console.log($event); console.log('Week selected');"
+                    [closeOnSelect]="true"
                     [disabled]="false">
                   </particle-week-picker>
                   <div class="pad_10"></div>

@@ -175,6 +175,12 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   dateFormat = 'MM/dd/y';
 
   /**
+   * Close the picker when a selection is made
+   */
+  @Input()
+  closeOnSelect = true;
+
+  /**
    * Event emitted on week select
    */
   @Output()
@@ -604,6 +610,10 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
         !isEqual(valueBeforeUpdate.end, this.value.end)) {
         this.onChange(this.value);
         this.weekSelected.emit(this.value);
+
+        if (this.closeOnSelect) {
+          this.calendarPopover.close();
+        }
       }
     }
   }

@@ -125,7 +125,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
    * ViewChild of the color input element
    */
   @ViewChild('colorInput')
-  colorInput: ElementRef<HTMLInputElement> = {} as ElementRef;
+  colorInput: ElementRef<HTMLInputElement> = null as any;
 
   /**
    * Whether or not to render the component
