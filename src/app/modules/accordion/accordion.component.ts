@@ -28,9 +28,11 @@ export class AccordionComponent {
    * When collapsing, it will display 1 tab at a time
    * When not collapsing, it can display multiple tabs at once
    */
-  @Input() collapsing;
+  @Input()
+  collapsing = false;
 
-  @ContentChildren(AccordionItemDirective) items: QueryList<AccordionItemDirective>;
+  @ContentChildren(AccordionItemDirective)
+  items: QueryList<AccordionItemDirective> = null as any;
 
   /**
    * @param index - index of the accordion item

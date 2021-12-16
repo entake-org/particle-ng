@@ -17,18 +17,18 @@ export class ThemingComponent implements OnInit {
    * Override class for the embedded dropdown
    */
   @Input()
-  selectClass: string;
+  selectClass: string = null as any;
 
   /**
    * ID for the embedded dropdown (allows for linking a label)
    */
   @Input()
-  selectId: string;
+  selectId: string = null as any;
 
   /**
    * Selected Theme ID
    */
-  themeId: number;
+  themeId: number = null as any;
 
   /**
    * List of available themes
@@ -43,7 +43,7 @@ export class ThemingComponent implements OnInit {
           value: theme.themeId,
           disabled: false,
           dataContext: {
-            'colorClass': 'nav_color'
+            'colorValue': theme.navColor
           }
         } as DropdownOption);
       }

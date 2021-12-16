@@ -8,7 +8,7 @@ export class DialogService {
 
   dialogs: DialogComponent[] = [];
 
-  private escapeListener: (event) => void = event => {
+  private escapeListener: (event: any) => void = event => {
     if (event.key === 'Esc' || event.key === 'Escape') {
       if (this.dialogs && this.dialogs.length) {
         let closeOverride = null;

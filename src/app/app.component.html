@@ -129,6 +129,7 @@
                                     (dateSelected)="console.log($event); console.log('Date selected')"
                                     (input)="console.log('Date picker input')"
                                     [disabled]="false"
+                                    [closeOnSelect]="false"
                                     [inputClassList]="'form_input page_container_color'"
                                     [calendarButtonClassList]="'overlay border_left brad_0'">
                   </particle-date-picker>
@@ -137,7 +138,8 @@
                   <particle-week-picker
                     [(ngModel)]="weekPickerValue"
                     (ngModelChange)="console.log(weekPickerValue); console.log('Week picker model change')"
-                    (weekSelected)="console.log($event); console.log('Week selected')"
+                    (weekSelected)="console.log($event); console.log('Week selected');"
+                    [closeOnSelect]="true"
                     [disabled]="false">
                   </particle-week-picker>
                   <div class="pad_10"></div>
@@ -539,7 +541,7 @@
                         </ng-template>
                       </particle-accordion-item>
                        <!-- Item 4 -->
-                       <particle-accordion-item header="Header IV (Disabled)" disabled="disabled">
+                       <particle-accordion-item header="Header IV (Disabled)" [disabled]="true">
                         <ng-template particleAccordionContent>
                           <div class="pad_15 text md">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -779,7 +781,7 @@
                 <button class="access btn sm overlay_alt2 bg_grey_alt" (click)="dialogPopover.toggle($event)">
                   Preview Popover
                 </button>
-                <particle-popover width="500" #dialogPopover>
+                <particle-popover [width]="500" #dialogPopover>
                   <div class="pad_10">
                     <div class="mar_bot10">This is some popover content</div>
                     <button (click)="dialogPopover.toggle($event)" class="access btn overlay sm mar_5">

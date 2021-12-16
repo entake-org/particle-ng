@@ -123,12 +123,12 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
 
       this._internalValue.next(value);
     } else {
-      this._internalValue.next(null);
+      this._internalValue.next(null as any);
       this._selectedMonth.next(this.currentDate.month);
       this._selectedYear.next(this.currentDate.year);
     }
 
-    this._value = value;
+    this._value = value as any;
   }
 
   /**
@@ -175,6 +175,12 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   dateFormat = 'MM/dd/y';
 
   /**
+   * Close the picker when a selection is made
+   */
+  @Input()
+  closeOnSelect = true;
+
+  /**
    * Event emitted on week select
    */
   @Output()
@@ -184,7 +190,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * ViewChild of the calendar popover
    */
   @ViewChild('calendarPopover')
-  calendarPopover: PopoverComponent;
+  calendarPopover: PopoverComponent = null as any;
 
   /**
    * The current date
@@ -207,12 +213,12 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   /**
    * BehaviorSubject tracking the value of the week picker
    */
-  readonly _internalValue = new BehaviorSubject<{ start: Date, end: Date }>(null);
+  readonly _internalValue = new BehaviorSubject<{ start: Date, end: Date }>(null as any);
 
   /**
    * BehaviorSubject tracking the selectable date range
    */
-  readonly _validSelectionInterval = new BehaviorSubject<{ start: Date, end: Date }>(null);
+  readonly _validSelectionInterval = new BehaviorSubject<{ start: Date, end: Date }>(null as any);
 
   /**
    * BehaviorSubject tracking the currently selected month
@@ -310,7 +316,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
     this._validSelectionInterval
   ]).pipe(
     map(([month, year, selectionInterval]) => {
-      let fullMonth: Array<MetaWeek> = null;
+      let fullMonth: Array<MetaWeek> = null as any;
 
       if (selectionInterval) {
         fullMonth = WeekPickerComponent.generateMonth(
@@ -331,13 +337,13 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * The value of the week picker
    * @private
    */
-  private _value;
+  private _value = null;
 
   /**
    * Whether or not the control is disabled
    * @private
    */
-  private _disabled;
+  private _disabled = false;
 
   /**
    * Generate an Array of numbers representing the span of years between the input
@@ -345,7 +351,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * @param maxYear the end of the range
    * @param currentYear the current year
    */
-  private static generateYearRange(minYear, maxYear, currentYear): Array<number> {
+  private static generateYearRange(minYear: number, maxYear: number, currentYear: number): Array<number> {
     let start: number, end: number;
     if (!minYear && maxYear) {
       start = maxYear = 50;
@@ -446,7 +452,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * Get the value of the week picker
    */
   get value(): { start: Date, end: Date } {
-    return this._value;
+    return this._value as any;
   }
 
   /**
@@ -503,7 +509,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
     if (!this.disabled) {
       const selectionInterval = this._validSelectionInterval.getValue();
       if (!selectionInterval) {
-        this.setSelectionInterval(null);
+        this.setSelectionInterval(null as any);
       }
 
       this.setCurrentDateSelectable();
@@ -604,6 +610,10 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
         !isEqual(valueBeforeUpdate.end, this.value.end)) {
         this.onChange(this.value);
         this.weekSelected.emit(this.value);
+
+        if (this.closeOnSelect) {
+          this.calendarPopover.close();
+        }
       }
     }
   }
@@ -614,13 +624,17 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * @private
    */
   private setSelectionInterval(interval: { start?: Date, end?: Date }): void {
-    if (interval?.start > interval?.end) {
+    if (!!interval) {
+      throw new Error('Start date must be less than end date');
+    }
+
+    if ((interval as any)?.start > (interval as any)?.end) {
       throw new Error('Start date must be less than end date');
     }
 
     this._validSelectionInterval.next({
-      start: interval?.start ?? new Date(this.currentDate.year - 100, 0, 1),
-      end: interval?.end ?? new Date(this.currentDate.year + 50, 11, 31)
+      start: (interval as any)?.start ?? new Date(this.currentDate.year - 100, 0, 1),
+      end: (interval as any)?.end ?? new Date(this.currentDate.year + 50, 11, 31)
     });
   }
 

@@ -5,7 +5,13 @@ import { AccordionContentDirective } from './accordion-content.directive';
   selector: 'particle-accordion-item'
 })
 export class AccordionItemDirective {
-  @Input() header = '';
-  @Input() disabled = false;
-  @ContentChild(AccordionContentDirective) content: AccordionContentDirective;
+
+  @Input()
+  header: string = null as any;
+
+  @Input()
+  disabled = false;
+
+  @ContentChild(AccordionContentDirective)
+  content: AccordionContentDirective = null as any;
 }
