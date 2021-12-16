@@ -14,7 +14,7 @@ export class SafeStylePipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) {
   }
 
-  transform(style) {
+  transform(style: string) {
     return this.sanitizer.bypassSecurityTrustStyle(style);
   }
 

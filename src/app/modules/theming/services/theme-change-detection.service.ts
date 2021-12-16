@@ -14,7 +14,7 @@ export class ThemeChangeDetectionService {
    * Subject that fires when the theme is changed
    * @private
    */
-  private readonly _themeChanged = new BehaviorSubject<void>(null);
+  private readonly _themeChanged = new BehaviorSubject<void>(null as any);
 
   /**
    * Dependency injection site

@@ -22,7 +22,7 @@ export class ThemingService {
   /**
    * Key for the product this is deployed into
    */
-  protected applicationName: string;
+  protected applicationName: string = null as any;
 
   /**
    * Constructor
@@ -95,7 +95,7 @@ export class ThemingService {
    *
    * @param hex
    */
-  private hexToRgb(hex): any {
+  private hexToRgb(hex: string): any {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
       r: parseInt(result[1], 16),
@@ -151,10 +151,11 @@ export class ThemingService {
     let newTheme: Theme = {} as Theme;
     if (theme) {
       for (const prop of Object.keys(theme)) {
+        // @ts-ignore
         newTheme[prop] = theme[prop];
       }
     } else {
-      newTheme = this.themes.getValue().find(theTheme => theTheme.isDefault);
+      newTheme = this.themes.getValue().find(theTheme => theTheme.isDefault) as Theme;
     }
 
     return newTheme;
@@ -178,7 +179,7 @@ export class ThemingService {
    * Returns the user selected theme from local storage
    */
   getTheme(): Theme {
-    return this.generateTheme(this.localStorageService.getObject(this.applicationName + this.THEME_KEY));
+    return this.generateTheme(this.localStorageService.getObject(this.applicationName + this.THEME_KEY) as Theme);
   }
 
   /**
@@ -200,7 +201,10 @@ export class ThemingService {
 
     for (const prop of Object.keys(theme)) {
       if (prop.toLowerCase().includes('bg') || prop.toLowerCase().includes('color')) {
-        const color = (<string>theme[prop]).startsWith('#') ? theme[prop] : '#' + theme[prop];
+        // @ts-ignore
+        const value = theme[prop] as string;
+
+        const color = value.startsWith('#') ? value : '#' + value;
         this.generateColors(style, color, this.toSnakeCase(prop));
       }
     }
@@ -252,7 +256,7 @@ export class ThemingService {
    * @param g
    * @param b
    */
-  private luminance(r, g, b): number {
+  private luminance(r: number, g: number, b: number): number {
     const a = [r, g, b].map(function (v) {
       v /= 255;
       return v <= 0.03928

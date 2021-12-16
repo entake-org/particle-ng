@@ -48,3 +48,4 @@ dist.tgz
 documentation/
 
 *.iml
+/.angular/

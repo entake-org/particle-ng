@@ -2,7 +2,7 @@
   <div *ngFor="let item of items;index as i"
     class="particle_accordion__item" [class.disabled]="item.disabled" [class.active]="expanded.has(i)">
     <ng-container
-      [ngTemplateOutlet]="(item?.customHeader?.templateRef || defaultHeader)"
+      [ngTemplateOutlet]="(item.customHeader?.templateRef || defaultHeader)"
       [ngTemplateOutletContext]="{$implicit: item, index: i, toggle: getToggleState(i)}"></ng-container>
     <div class="particle_accordion__content" [class.expanded]="expanded.has(i)" [@contentExpansion]="expanded.has(i) ? 'expanded':'collapsed'">
       <ng-container *ngTemplateOutlet="item?.content?.templateRef"></ng-container>

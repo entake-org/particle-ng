@@ -14,7 +14,7 @@ export class EndpointStateComponent implements OnInit {
    * Flag to determine if in loading state
    */
   @Input()
-  loading: boolean;
+  loading: boolean = false;
 
   /**
    * Icon for loading state
@@ -32,13 +32,13 @@ export class EndpointStateComponent implements OnInit {
    * Subtext for loading state
    */
   @Input()
-  loadingSubtext: string;
+  loadingSubtext: string = null as any;
 
   /**
    * Flag to determine if in empty state
    */
   @Input()
-  empty: boolean;
+  empty: boolean = false;
 
   /**
    * Icon for empty state
@@ -56,13 +56,13 @@ export class EndpointStateComponent implements OnInit {
    * Subtext for empty state
    */
   @Input()
-  emptySubtext: string;
+  emptySubtext: string = null as any;
 
   /**
    * Flag to determine if in error state
    */
   @Input()
-  error: boolean;
+  error: boolean = false;
 
   /**
    * Icon for error state
@@ -86,7 +86,7 @@ export class EndpointStateComponent implements OnInit {
    * Flag to determine if overlay spinner
    */
   @Input()
-  loadingOverlay: boolean;
+  loadingOverlay: boolean = false;
 
   /**
    * The icon on the overlay spinner
@@ -98,13 +98,13 @@ export class EndpointStateComponent implements OnInit {
    * Main text for loading overlay
    */
   @Input()
-  loadingOverlayText: string;
+  loadingOverlayText: string = null as any;
 
   /**
    * Subtext for loading overlay
    */
   @Input()
-  loadingOverlaySubtext: string;
+  loadingOverlaySubtext: string = null as any;
 
   /**
    * Component constructor

@@ -83,9 +83,9 @@ export class AppComponent implements OnInit {
    * Push Container component.
    */
   @ViewChild('pushContainerLeft')
-  pushContainerLeft: PushContainerComponent;
+  pushContainerLeft: PushContainerComponent = {} as PushContainerComponent;
 
-  text: string;
+  text = '';
 
   value = ['value', 'value6', 'value4'];
 

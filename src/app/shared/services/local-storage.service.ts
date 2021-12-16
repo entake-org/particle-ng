@@ -12,7 +12,7 @@ export class LocalStorageService {
    *
    * @param key
    */
-  getObject<T>(key: string): T {
+  getObject<T>(key: string): T | null {
     const obj: any = localStorage.getItem(key);
     if (obj) {
       return <T> JSON.parse(obj);
@@ -27,7 +27,7 @@ export class LocalStorageService {
    * @param key
    */
   getText(key: string): string {
-    return localStorage.getItem(key);
+    return localStorage.getItem(key) + '';
   }
 
   /**

@@ -539,7 +539,7 @@
                         </ng-template>
                       </particle-accordion-item>
                        <!-- Item 4 -->
-                       <particle-accordion-item header="Header IV (Disabled)" disabled="disabled">
+                       <particle-accordion-item header="Header IV (Disabled)" [disabled]="true">
                         <ng-template particleAccordionContent>
                           <div class="pad_15 text md">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -779,7 +779,7 @@
                 <button class="access btn sm overlay_alt2 bg_grey_alt" (click)="dialogPopover.toggle($event)">
                   Preview Popover
                 </button>
-                <particle-popover width="500" #dialogPopover>
+                <particle-popover [width]="500" #dialogPopover>
                   <div class="pad_10">
                     <div class="mar_bot10">This is some popover content</div>
                     <button (click)="dialogPopover.toggle($event)" class="access btn overlay sm mar_5">
