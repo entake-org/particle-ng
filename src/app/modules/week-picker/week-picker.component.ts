@@ -542,6 +542,10 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
       const selectedWeek = { start: weekStart, end: weekEnd };
 
       this.updateModel(selectedWeek);
+
+      if (this.closeOnSelect) {
+        setTimeout(() => this.calendarPopover.close(), 200);
+      }
     }
   }
 
@@ -610,10 +614,6 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
         !isEqual(valueBeforeUpdate.end, this.value.end)) {
         this.onChange(this.value);
         this.weekSelected.emit(this.value);
-
-        if (this.closeOnSelect) {
-          this.calendarPopover.close();
-        }
       }
     }
   }

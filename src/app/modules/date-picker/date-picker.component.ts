@@ -423,7 +423,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
           this.dateSelected.emit(value);
 
           if (this.closeOnSelect) {
-            this.handleCalendarClose();
+            setTimeout(() => this.handleCalendarClose(), 200);
           }
         }
       } else {
