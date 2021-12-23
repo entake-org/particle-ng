@@ -12,6 +12,8 @@ export class AccordionItemDirective {
   @Input()
   disabled = false;
 
+  customHeader: any = null;
+
   @ContentChild(AccordionContentDirective)
   content: AccordionContentDirective = null as any;
 }

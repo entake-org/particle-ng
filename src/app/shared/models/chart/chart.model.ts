@@ -31,7 +31,7 @@ export class Chart {
   };
 
   /**
-   * Defaults the chart to be repsonsive
+   * Defaults the chart to be responsive
    */
   responsive: any = {
     enabled: true

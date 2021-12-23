@@ -156,7 +156,7 @@ export class TooltipDirective implements OnDestroy {
 
     this.tooltip = this.renderer.createElement('div');
     this.renderer.appendChild(document.body, this.tooltip);
-    this.renderer.addClass(this.tooltip, 'wily_tooltip');
+    this.renderer.addClass(this.tooltip, 'particle_tooltip');
   }
 
   /**

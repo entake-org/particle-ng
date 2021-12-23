@@ -3,7 +3,7 @@ import {BehaviorSubject} from 'rxjs';
 import {CarouselOptions} from './carousel-options.model';
 
 /**
- * This directive when applied to a div will hi-jack its background and apply a carousel of images.
+ * This directive when applied to a div will hijack its background and apply a carousel of images.
  */
 @Directive({
   selector: '[particleCarousel]'
