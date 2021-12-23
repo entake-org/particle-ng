@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
-import * as Quill from 'quill';
+import Quill from 'quill';
 
 /**
  * Accessor information for the Rich Text Editor
@@ -173,16 +173,10 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
     const editorElement = this.editor.nativeElement;
     const toolbarElement = this.toolbar.nativeElement;
 
-    // @ts-ignore
     this.quill = new Quill(editorElement, {
       modules: { toolbar: toolbarElement },
       placeholder: this.placeholder,
-      readOnly: this.readonly,
-      theme: null,
-      formats: null,
-      bounds: null,
-      debug: null,
-      scrollingContainer: null
+      readOnly: this.readonly
     });
 
     // disable tabbing in editor
