@@ -7,7 +7,6 @@ import {
   EventEmitter, forwardRef,
   HostListener,
   Input,
-  OnInit,
   Output,
   QueryList,
   Renderer2,
@@ -16,8 +15,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {BehaviorSubject, Observable, map} from 'rxjs';
 import {MultiSelectOption} from './models/multi-select-option.model';
 import {MultiSelectOptionGroup} from './models/multi-select-option-group.model';
 
@@ -55,13 +53,13 @@ declare type MultiSelectOptionInput = Array<MultiSelectOption | MultiSelectOptio
     }
   ]
 })
-export class MultiSelectComponent implements ControlValueAccessor, OnInit {
+export class MultiSelectComponent implements ControlValueAccessor {
 
   /**
    * Set the value of the multi-select
    * @param value the value to set
    */
-  @Input('value')
+  @Input()
   set value(value: Array<string | number>) {
     let valueToSet: Array<string | number> = null as any;
     if (Array.isArray(value)) {
@@ -81,13 +79,16 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
     this._value = valueToSet;
     this._internalValue.next(valueToSet);
   }
-  get value() { return this._value; }
+
+  get value(): Array<any> {
+    return this._value;
+  }
 
   /**
    * The multi-select options/option groups
    */
-  @Input('options')
-  set setOptions(options: MultiSelectOptionInput) {
+  @Input()
+  set options(options: MultiSelectOptionInput) {
     this._options.next(MultiSelectComponent.sanitizeOptionInput(options));
   }
 
@@ -162,6 +163,7 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
    * Event emitted on value change, emits the new value
    */
   @Output()
+    // eslint-disable-next-line @angular-eslint/no-output-native
   change = new EventEmitter<Array<string | number>>();
 
   /**
@@ -341,11 +343,6 @@ export class MultiSelectComponent implements ControlValueAccessor, OnInit {
 
     this.multiSelectId = `multiselect-${result}${new Date().getTime()}`;
   }
-
-  /**
-   * Init component
-   */
-  ngOnInit(): void { }
 
   /**
    * Write value

@@ -37,11 +37,11 @@ export class AccordionComponent {
   /**
    * @param index - index of the accordion item
    */
-  getToggleState = (index: number) => {
+  getToggleState = (index: number): any => {
     return this.toggleState.bind(this, index);
   }
 
-  toggleState = (index: number) => {
+  toggleState = (index: number): void => {
     if (this.expanded.has(index)) {
       this.expanded.delete(index);
     } else {

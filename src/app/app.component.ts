@@ -193,14 +193,14 @@ export class AppComponent implements OnInit {
    *
    * @param event
    */
-  iconSelected(event: any) {
+  iconSelected(event: any): void {
     console.log(event.value);
   }
 
   /**
    * Icon select opened event handler
    */
-  iconSelectOpened() {
+  iconSelectOpened(): void {
     console.log('Icon select opened');
   }
 
@@ -223,7 +223,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  onPushContainerClose() {
+  onPushContainerClose(): void {
     console.log('Push container closed.');
   }
 

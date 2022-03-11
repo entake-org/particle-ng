@@ -50,7 +50,7 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
    * Set value
    * @param value the value to set
    */
-  @Input('value')
+  @Input()
   set value(value: string) {
     this._value = value;
   }
@@ -223,7 +223,7 @@ export class RichTextComponent implements AfterViewInit, ControlValueAccessor, O
       editor: this.quill
     });
 
-    this.quill.getModule('toolbar').handlers.image = () => {
+    this.quill.getModule('toolbar').handlers.image = (): void => {
       const range = this.quill.getSelection();
       const value = prompt('Please enter the image URL');
       this.quill.insertEmbed(range.index, 'image', value, 'user');

@@ -4,7 +4,6 @@ import {
   EventEmitter,
   forwardRef,
   Input,
-  OnInit,
   Output,
   ViewChild
 } from '@angular/core';
@@ -21,8 +20,7 @@ import {
   startOfWeek,
   sub
 } from 'date-fns';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, shareReplay, withLatestFrom } from 'rxjs/operators';
+import { BehaviorSubject, Observable, combineLatest, map, shareReplay, withLatestFrom,  } from 'rxjs';
 import { PopoverComponent } from '../popover/popover.component';
 
 /**
@@ -103,13 +101,13 @@ declare interface MetaWeek {
     }
   ]
 })
-export class WeekPickerComponent implements ControlValueAccessor, OnInit {
+export class WeekPickerComponent implements ControlValueAccessor {
 
   /**
    * Set the value of the week picker
    * @param value the value to set
    */
-  @Input('value')
+  @Input()
   set value(value: { start: Date, end: Date }) {
     if (value?.start && value?.end) {
       const startWeek = getWeek(value.start);
@@ -134,7 +132,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   /**
    * Set disabled
    */
-  @Input('disabled')
+  @Input()
   set disabled(disabled: boolean) {
     this._disabled = disabled;
   }
@@ -143,7 +141,7 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
    * Set the valid date boundary for the week picker
    * @param dateRange
    */
-  @Input('dateRange')
+  @Input()
   set dateRange(dateRange: { start?: Date, end?: Date }) {
     this.setSelectionInterval(dateRange);
     this.setCurrentDateSelectable();
@@ -461,11 +459,6 @@ export class WeekPickerComponent implements ControlValueAccessor, OnInit {
   get disabled(): boolean {
     return this._disabled;
   }
-
-  /**
-   * Init component
-   */
-  ngOnInit(): void { }
 
   /**
    * Write value
