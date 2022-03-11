@@ -2,44 +2,42 @@
   --accordion-disabled: rgb(159, 159, 161);
 }
 
-.particle_accordion {
-}
-
-.particle_accordion__header {
+.particle_accordion_header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: 40px;
   cursor: pointer;
+  user-select: none;
 }
 
-.particle_accordion__toggle-btn {
+.particle_accordion_toggle_button {
   border: none;
   transition: transform 0.2s ease-in;
   background: none;
 }
 
-.particle_accordion__item.disabled .particle_accordion__header {
+.particle_accordion_item.disabled .particle_accordion_header {
   color: var(--accordion-disabled);
-  cursor: not-allowed;
+  cursor: auto;
 }
 
-.particle_accordion__toggle-btn:disabled {
-  cursor: not-allowed;
+.particle_accordion_toggle_button:disabled {
+  cursor: auto;
 }
 
-.particle_accordion__toggle-btn:disabled svg path:nth-child(2) {
+.particle_accordion_toggle_button:disabled svg path:nth-child(2) {
   fill: var(--accordion-disabled);
 }
 
-.particle_accordion__item.active .particle_accordion__toggle-btn {
+.particle_accordion_item.active .particle_accordion_toggle_button {
   transform: rotate(90deg);
 }
 
-.particle_accordion__item .particle_accordion__header:focus-within {
+.particle_accordion_item .particle_accordion_header:focus-within {
 }
 
-.particle_accordion__toggle-btn:focus {
+.particle_accordion_toggle_button:focus {
   outline: none;
 }
 
