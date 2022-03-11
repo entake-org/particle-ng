@@ -78,6 +78,11 @@
   border-color: transparent #2f2f2f transparent transparent;
 }
 
+.rich-text-link {
+  font-weight:700;
+  text-decoration:underline
+}
+
 
 /* REGULAR ACCESS CLASS */
 .access{

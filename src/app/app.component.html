@@ -166,6 +166,8 @@
                     (ngModelChange)="console.log(textEditorValue); console.log('text editor model change')"
                     (textChanged)="handleEditorTextChange($event)">
                   </particle-rich-text>
+                  <div class="form_label mar_bot3">Render that text my man</div>
+                  <particle-render-rich-text [html]="textEditorValue"></particle-render-rich-text>
                 </div>
               </div>
             </div>
@@ -645,8 +647,8 @@
                 <div class="pad_15">
                   <div class="form_label mar_bot5">Check this guy out</div>
                   <particle-profile-pic
-                    toolTip="Some Guy"
-                    imageUrl="https://s3.amazonaws.com/transcend-project-management-files/public/5e5b8204-955f-4ccf-9c57-8efd02faa70c-1544366755611.jpeg">
+                    toolTip="Philip J Fry"
+                    imageUrl="https://i.etsystatic.com/20023820/r/il/df05fc/2933074931/il_340x270.2933074931_7o9c.jpg">
                   </particle-profile-pic>
                 </div>
               </div>

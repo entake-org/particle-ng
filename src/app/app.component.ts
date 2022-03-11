@@ -99,7 +99,7 @@ export class AppComponent implements OnInit {
 
   weekPickerValue = { start: startOfWeek(new Date()), end: endOfWeek(new Date()) };
 
-  textEditorValue = '<p>This is some rich text</p>';
+  textEditorValue = '<h2 style="text-align: center">Beautiful <b>BOLD</b> <em>rich</em> text!</h2>';
 
   colorPickerValue = '#44ff55';
 
