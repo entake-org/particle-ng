@@ -2,8 +2,8 @@
   <button class="access particle_accordion_header overlay_alt2 border_bottom"
        (click)="!item.disabled ? toggleState(i) : {}" aria-label="View More...">
     <p class="text md bolder" >
-      <span *ngIf="!expanded.has(i)"><i class="far fa-caret-square-right"></i></span>
-      <span *ngIf="expanded.has(i)"><i class="far fa-caret-square-down"></i></span>
+      <span *ngIf="!expanded.has(i)"><i class="far fa-caret-right"></i></span>
+      <span *ngIf="expanded.has(i)"><i class="far fa-caret-down"></i></span>
       {{item?.header}}
     </p>
   </button>
