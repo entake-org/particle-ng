@@ -6,7 +6,8 @@ import {NgxTiptapModule} from "ngx-tiptap";
 import {FormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 import {RenderRichTextComponent} from "./render-rich-text.component";
-import {NgDompurifyModule} from "@tinkoff/ng-dompurify";
+import {DOMPURIFY_CONFIG, NgDompurifyModule} from "@tinkoff/ng-dompurify";
+import {ParticleDialogModule} from "../dialog/dialog.module";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,14 @@ import {NgDompurifyModule} from "@tinkoff/ng-dompurify";
     NgxTiptapModule,
     FormsModule,
     BrowserModule,
-    NgDompurifyModule
+    NgDompurifyModule,
+    ParticleDialogModule,
+  ],
+  providers: [
+    {
+      provide: DOMPURIFY_CONFIG,
+      useValue: {ADD_ATTR: ['target']},
+    },
   ],
   exports: [
     RichTextComponent,

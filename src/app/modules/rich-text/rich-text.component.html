@@ -123,10 +123,20 @@
             aria-label="Set Link"
             class="btn access pad_5 mar_right5 mar_left5"
             particleTooltip="Set Link" tooltipPosition="top"
-            (click)="setLink()"
+            (click)="openLinkDialog()"
             [ngClass]="{ 'bg_blue': this.editor.isActive('link') }"
     >
         <i class="fas fa-link fa-fw"></i>
+    </button>
+    <button
+      id="unlink"
+      aria-label="Remove Link"
+      class="btn access pad_5 mar_right5 mar_left5"
+      particleTooltip="Remove Link" tooltipPosition="top"
+      (click)="this.editor.isActive('link') ? changeEditorLink('remove') : null"
+      [disabled]="!this.editor.isActive('link')"
+    >
+      <i class="fas fa-unlink fa-fw"></i>
     </button>
   </div>
   <div class="col size_1 v_center overlay_alt2 border_none pad_5">
@@ -144,3 +154,20 @@
 <div class="overlay_alt2 pad_10 text sm scroll_yauto" [style.height]="this.height">
   <tiptap-editor [editor]="editor" [(ngModel)]="value"></tiptap-editor>
 </div>
+
+<particle-dialog
+  title="Modify Link"
+  [object]="showDialog"
+  [allowClose]="false"
+  width="400px"
+  height="120px"
+>
+  <div class="pad_10 text sm">
+    <input class="access input md" [(ngModel)]="dialogLink" aria-label="URL" placeholder="eg. https://www.google.com" />
+  </div>
+
+  <div class="center_center">
+    <button class="access btn sm overlay_alt2 bg_grey_alt mar_5" (click)="changeEditorLink('cancel')">Cancel</button>
+    <button class="access btn sm overlay_alt2 bg_grey_alt mar_5" (click)="changeEditorLink('save')">Update</button>
+  </div>
+</particle-dialog>

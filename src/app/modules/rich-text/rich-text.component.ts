@@ -47,6 +47,9 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     textValue: string
   }>();
 
+  showDialog: any = null;
+  dialogLink: string = null as any;
+
   /**
    * Function called on change
    */
@@ -67,6 +70,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
         openOnClick: false,
         HTMLAttributes: {
           class: 'rich-text-link',
+          target: '_blank'
         },
       }),
       TextAlign.configure({
@@ -138,26 +142,26 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     this.editor.setEditable(isDisabled);
   }
 
-  setLink(): void {
+  openLinkDialog(): void {
     const previousUrl = this.editor.getAttributes('link').href;
-    const url = window.prompt(
-      'Please provide a URL - if you\'d like to remove the link, simply delete all of the text in the box below',
-      previousUrl) as string;
+    this.showDialog = {};
+    this.dialogLink = previousUrl;
+  }
 
-    // cancelled
-    if (url === null) {
-      return;
+  changeEditorLink(action: string): void {
+    switch (action) {
+      case 'remove':
+        this.editor.chain().focus().extendMarkRange('link').unsetLink().run();
+        break;
+      case 'save':
+        this.editor.chain().focus().extendMarkRange('link').setLink({ href: this.dialogLink, target: '_blank' }).run();
+        break;
+      default:
+        console.log(action);
     }
 
-    // empty
-    if (url === '') {
-      this.editor.chain().focus().extendMarkRange('link').unsetLink().run();
-
-      return;
-    }
-
-    // update link
-    this.editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
+    this.dialogLink = null as any;
+    this.showDialog = null as any;
   }
 
 }
