@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnDestroy, Output, Renderer2, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'particle-slideover',
   templateUrl: './slideover.component.html',
   styleUrls: ['./slideover.component.css']
 })
-export class SlideoverComponent {
+export class SlideoverComponent implements OnDestroy {
 
   private _position = 'right';
 
@@ -42,14 +42,19 @@ export class SlideoverComponent {
   @Output()
   closed = new EventEmitter<any>();
 
-  constructor() { }
+  @ViewChild('overlay')
+  overlay: ElementRef = null as any;
+
+  constructor(public renderer: Renderer2) { }
 
   open(): void {
+    this.addModalMask();
     this.slideoverOpen = true;
     this.opened.emit();
   }
 
   close(): void {
+    this.removeModalMask();
     this.slideoverOpen = false;
     this.closed.emit();
   }
@@ -60,6 +65,24 @@ export class SlideoverComponent {
     } else {
       this.open();
     }
+  }
+
+  private addModalMask(): void {
+    if (this.modal) {
+      this.overlay.nativeElement.classList.add('particle_dialog_overlay');
+      document.body.classList.add('scroll_none');
+    }
+  }
+
+  private removeModalMask(): void {
+    if (this.modal) {
+      this.overlay.nativeElement.classList.remove('particle_dialog_overlay');
+      document.body.classList.remove('scroll_none');
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.removeModalMask();
   }
 
 }

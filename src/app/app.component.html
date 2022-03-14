@@ -371,10 +371,10 @@
               <div class="row_block width100">
                 <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
                   <div class="circle_20px bg_green mar_right5"><i class="wis fa-sidebar-open"></i></div>
-                  Slideover
+                  Slide Over
                 </div>
                 <div class="pad_15">
-                  <div class="form_label mar_bot5">Test each slideover type below</div>
+                  <div class="form_label mar_bot5">Test each slide over type below</div>
                   <button class="access btn sm overlay_alt2 bg_grey_alt mar_5" (click)="slideoverLeft.toggle()">
                     Left
                   </button>
@@ -387,6 +387,26 @@
                   <button class="access btn sm overlay_alt2 bg_grey_alt mar_5" (click)="slideoverBottom.toggle()">
                     Bottom
                   </button>
+
+                  <particle-slideover position="left" bgClass="bg_green" [modal]="false" #slideoverLeft
+                                      (opened)="slideoverRight.close();slideoverBottom.close();slideoverTop.close()">
+                    Left Side
+                  </particle-slideover>
+
+                  <particle-slideover position="right" bgClass="bg_blue" #slideoverRight
+                                      (opened)="slideoverLeft.close();slideoverBottom.close();slideoverTop.close()">
+                    Right Side
+                  </particle-slideover>
+
+                  <particle-slideover position="top" bgClass="bg_red" [modal]="false" #slideoverTop
+                                      (opened)="slideoverRight.close();slideoverBottom.close();slideoverLeft.close()">
+                    Up Top
+                  </particle-slideover>
+
+                  <particle-slideover position="bottom" bgClass="bg_orange" [modal]="false" #slideoverBottom
+                                      (opened)="slideoverRight.close();slideoverLeft.close();slideoverTop.close()">
+                    Down Low
+                  </particle-slideover>
                 </div>
               </div>
             </div>
@@ -901,23 +921,3 @@
   </footer-->
 
 </div>
-
-<particle-slideover position="left" bgClass="bg_green" #slideoverLeft
-                    (opened)="slideoverRight.close();slideoverBottom.close();slideoverTop.close()">
-  Left Side
-</particle-slideover>
-
-<particle-slideover position="right" bgClass="bg_blue" #slideoverRight
-                    (opened)="slideoverLeft.close();slideoverBottom.close();slideoverTop.close()">
-  Right Side
-</particle-slideover>
-
-<particle-slideover position="top" bgClass="bg_red" #slideoverTop
-                    (opened)="slideoverRight.close();slideoverBottom.close();slideoverLeft.close()">
-  Up Top
-</particle-slideover>
-
-<particle-slideover position="bottom" bgClass="bg_orange" #slideoverBottom
-                    (opened)="slideoverRight.close();slideoverLeft.close();slideoverTop.close()">
-  Down Low
-</particle-slideover>

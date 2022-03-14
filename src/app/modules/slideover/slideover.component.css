@@ -3,34 +3,31 @@
   transition: transform .3s;
   display: flex;
   flex-direction: column;
+  z-index: 9999;
 }
 
 .slideover-panel.left {
   top: 0;
   left: 0;
   height: 100%;
-  z-index: 999;
 }
 
 .slideover-panel.right {
   top: 0;
   right: 0;
   height: 100%;
-  z-index: 999;
 }
 
 .slideover-panel.top {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 999;
 }
 
 .slideover-panel.bottom {
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 999;
 }
 
 .slideover_inactive_left {
@@ -71,7 +68,7 @@
   top:0;
   width:45px;
   height:45px;
-  z-index: 999;
+  z-index: 9999;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -100,4 +97,18 @@
   background-color: rgba(0, 0, 0, 0.3);
   color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.1)
+}
+
+/* dark overlay behind the dialog */
+.particle_dialog_overlay {
+  position: fixed;
+  display: block;
+  width: 100%; /* used instead of vh for mobile safari compatibility */
+  height: 100%; /* used instead of vh for mobile safari compatibility */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(120,120,120,0.4); /* black background with opacity */
+  z-index: 9998; /* Specify a stack order in case of using a different order for other elements */
 }

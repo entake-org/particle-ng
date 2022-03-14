@@ -2,8 +2,8 @@
 .particle_dialog_overlay {
   position: fixed;
   display: block;
-  width: 100%; /* used intead of vh for mobile safari compatibility */
-  height: 100%; /* used intead of vh for mobile safari compatibility */
+  width: 100%; /* used instead of vh for mobile safari compatibility */
+  height: 100%; /* used instead of vh for mobile safari compatibility */
   top: 0;
   left: 0;
   right: 0;
