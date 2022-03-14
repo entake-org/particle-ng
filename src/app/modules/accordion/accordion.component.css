@@ -6,7 +6,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 40px;
   cursor: pointer;
   user-select: none;
 }
@@ -28,13 +27,6 @@
 
 .particle_accordion_toggle_button:disabled svg path:nth-child(2) {
   fill: var(--accordion-disabled);
-}
-
-.particle_accordion_item.active .particle_accordion_toggle_button {
-  transform: rotate(90deg);
-}
-
-.particle_accordion_item .particle_accordion_header:focus-within {
 }
 
 .particle_accordion_toggle_button:focus {

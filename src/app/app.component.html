@@ -512,7 +512,7 @@
                 <!-- Default -->
                 <p class="pad_15 text lg">Default</p>
                 <div class="pad_15">
-                    <particle-accordion [multiple]="true">
+                    <particle-accordion>
                       <!-- Item 1 -->
                       <particle-accordion-item header="Header I">
                         <ng-template particleAccordionContent>
@@ -559,7 +559,13 @@
                 <!-- Multiple -->
                 <p class="pad_15 text lg">Multiple</p>
                 <div class="pad_15">
-                    <particle-accordion>
+                    <particle-accordion
+                      [multiple]="true"
+                      headerClass="border_none"
+                      height=""
+                      textClass="sm"
+                      iconCollapsed="far fa-plus-square"
+                      iconExpanded="far fa-minus-square">
                       <!-- Item 1 -->
                       <particle-accordion-item header="Header I">
                         <ng-template particleAccordionContent>

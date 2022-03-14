@@ -28,6 +28,21 @@ export class AccordionComponent {
   @Input()
   multiple = false;
 
+  @Input()
+  height = '40px';
+
+  @Input()
+  headerClass = 'border_bottom';
+
+  @Input()
+  textClass = 'md bolder';
+
+  @Input()
+  iconCollapsed = 'fas fa-caret-right';
+
+  @Input()
+  iconExpanded = 'fas fa-caret-down';
+
   @ContentChildren(AccordionItemDirective)
   items: QueryList<AccordionItemDirective> = null as any;
 
@@ -42,7 +57,7 @@ export class AccordionComponent {
     if (this.expanded.has(index)) {
       this.expanded.delete(index);
     } else {
-      if (this.multiple) {
+      if (!this.multiple) {
         this.expanded.clear();
       }
       this.expanded.add(index);
