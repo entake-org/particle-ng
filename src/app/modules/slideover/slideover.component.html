@@ -1,4 +1,4 @@
-<div #overlay></div>
+<div #overlay (click)="close()"></div>
 <div
   [ngClass]="bgClass + ' ' + (slideoverOpen ? 'slideover_active_' + position : 'slideover_inactive_' + position) + ' slideover-panel ' + position"
   [style.width]="position === 'right' || position === 'left' ? width : null"
