@@ -33,6 +33,9 @@ export class SlideoverComponent {
   @Input()
   height = '100px';
 
+  @Input()
+  bgClass = 'dialog_body_color';
+
   @Output()
   opened = new EventEmitter<any>();
 
