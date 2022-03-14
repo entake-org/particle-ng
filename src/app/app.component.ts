@@ -5,6 +5,7 @@ import {NotificationService} from './modules/notification/services/notification.
 import {PushContainerComponent} from './modules/push-container/push-container.component';
 import {ThemingService} from './modules/theming/services/theming.service';
 import {Theme} from './modules/theming/models/theme.model';
+import {SlideoverComponent} from "./modules/slideover/slideover.component";
 
 /**
  * App Component to test out stuff built here. Not useful for anything else. Should not be exported by this package.

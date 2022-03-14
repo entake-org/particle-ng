@@ -339,7 +339,10 @@
                 </div>
               </div>
             </div>
+          </div>
 
+          <!-- ROW -->
+          <div class="col wrap">
             <!-- NOTIFICATION SECTION -->
             <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
               <div class="row_block width100">
@@ -364,6 +367,29 @@
               </div>
             </div>
 
+            <div class="col size_1 min_w280 page_container_color box_shadow mar_10 brad_5 scroll_none">
+              <div class="row_block width100">
+                <div class="page_container_color_dark_1 v_center pad_10 pad_x15 text lg bold mar_top5">
+                  <div class="circle_20px bg_green mar_right5"><i class="wis fa-sidebar-open"></i></div>
+                  Slideover
+                </div>
+                <div class="pad_15">
+                  <div class="form_label mar_bot5">Test each slideover type below</div>
+                  <button class="access btn sm overlay_alt2 bg_grey_alt" (click)="slideOverLeft.toggle()">
+                    Left
+                  </button>
+                  <button class="access btn sm overlay_alt2 bg_grey_alt" (click)="slideOverRight.toggle()">
+                    Right
+                  </button>
+                  <button class="access btn sm overlay_alt2 bg_grey_alt" (click)="slideOverTop.toggle()">
+                    Top
+                  </button>
+                  <button class="access btn sm overlay_alt2 bg_grey_alt" (click)="slideOverBottom.toggle()">
+                    Bottom
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- ROW -->
@@ -875,3 +901,15 @@
   </footer-->
 
 </div>
+
+<particle-slideover position="left" #slideOverLeft>
+</particle-slideover>
+
+<particle-slideover position="right" #slideOverRight>
+</particle-slideover>
+
+<particle-slideover position="top" #slideOverTop>
+</particle-slideover>
+
+<particle-slideover position="bottom" #slideOverBottom>
+</particle-slideover>

@@ -22,6 +22,7 @@ import {ParticleNotificationModule} from './modules/notification/notification.mo
 import {ParticlePopoverModule} from './modules/popover/popover.module';
 import {ParticleAccordionModule} from './modules/accordion/accordion.module';
 import {ParticleThemingModule} from './modules/theming/theming.module';
+import {ParticleSlideoverModule} from "./modules/slideover/particle-slideover.module";
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import {ParticleThemingModule} from './modules/theming/theming.module';
     ParticleSliderModule,
     ParticleOrdinalNumberPipeModule,
     ParticleAccordionModule,
-    ParticleThemingModule
+    ParticleThemingModule,
+    ParticleSlideoverModule
   ],
   providers: [],
   bootstrap: [AppComponent]

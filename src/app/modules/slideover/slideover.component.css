@@ -1,0 +1,66 @@
+.slideover-panel {
+  position: fixed;
+  transition: transform .3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.slideover-panel.left {
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 999;
+}
+
+.slideover-panel.right {
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 999;
+}
+
+.slideover-panel.top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.slideover-panel.bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.slideover_inactive_left {
+  transition: left 0.2s ease-in-out;
+}
+
+.slideover_active_left {
+  transition: left 0.2s ease-in-out;
+}
+
+.slideover_inactive_right {
+  transition: right 0.2s ease-in-out;
+}
+
+.slideover_active_right {
+  transition: right 0.2s ease-in-out;
+}
+
+.slideover_inactive_top {
+  transition: top 0.2s ease-in-out;
+}
+
+.slideover_active_top {
+  transition: top 0.2s ease-in-out;
+}
+
+.slideover_inactive_bottom {
+  transition: bottom 0.2s ease-in-out;
+}
+
+.slideover_active_bottom {
+  transition: bottom 0.2s ease-in-out;
+}
