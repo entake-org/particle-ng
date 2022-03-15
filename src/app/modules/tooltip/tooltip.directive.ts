@@ -6,6 +6,7 @@ import {Directive, ElementRef, HostListener, Input, OnDestroy, Renderer2} from '
  */
 @Directive({
   selector: '[particleTooltip]'
+
 })
 export class TooltipDirective implements OnDestroy {
 

@@ -1,88 +1,13 @@
-@import 'https://cdn.jsdelivr.net/gh/gditfc/wily-styles@v1.0.1/dist/wily-styles.css';
-
-.amcharts-legend-div {
-  background-color: rgba(255, 255, 255, .3);
-}
-
-/* TOOLTIP STYLES FOR 'particle_toolip' COMPONENT */
-.particle_tooltip {
-  min-width: 75px;
-  max-width: 200px;
-  background-color: #2f2f2f;
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 3px 5px;
-  font-size:12px;
-  line-height:1.5;
-  position: absolute;
-  z-index: 4;
-  box-shadow: 0 3px 6px 0 rgba(0,0,0,0.2);
-  animation-name: fadeInTooltip;
-  animation-duration: 0.4s;
-}
-@keyframes fadeInTooltip {
-  0%   {opacity:0;}
-  100% {opacity:1;}
-}
-.particle_tooltip.top {
-  transform-origin:bottom center;
-}
-.particle_tooltip.top::after {
-  content: " ";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #2f2f2f transparent transparent transparent;
-}
-.particle_tooltip.bottom {
-  transform-origin:top center;
-}
-.particle_tooltip.bottom::after {
-  content: " ";
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent #2f2f2f transparent;
-}
-.particle_tooltip.left {
-  transform-origin:right center;
-}
-.particle_tooltip.left::after {
-  content: " ";
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  margin-top: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent transparent #2f2f2f;
-}
-.particle_tooltip.right {
-  transform-origin:left center;
-}
-.particle_tooltip.right::after {
-  content: " ";
-  position: absolute;
-  top: 50%;
-  right: 100%;
-  margin-top: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent #2f2f2f transparent transparent;
-}
-
-.rich-text-link {
-  font-weight:700;
-  text-decoration:underline;
-  color: inherit;
-}
+@import 'C:\\dev\\particle\\particle-styles\\styles\\borders.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\buttons.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\effects.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\forms.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\layout.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\navigation.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\shapes.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\spacing.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\styles.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\z_responsive.css';
 
 
 /* REGULAR ACCESS CLASS */
@@ -97,26 +22,3 @@
   position:relative;
   z-index:1;
 }
-
-/* Experimental new access class */
-/* .access:focus {
-  position:relative;
-  overflow:visible;
-}
-.access:focus::after {
-  content: "";
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  bottom: -5px;
-  left: -5px;
-  border-radius: inherit;
-  background-color: transparent;
-  border:2px solid #65a3c7;
-}
-input.access:focus, select.access:focus {
-  position:relative;
-  z-index:2;
-  outline:2px solid #65a3c7;
-  outline-offset:2px;
-} */

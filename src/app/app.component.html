@@ -736,13 +736,35 @@
                 </div>
                 <div class="pad_15">
                   <div class="form_label mar_bot5">A loading state</div>
-                  <particle-endpoint-state
-                    [loadingOverlay]="false"
-                    [loading]="true"
-                    [loadingOverlayText]="'Please wait while we get things ready for you'"
-                    [loadingOverlaySubtext]="'This may take a few minutes...'"
-                    [loadingIcon]="'bars_vertical'">
-                  </particle-endpoint-state>
+                  <div class="row">
+                    <div class="col size_1 center_center">
+                      <particle-endpoint-state
+                        [loadingOverlay]="false"
+                        [loading]="true"
+                        [loadingOverlayText]="'Please wait while we get things ready for you'"
+                        [loadingOverlaySubtext]="'This may take a few minutes...'"
+                        [loadingIcon]="'bars_bounce'">
+                      </particle-endpoint-state>
+                    </div>
+                    <div class="col size_1 center_center">
+                      <particle-endpoint-state
+                        [loadingOverlay]="false"
+                        [loading]="true"
+                        [loadingOverlayText]="'Please wait while we get things ready for you'"
+                        [loadingOverlaySubtext]="'This may take a few minutes...'"
+                        [loadingIcon]="'bars_vertical'">
+                      </particle-endpoint-state>
+                    </div>
+                    <div class="col size_1 center_center">
+                      <particle-endpoint-state
+                        [loadingOverlay]="false"
+                        [loading]="true"
+                        [loadingOverlayText]="'Please wait while we get things ready for you'"
+                        [loadingOverlaySubtext]="'This may take a few minutes...'"
+                        [loadingIcon]="'bars_progress'">
+                      </particle-endpoint-state>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
