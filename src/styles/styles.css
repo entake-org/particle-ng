@@ -18,7 +18,7 @@
 }
 .access:focus{
   outline:rgba(38,184,239,1.0) 1px solid !important;
-  outline-offset: 5px;
+  outline-offset: 2px;
   position:relative;
   z-index:1;
 }
