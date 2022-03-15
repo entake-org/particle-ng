@@ -32,6 +32,8 @@ export interface ThemeExtension {
 
 export interface ThemeFont {
   name: string;
+  id?: string;
   source?: string;
   isDefault?: boolean;
+  isSerif?: boolean;
 }

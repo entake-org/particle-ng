@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Theme} from '../models/theme.model';
+import {Theme, ThemeFont} from '../models/theme.model';
 import {ThemeChangeDetectionService} from './theme-change-detection.service';
 import {LocalStorageService} from '../../../shared/services/local-storage.service';
 
@@ -240,27 +240,33 @@ export class ThemingService {
   }
 
   private addFonts(theme: Theme, head: HTMLHeadElement, style: HTMLStyleElement): void {
-    let defaultFont = '';
+    let defaultFont: ThemeFont = null as any;
     for (const font of theme.fonts) {
       if (font.isDefault) {
-        defaultFont = font.name;
+        defaultFont = font;
       }
 
-      if (!this.fontExists(head, font.name)) {
+      if (!this.fontExists(head, font)) {
         let element: HTMLLinkElement = document.createElement('link');
-        element.setAttribute('href', `https://fonts.googleapis.com/css?family=${font.name.replace(' ', '+')}&display=swap`);
+        if (font.source === 'adobe') {
+          element.setAttribute('href', `https://use.typekit.net/${font.id}.css`);
+        } else {
+          element.setAttribute('href', `https://fonts.googleapis.com/css?family=${font.name.replace(' ', '+')}&display=swap`);
+        }
         element.setAttribute('rel', 'stylesheet');
         head.appendChild(element);
       }
     }
 
-    style.appendChild(document.createTextNode(`html * { font-family: ${defaultFont}, sans-serif; }`));
+    style.appendChild(document.createTextNode(`html * { font-family: ${defaultFont.name}, ${defaultFont.isSerif ? 'serif' : 'sans-serif'}; }`));
   }
 
-  private fontExists(head: HTMLHeadElement, fontName: string): boolean {
+  private fontExists(head: HTMLHeadElement, font: ThemeFont): boolean {
     for (const child of <any>head.childNodes) {
-      if (child.href && child.href.indexOf(fontName.replace(' ', '+')) > -1) {
+      if (child.href && font.source === 'adobe' && child.href.indexOf(font.id) > -1) {
         return true;
+      } else if (child.href && child.href.indexOf(font.name.replace(' ', '+')) > -1) {
+
       }
     }
 

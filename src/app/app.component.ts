@@ -179,8 +179,8 @@ export class AppComponent implements OnInit {
         {className: 'bg_grey_alt', color: '#616161'},
       ],
       fonts: [
-        {name: 'Open Sans', isDefault: true},
-        {name: 'Montserrat'}
+        {name: 'acumin-pro', id: 'gna4twy', source: 'adobe', isSerif: false, isDefault: true},
+        {name: 'Open Sans'}
       ]
     } as Theme
   ];
