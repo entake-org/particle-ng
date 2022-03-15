@@ -22,9 +22,16 @@ export interface Theme {
   bgBrown: string;
   bgGrey: string;
   extension: Array<ThemeExtension>;
+  fonts: Array<ThemeFont>;
 }
 
 export interface ThemeExtension {
   className: string;
   color: string;
+}
+
+export interface ThemeFont {
+  name: string;
+  source?: string;
+  isDefault?: boolean;
 }

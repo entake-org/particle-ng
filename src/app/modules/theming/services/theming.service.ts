@@ -235,7 +235,26 @@ export class ThemingService {
     }
 
     head.appendChild(style);
+    this.addFonts(theme, head);
     this.themeChangeDetectionService.changeTheme();
+  }
+
+  private addFonts(theme: Theme, head: HTMLHeadElement): void {
+    let defaultFont = '';
+    for (const font of theme.fonts) {
+      if (font.isDefault) {
+        defaultFont = font.name;
+      }
+
+      let element: HTMLLinkElement = document.createElement('link');
+      element.setAttribute('href', `https://fonts.googleapis.com/css?family=${font.name.replace(' ', '+')}&display=swap`);
+      element.setAttribute('rel', 'stylesheet');
+      head.appendChild(element);
+    }
+
+    let fontElement = document.createElement('style');
+    fontElement.appendChild(document.createTextNode(`html * { font-family: ${defaultFont}, sans-serif`));
+    head.appendChild(fontElement);
   }
 
   /**

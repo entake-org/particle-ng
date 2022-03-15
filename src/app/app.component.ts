@@ -139,6 +139,10 @@ export class AppComponent implements OnInit {
         {className: 'bg_purple_alt', color: '#8a4878'},
         {className: 'bg_brown_alt', color: '#6b6032'},
         {className: 'bg_grey_alt', color: '#616161'},
+      ],
+      fonts: [
+        {name: 'Roboto'},
+        {name: 'Montserrat', isDefault: true}
       ]
     } as Theme,
     {
@@ -173,6 +177,10 @@ export class AppComponent implements OnInit {
         {className: 'bg_purple_alt', color: '#8a4878'},
         {className: 'bg_brown_alt', color: '#6b6032'},
         {className: 'bg_grey_alt', color: '#616161'},
+      ],
+      fonts: [
+        {name: 'Roboto', isDefault: true},
+        {name: 'Montserrat'}
       ]
     } as Theme
   ];
@@ -186,7 +194,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.themingService.appInit('aac', this.themes);
+    this.themingService.appInit('particle_ng', this.themes);
   }
 
   /**
