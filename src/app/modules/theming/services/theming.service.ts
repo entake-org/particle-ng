@@ -228,33 +228,43 @@ export class ThemingService {
     const head = document.head || document.getElementsByTagName('head')[0];
 
     for (const child of <any>head.childNodes) {
-      if ((<Element>child).innerHTML && (<Element>child).innerHTML.startsWith('.menu_color')) {
+      if ((child as Element).innerHTML && (child as Element).innerHTML.startsWith('.menu_color')) {
         head.removeChild(child);
         break;
       }
     }
 
+    this.addFonts(theme, head, style);
     head.appendChild(style);
-    this.addFonts(theme, head);
     this.themeChangeDetectionService.changeTheme();
   }
 
-  private addFonts(theme: Theme, head: HTMLHeadElement): void {
+  private addFonts(theme: Theme, head: HTMLHeadElement, style: HTMLStyleElement): void {
     let defaultFont = '';
     for (const font of theme.fonts) {
       if (font.isDefault) {
         defaultFont = font.name;
       }
 
-      let element: HTMLLinkElement = document.createElement('link');
-      element.setAttribute('href', `https://fonts.googleapis.com/css?family=${font.name.replace(' ', '+')}&display=swap`);
-      element.setAttribute('rel', 'stylesheet');
-      head.appendChild(element);
+      if (!this.fontExists(head, font.name)) {
+        let element: HTMLLinkElement = document.createElement('link');
+        element.setAttribute('href', `https://fonts.googleapis.com/css?family=${font.name.replace(' ', '+')}&display=swap`);
+        element.setAttribute('rel', 'stylesheet');
+        head.appendChild(element);
+      }
     }
 
-    let fontElement = document.createElement('style');
-    fontElement.appendChild(document.createTextNode(`html * { font-family: ${defaultFont}, sans-serif`));
-    head.appendChild(fontElement);
+    style.appendChild(document.createTextNode(`html * { font-family: ${defaultFont}, sans-serif; }`));
+  }
+
+  private fontExists(head: HTMLHeadElement, fontName: string): boolean {
+    for (const child of <any>head.childNodes) {
+      if (child.href && child.href.indexOf(fontName.replace(' ', '+')) > -1) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**

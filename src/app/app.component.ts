@@ -179,7 +179,7 @@ export class AppComponent implements OnInit {
         {className: 'bg_grey_alt', color: '#616161'},
       ],
       fonts: [
-        {name: 'Roboto', isDefault: true},
+        {name: 'Open Sans', isDefault: true},
         {name: 'Montserrat'}
       ]
     } as Theme
