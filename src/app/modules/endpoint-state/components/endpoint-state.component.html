@@ -10,13 +10,13 @@
         <div class="col size_1 overlay bar4"></div>
         <div class="col size_1 overlay bar5"></div>
       </div>
-      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}</div>
+      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}<span class="one">.</span><span class="two">.</span><span class="three">.</span></div>
       <div *ngIf="loadingSubtext" class="text sm center mar_top5">{{loadingSubtext}}</div>
     </ng-container>
 
     <div *ngSwitchDefault>
       <i class="{{loadingIcon}} fa-fw fa-3x opac_80"></i>
-      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}</div>
+      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}<span class="one">.</span><span class="two">.</span><span class="three">.</span></div>
       <div *ngIf="loadingSubtext" class="text sm center mar_top5">{{loadingSubtext}}</div>
     </div>
   </ng-container>

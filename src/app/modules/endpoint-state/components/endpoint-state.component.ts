@@ -20,13 +20,13 @@ export class EndpointStateComponent {
    * Icon for loading state
    */
   @Input()
-  loadingIcon: 'bars_bounce' | 'bars_vertical' | 'bars_progress' | string = 'bars_bounce';
+  loadingIcon: 'double_helix' | string = 'double_helix';
 
   /**
    * Main text for loading state
    */
   @Input()
-  loadingText = 'Loading...';
+  loadingText = 'Loading';
 
   /**
    * Subtext for loading state
