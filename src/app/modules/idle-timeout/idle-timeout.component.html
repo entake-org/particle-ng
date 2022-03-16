@@ -1,0 +1,14 @@
+<!-- timeout dialog -->
+<particle-dialog title="Your Session is Expiring"
+                 [object]="showDialog"
+                 (closed)="resetTimer()"
+                 width="350px" height="150px"
+                 #timeoutDialog>
+  <div class="row column center_center height100">
+    <div class="header sm bold center mar_bot10">{{count}} {{count !== 1 ? 'seconds' : 'second'}}</div>
+    <button class="access btn md overlay_alt2 bg_blue_alt" aria-label="Stay Logged In"
+            (click)="resetTimer()">
+      <span class="text">Click to stay logged in</span>
+    </button>
+  </div>
+</particle-dialog>

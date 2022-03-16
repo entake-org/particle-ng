@@ -7,7 +7,7 @@ export * from './app/modules/rich-text/particle-rich-text.module';
 export * from './app/modules/icons/particle-icons.module';
 export * from './app/modules/endpoint-state/endpoint-state.module';
 export * from './app/modules/dialog/dialog.module';
-export * from './app/modules/user-idle/particle-user-idle.module';
+export * from './app/modules/idle-timeout/particle-idle-timeout.module';
 export * from './app/modules/date-picker/date-picker.module';
 export * from './app/modules/dropdown/dropdown.module';
 export * from './app/modules/multi-select/multi-select.module';
@@ -21,6 +21,7 @@ export * from './app/modules/color-picker/color-picker.module';
 export * from './app/modules/slider/slider.module';
 export * from './app/modules/accordion/accordion.module';
 export * from './app/modules/theming/theming.module';
+export * from './app/modules/slideover/particle-slideover.module';
 
 /** DIRECTIVES */
 export * from './app/modules/tooltip/tooltip.directive';
@@ -49,6 +50,8 @@ export * from './app/modules/color-picker/color-picker.component';
 export * from './app/modules/slider/slider.component';
 export * from './app/modules/theming/components/theming.component';
 export * from './app/modules/accordion/accordion.component';
+export * from './app/modules/slideover/slideover.component';
+export * from './app/modules/idle-timeout/idle-timeout.component';
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';
@@ -57,7 +60,6 @@ export * from './app/shared/interceptors/json.interceptor';
 export * from './app/shared/services/base-data.service';
 export * from './app/shared/services/local-storage.service';
 export * from './app/shared/services/dialog.service';
-export * from './app/modules/user-idle/services/user-idle.service';
 export * from './app/modules/notification/services/notification.service';
 export * from './app/modules/theming/services/theming.service';
 export * from './app/modules/theming/services/theme-change-detection.service';
@@ -71,7 +73,6 @@ export * from './app/modules/background-carousel/carousel-options.model';
 export * from './app/shared/models/auditable.model';
 export * from './app/shared/models/data-list.model';
 export * from './app/shared/models/id.model';
-export * from './app/modules/user-idle/models/user-idle-config.model';
 export * from './app/modules/dropdown/models/dropdown-option.model';
 export * from './app/modules/dropdown/models/dropdown-option-group.model';
 export * from './app/modules/multi-select/models/multi-select-option.model';

@@ -266,7 +266,7 @@ export class ThemingService {
       if (child.href && font.source === 'adobe' && child.href.indexOf(font.id) > -1) {
         return true;
       } else if (child.href && child.href.indexOf(font.name.replace(' ', '+')) > -1) {
-
+        return true;
       }
     }
 

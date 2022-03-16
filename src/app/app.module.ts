@@ -23,6 +23,7 @@ import {ParticlePopoverModule} from './modules/popover/popover.module';
 import {ParticleAccordionModule} from './modules/accordion/accordion.module';
 import {ParticleThemingModule} from './modules/theming/theming.module';
 import {ParticleSlideoverModule} from "./modules/slideover/particle-slideover.module";
+import {ParticleIdleTimeoutModule} from "./modules/idle-timeout/particle-idle-timeout.module";
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import {ParticleSlideoverModule} from "./modules/slideover/particle-slideover.mo
     ParticleOrdinalNumberPipeModule,
     ParticleAccordionModule,
     ParticleThemingModule,
-    ParticleSlideoverModule
+    ParticleSlideoverModule,
+    ParticleIdleTimeoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

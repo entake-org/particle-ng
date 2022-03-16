@@ -260,4 +260,12 @@ export class AppComponent implements OnInit {
 
     this.notificationService.add(notification);
   }
+
+  doLogout(): void {
+    this.notificationService.add({
+      severity: 'info',
+      summary: 'Timer Ended',
+      detail: 'User logged out'
+    });
+  }
 }

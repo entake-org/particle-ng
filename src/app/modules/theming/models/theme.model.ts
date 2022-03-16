@@ -33,7 +33,7 @@ export interface ThemeExtension {
 export interface ThemeFont {
   name: string;
   id?: string;
-  source?: string;
+  source?: 'google' | 'adobe';
   isDefault?: boolean;
   isSerif?: boolean;
 }
