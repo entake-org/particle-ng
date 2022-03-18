@@ -17,7 +17,7 @@
   </nav>
 
   <!-- main content -->
-  <main class="site-content" id="site-content">
+  <main class="site-content" id="site-content" #contentDiv>
     <div class="col size_1 position_relative">
       <div class="row_block width100">
         <!-- HEADER -->
@@ -962,7 +962,8 @@
   <!--footer class="row footer_color pad_15 center_center">
     STARTER FOOTER
   </footer-->
-
 </div>
+
+<particle-scroll-to-top [content]="contentDiv"></particle-scroll-to-top>
 
 <!--particle-idle-timeout [timeoutInSeconds]="70" (timerEnd)="doLogout()"></particle-idle-timeout-->

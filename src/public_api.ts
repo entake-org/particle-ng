@@ -22,6 +22,7 @@ export * from './app/modules/slider/slider.module';
 export * from './app/modules/accordion/accordion.module';
 export * from './app/modules/theming/theming.module';
 export * from './app/modules/slideover/particle-slideover.module';
+export * from './app/modules/scroll-to-top/particle-scroll-to-top.module';
 
 /** DIRECTIVES */
 export * from './app/modules/tooltip/tooltip.directive';
@@ -52,6 +53,7 @@ export * from './app/modules/theming/components/theming.component';
 export * from './app/modules/accordion/accordion.component';
 export * from './app/modules/slideover/slideover.component';
 export * from './app/modules/idle-timeout/idle-timeout.component';
+export * from './app/modules/scroll-to-top/scroll-to-top.component';
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';
