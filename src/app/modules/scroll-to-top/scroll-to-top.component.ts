@@ -23,7 +23,7 @@ export class ScrollToTopComponent implements OnDestroy, AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
-    this._listener = this.renderer.listen(this.content, 'scroll', (e) => {
+    this._listener = this.renderer.listen(this.content, 'scroll', () => {
       this.$scrollTop.next(this.content.scrollTop);
     });
   }
