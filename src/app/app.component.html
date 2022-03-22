@@ -20,23 +20,8 @@
   <main class="site-content" id="site-content" #contentDiv>
     <div class="col size_1 position_relative">
       <div class="row_block width100">
-        <!-- HEADER -->
-        <div class="row v_center min_h40 menu_color pad_5">
-          <!-- left push button -->
-          <button class="access btn_pulse xsm page_container_color" (click)="pushContainerLeft.toggle()" aria-label="Toggle Left Push">
-            <i class="fas fa-bars"></i>
-          </button>
-          <!-- page description -->
-          <div class="col size_1 text sm mar_5">
-            You can mess with components made for the module here and make sure they work before package and release.
-          </div>
-          <!-- right push button -->
-          <button class="access btn_pulse xsm page_container_color" (click)="pushContainerRight.toggle()" aria-label="Toggle Right Push">
-            <i class="fas fa-bars"></i>
-          </button>
-        </div>
         <!-- CONTENT -->
-        <div class="row column pad_10">
+        <div class="row column pad_5">
 
           <!-- ROW -->
           <div class="col wrap">
@@ -864,10 +849,11 @@
           [showSidePanel]="true"
           [hideCloseButton]="false"
           [showTabOnClose]="true"
+          [alwaysShowClose]="true"
           (closed)="onPushContainerClose()"
           #pushContainerLeft>
-          <div class="menu_color min_h40 pad_10 pad_x15 text md bold v_center ">
-            Menu Example
+          <div class="menu_color min_h40 pad_10 pad_x15 text md bold v_center">
+            <div>Menu Example</div>
           </div>
           <div class="pad_10">
             <div class="row bottom_left mar_5" style="height:32px;">
@@ -935,9 +921,10 @@
           [showSidePanel]='true'
           [width]="250"
           [showTabOnClose]="true"
+          [alwaysShowClose]="true"
           #pushContainerRight>
           <div class="menu_color min_h40 pad_10 pad_x15 text md bold v_center">
-            Settings
+            <div>Settings</div>
           </div>
           <div class="pad_10">
             <div class="row bottom_left mar_5" style="height:32px;">
