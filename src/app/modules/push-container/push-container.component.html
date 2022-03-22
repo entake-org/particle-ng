@@ -17,7 +17,8 @@
   </div>
   <div
     *ngIf="!visibility && showTabOnClose"
-    class="side_panel_tab push_container_color_dark_2 center_center hide_element"
+    class="side_panel_tab center_center hide_element"
+    [ngClass]="tabColorClass"
     [style.top]="topOffset"
     [style.height]="'calc(100% - ' + topOffset + ')'"
     (click)="open()"

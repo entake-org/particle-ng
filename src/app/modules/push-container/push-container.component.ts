@@ -69,6 +69,9 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   @Input()
   showTabOnClose = false;
 
+  @Input()
+  tabColorClass = 'push_container_color_dark_2';
+
   /**
    * Event emitter for open
    */
@@ -137,6 +140,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    * Close the push container on destroy
    */
   ngOnDestroy(): void {
+    this.showTabOnClose = false;
     this.close();
   }
 
