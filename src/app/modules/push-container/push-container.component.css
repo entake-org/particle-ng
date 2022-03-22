@@ -48,12 +48,15 @@
   position: fixed;
   z-index: 3;
   user-select: none;
-  width: 20px;
+  width: 15px;
   overflow: hidden;
   cursor: pointer;
   box-shadow: 5px 0 3px -1px #00000059;
+  transition: all .2s ease-in-out;
 }
-
+.side_panel_tab:hover{
+  width:25px;
+}
 .data_hide_button {
   float: right;
   display: flex;
@@ -76,5 +79,5 @@
 .data_hide_button:hover {
   background-color: rgba(0, 0, 0, 0.3);
   color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.1)
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
