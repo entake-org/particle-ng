@@ -15,4 +15,17 @@
     </div>
     <ng-content></ng-content>
   </div>
+  <div
+    *ngIf="!visibility && showTabOnClose"
+    class="side_panel_tab push_container_color center_center"
+    [style.top]="topOffset"
+    [style.height]="'calc(100% - ' + topOffset + ')'"
+    (click)="open()"
+    [style.left]="side === 'left' ? 0 : undefined"
+    [style.right]="side !== 'left' ? 0 : undefined"
+  >
+    <div class="text sm">
+      <i [ngClass]="side === 'left' ? 'fas fa-angles-right' : 'fas fa-angles-left'"></i>
+    </div>
+  </div>
 </ng-container>

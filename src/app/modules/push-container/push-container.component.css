@@ -44,6 +44,16 @@
   display: none;
 }
 
+.side_panel_tab {
+  position: fixed;
+  z-index: 3;
+  user-select: none;
+  width: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 5px 0 3px -1px #00000059;
+}
+
 .data_hide_button {
   float: right;
   display: flex;

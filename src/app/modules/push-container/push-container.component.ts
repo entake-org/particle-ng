@@ -72,6 +72,9 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   @Input()
   alwaysShowClose = false;
 
+  @Input()
+  showTabOnClose = false;
+
   /**
    * Event emitter for open
    */
@@ -224,6 +227,10 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
     const element = document.getElementById(this.mainContentId);
     if (!element) {
       return;
+    }
+
+    if (this.showTabOnClose && size === '0px') {
+      size = '20px';
     }
 
     if (this.side.toLowerCase() === 'left') {
