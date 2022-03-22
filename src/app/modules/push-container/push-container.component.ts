@@ -66,12 +66,6 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   @Input()
   hideCloseButton = false;
 
-  /**
-   * Whether or not to show the close button on desktop. Defaults to false.
-   */
-  @Input()
-  alwaysShowClose = false;
-
   @Input()
   showTabOnClose = false;
 

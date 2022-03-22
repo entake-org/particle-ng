@@ -7,7 +7,7 @@
     [style.left]="state.left"
     [style.right]="state.right"
     [style.visibility]="visibility ? 'visible' : 'hidden'">
-    <div class="push_close_bar" *ngIf="(alwaysShowClose || breakpointExceeded) && !hideCloseButton">
+    <div class="push_close_bar" *ngIf="(!hideCloseButton || breakpointExceeded) && !hideCloseButton">
       <button (click)="close()" class="data_hide_button access" tabindex="0"
               [attr.aria-label]="'Close ' + side + ' sidebar'">
         <i class="fas fa-times"></i>
