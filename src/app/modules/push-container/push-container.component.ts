@@ -95,6 +95,8 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
 
   containerState: BehaviorSubject<PushContainerState> = new BehaviorSubject<PushContainerState>({} as PushContainerState);
 
+  private _lastWidth = 0;
+
   /**
    * Constructor
    */
@@ -106,6 +108,8 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    * Show or close the push container on load depending on the state passed in.
    */
   ngAfterViewInit(): void {
+    this._lastWidth = window.innerWidth;
+
     const element = document.getElementById(this.mainContentId);
 
     if (element) {
@@ -155,7 +159,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
       this.setMargin(this.width + 'px');
     }
 
-    if (event.target.innerWidth > 768 && this.closeOnResize) {
+    if (event.target.innerWidth > 768 && this._lastWidth <= 768 && this.closeOnResize) {
       this.showSidePanel = true;
       this.visibility = true;
       this.opened.emit();
@@ -168,6 +172,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     this.updateContainerState();
+    this._lastWidth = event.target.innerWidth;
   }
 
   /**
@@ -231,7 +236,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
       return;
     }
 
-    if (this.showTabOnClose && size === '0px') {
+    if (this.showTabOnClose && size === '0px' && window.innerWidth > 768) {
       size = '15px';
     }
 
