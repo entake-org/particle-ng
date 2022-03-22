@@ -224,7 +224,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     if (this.showTabOnClose && size === '0px') {
-      size = '20px';
+      size = '15px';
     }
 
     if (this.side.toLowerCase() === 'left') {
