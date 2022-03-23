@@ -163,7 +163,12 @@
   height="120px"
 >
   <div class="pad_10 text sm">
-    <input class="access input md" [(ngModel)]="dialogLink" aria-label="URL" placeholder="eg. https://www.google.com" />
+    <input class="access input md"
+           [(ngModel)]="dialogLink"
+           aria-label="URL"
+           placeholder="eg. https://www.google.com"
+           (keyup.enter)="changeEditorLink('save')"
+    />
   </div>
 
   <div class="center_center">
