@@ -222,6 +222,14 @@ export class ThemingService {
       this.generateColors(style, extension.color.startsWith('#') ? extension.color : '#' + extension.color, extension.className);
     }
 
+    if (this.isDarkTheme(theme.bodyColor)) {
+      style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.05);color:#FFFFFF;}`));
+      style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
+    } else {
+      style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.1);color:#111111;}`));
+      style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
+    }
+
     if (theme.overlayStyle) {
       style.appendChild(document.createTextNode(`.overlay{${theme.overlayStyle}}`));
     }
@@ -308,6 +316,11 @@ export class ThemingService {
         : Math.pow((v + 0.055) / 1.055, 2.4);
     });
     return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+  }
+
+  private isDarkTheme(color: string): boolean {
+    const rgb = this.hexToRgb(color);
+    return (this.luminance(rgb.r, rgb.g, rgb.b) * 100) < 50;
   }
 
   /**
