@@ -224,22 +224,16 @@ export class ThemingService {
 
     if (this.isDarkTheme(theme.bodyColor)) {
       style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.05);color:#FFFFFF;}`));
+      style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.05);color:#FFFFFF;}`));
       style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
     } else {
       style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.1);color:#111111;}`));
+      style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.1);color:#111111;}`));
       style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
     }
 
     if (theme.overlayStyle) {
       style.appendChild(document.createTextNode(`.overlay{${theme.overlayStyle}}`));
-    }
-
-    if (theme.overlayStyleAlt1) {
-      style.appendChild(document.createTextNode(`.overlay_alt1{${theme.overlayStyleAlt1}}`));
-    }
-
-    if (theme.overlayStyleAlt2) {
-      style.appendChild(document.createTextNode(`.overlay_alt2{${theme.overlayStyleAlt2}}`));
     }
 
     const head = document.head || document.getElementsByTagName('head')[0];

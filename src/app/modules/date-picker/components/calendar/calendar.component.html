@@ -70,7 +70,7 @@
                       [attr.aria-label]="'Select ' + weekDays[dayInMonth.day] + ' the ' + (dayInMonth.date | ordinalNumber)"
                       [ngClass]="{
                         'bg_blue_alt': (dayInMonth.date === selectedDate?.date && dayInMonth.month === selectedDate?.month && dayInMonth.year === selectedDate?.year),
-                        'overlay_alt1 hov_bg': (dayInMonth.date !== selectedDate?.date || dayInMonth.month !== selectedDate?.month || dayInMonth.year !== selectedDate?.year)
+                        'bg_overlay_rev brdr hov_bg': (dayInMonth.date !== selectedDate?.date || dayInMonth.month !== selectedDate?.month || dayInMonth.year !== selectedDate?.year)
                       }"
                       class="access day_button">
                 {{dayInMonth.date}}
@@ -90,7 +90,7 @@
       <ng-container *ngIf="currentDate.selectable">
         <button *ngIf="(currentDate.date === selectedDate?.date && currentDate.month === selectedDate?.month && currentDate.year === selectedDate?.year) else selectTodayButton"
                 disabled
-                class="access btn sm overlay_alt1 hov_bg mar_5"
+                class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
                 aria-label="Reset date selection to today's date">
             <span class="text bold">Select Today</span>
           </button>
@@ -98,7 +98,7 @@
           <button (keyup.escape)="closed.emit()"
                   (click)="selectToday()"
                   [attr.data-dialog-close-override]="true"
-                  class="access btn sm overlay_alt1 hov_bg mar_5"
+                  class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
                   aria-label="Reset date selection to today's date">
             <span class="text bold">Select Today</span>
           </button>
