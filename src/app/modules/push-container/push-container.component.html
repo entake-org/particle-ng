@@ -15,9 +15,9 @@
     </div>
     <ng-content></ng-content>
   </div>
-  <div
+  <button
     *ngIf="!visibility && showTabOnClose"
-    class="side_panel_tab center_center hide_element"
+    class="btn md side_panel_tab center_center hide_element access"
     [ngClass]="tabColorClass"
     [style.top]="topOffset"
     [style.height]="'calc(100% - ' + topOffset + ')'"
@@ -25,8 +25,8 @@
     [style.left]="side === 'left' ? 0 : undefined"
     [style.right]="side !== 'left' ? 0 : undefined"
   >
-    <div class="text sm">
+    <div class="text md">
       <i [ngClass]="side === 'left' ? 'fas fa-angle-right' : 'fas fa-angle-left'"></i>
     </div>
-  </div>
+  </button>
 </ng-container>
