@@ -179,7 +179,16 @@ export class ThemingService {
    * Returns the user selected theme from local storage
    */
   getTheme(): Theme {
-    return this.generateTheme(this.localStorageService.getObject(this.applicationName + this.THEME_KEY) as Theme);
+    const themeId = this.localStorageService.getObject(this.applicationName + this.THEME_KEY);
+    let defaultTheme = this.themes.value.filter(theme => theme.isDefault)[0];
+
+    for (const theme of this.themes.value) {
+      if (theme.themeId === themeId) {
+        return theme;
+      }
+    }
+
+    return defaultTheme;
   }
 
   /**
@@ -188,7 +197,7 @@ export class ThemingService {
    * @param settings
    */
   saveTheme(settings: Theme): void {
-    this.localStorageService.putObject(this.applicationName + this.THEME_KEY, settings);
+    this.localStorageService.putObject(this.applicationName + this.THEME_KEY, settings.themeId);
   }
 
   /**

@@ -1,5 +1,5 @@
 export interface Theme {
-  themeId: number;
+  themeId: string;
   isDefault: boolean;
   name: string;
   menuColor: string;

@@ -108,7 +108,7 @@ export class AppComponent implements OnInit {
 
   themes: Array<Theme> = [
     {
-      themeId: 1,
+      themeId: 'b170c2d1-5ce4-449b-9519-0b7082be9200',
       isDefault: true,
       name: 'Default',
       menuColor: '#3f6570',
@@ -146,7 +146,7 @@ export class AppComponent implements OnInit {
       ]
     } as Theme,
     {
-      themeId: 2,
+      themeId: 'c12fd008-88eb-49ec-bcfe-bb4cfced56a5',
       isDefault: false,
       name: 'Other',
       menuColor: '#230e26',
