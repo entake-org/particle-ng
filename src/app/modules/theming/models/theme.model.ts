@@ -10,9 +10,6 @@ export interface Theme {
   dialogHeaderColor: string;
   dialogBodyColor: string;
   pushContainerColor: string;
-  overlayStyle: string;
-  overlayStyleAlt1: string;
-  overlayStyleAlt2: string;
   bgRed: string;
   bgOrange: string;
   bgYellow: string;

@@ -232,10 +232,6 @@ export class ThemingService {
       style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
     }
 
-    if (theme.overlayStyle) {
-      style.appendChild(document.createTextNode(`.overlay{${theme.overlayStyle}}`));
-    }
-
     const head = document.head || document.getElementsByTagName('head')[0];
 
     for (const child of <any>head.childNodes) {
