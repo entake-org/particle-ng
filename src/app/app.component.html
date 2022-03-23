@@ -4,7 +4,7 @@
   <nav class="nav_color nav_shadow" style="height:100px;">
     <div class="row">
       <div class="nav_logo_box">
-        <div class="overlay_alt2 mar_left15 center_center mar_right5" style="height:50px;width:100px;">LOGO</div>
+        <div class="bg_overlay brdr mar_left15 center_center mar_right5" style="height:50px;width:100px;">LOGO</div>
         <div class="nav_title_box">
           <div class="nav_title">Particle NG</div>
           <div class="nav_subtitle">By SD Solutions</div>
@@ -286,7 +286,7 @@
                            ]
                          }
                        ]"
-                    [disabled]="false" [classList]="'input md overlay_alt2 page_container_color'">
+                    [disabled]="false" [classList]="'input md bg_overlay brdr page_container_color'">
                     <ng-template let-iconClass="iconClass" let-label>
                       <i [ngClass]="iconClass + ' fa-fw mar_right5'"></i> {{label}}
                     </ng-template>
@@ -314,7 +314,7 @@
                 </div>
                 <div class="pad_15">
                   <div class="form_label mar_bot5">Select the button below to preview the dialog</div>
-                  <button class="access btn sm overlay_alt2 bg_purple_alt" (click)="obj2 = {}">
+                  <button class="access btn sm bg_overlay brdr bg_purple_alt" (click)="obj2 = {}">
                     Preview Dialog
                   </button>
                 </div>
@@ -352,7 +352,7 @@
                 </div>
                 <div class="pad_15">
                   <div class="form_label mar_bot5">Select the button below to open the popover</div>
-                  <button class="access btn sm overlay_alt2 bg_grey_alt" (click)="popover.toggle($event)">
+                  <button class="access btn sm bg_overlay brdr bg_grey_alt" (click)="popover.toggle($event)">
                     Preview Popover
                   </button>
                   <particle-popover width="500" #popover>
@@ -375,16 +375,16 @@
                 </div>
                 <div class="pad_15">
                   <div class="form_label mar_bot5">Test each slide over type below</div>
-                  <button class="access btn sm overlay_alt2 bg_grey_alt mar_5" (click)="slideoverLeft.toggle()">
+                  <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="slideoverLeft.toggle()">
                     Left
                   </button>
-                  <button class="access btn sm overlay_alt2 bg_grey_alt mar_5" (click)="slideoverRight.toggle()">
+                  <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="slideoverRight.toggle()">
                     Right
                   </button>
-                  <button class="access btn sm overlay_alt2 bg_grey_alt mar_5" (click)="slideoverTop.toggle()">
+                  <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="slideoverTop.toggle()">
                     Top
                   </button>
-                  <button class="access btn sm overlay_alt2 bg_grey_alt mar_5" (click)="slideoverBottom.toggle()">
+                  <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="slideoverBottom.toggle()">
                     Bottom
                   </button>
 
@@ -426,19 +426,19 @@
                   <div class="form_label mar_bot5">Select a button below to preview a notification type</div>
                   <div class="row wrap v_center" style="margin:0 -5px;">
                     <button (click)="addNotification('success')"
-                            class="access btn sm overlay_alt2 bg_green_alt mar_5">
+                            class="access btn sm bg_overlay brdr bg_green_alt mar_5">
                       Show Success
                     </button>
                     <button (click)="addNotification('warn')"
-                            class="access btn sm overlay_alt2 bg_orange_alt mar_5">
+                            class="access btn sm bg_overlay brdr bg_orange_alt mar_5">
                       Show Warning
                     </button>
                     <button (click)="addNotification('error')"
-                            class="access btn sm overlay_alt2 bg_red_alt mar_5">
+                            class="access btn sm bg_overlay brdr bg_red_alt mar_5">
                       Show Error
                     </button>
                     <button (click)="addNotification('info')"
-                            class="access btn sm overlay_alt2 bg_purple_alt mar_5">
+                            class="access btn sm bg_overlay brdr bg_purple_alt mar_5">
                       Show Info
                     </button>
                   </div>
@@ -817,7 +817,7 @@
                            ]"
               [disabled]="false">
             </particle-dropdown>
-            <button class="access btn md overlay_alt2 bg_blue_alt mar_10" (click)="obj3 = {}">Open Child</button>
+            <button class="access btn md bg_overlay brdr bg_blue_alt mar_10" (click)="obj3 = {}">Open Child</button>
           </div>
           <!-- CHILD DIALOG -->
           <particle-dialog title="Child of Parent Dialog" [object]="obj3" (closed)="obj3 = null"
@@ -830,15 +830,15 @@
                 [inputClassList]="'form_input page_container_color'"
                 [calendarButtonClassList]="'overlay border_left brad_0'">
               </particle-date-picker>
-              <button class="access btn md overlay_alt2 bg_blue_alt mar_10" (click)="obj4 = {}">Open Child</button>
-              <button class="access btn md overlay_alt2 bg_blue_alt mar_10" (click)="obj3 = null">Close</button>
+              <button class="access btn md bg_overlay brdr bg_blue_alt mar_10" (click)="obj4 = {}">Open Child</button>
+              <button class="access btn md bg_overlay brdr bg_blue_alt mar_10" (click)="obj3 = null">Close</button>
             </div>
             <!-- SECOND CHILD DIALOG -->
             <particle-dialog title="Child of Child of Parent Dialog" [object]="obj4" (closed)="obj4 = null"
                          width="400px" height="300px">
               <div class="pad_15">
                 <div class="form_label mar_bot5">Select the button below to open the popover</div>
-                <button class="access btn sm overlay_alt2 bg_grey_alt" (click)="dialogPopover.toggle($event)">
+                <button class="access btn sm bg_overlay brdr bg_grey_alt" (click)="dialogPopover.toggle($event)">
                   Preview Popover
                 </button>
                 <particle-popover width="500" #dialogPopover>
@@ -875,7 +875,7 @@
                 Here are your options
               </div>
             </div>
-            <div class="overlay_alt2 hr mar_y15 mar_x5"></div>
+            <div class="bg_overlay brdr hr mar_y15 mar_x5"></div>
             <!-- informational text -->
             <div class="mar_5 mar_y10 pad_bot5">
               <div class="text sm paragraph">
@@ -945,7 +945,7 @@
                 Add basic controls here
               </div>
             </div>
-            <div class="overlay_alt2 hr mar_y15 mar_x5"></div>
+            <div class="bg_overlay brdr hr mar_y15 mar_x5"></div>
             <!-- informational text -->
             <div class="mar_5 mar_y10 pad_bot5">
               <particle-theming></particle-theming>

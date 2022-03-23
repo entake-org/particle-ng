@@ -1,6 +1,6 @@
 <div *ngIf="render" [style.filter]="_disabled ? 'brightness(.95)' : ''"
      class="wcp_container"
-     [ngClass]="classList ? classList : 'input md overlay_alt2 page_container_color'">
+     [ngClass]="classList ? classList : 'input md bg_overlay brdr page_container_color'">
   <ng-container *ngIf="colorPickerSupported else colorSwatch">
     <input #colorPicker
            type="color"
@@ -14,11 +14,11 @@
   </ng-container>
   <ng-template #colorSwatch>
     <div class="wcp_swatch">
-      <div class="width100 height100 overlay_alt2" style="border-radius:inherit;"
+      <div class="width100 height100 bg_overlay brdr" style="border-radius:inherit;"
            [style.background-color]="'#' + (_value || '000000')"></div>
     </div>
   </ng-template>
-  <div class="overlay_alt2 vr wcp_divider"></div>
+  <div class="bg_overlay brdr vr wcp_divider"></div>
   <div class="wcp_hashtag">#</div>
   <input #colorInput
          type="text"

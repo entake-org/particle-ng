@@ -1,5 +1,5 @@
-<div class="row overlay_alt2 wrap hide_element"  style="border-width: 1px 1px 0 1px;" *ngIf="!this.hideControls && this.editor.isEditable">
-  <div class="col v_center overlay_alt2 border_right pad_5">
+<div class="row bg_overlay brdr wrap hide_element"  style="border-width: 1px 1px 0 1px;" *ngIf="!this.hideControls && this.editor.isEditable">
+  <div class="col v_center bg_overlay brdr border_right pad_5">
     <button
       id="heading1"
       aria-label="Heading 1"
@@ -21,7 +21,7 @@
       <i class="fas fa-header fa-fw"></i>2
     </button>
   </div>
-  <div class="col v_center overlay_alt2 border_right pad_5">
+  <div class="col v_center bg_overlay brdr border_right pad_5">
     <button
       id="bold"
       aria-label="Bold"
@@ -53,7 +53,7 @@
       <i class="fas fa-strikethrough fa-fw"></i>
     </button>
   </div>
-  <div class="col v_center overlay_alt2 border_right pad_5">
+  <div class="col v_center bg_overlay brdr border_right pad_5">
     <button
       id="bullet-list"
       aria-label="Bulleted List"
@@ -75,7 +75,7 @@
       <i class="fas fa-list-ol fa-fw"></i>
     </button>
   </div>
-  <div class="col v_center overlay_alt2 border_right pad_5">
+  <div class="col v_center bg_overlay brdr border_right pad_5">
   <button
     id="left-align"
     aria-label="Left Align"
@@ -117,7 +117,7 @@
     <i class="fas fa-align-justify fa-fw"></i>
   </button>
   </div>
-  <div class="col v_center overlay_alt2 border_right pad_5">
+  <div class="col v_center bg_overlay brdr border_right pad_5">
     <button
             id="link"
             aria-label="Set Link"
@@ -139,7 +139,7 @@
       <i class="fas fa-unlink fa-fw"></i>
     </button>
   </div>
-  <div class="col size_1 v_center overlay_alt2 border_none pad_5">
+  <div class="col size_1 v_center bg_overlay brdr border_none pad_5">
   <button
     id="clear-format"
     aria-label="Clear Format"
@@ -151,7 +151,7 @@
   </button>
   </div>
 </div>
-<div class="overlay_alt2 pad_10 text sm scroll_yauto" [style.height]="this.height">
+<div class="bg_overlay brdr pad_10 text sm scroll_yauto" [style.height]="this.height">
   <tiptap-editor [editor]="editor" [(ngModel)]="value"></tiptap-editor>
 </div>
 
@@ -167,7 +167,7 @@
   </div>
 
   <div class="center_center">
-    <button class="access btn sm overlay_alt2 bg_grey_alt mar_5" (click)="changeEditorLink('cancel')">Cancel</button>
-    <button class="access btn sm overlay_alt2 bg_grey_alt mar_5" (click)="changeEditorLink('save')">Update</button>
+    <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="changeEditorLink('cancel')">Cancel</button>
+    <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="changeEditorLink('save')">Update</button>
   </div>
 </particle-dialog>

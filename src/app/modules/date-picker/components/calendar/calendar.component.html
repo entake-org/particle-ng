@@ -85,7 +85,7 @@
         </ng-container>
       </div>
     </div>
-    <div class="overlay_alt2 hr mar_5"></div>
+    <div class="bg_overlay brdr hr mar_5"></div>
     <div class="row space_between">
       <ng-container *ngIf="currentDate.selectable">
         <button *ngIf="(currentDate.date === selectedDate?.date && currentDate.month === selectedDate?.month && currentDate.year === selectedDate?.year) else selectTodayButton"
@@ -108,7 +108,7 @@
               (keyup.escape)="closed.emit()"
               (click)="closed.emit()"
               [attr.data-dialog-close-override]="true"
-              class="access btn sm overlay_alt2 bg_green_alt mar_5 hov_glow"
+              class="access btn sm bg_overlay brdr bg_green_alt mar_5 hov_glow"
               aria-label="Save date selection">
         <i class="fas fa-check mar_right5"></i><span class="text bold">Done</span>
       </button>
