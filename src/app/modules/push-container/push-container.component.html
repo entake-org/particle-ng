@@ -24,6 +24,9 @@
     (click)="open()"
     [style.left]="side === 'left' ? 0 : undefined"
     [style.right]="side !== 'left' ? 0 : undefined"
+    particleTooltip="Expand"
+    tooltipPosition="right"
+    aria-label="Expand"
   >
     <div class="text md">
       <i [ngClass]="side === 'left' ? 'fas fa-angle-right' : 'fas fa-angle-left'"></i>
