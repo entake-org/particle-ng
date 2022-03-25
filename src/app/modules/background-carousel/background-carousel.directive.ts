@@ -3,7 +3,7 @@ import {BehaviorSubject} from 'rxjs';
 import {CarouselOptions} from './carousel-options.model';
 
 /**
- * This directive when applied to a div will hi-jack its background and apply a carousel of images.
+ * This directive when applied to a div will hijack its background and apply a carousel of images.
  */
 @Directive({
   selector: '[particleCarousel]'
@@ -26,14 +26,14 @@ export class BackgroundCarouselDirective implements OnDestroy {
    * @param value
    */
   @Input('particleCarouselOptions')
-  set options(value: any) {
+  set options(value: CarouselOptions) {
     this._options.next(value);
   }
 
   /**
    * Gets the options for the carousel
    */
-  get options() {
+  get options(): CarouselOptions {
     return this._options.getValue();
   }
 
@@ -44,7 +44,7 @@ export class BackgroundCarouselDirective implements OnDestroy {
    */
   constructor(el: ElementRef) {
     this._options.subscribe(
-      options => {
+      () => {
         this.initOptions();
 
         if (this.options.resetInterval) {

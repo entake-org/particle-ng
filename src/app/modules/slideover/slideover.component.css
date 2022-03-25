@@ -1,0 +1,114 @@
+.slideover-panel {
+  position: fixed;
+  transition: transform .3s;
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+.slideover-panel.left {
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.slideover-panel.right {
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+
+.slideover-panel.top {
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.slideover-panel.bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.slideover_inactive_left {
+  transition: left 0.2s ease-in-out;
+}
+
+.slideover_active_left {
+  transition: left 0.2s ease-in-out;
+}
+
+.slideover_inactive_right {
+  transition: right 0.2s ease-in-out;
+}
+
+.slideover_active_right {
+  transition: right 0.2s ease-in-out;
+}
+
+.slideover_inactive_top {
+  transition: top 0.2s ease-in-out;
+}
+
+.slideover_active_top {
+  transition: top 0.2s ease-in-out;
+}
+
+.slideover_inactive_bottom {
+  transition: bottom 0.2s ease-in-out;
+}
+
+.slideover_active_bottom {
+  transition: bottom 0.2s ease-in-out;
+}
+
+.push_close_bar {
+  position: absolute;
+  right:0;
+  top:0;
+  width:45px;
+  height:45px;
+  z-index: 9999;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.data_hide_button {
+  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9pt;
+  min-height: 20px;
+  height: 20px;
+  min-width: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding:0;
+  transition: all .2s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.data_hide_button:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1)
+}
+
+/* dark overlay behind the dialog */
+.particle_dialog_overlay {
+  position: fixed;
+  display: block;
+  width: 100%; /* used instead of vh for mobile safari compatibility */
+  height: 100%; /* used instead of vh for mobile safari compatibility */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(120,120,120,0.4); /* black background with opacity */
+  z-index: 9998; /* Specify a stack order in case of using a different order for other elements */
+}

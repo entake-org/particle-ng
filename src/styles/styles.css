@@ -1,38 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
-@import 'https://cdn.jsdelivr.net/gh/gditfc/wily-styles@v1.0.1/dist/wily-styles.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\borders.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\buttons.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\effects.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\forms.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\layout.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\navigation.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\shapes.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\spacing.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\styles.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\z_responsive.css';
+
+/* TODO - REMOVE */
+.overlay {
+  border:1px solid rgba(0,0,0,0.1);background-color:blueviolet;color:deeppink;
+}
 
 /* REGULAR ACCESS CLASS */
 .access{
-  outline:rgba(38,184,239,0.0) 1px solid !important;
+  outline:rgba(17,212,17,0.0) 1px solid !important;
   transition:all 0.2s ease-in-out;
   text-decoration: none;
 }
-.access:focus{
-  outline:rgba(38,184,239,1.0) 1px solid !important;
-  outline-offset: 5px;
-  position:relative;
-  z-index:1;
+.access:hover{
+  outline:rgba(17,212,17,1.0) 1px solid !important;
+  outline-offset: 3px;
+  border-radius: inherit;
 }
 
-/* Experimental new access class */
-/* .access:focus {
-  position:relative;
-  overflow:visible;
-}
-.access:focus::after {
-  content: "";
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  bottom: -5px;
-  left: -5px;
+.access:focus{
+  outline:rgba(17,212,17,1.0) 1px solid !important;
+  outline-offset: 3px;
   border-radius: inherit;
-  background-color: transparent;
-  border:2px solid #65a3c7;
 }
-input.access:focus, select.access:focus {
-  position:relative;
-  z-index:2;
-  outline:2px solid #65a3c7;
-  outline-offset:2px;
-} */

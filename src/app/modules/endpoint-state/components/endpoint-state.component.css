@@ -1,46 +1,4 @@
-/****** BARS_BOUNCE ******/
-.bars_bounce {
-  height:50px;
-  width:120px;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-}
-.bars_bounce .bar1,
-.bars_bounce .bar2,
-.bars_bounce .bar3,
-.bars_bounce .bar4 {
-  animation-duration: 0.75s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease;
-  animation-direction:alternate;
-  transform-origin:bottom center;
-  margin:0 5px;
-}
-.bars_bounce .bar1 {
-  animation-name: bars_bounce_grow;
-  animation-delay:0.15s;
-}
-.bars_bounce .bar2 {
-  animation-name: bars_bounce_grow;
-  animation-delay:0.3s;
-}
-.bars_bounce .bar3 {
-  animation-name: bars_bounce_grow;
-  animation-delay:0.45s;
-}
-.bars_bounce .bar4 {
-  animation-name: bars_bounce_grow;
-  animation-delay:0.6s;
-}
-@keyframes bars_bounce_grow {
-  from {
-    transform:scaleY(1);
-  }
-  to {
-    transform: scaleY(10);
-  }
-}
+
 
 /****** BARS_VERTICAL ******/
 .bars_vertical {
@@ -53,33 +11,39 @@
 .bars_vertical .bar1,
 .bars_vertical .bar2,
 .bars_vertical .bar3,
-.bars_vertical .bar4 {
+.bars_vertical .bar4,
+.bars_vertical .bar5 {
   animation-duration: 0.8s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
   animation-direction:alternate;
   transform-origin:center center;
-  margin:0 5px;
+  margin:0 10px;
 }
 .bars_vertical .bar1 {
   animation-name: bars_vertical_grow;
   animation-delay:0.2s;
-  height:12px;
+  height:5px;
 }
 .bars_vertical .bar2 {
   animation-name: bars_vertical_grow;
   animation-delay:0.4s;
-  height:16px;
+  height:5px;
 }
 .bars_vertical .bar3 {
   animation-name: bars_vertical_grow;
   animation-delay:0.6s;
-  height:16px;
+  height:5px;
 }
 .bars_vertical .bar4 {
   animation-name: bars_vertical_grow;
   animation-delay:0.8s;
-  height:12px;
+  height:5px;
+}
+.bars_vertical .bar5 {
+  animation-name: bars_vertical_grow;
+  animation-delay:1.0s;
+  height:5px;
 }
 @keyframes bars_vertical_grow {
   from {
@@ -89,84 +53,6 @@
     transform: scaleY(3.3);
   }
 }
-
-/****** BARS_PROGRESS ******/
-.bars_progress {
-  width:175px;
-}
-.bars_progress .bar1,
-.bars_progress .bar2,
-.bars_progress .bar3,
-.bars_progress .bar4 {
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  transform-origin:left center;
-  animation-duration: 1.25s;
-  animation-name: bars_progress_grow;
-  transform:scaleX(0);
-}
-.bars_progress .bar1 {
-  animation-delay:0s;
-}
-.bars_progress .bar2 {
-  animation-delay:0.2s;
-}
-.bars_progress .bar3 {
-  animation-delay:0.4s;
-}
-.bars_progress .bar4 {
-  animation-delay:0.6s;
-}
-@keyframes bars_progress_grow {
-  0% {
-    transform:scaleX(0);
-    opacity:1;
-  }
-  16% {
-    transform:scaleX(1);
-    opacity:1;
-  }
-  100% {
-    transform:scaleX(1);
-    opacity:0;
-  }
-}
-
-/*!* bars2 animations *!*/
-/*.bars2_1, .bars2_2, .bars2_3, .bars2_4 {*/
-/*  animation-iteration-count: infinite;*/
-/*  animation-timing-function: ease-in-out;*/
-/*  transform-origin:left center;*/
-/*  animation-duration: 1s;*/
-/*  animation-name: bars2_grow;*/
-/*  transform:scaleX(0);*/
-/*}*/
-/*.bars2_1 {*/
-/*  animation-delay:0s;*/
-/*}*/
-/*.bars2_2 {*/
-/*  animation-delay:0.25s;*/
-/*}*/
-/*.bars2_3 {*/
-/*  animation-delay:0.5s;*/
-/*}*/
-/*.bars2_4 {*/
-/*  animation-delay:0.75s;*/
-/*}*/
-/*@keyframes bars2_grow {*/
-/*  0% {*/
-/*    transform:scaleX(0) scaleY(0.5);*/
-/*    opacity:1;*/
-/*  }*/
-/*  25% {*/
-/*    transform:scaleX(1) scaleY(3);*/
-/*    opacity:1;*/
-/*  }*/
-/*  100% {*/
-/*    transform:scaleX(1) scaleY(0.5);*/
-/*    opacity:0;*/
-/*  }*/
-/*}*/
 
 #overlay {
   position: fixed; /* Sit on top of the page content */
@@ -197,4 +83,52 @@
 @keyframes fadein {
   from { opacity:0; }
   to   { opacity:0.5; }
+}
+
+.one {
+  opacity: 0;
+  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation-delay: 0.0s;
+  animation: dot 1.3s infinite;
+  animation-delay: 0.0s;
+}
+
+.two {
+  opacity: 0;
+  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation-delay: 0.2s;
+  animation: dot 1.3s infinite;
+  animation-delay: 0.2s;
+}
+
+.three {
+  opacity: 0;
+  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation-delay: 0.3s;
+  animation: dot 1.3s infinite;
+  animation-delay: 0.3s;
+}
+
+@-webkit-keyframes dot {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dot {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

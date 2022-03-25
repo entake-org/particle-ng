@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 /**
  * Component to display different endpoint states
@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
   templateUrl: './endpoint-state.component.html',
   styleUrls: ['./endpoint-state.component.css']
 })
-export class EndpointStateComponent implements OnInit {
+export class EndpointStateComponent {
 
   /**
    * Flag to determine if in loading state
@@ -20,13 +20,13 @@ export class EndpointStateComponent implements OnInit {
    * Icon for loading state
    */
   @Input()
-  loadingIcon: 'bars_bounce' | 'bars_vertical' | 'bars_progress' | string = 'bars_bounce';
+  loadingIcon: 'double_helix' | string = 'double_helix';
 
   /**
    * Main text for loading state
    */
   @Input()
-  loadingText = 'Loading...';
+  loadingText = 'Loading';
 
   /**
    * Subtext for loading state
@@ -110,11 +110,5 @@ export class EndpointStateComponent implements OnInit {
    * Component constructor
    */
   constructor() { }
-
-  /**
-   * Initialize the component
-   */
-  ngOnInit(): void {
-  }
 
 }

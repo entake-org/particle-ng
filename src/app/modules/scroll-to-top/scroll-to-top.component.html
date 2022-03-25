@@ -1,0 +1,11 @@
+<ng-container *ngIf="$scrollTop | async as scrollTop">
+  <div [style.visibility]="scrollTop > scrollDistance ? 'visible' : 'hidden'"
+       [style.opacity]="scrollTop > scrollDistance ? '1' : '0'"
+       class="circle_40px bg_overlay_rev particle_scroll_button">
+    <button (click)="scrollToTop()"
+            class="access btn circle_30px brdr page_container_color"
+            aria-label="Scroll back to the top of the page">
+      <span class="icon slide_up"><i class="fas fa-chevron-up"></i></span>
+    </button>
+  </div>
+</ng-container>

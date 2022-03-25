@@ -1,7 +1,7 @@
 /**
  * Auditable Class - Holds the creation and modification data that is known for most DB interactions
  */
-export class Auditable {
+export interface Auditable {
 
   /**
    * Who Created it

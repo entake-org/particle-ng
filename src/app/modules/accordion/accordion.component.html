@@ -1,24 +1,16 @@
-<section class="particle_accordion">
-  <div *ngFor="let item of items;index as i"
-    class="particle_accordion__item" [class.disabled]="item.disabled" [class.active]="expanded.has(i)">
-    <ng-container
-      [ngTemplateOutlet]="(item.customHeader?.templateRef || defaultHeader)"
-      [ngTemplateOutletContext]="{$implicit: item, index: i, toggle: getToggleState(i)}"></ng-container>
-    <div class="particle_accordion__content" [class.expanded]="expanded.has(i)" [@contentExpansion]="expanded.has(i) ? 'expanded':'collapsed'">
-      <ng-container *ngTemplateOutlet="item?.content?.templateRef"></ng-container>
+<div *ngFor="let item of items;index as i" class="particle_accordion_item" [class.disabled]="item.disabled" [class.active]="expanded.has(i)">
+  <button class="particle_accordion_header bg_overlay brdr width100"
+          [ngClass]="headerClass + (!item.disabled ? ' access' : '')"
+          [style.height]="height"
+          (click)="!item.disabled ? toggleState(i) : {}"
+          aria-label="View More...">
+    <div class="text" [ngClass]="textClass">
+      <span *ngIf="!expanded.has(i)"><i [ngClass]="iconCollapsed + ' fa-fw'"></i></span>
+      <span *ngIf="expanded.has(i)"><i [ngClass]="iconExpanded + ' fa-fw'"></i></span>
+      {{item?.header}}
     </div>
+  </button>
+  <div class="particle_accordion_content" [class.expanded]="expanded.has(i)" [@contentExpansion]="expanded.has(i) ? 'expanded':'collapsed'">
+    <ng-container *ngTemplateOutlet="item?.content?.templateRef"></ng-container>
   </div>
-</section>
-
-<ng-template #defaultHeader let-item let-index="index">
-  <header class="particle_accordion__header overlay_alt2 border_bottom"
-    (click)="item.disabled ? {} :toggleState(index)">
-    <button class="access page_container_color particle_accordion__toggle-btn" [disabled]="item.disabled" aria-label="View More...">
-      <div class="text"> &#9654; </div>
-      </button>
-    <ng-container *ngTemplateOutlet="item?.customTitle?.templateRef || defaultTitle"></ng-container>
-  </header>
-  <ng-template #defaultTitle>
-    <p class="text md bolder">{{item?.header}}</p>
-  </ng-template>
-</ng-template>
+</div>

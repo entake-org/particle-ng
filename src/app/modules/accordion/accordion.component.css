@@ -1,40 +1,35 @@
 :host {
-    --accordion-disabled: rgb(159, 159, 161);
-  }
-  .particle_accordion {
-  }
+  --accordion-disabled: rgb(159, 159, 161);
+}
 
-  .particle_accordion__header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 40px;
-    cursor: pointer;
-  }
+.particle_accordion_header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
 
-  .particle_accordion__toggle-btn {
-    border: none;
-    transition: transform 0.2s ease-in;
-    background: none;
-  }
+.particle_accordion_toggle_button {
+  border: none;
+  transition: transform 0.2s ease-in;
+  background: none;
+}
 
-  .particle_accordion__item.disabled .particle_accordion__header {
-    color: var(--accordion-disabled);
-    cursor: not-allowed;
-  }
-  .particle_accordion__toggle-btn:disabled {
-    cursor: not-allowed;
-  }
-  .particle_accordion__toggle-btn:disabled svg path:nth-child(2) {
-    fill: var(--accordion-disabled);
-  }
-  .particle_accordion__item.active .particle_accordion__toggle-btn {
-    transform: rotate(90deg);
-  }
+.particle_accordion_item.disabled .particle_accordion_header {
+  color: var(--accordion-disabled);
+  cursor: auto;
+}
 
-  .particle_accordion__item .particle_accordion__header:focus-within {
-  }
-  .particle_accordion__toggle-btn:focus {
-    outline: none;
-  }
+.particle_accordion_toggle_button:disabled {
+  cursor: auto;
+}
+
+.particle_accordion_toggle_button:disabled svg path:nth-child(2) {
+  fill: var(--accordion-disabled);
+}
+
+.particle_accordion_toggle_button:focus {
+  outline: none;
+}
 

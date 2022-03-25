@@ -1,4 +1,6 @@
 import {AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {PushContainerState} from './push-container-state.model';
+import {BehaviorSubject} from 'rxjs';
 
 /**
  * Push Container that'll either push the content or overlay the content based on screen width.
@@ -64,11 +66,11 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   @Input()
   hideCloseButton = false;
 
-  /**
-   * Whether or not to show the close button on desktop. Defaults to false.
-   */
   @Input()
-  alwaysShowClose = false;
+  showTabOnClose = false;
+
+  @Input()
+  tabColorClass = 'push_container_color_dark_2';
 
   /**
    * Event emitter for open
@@ -94,6 +96,10 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    */
   breakpointExceeded = false;
 
+  containerState: BehaviorSubject<PushContainerState> = new BehaviorSubject<PushContainerState>({} as PushContainerState);
+
+  private _lastWidth = 0;
+
   /**
    * Constructor
    */
@@ -105,6 +111,8 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    * Show or close the push container on load depending on the state passed in.
    */
   ngAfterViewInit(): void {
+    this._lastWidth = window.innerWidth;
+
     const element = document.getElementById(this.mainContentId);
 
     if (element) {
@@ -123,6 +131,8 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
       if (this.breakpoint && (window.innerWidth <= this.breakpoint)) {
         this.breakpointExceeded = true;
       }
+
+      this.updateContainerState();
     });
   }
 
@@ -130,6 +140,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    * Close the push container on destroy
    */
   ngOnDestroy(): void {
+    this.showTabOnClose = false;
     this.close();
   }
 
@@ -152,9 +163,20 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
       this.setMargin(this.width + 'px');
     }
 
+    if (event.target.innerWidth > 768 && this._lastWidth <= 768 && this.closeOnResize) {
+      this.showSidePanel = true;
+      this.visibility = true;
+      this.opened.emit();
+
+      this.setMargin(this.width + 'px');
+    }
+
     if (this.breakpoint) {
       this.breakpointExceeded = event.target.innerWidth < this.breakpoint;
     }
+
+    this.updateContainerState();
+    this._lastWidth = event.target.innerWidth;
   }
 
   /**
@@ -190,6 +212,8 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
     if (window.innerWidth > 768) {
       this.setMargin(this.width + 'px');
     }
+
+    this.updateContainerState();
   }
 
   /**
@@ -201,6 +225,8 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
     this.setMargin('0px');
 
     setTimeout(() => this.visibility = false, 200);
+
+    this.updateContainerState();
   }
 
   /**
@@ -212,6 +238,10 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
     const element = document.getElementById(this.mainContentId);
     if (!element) {
       return;
+    }
+
+    if (this.showTabOnClose && size === '0px' && window.innerWidth > 768) {
+      size = '15px';
     }
 
     if (this.side.toLowerCase() === 'left') {
@@ -243,7 +273,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   /**
    * Get the side panel class based on the current state.
    */
-  getSidePanelClass(): string {
+  private getSidePanelClass(): string {
     if (this.showSidePanel) {
       return this.backgroundColorClass + ' layout_sidebar_active_' + this.side.toLowerCase();
     } else {
@@ -254,7 +284,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   /**
    * Get the left size based on the options
    */
-  getLeftProperty(): string {
+  private getLeftProperty(): string {
     if (this.side !== 'left') {
       return '';
     } else {
@@ -269,7 +299,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   /**
    * Get the right size based on the options
    */
-  getRightProperty(): string {
+  private getRightProperty(): string {
     if (this.side !== 'right') {
       return '';
     } else {
@@ -279,6 +309,14 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
         return '-' + (this.width + 20) + 'px';
       }
     }
+  }
+
+  private updateContainerState(): void {
+    this.containerState.next({
+      right: this.getRightProperty(),
+      left: this.getLeftProperty(),
+      sidePanelClass: this.getSidePanelClass()
+    } as PushContainerState);
   }
 
 }

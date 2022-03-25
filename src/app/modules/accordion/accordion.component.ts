@@ -24,12 +24,24 @@ import { AccordionItemDirective } from './directives/accordion-item.directive';
 })
 export class AccordionComponent {
   expanded = new Set<number>();
-  /**
-   * When collapsing, it will display 1 tab at a time
-   * When not collapsing, it can display multiple tabs at once
-   */
+
   @Input()
-  collapsing = false;
+  multiple = false;
+
+  @Input()
+  height = '40px';
+
+  @Input()
+  headerClass = 'border_bottom';
+
+  @Input()
+  textClass = 'md bolder';
+
+  @Input()
+  iconCollapsed = 'fas fa-caret-right';
+
+  @Input()
+  iconExpanded = 'fas fa-caret-down';
 
   @ContentChildren(AccordionItemDirective)
   items: QueryList<AccordionItemDirective> = null as any;
@@ -37,15 +49,15 @@ export class AccordionComponent {
   /**
    * @param index - index of the accordion item
    */
-  getToggleState = (index: number) => {
+  getToggleState = (index: number): any => {
     return this.toggleState.bind(this, index);
   }
 
-  toggleState = (index: number) => {
+  toggleState = (index: number): void => {
     if (this.expanded.has(index)) {
       this.expanded.delete(index);
     } else {
-      if (this.collapsing) {
+      if (!this.multiple) {
         this.expanded.clear();
       }
       this.expanded.add(index);

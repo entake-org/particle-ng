@@ -5,6 +5,7 @@ import {NotificationService} from './modules/notification/services/notification.
 import {PushContainerComponent} from './modules/push-container/push-container.component';
 import {ThemingService} from './modules/theming/services/theming.service';
 import {Theme} from './modules/theming/models/theme.model';
+import {SlideoverComponent} from "./modules/slideover/slideover.component";
 
 /**
  * App Component to test out stuff built here. Not useful for anything else. Should not be exported by this package.
@@ -99,7 +100,7 @@ export class AppComponent implements OnInit {
 
   weekPickerValue = { start: startOfWeek(new Date()), end: endOfWeek(new Date()) };
 
-  textEditorValue = '<p>This is some rich text</p>';
+  textEditorValue = '<h2 style="text-align: center">Beautiful <b>BOLD</b> <em>rich</em> text!</h2><p>Visit <a href="https://www.sdsolutions.io" target="_blank">sdsolutions.io</a> for more cool stuff!</p>';
 
   colorPickerValue = '#44ff55';
 
@@ -107,7 +108,7 @@ export class AppComponent implements OnInit {
 
   themes: Array<Theme> = [
     {
-      themeId: 1,
+      themeId: 'b170c2d1-5ce4-449b-9519-0b7082be9200',
       isDefault: true,
       name: 'Default',
       menuColor: '#3f6570',
@@ -118,9 +119,6 @@ export class AppComponent implements OnInit {
       dialogHeaderColor: '#43555e',
       dialogBodyColor: '#FEFEFE',
       pushContainerColor: '#FEFEFE',
-      overlayStyle: 'border:1px solid rgba(0,0,0,0.1);background-color:#EFEFEF;color:#222222;',
-      overlayStyleAlt1: 'border:1px solid rgba(150,150,150,0.5);background-color:rgba(0,0,0,0.1);color:#111111;',
-      overlayStyleAlt2: 'border:1px solid rgba(150,150,150,0.5);background-color:rgba(255,255,255,0.1);color:#111111;',
       bgRed: '#823841',
       bgOrange: '#946a15',
       bgYellow: '#7a7626',
@@ -138,10 +136,14 @@ export class AppComponent implements OnInit {
         {className: 'bg_purple_alt', color: '#8a4878'},
         {className: 'bg_brown_alt', color: '#6b6032'},
         {className: 'bg_grey_alt', color: '#616161'},
+      ],
+      fonts: [
+        {name: 'Roboto'},
+        {name: 'Montserrat', isDefault: true}
       ]
     } as Theme,
     {
-      themeId: 2,
+      themeId: 'c12fd008-88eb-49ec-bcfe-bb4cfced56a5',
       isDefault: false,
       name: 'Other',
       menuColor: '#230e26',
@@ -152,9 +154,6 @@ export class AppComponent implements OnInit {
       dialogHeaderColor: '#2b4044',
       dialogBodyColor: '#2c2c2c',
       pushContainerColor: '#413f3f',
-      overlayStyle: 'border:1px solid rgba(0,0,0,0.1);background-color:#EFEFEF;color:#222222;',
-      overlayStyleAlt1: 'border:1px solid rgba(150,150,150,0.5);background-color:rgba(0,0,0,0.05);color:#FFFFFF;',
-      overlayStyleAlt2: 'border:1px solid rgba(150,150,150,0.5);background-color:rgba(255,255,255,0.05);color:#FFFFFF;',
       bgRed: '#910f20',
       bgOrange: '#9f6f03',
       bgYellow: '#6e680d',
@@ -172,6 +171,10 @@ export class AppComponent implements OnInit {
         {className: 'bg_purple_alt', color: '#8a4878'},
         {className: 'bg_brown_alt', color: '#6b6032'},
         {className: 'bg_grey_alt', color: '#616161'},
+      ],
+      fonts: [
+        {name: 'acumin-pro', id: 'gna4twy', source: 'adobe', isSerif: false, isDefault: true},
+        {name: 'Open Sans'}
       ]
     } as Theme
   ];
@@ -185,7 +188,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.themingService.appInit('aac', this.themes);
+    this.themingService.appInit('particle_ng', this.themes);
   }
 
   /**
@@ -193,14 +196,14 @@ export class AppComponent implements OnInit {
    *
    * @param event
    */
-  iconSelected(event: any) {
+  iconSelected(event: any): void {
     console.log(event.value);
   }
 
   /**
    * Icon select opened event handler
    */
-  iconSelectOpened() {
+  iconSelectOpened(): void {
     console.log('Icon select opened');
   }
 
@@ -223,7 +226,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  onPushContainerClose() {
+  onPushContainerClose(): void {
     console.log('Push container closed.');
   }
 
@@ -250,5 +253,13 @@ export class AppComponent implements OnInit {
     }
 
     this.notificationService.add(notification);
+  }
+
+  doLogout(): void {
+    this.notificationService.add({
+      severity: 'info',
+      summary: 'Timer Ended',
+      detail: 'User logged out'
+    });
   }
 }

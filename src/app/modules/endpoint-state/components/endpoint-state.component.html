@@ -2,45 +2,21 @@
 <div class="row column center_center" *ngIf="loading">
   <ng-container [ngSwitch]="loadingIcon">
     <!-- bars_bounce -->
-    <ng-container *ngSwitchCase="'bars_bounce'">
-      <div class="bars_bounce">
-        <div class="row" style="height:4px;">
-          <div class="col size_1 bg_blue_light_2 bar1"></div>
-          <div class="col size_1 bg_purple_light_2 bar2"></div>
-          <div class="col size_1 bg_yellow_light_2 bar3"></div>
-          <div class="col size_1 bg_red_light_2 bar4"></div>
-        </div>
-      </div>
-      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}</div>
-      <div *ngIf="loadingSubtext" class="text sm center mar_top5">{{loadingSubtext}}</div>
-    </ng-container>
-    <!-- bars_vertical -->
-    <ng-container *ngSwitchCase="'bars_vertical'">
+    <ng-container *ngSwitchCase="'double_helix'">
       <div class="bars_vertical">
-        <div class="col size_1 bg_blue_light_2 bar1"></div>
-        <div class="col size_1 bg_purple_light_2 bar2"></div>
-        <div class="col size_1 bg_yellow_light_2 bar3"></div>
-        <div class="col size_1 bg_red_light_2 bar4"></div>
+        <div class="col size_1 bg_overlay brdr bar1"></div>
+        <div class="col size_1 bg_overlay brdr bar2"></div>
+        <div class="col size_1 bg_overlay brdr bar3"></div>
+        <div class="col size_1 bg_overlay brdr bar4"></div>
+        <div class="col size_1 bg_overlay brdr bar5"></div>
       </div>
-      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}</div>
+      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}<span class="one">.</span><span class="two">.</span><span class="three">.</span></div>
       <div *ngIf="loadingSubtext" class="text sm center mar_top5">{{loadingSubtext}}</div>
     </ng-container>
-    <!-- bars_progress -->
-    <ng-container *ngSwitchCase="'bars_progress'">
-      <div class="bars_progress">
-        <div class="row overlay_alt1" style="height:6px; overflow:hidden; border-radius:2px;">
-          <div class="col size_1 bg_blue_light_2 bar1"></div>
-          <div class="col size_1 bg_purple_light_2 bar2"></div>
-          <div class="col size_1 bg_yellow_light_2 bar3"></div>
-          <div class="col size_1 bg_red_light_2 bar4"></div>
-        </div>
-      </div>
-      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}</div>
-      <div *ngIf="loadingSubtext" class="text sm center mar_top5">{{loadingSubtext}}</div>
-    </ng-container>
+
     <div *ngSwitchDefault>
       <i class="{{loadingIcon}} fa-fw fa-3x opac_80"></i>
-      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}</div>
+      <div *ngIf="loadingText" class="text md bold center mar_top5">{{loadingText}}<span class="one">.</span><span class="two">.</span><span class="three">.</span></div>
       <div *ngIf="loadingSubtext" class="text sm center mar_top5">{{loadingSubtext}}</div>
     </div>
   </ng-container>
@@ -52,10 +28,10 @@
   </div>
   <div class="row column center_center dialog_body_color brad_5 shadow min_w280" style="padding:25px;" id="spinner">
     <div class="bars_vertical">
-      <div class="col size_1 bg_blue_light_2 bar1"></div>
-      <div class="col size_1 bg_purple_light_2 bar2"></div>
-      <div class="col size_1 bg_yellow_light_2 bar3"></div>
-      <div class="col size_1 bg_red_light_2 bar4"></div>
+      <div class="col size_1 bg_overlay brdr bar1"></div>
+      <div class="col size_1 bg_overlay brdr bar2"></div>
+      <div class="col size_1 bg_overlay brdr bar3"></div>
+      <div class="col size_1 bg_overlay brdr bar4"></div>
     </div>
     <div *ngIf="loadingOverlayText" class="text xlg bold center" style="margin-top:20px;">{{loadingOverlayText}}</div>
     <div *ngIf="loadingOverlaySubtext" class="text md center mar_top5">{{loadingOverlaySubtext}}</div>

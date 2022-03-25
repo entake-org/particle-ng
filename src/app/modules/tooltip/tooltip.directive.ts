@@ -6,6 +6,7 @@ import {Directive, ElementRef, HostListener, Input, OnDestroy, Renderer2} from '
  */
 @Directive({
   selector: '[particleTooltip]'
+
 })
 export class TooltipDirective implements OnDestroy {
 
@@ -19,8 +20,8 @@ export class TooltipDirective implements OnDestroy {
    * Tooltip text input
    * @param text the text to set for the tooltip
    */
-  @Input('particleTooltip')
-  set text(text: string) {
+  @Input()
+  set particleTooltip(text: string) {
     this._text = text;
 
     if (!!text) {
@@ -32,7 +33,7 @@ export class TooltipDirective implements OnDestroy {
       this.deleteTooltip();
     }
   }
-  get text() { return this._text; }
+  get particleTooltip(): string { return this._text; }
 
   /**
    * The direction of the tooltip around the host element
@@ -44,14 +45,17 @@ export class TooltipDirective implements OnDestroy {
    * Whether or not to disable the tooltip
    * @param disabled disabled or not
    */
-  @Input('tooltipDisabled')
-  set disabled(disabled: boolean) {
-    this._disabled = disabled;
+  @Input()
+  set tooltipDisabled(disabled: boolean) {
+    this._tooltipDisabled = disabled;
     if (disabled && !!this.tooltip?.parentElement) {
       this.deleteTooltip();
     }
   }
-  get disabled() { return this._disabled; }
+
+  get tooltipDisabled(): boolean {
+    return this._tooltipDisabled;
+  }
 
   /**
    * The DIV element housing the tooltip
@@ -69,7 +73,7 @@ export class TooltipDirective implements OnDestroy {
    * Whether or not the tooltip is disabled
    * @private
    */
-  private _disabled: boolean = false;
+  private _tooltipDisabled: boolean = false;
 
   /**
    * Array of scroll unlisten functions
@@ -83,7 +87,7 @@ export class TooltipDirective implements OnDestroy {
    */
   private static getWindowScrollTop(): number {
     const { scrollTop, clientTop } = document.documentElement;
-    return (window.pageYOffset ?? scrollTop) - (clientTop ?? 0);
+    return (window.scrollY ?? scrollTop) - (clientTop ?? 0);
   }
 
   /**
@@ -92,7 +96,7 @@ export class TooltipDirective implements OnDestroy {
    */
   private static getWindowScrollLeft(): number {
     const { scrollLeft, clientLeft } = document.documentElement;
-    return (window.pageXOffset ?? scrollLeft) - (clientLeft ?? 0);
+    return (window.scrollX ?? scrollLeft) - (clientLeft ?? 0);
   }
 
   /**
@@ -138,7 +142,7 @@ export class TooltipDirective implements OnDestroy {
    * @private
    */
   private showTooltip(): void {
-    if (!this.disabled) {
+    if (!this.tooltipDisabled) {
       this.createTooltip();
       this.setTooltipText();
       this.alignTooltip();
@@ -156,7 +160,7 @@ export class TooltipDirective implements OnDestroy {
 
     this.tooltip = this.renderer.createElement('div');
     this.renderer.appendChild(document.body, this.tooltip);
-    this.renderer.addClass(this.tooltip, 'wily_tooltip');
+    this.renderer.addClass(this.tooltip, 'particle_tooltip');
   }
 
   /**
@@ -164,7 +168,7 @@ export class TooltipDirective implements OnDestroy {
    * @private
    */
   private setTooltipText(): void {
-    this.renderer.setProperty(this.tooltip, 'innerHTML', this.text);
+    this.renderer.setProperty(this.tooltip, 'innerHTML', this.particleTooltip);
   }
 
   /**
@@ -358,7 +362,7 @@ export class TooltipDirective implements OnDestroy {
    */
   private addScrollListeners(): void {
     const overflowRegex = /(auto|scroll)/;
-    const overflowCheck = (node: any) => {
+    const overflowCheck = (node: any): boolean => {
       overflowRegex.lastIndex = 0;
       const styleDeclaration = window['getComputedStyle'](node, null);
       return overflowRegex.test(styleDeclaration.getPropertyValue('overflow')) ||

@@ -28,7 +28,7 @@ export class ThemingComponent implements OnInit {
   /**
    * Selected Theme ID
    */
-  themeId: number = null as any;
+  themeId: string = null as any;
 
   /**
    * List of available themes
@@ -70,10 +70,10 @@ export class ThemingComponent implements OnInit {
   /**
    * Update the user's selected theme
    */
-  changeTheme(selectedValue: string | number, themes: Array<Theme>): void {
+  changeTheme(selectedValue: string, themes: Array<Theme>): void {
     let newTheme;
     for (const theme of themes) {
-      if (+theme.themeId === selectedValue) {
+      if (theme.themeId === selectedValue) {
         newTheme = theme;
         break;
       }

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Theme} from '../models/theme.model';
+import {Theme, ThemeFont} from '../models/theme.model';
 import {ThemeChangeDetectionService} from './theme-change-detection.service';
 import {LocalStorageService} from '../../../shared/services/local-storage.service';
 
@@ -179,7 +179,16 @@ export class ThemingService {
    * Returns the user selected theme from local storage
    */
   getTheme(): Theme {
-    return this.generateTheme(this.localStorageService.getObject(this.applicationName + this.THEME_KEY) as Theme);
+    const themeId = this.localStorageService.getObject(this.applicationName + this.THEME_KEY);
+    let defaultTheme = this.themes.value.filter(theme => theme.isDefault)[0];
+
+    for (const theme of this.themes.value) {
+      if (theme.themeId === themeId) {
+        return theme;
+      }
+    }
+
+    return defaultTheme;
   }
 
   /**
@@ -188,7 +197,7 @@ export class ThemingService {
    * @param settings
    */
   saveTheme(settings: Theme): void {
-    this.localStorageService.putObject(this.applicationName + this.THEME_KEY, settings);
+    this.localStorageService.putObject(this.applicationName + this.THEME_KEY, settings.themeId);
   }
 
   /**
@@ -213,29 +222,62 @@ export class ThemingService {
       this.generateColors(style, extension.color.startsWith('#') ? extension.color : '#' + extension.color, extension.className);
     }
 
-    if (theme.overlayStyle) {
-      style.appendChild(document.createTextNode(`.overlay{${theme.overlayStyle}}`));
-    }
-
-    if (theme.overlayStyleAlt1) {
-      style.appendChild(document.createTextNode(`.overlay_alt1{${theme.overlayStyleAlt1}}`));
-    }
-
-    if (theme.overlayStyleAlt2) {
-      style.appendChild(document.createTextNode(`.overlay_alt2{${theme.overlayStyleAlt2}}`));
+    if (this.isDarkTheme(theme.bodyColor)) {
+      style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.05);color:#FFFFFF;}`));
+      style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.05);color:#FFFFFF;}`));
+      style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
+    } else {
+      style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.1);color:#111111;}`));
+      style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.1);color:#111111;}`));
+      style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
     }
 
     const head = document.head || document.getElementsByTagName('head')[0];
 
     for (const child of <any>head.childNodes) {
-      if ((<Element>child).innerHTML && (<Element>child).innerHTML.startsWith('.menu_color')) {
+      if ((child as Element).innerHTML && (child as Element).innerHTML.startsWith('.menu_color')) {
         head.removeChild(child);
         break;
       }
     }
 
+    this.addFonts(theme, head, style);
     head.appendChild(style);
     this.themeChangeDetectionService.changeTheme();
+  }
+
+  private addFonts(theme: Theme, head: HTMLHeadElement, style: HTMLStyleElement): void {
+    let defaultFont: ThemeFont = null as any;
+    for (const font of theme.fonts) {
+      if (font.isDefault) {
+        defaultFont = font;
+      }
+
+      if (!this.fontExists(head, font)) {
+        let element: HTMLLinkElement = document.createElement('link');
+        if (font.source === 'adobe') {
+          element.setAttribute('href', `https://use.typekit.net/${font.id}.css`);
+        } else {
+          element.setAttribute('href', `https://fonts.googleapis.com/css?family=${font.name.replace(' ', '+')}&display=swap`);
+        }
+        element.setAttribute('rel', 'stylesheet');
+        head.appendChild(element);
+      }
+    }
+
+    style.appendChild(document.createTextNode(`html * { font-family: ${defaultFont.name}, ${defaultFont.isSerif ? 'serif' : 'sans-serif'}; }`));
+  }
+
+  private fontExists(head: HTMLHeadElement, font: ThemeFont): boolean {
+    for (const child of <any>head.childNodes) {
+      if (child.href && font.source === 'adobe' && child.href.indexOf(font.id) > -1) {
+        return true;
+      } else if (child.href && child.href.indexOf(font.name.replace(' ', '+')) > -1) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   /**
@@ -264,6 +306,11 @@ export class ThemingService {
         : Math.pow((v + 0.055) / 1.055, 2.4);
     });
     return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+  }
+
+  private isDarkTheme(color: string): boolean {
+    const rgb = this.hexToRgb(color);
+    return (this.luminance(rgb.r, rgb.g, rgb.b) * 100) < 50;
   }
 
   /**

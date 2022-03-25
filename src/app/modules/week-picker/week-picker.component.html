@@ -83,7 +83,7 @@
                       [disabled]="!week.selectable"
                       [ngClass]="((selectedWeek$ | async) === week.week) && ((selectedYear$ | async) === week.year)
                                     ? 'bg_blue'
-                                    : 'overlay_alt1 hov_bg'"
+                                    : 'bg_overlay_rev brdr hov_bg'"
                       class="access wwp_week_btn">
                 <ng-container *ngFor="let date of week.dates">
                   <div class="wwp_day">
@@ -95,11 +95,11 @@
           </ng-container>
         </ng-container>
       </div>
-      <div class="overlay_alt2 hr mar_5"></div>
+      <div class="bg_overlay brdr hr mar_5"></div>
       <div class="row space_between">
         <button *ngIf="canSelectLastWeek$ | async else disabledLastWeekButton"
                 (click)="selectLastWeek()"
-                class="access btn sm icon_left overlay_alt1 hov_bg mar_5"
+                class="access btn sm icon_left bg_overlay_rev brdr hov_bg mar_5"
                 aria-label="Select last week">
           <span class="icon slide_left"><i class="fas fa-chevron-left"></i></span>
           Last Week
@@ -122,7 +122,7 @@
           <ng-template #selectCurrentWeekButton>
             <button (click)="selectCurrentWeek()"
                     particleTooltip="Reset to Current Week"
-                    class="access btn sm overlay_alt1 hov_bg mar_5"
+                    class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
                     aria-label="Reset week selection to current week">
               <i class="fas fa-undo-alt"></i>
             </button>
@@ -130,7 +130,7 @@
         </ng-container>
         <button *ngIf="canSelectNextWeek$ | async else disabledNextWeekButton"
                 (click)="selectNextWeek()"
-                class="access btn sm icon_right overlay_alt1 hov_bg mar_5"
+                class="access btn sm icon_right bg_overlay_rev brdr hov_bg mar_5"
                 aria-label="Select next week">
           Next Week
           <span class="icon slide_right"><i class="fas fa-chevron-right"></i></span>

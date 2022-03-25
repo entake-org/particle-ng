@@ -1,5 +1,5 @@
 export interface Theme {
-  themeId: number;
+  themeId: string;
   isDefault: boolean;
   name: string;
   menuColor: string;
@@ -10,9 +10,6 @@ export interface Theme {
   dialogHeaderColor: string;
   dialogBodyColor: string;
   pushContainerColor: string;
-  overlayStyle: string;
-  overlayStyleAlt1: string;
-  overlayStyleAlt2: string;
   bgRed: string;
   bgOrange: string;
   bgYellow: string;
@@ -22,9 +19,18 @@ export interface Theme {
   bgBrown: string;
   bgGrey: string;
   extension: Array<ThemeExtension>;
+  fonts: Array<ThemeFont>;
 }
 
 export interface ThemeExtension {
   className: string;
   color: string;
+}
+
+export interface ThemeFont {
+  name: string;
+  id?: string;
+  source?: 'google' | 'adobe';
+  isDefault?: boolean;
+  isSerif?: boolean;
 }
