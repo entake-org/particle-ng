@@ -70,7 +70,7 @@ export class ThemingComponent implements OnInit {
   /**
    * Update the user's selected theme
    */
-  changeTheme(selectedValue: string, themes: Array<Theme>): void {
+  changeTheme(selectedValue: string | number, themes: Array<Theme>): void {
     let newTheme;
     for (const theme of themes) {
       if (theme.themeId === selectedValue) {
