@@ -1,6 +1,6 @@
-# Particle - Angular
+# Particle NG by SD Solutions
 
-This package offers a small selection of reusable components that are meant to replace usage of other Angular component libraries, like Angular Material and PrimeNG. If you're looking for a themeable alternative that gives you unprecedented control of your Angular components, give Particle a chance! If you're interested in contributing or find any bugs, feel free to catch us on GitHub.
+This package offers a small selection of reusable components that are meant to replace usage of other Angular component libraries, like Angular Material and PrimeNG. If you're looking for a themeable alternative that gives you unprecedented control of your Angular components, give Particle a try! If you're interested in contributing or find any bugs, feel free to catch us on GitHub.
 
 ## ParticleColorPickerModule
 ### ColorPickerComponent
@@ -354,7 +354,7 @@ The accordion component accepts any a text header for each accordion tab with ch
 #### Selector: particle-accordion
 This selector is a parent wrapper of the following selector which contains each item
 #### Inputs
-- `collapsing` a boolean attribute that allows the user to change the mode of accordion tabs to either display multiple tabs at once or only display one tab at a time.
+- `multiple` a boolean attribute that allows the user to change the mode of accordion tabs to either display multiple tabs at once or only display one tab at a time.
 
 #### Selector: particle-accordion-item
 #### Inputs
@@ -389,8 +389,8 @@ After packaging, you can install a local build for testing with the following:
 
 ### Release
 
-`npm publish dist`
+`npm publish`
 
 ## Further Help
 
-For more help, please reach out to `nicholasdimola@gmail.com`.
+For more help, please reach out to `nick@sdsolutions.io`.
