@@ -19,6 +19,13 @@ export class ThemingService {
    */
   private themes = new BehaviorSubject<Theme[]>([]);
 
+  private $selectedTheme = new BehaviorSubject<Theme>(null as any);
+
+  get selectedTheme(): Observable<Theme> {
+    return this.$selectedTheme.asObservable();
+  }
+
+
   /**
    * Key for the product this is deployed into
    */
@@ -139,6 +146,7 @@ export class ThemingService {
    */
   applySettings(): void {
     const settings = this.getTheme();
+    this.$selectedTheme.next(settings);
     this.changeColors(settings);
   }
 
@@ -197,6 +205,7 @@ export class ThemingService {
    * @param settings
    */
   saveTheme(settings: Theme): void {
+    this.$selectedTheme.next(settings);
     this.localStorageService.putObject(this.applicationName + this.THEME_KEY, settings.themeId);
   }
 
@@ -207,6 +216,27 @@ export class ThemingService {
    */
   changeColors(theme: Theme): void {
     const style = document.createElement('style');
+
+    let rootVars = ':root {';
+    rootVars += `--menu-color: ${theme.menuColor};`;
+    rootVars += `--nav-color: ${theme.navColor};`;
+    rootVars += `--footer-color: ${theme.footerColor};`;
+    rootVars += `--body-color: ${theme.bodyColor};`;
+    rootVars += `--page-container-color: ${theme.pageContainerColor};`;
+    rootVars += `--dialog-header-color: ${theme.dialogHeaderColor};`;
+    rootVars += `--dialog-body-color: ${theme.dialogBodyColor};`;
+    rootVars += `--push-container-color: ${theme.pushContainerColor};`;
+    rootVars += `--bg-red-color: ${theme.bgRed};`;
+    rootVars += `--bg-orange-color: ${theme.bgOrange};`;
+    rootVars += `--bg-yellow-color: ${theme.bgYellow};`;
+    rootVars += `--bg-green-color: ${theme.bgGreen};`;
+    rootVars += `--bg-blue-color: ${theme.bgBlue};`;
+    rootVars += `--bg-purple-color: ${theme.bgPurple};`;
+    rootVars += `--bg-brown-color: ${theme.bgBrown};`;
+    rootVars += `--bg-grey-color: ${theme.bgGrey};`;
+    rootVars += '}';
+
+    style.appendChild(document.createTextNode(rootVars));
 
     for (const prop of Object.keys(theme)) {
       if (prop.toLowerCase().includes('bg') || prop.toLowerCase().includes('color')) {
