@@ -99,7 +99,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   containerState: BehaviorSubject<PushContainerState> = new BehaviorSubject<PushContainerState>({} as PushContainerState);
 
   zIndex: number = null as any;
-  height: string = null as any;
+  private _height: string = null as any;
 
   private _lastWidth = 0;
   private _originalTopOffset: string = null as any;
@@ -227,7 +227,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
       this.topOffset = '0';
       this.zIndex = 1000;
       this.hideCloseButton = false;
-      this.height = '100%';
+      this._height = '100%';
     }
 
     this.updateContainerState();
@@ -240,16 +240,15 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
     this.showSidePanel = false;
     this.closed.emit({});
     this.setMargin('0px');
+    this.setDefaultHeight();
+    this.updateContainerState();
 
     setTimeout(() => {
       this.visibility = false;
       this.topOffset = this._originalTopOffset + '';
       this.hideCloseButton = Boolean(this._originalHideCloseButton);
       this.zIndex = null as any;
-      this.setDefaultHeight();
     }, 200);
-
-    this.updateContainerState();
   }
 
   /**
@@ -338,12 +337,13 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
     this.containerState.next({
       right: this.getRightProperty(),
       left: this.getLeftProperty(),
-      sidePanelClass: this.getSidePanelClass()
+      sidePanelClass: this.getSidePanelClass(),
+      height: this._height
     } as PushContainerState);
   }
 
   private setDefaultHeight(): void {
-    this.height = `calc(100% - ${this.topOffset})`;
+    this._height = `calc(100% - ${this.topOffset})`;
   }
 
 }

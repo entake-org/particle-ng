@@ -2,7 +2,7 @@
   <div class="layout_sidebar"
     [ngClass]="state.sidePanelClass"
     [style.top]="topOffset"
-    [style.height]="height"
+    [style.height]="state.height"
     [style.width]="(breakpointExceeded && showSidePanel) ? '100%' : width + 'px'"
     [style.left]="state.left"
     [style.right]="state.right"
