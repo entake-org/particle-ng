@@ -2,11 +2,12 @@
   <div class="layout_sidebar"
     [ngClass]="state.sidePanelClass"
     [style.top]="topOffset"
-    [ngStyle]="{'height': 'calc(100% - ' + topOffset + ')'}"
+    [style.height]="height"
     [style.width]="(breakpointExceeded && showSidePanel) ? '100%' : width + 'px'"
     [style.left]="state.left"
     [style.right]="state.right"
-    [style.visibility]="visibility ? 'visible' : 'hidden'">
+    [style.visibility]="visibility ? 'visible' : 'hidden'"
+    [style.z-index]="zIndex">
     <div class="push_close_bar" *ngIf="(!hideCloseButton || breakpointExceeded) && !hideCloseButton">
       <button (click)="close()" class="data_hide_button access" tabindex="0"
               [attr.aria-label]="'Close ' + side + ' sidebar'">

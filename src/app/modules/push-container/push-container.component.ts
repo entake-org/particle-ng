@@ -98,7 +98,12 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
 
   containerState: BehaviorSubject<PushContainerState> = new BehaviorSubject<PushContainerState>({} as PushContainerState);
 
+  zIndex: number = null as any;
+  height: string = null as any;
+
   private _lastWidth = 0;
+  private _originalTopOffset: string = null as any;
+  private _originalHideCloseButton: boolean = null as any;
 
   /**
    * Constructor
@@ -112,6 +117,9 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    */
   ngAfterViewInit(): void {
     this._lastWidth = window.innerWidth;
+    this._originalTopOffset = this.topOffset + '';
+    this._originalHideCloseButton = Boolean(this.hideCloseButton);
+    this.setDefaultHeight();
 
     const element = document.getElementById(this.mainContentId);
 
@@ -151,7 +159,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    */
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
-    if (event.target.innerWidth <= 768 && this.showSidePanel) {
+    if (event.target.innerWidth <= 768 && this._lastWidth > 768 && this.showSidePanel) {
       if (this.closeOnResize) {
         this.showSidePanel = false;
         this.visibility = false;
@@ -161,6 +169,10 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
       this.setMargin('0px');
     } else if (event.target.innerWidth > 768 && this.showSidePanel) {
       this.setMargin(this.width + 'px');
+      this.topOffset = this._originalTopOffset + '';
+      this.hideCloseButton = Boolean(this._originalHideCloseButton);
+      this.zIndex = null as any;
+      this.setDefaultHeight();
     }
 
     if (event.target.innerWidth > 768 && this._lastWidth <= 768 && this.closeOnResize) {
@@ -211,6 +223,11 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
 
     if (window.innerWidth > 768) {
       this.setMargin(this.width + 'px');
+    } else {
+      this.topOffset = '0';
+      this.zIndex = 1000;
+      this.hideCloseButton = false;
+      this.height = '100%';
     }
 
     this.updateContainerState();
@@ -224,7 +241,13 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
     this.closed.emit({});
     this.setMargin('0px');
 
-    setTimeout(() => this.visibility = false, 200);
+    setTimeout(() => {
+      this.visibility = false;
+      this.topOffset = this._originalTopOffset + '';
+      this.hideCloseButton = Boolean(this._originalHideCloseButton);
+      this.zIndex = null as any;
+      this.setDefaultHeight();
+    }, 200);
 
     this.updateContainerState();
   }
@@ -317,6 +340,10 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
       left: this.getLeftProperty(),
       sidePanelClass: this.getSidePanelClass()
     } as PushContainerState);
+  }
+
+  private setDefaultHeight(): void {
+    this.height = `calc(100% - ${this.topOffset})`;
   }
 
 }
