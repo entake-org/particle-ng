@@ -33,3 +33,6 @@
   outline: none;
 }
 
+.particle_accordion_content {
+  user-select: text;
+}

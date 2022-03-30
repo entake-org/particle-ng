@@ -54,6 +54,8 @@ export class ThemingComponent implements OnInit {
 
   themes$ = this.themingService.getThemes();
 
+  selectedTheme$ = this.themingService.selectedTheme;
+
   /**
    * Constructor
    *

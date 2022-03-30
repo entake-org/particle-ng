@@ -4,13 +4,22 @@
           [style.height]="height"
           (click)="!item.disabled ? toggleState(i) : {}"
           aria-label="View More...">
-    <div class="text" [ngClass]="textClass">
-      <span *ngIf="!expanded.has(i)"><i [ngClass]="iconCollapsed + ' fa-fw'"></i></span>
-      <span *ngIf="expanded.has(i)"><i [ngClass]="iconExpanded + ' fa-fw'"></i></span>
-      {{item?.header}}
-    </div>
+    <ng-container *ngIf="item.headerTemplate">
+      <ng-container *ngTemplateOutlet="item.headerTemplate.templateRef"></ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="!item.headerTemplate">
+      <div class="text" [ngClass]="textClass" *ngIf="showIcon">
+        <span *ngIf="!expanded.has(i)"><i [ngClass]="iconCollapsed + ' fa-fw'"></i></span>
+        <span *ngIf="expanded.has(i)"><i [ngClass]="iconExpanded + ' fa-fw'"></i></span>
+        {{item?.header}}
+      </div>
+      <div class="text" [ngClass]="textClass" *ngIf="!showIcon">
+        <span>{{item?.header}}</span>
+      </div>
+    </ng-container>
   </button>
-  <div class="particle_accordion_content" [class.expanded]="expanded.has(i)" [@contentExpansion]="expanded.has(i) ? 'expanded':'collapsed'">
+  <div class="particle_accordion_content" [class.expanded]="expanded.has(i)" [@contentExpansion]="expanded.has(i) ? 'expanded' : 'collapsed'">
     <ng-container *ngTemplateOutlet="item?.content?.templateRef"></ng-container>
   </div>
 </div>

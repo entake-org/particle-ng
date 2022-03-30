@@ -1,5 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
@@ -22,7 +23,7 @@ import { AccordionItemDirective } from './directives/accordion-item.directive';
     ])
   ]
 })
-export class AccordionComponent {
+export class AccordionComponent implements AfterContentInit {
   expanded = new Set<number>();
 
   @Input()
@@ -43,8 +44,23 @@ export class AccordionComponent {
   @Input()
   iconExpanded = 'fas fa-caret-down';
 
+  @Input()
+  showIcon = true;
+
   @ContentChildren(AccordionItemDirective)
   items: QueryList<AccordionItemDirective> = null as any;
+
+  ngAfterContentInit(): void {
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items.get(i) as AccordionItemDirective;
+      if (item.open && !item.disabled) {
+        this.expanded.add(i);
+        if (!this.multiple) {
+          break;
+        }
+      }
+    }
+  }
 
   /**
    * @param index - index of the accordion item
