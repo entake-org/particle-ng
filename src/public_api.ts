@@ -29,6 +29,7 @@ export * from './app/modules/tooltip/tooltip.directive';
 export * from './app/modules/keyfilter/keyfilter.directive';
 export * from './app/modules/accordion/directives/accordion-content.directive';
 export * from './app/modules/accordion/directives/accordion-item.directive';
+export * from './app/modules/accordion/directives/accordion-header.directive';
 export * from './app/modules/background-carousel/background-carousel.directive';
 
 /** COMPONENTS */
