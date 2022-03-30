@@ -871,7 +871,7 @@
           <div class="menu_color min_h40 pad_10 pad_x15 text md bold v_center">
             <div>Menu Example</div>
           </div>
-          <div class="pad_10">
+          <div>
             <div class="row bottom_left mar_5" style="height:32px;">
               <div class="text md bolder">
                 Here are your options
@@ -879,16 +879,15 @@
             </div>
             <div class="bg_overlay brdr hr mar_y15 mar_x5"></div>
             <!-- informational text -->
-            <div class="mar_5 mar_y10 pad_bot5">
+            <div class="mar_y10 pad_bot5">
               <div class="text sm paragraph">
                 <particle-accordion
                   [multiple]="true"
                   headerClass="bg_overlay_rev brdr pad_5 brad_3"
-                  height=""
                   textClass="md"
                   [showIcon]="false">
                   <!-- Item 1 -->
-                  <particle-accordion-item [open]="true">
+                  <particle-accordion-item [open]="true" headerClass="bg_green brdr">
                     <ng-template particleAccordionHeader>
                       <div class="text">
                         <i class="fas fa-dog"></i> General Styles
@@ -904,7 +903,7 @@
                     </ng-template>
                   </particle-accordion-item>
                   <!-- Item 2 -->
-                  <particle-accordion-item [open]="true">
+                  <particle-accordion-item [open]="true" headerClass="bg_red brdr">
                     <ng-template particleAccordionHeader>
                       <div class="text">
                         <i class="fas fa-pencil"></i> Components
@@ -920,7 +919,7 @@
                     </ng-template>
                   </particle-accordion-item>
                   <!-- Item 3 -->
-                  <particle-accordion-item [open]="true">
+                  <particle-accordion-item [open]="true" headerClass="bg_blue brdr">
                     <ng-template particleAccordionHeader>
                       <div class="text">
                         <i class="fas fa-car"></i> Best Practices

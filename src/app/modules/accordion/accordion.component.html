@@ -1,6 +1,6 @@
 <div *ngFor="let item of items;index as i" class="particle_accordion_item" [class.disabled]="item.disabled" [class.active]="expanded.has(i)">
-  <button class="particle_accordion_header bg_overlay brdr width100"
-          [ngClass]="headerClass + (!item.disabled ? ' access' : '')"
+  <button class="particle_accordion_header width100"
+          [ngClass]="(item.headerClass ? item.headerClass : headerClass) + (!item.disabled ? ' access' : '')"
           [style.height]="height"
           (click)="!item.disabled ? toggleState(i) : {}"
           aria-label="View More...">

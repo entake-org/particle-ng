@@ -16,6 +16,9 @@ export class AccordionItemDirective {
   @Input()
   open = false;
 
+  @Input()
+  headerClass: string = null as any;
+
   @ContentChild(AccordionHeaderDirective)
   headerTemplate: AccordionHeaderDirective = null as any;
 

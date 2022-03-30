@@ -33,7 +33,7 @@ export class AccordionComponent implements AfterContentInit {
   height = '40px';
 
   @Input()
-  headerClass = 'border_bottom';
+  headerClass = 'bg_overlay brdr border_bottom';
 
   @Input()
   textClass = 'md bolder';
