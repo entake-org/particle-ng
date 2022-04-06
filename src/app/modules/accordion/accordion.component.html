@@ -2,7 +2,7 @@
   <button class="particle_accordion_header width100"
           [ngClass]="(item.headerClass ? item.headerClass : headerClass) + (!item.disabled ? ' access' : '')"
           [style.height]="height"
-          (click)="handleClick(item, ref, i)"
+          (click)="!item.disabled ? toggleState(i) : {}"
           aria-label="View More...">
     <ng-container *ngIf="item.headerTemplate">
       <ng-container *ngTemplateOutlet="item.headerTemplate.templateRef"></ng-container>
@@ -19,9 +19,7 @@
       </div>
     </ng-container>
   </button>
-  <div class="particle_accordion_content"
-       [style.max-height]="!expanded.has(i) ? '0' : {}"
-        #ref>
+  <div class="particle_accordion_content" #ref>
     <ng-container *ngTemplateOutlet="item?.content?.templateRef"></ng-container>
   </div>
 </div>
