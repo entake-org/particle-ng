@@ -13,15 +13,7 @@ import { AccordionItemDirective } from './directives/accordion-item.directive';
   selector: 'particle-accordion',
   templateUrl: './accordion.component.html',
   styleUrls: ['./accordion.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('contentExpansion', [
-      state('expanded', style({height: '*', opacity: 1, visibility: 'visible'})),
-      state('collapsed', style({height: '0px', opacity: 0, visibility: 'hidden'})),
-      transition('expanded <=> collapsed',
-        animate('200ms cubic-bezier(.37,1.04,.68,.98)')),
-    ])
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccordionComponent implements AfterContentInit {
   expanded = new Set<number>();
@@ -77,6 +69,18 @@ export class AccordionComponent implements AfterContentInit {
         this.expanded.clear();
       }
       this.expanded.add(index);
+    }
+  }
+
+  handleClick(item: AccordionItemDirective, element: HTMLDivElement, index: number): void {
+    if (!item.disabled) {
+      this.toggleState(index);
+
+      if (!this.expanded.has(index)) {
+        element.style.maxHeight = '0';
+      } else {
+        element.style.maxHeight = `${element.scrollHeight}px`;
+      }
     }
   }
 }
