@@ -1,6 +1,7 @@
 <ng-container *ngIf="$scrollTop | async as scrollTop">
   <div [style.visibility]="scrollTop > scrollDistance ? 'visible' : 'hidden'"
        [style.opacity]="scrollTop > scrollDistance ? '1' : '0'"
+       [style.bottom]="bottomOffset + 'px'"
        class="circle_40px bg_overlay_rev particle_scroll_button">
     <button (click)="scrollToTop()"
             class="access btn circle_30px brdr page_container_color"

@@ -14,6 +14,9 @@ export class ScrollToTopComponent implements OnDestroy, AfterViewInit {
   @Input()
   scrollDistance = 500;
 
+  @Input()
+  bottomOffset = 50;
+
   $scrollTop = new BehaviorSubject<number>(0);
 
   private _listener: any;
