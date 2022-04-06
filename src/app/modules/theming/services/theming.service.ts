@@ -254,11 +254,11 @@ export class ThemingService {
 
     if (this.isDarkTheme(theme.bodyColor)) {
       style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.05);color:inherit;}`));
-      style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.03);color:inherit;}`));
+      style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.05);color:inherit;}`));
       style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
     } else {
       style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.1);color:inherit;}`));
-      style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.1);color:inherit;}`));
+      style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.04);color:inherit;}`));
       style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
     }
 

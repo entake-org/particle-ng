@@ -1,0 +1,19 @@
+.particle_layout_main {
+  margin-right: 200px;
+}
+
+.particle_layout_sidebar {
+  width:200px;
+  position: absolute;
+  right:0;
+}
+
+@media screen and (max-width: 768px) {
+  .particle_layout_main {
+    margin-right: 0;
+  }
+
+  .particle_layout_sidebar {
+    display: none;
+  }
+}
