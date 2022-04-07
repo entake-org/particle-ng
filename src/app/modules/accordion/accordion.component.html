@@ -20,6 +20,6 @@
     </ng-container>
   </button>
   <div class="particle_accordion_content" #ref>
-    <ng-container *ngTemplateOutlet="item?.content?.templateRef"></ng-container>
+    <ng-container *ngTemplateOutlet="$any(item?.content?.templateRef)"></ng-container>
   </div>
 </div>

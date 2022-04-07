@@ -201,7 +201,7 @@
             <div *ngIf="totalPages$ | async as totalPages"
                  class="text sm bolder center"
                  style="min-width:65px;">
-              {{(_activePage | async) + 1}} / {{totalPages}}
+              {{(_activePage | async)! + 1}} / {{totalPages}}
             </div>
             <button *ngIf="canPaginateNext$ | async else disabledNextButton"
                     (click)="paginateNext()"

@@ -43,8 +43,8 @@
        (@openClose.start)="onAnimationStart($event)"
        (@openClose.done)="onAnimationDone($event)"
        class="position_absolute">
-    <particle-calendar [value]="showCalendar?.currentValue"
-                   [dateRange]="{ minDate: validSelectionInterval?.start, maxDate: validSelectionInterval?.end }"
+    <particle-calendar [value]="showCalendar?.currentValue!"
+                   [dateRange]="{ minDate: validSelectionInterval?.start!, maxDate: validSelectionInterval?.end! }"
                    (selected)="updateModel($event)"
                    (closed)="handleCalendarClose()">
     </particle-calendar>
