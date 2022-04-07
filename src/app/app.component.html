@@ -20,7 +20,7 @@
 
   <!-- main content -->
   <main class="site-content" id="site-content" #contentDiv>
-    <div class="col size_1 position_relative">
+    <div class="row position_relative">
       <div class="row_block width100">
         <!-- CONTENT -->
         <particle-layout-fullwidth-sidebar
@@ -799,17 +799,33 @@
         </ng-template>
 
         <ng-template #rightSidebar>
-          <div class="pad_5" style="position: fixed;width:200px;">
-            <div class="row_block width100 bg_overlay brdr brad_3 pad_10">
-
-              <div class="text_center text sm bolder">
-                Add basic controls here
+          <div style="height:100vh; position: sticky; top:0;">
+            <div class="row column space_between bg_red pad_5 height100" style="padding-bottom: 110px;">
+              <div>
+              <div class="row_block mar_top5 bg_overlay brdr brad_3 pad_10">
+                <div class="text_center text sm bolder">
+                  Add basic controls here
+                </div>
+                <div class="bg_overlay brdr hr mar_y10 mar_x5"></div>
+                <div class="mar_5 mar_y10 pad_bot10 pad_top10">
+                  <particle-theming></particle-theming>
+                </div>
+                <div class="mar_5 mar_y10 pad_5 brad_3 brdr test text_center text xsm">COOL COLOR VARIABLES</div>
               </div>
-              <div class="bg_overlay brdr hr mar_y10 mar_x5"></div>
-              <div class="mar_5 mar_y10 pad_bot10 pad_top10">
-                <particle-theming></particle-theming>
+              <div class="row_block mar_top5 bg_overlay brdr brad_3 pad_10">
+                <div class="text_center text sm bolder">
+                  Add basic controls here
+                </div>
+                <div class="bg_overlay brdr hr mar_y10 mar_x5"></div>
+                <div class="mar_5 mar_y10 pad_bot10 pad_top10">
+                  <particle-theming></particle-theming>
+                </div>
+                <div class="mar_5 mar_y10 pad_5 brad_3 brdr test text_center text xsm">COOL COLOR VARIABLES</div>
               </div>
-              <div class="mar_5 mar_y10 pad_5 brad_3 brdr test text_center text xsm">COOL COLOR VARIABLES</div>
+              </div>
+              <div class="row_block mar_top5 bg_overlay brdr brad_3 pad_10">
+                <div class="mar_5 mar_y10 pad_5 brad_3 brdr text_center bg_yellow text xsm">BOTTOM OBJECT</div>
+              </div>
             </div>
           </div>
       </ng-template>
