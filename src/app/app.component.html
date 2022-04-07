@@ -23,6 +23,13 @@
     <div class="col size_1 position_relative">
       <div class="row_block width100">
         <!-- CONTENT -->
+        <particle-layout-fullwidth-sidebar
+          [mainContent]="mainContent"
+          mainContentContainerClassList="bg_blue"
+          [rightSidebar]="rightSidebar"
+          rightSidebarContainerClassList="bg_green">
+
+        <ng-template #mainContent>
         <div class="row column pad_5">
 
           <!-- ROW -->
@@ -789,6 +796,27 @@
           </div>
 
         </div>
+        </ng-template>
+        <ng-template #rightSidebar>
+            <div class="menu_color min_h40 pad_10 pad_x15 text md bold v_center">
+              <div>Settings</div>
+            </div>
+            <div class="pad_10">
+              <div class="row bottom_left mar_5" style="height:32px;">
+                <div class="text md bolder">
+                  Add basic controls here
+                </div>
+              </div>
+              <div class="bg_overlay brdr hr mar_y15 mar_x5"></div>
+              <!-- informational text -->
+              <div class="mar_5 mar_y10 pad_bot5">
+                <particle-theming></particle-theming>
+              </div>
+              <div class="center_center mar_5 mar_y10 pad_bot5 pad_top5 brad_3 brdr test">COOL COLOR VARIABLES</div>
+            </div>
+        </ng-template>
+
+        </particle-layout-fullwidth-sidebar>
 
 <!--        &lt;!&ndash; DIALOG DEMONSTRATION &ndash;&gt;-->
 <!--        <particle-dialog title="This thing" [object]="obj" (closed)="obj = null;" #dialog>-->
@@ -941,33 +969,7 @@
           </div>
         </particle-push-container>
 
-        <!-- RIGHT PUSH CONTAINER -->
-        <particle-push-container
-          mainContentId="site-content"
-          side="right"
-          topOffset="100px"
-          [closeOnResize]="true"
-          [showSidePanel]="true"
-          [width]="250"
-          [hideCloseButton]="true"
-          #pushContainerRight>
-          <div class="menu_color min_h40 pad_10 pad_x15 text md bold v_center">
-            <div>Settings</div>
-          </div>
-          <div class="pad_10">
-            <div class="row bottom_left mar_5" style="height:32px;">
-              <div class="text md bolder">
-                Add basic controls here
-              </div>
-            </div>
-            <div class="bg_overlay brdr hr mar_y15 mar_x5"></div>
-            <!-- informational text -->
-            <div class="mar_5 mar_y10 pad_bot5">
-              <particle-theming></particle-theming>
-            </div>
-            <div class="center_center mar_5 mar_y10 pad_bot5 pad_top5 brad_3 brdr test">COOL COLOR VARIABLES</div>
-          </div>
-        </particle-push-container>
+
 
         <!-- NOTIFICATION CONTAINER -->
         <particle-notification></particle-notification>
@@ -982,10 +984,7 @@
   </footer-->
 </div>
 
-<!--particle-layout-fullwidth-sidebar [mainContent]="mainContent" [rightSidebar]="rightSidebar">
-  <ng-template #mainContent>TEST</ng-template>
-  <ng-template #rightSidebar>ICLE</ng-template>
-</particle-layout-fullwidth-sidebar-->
+
 
 
 <particle-scroll-to-top [content]="contentDiv"></particle-scroll-to-top>
