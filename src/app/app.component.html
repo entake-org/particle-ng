@@ -27,7 +27,7 @@
           [mainContent]="mainContent"
           mainContentContainerClassList="bg_blue"
           [rightSidebar]="rightSidebar"
-          rightSidebarContainerClassList="bg_green">
+          rightSidebarContainerClassList="bg_blue_dark_2">
 
         <ng-template #mainContent>
         <div class="row column pad_5">
@@ -797,24 +797,22 @@
 
         </div>
         </ng-template>
+
         <ng-template #rightSidebar>
-            <div class="menu_color min_h40 pad_10 pad_x15 text md bold v_center">
-              <div>Settings</div>
-            </div>
-            <div class="pad_10">
-              <div class="row bottom_left mar_5" style="height:32px;">
-                <div class="text md bolder">
-                  Add basic controls here
-                </div>
+          <div class="pad_5" style="position: fixed;width:200px;">
+            <div class="row_block width100 bg_overlay brdr brad_3 pad_10">
+
+              <div class="text_center text sm bolder">
+                Add basic controls here
               </div>
-              <div class="bg_overlay brdr hr mar_y15 mar_x5"></div>
-              <!-- informational text -->
-              <div class="mar_5 mar_y10 pad_bot5">
+              <div class="bg_overlay brdr hr mar_y10 mar_x5"></div>
+              <div class="mar_5 mar_y10 pad_bot10 pad_top10">
                 <particle-theming></particle-theming>
               </div>
-              <div class="center_center mar_5 mar_y10 pad_bot5 pad_top5 brad_3 brdr test">COOL COLOR VARIABLES</div>
+              <div class="mar_5 mar_y10 pad_5 brad_3 brdr test text_center text xsm">COOL COLOR VARIABLES</div>
             </div>
-        </ng-template>
+          </div>
+      </ng-template>
 
         </particle-layout-fullwidth-sidebar>
 

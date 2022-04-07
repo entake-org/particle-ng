@@ -1,10 +1,10 @@
 <!-- setup for a side column -->
 <div class="row height100">
-  <div class="particle_layout_main row column space_between page_container_color brdr height100" [ngClass]="mainContentContainerClassList">
+  <div class="particle_layout_main row column space_between page_container_color height100" [ngClass]="mainContentContainerClassList">
     <ng-template [ngTemplateOutlet]="mainContent"></ng-template>
   </div>
 
-  <div class="particle_layout_sidebar height100 hide_element center_center pad_10" [ngClass]="rightSidebarContainerClassList">
+  <div class="particle_layout_sidebar height100 hide_element" [ngClass]="rightSidebarContainerClassList">
     <ng-template [ngTemplateOutlet]="rightSidebar"></ng-template>
   </div>
 </div>

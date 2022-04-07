@@ -3,6 +3,7 @@
 }
 
 .particle_layout_sidebar {
+  display:block;
   width:200px;
   position: absolute;
   right:0;
