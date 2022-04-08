@@ -1,13 +1,13 @@
 .particle_layout_main {
-  //margin-right: 200px;
+  /**margin-right: 200px;*/
 }
 
 .particle_layout_sidebar {
   display:block;
   width:200px;
   box-sizing: border-box;
-  //position: absolute;
-  //right:0;
+  /**position: absolute;
+  right:0;*/
 }
 
 @media screen and (max-width: 768px) {

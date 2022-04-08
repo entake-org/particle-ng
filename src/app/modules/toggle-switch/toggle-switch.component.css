@@ -1,0 +1,11 @@
+.p_toggle_button {
+  padding: 2px;
+  border-radius: 50px;
+}
+
+.p_toggle_status {
+  min-width: 65px;
+  border-radius: 50px;
+  padding: 5px 3px;
+  transition: all 0.1s ease-in-out;
+}

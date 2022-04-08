@@ -26,6 +26,7 @@ import {ParticleSlideoverModule} from "./modules/slideover/particle-slideover.mo
 import {ParticleIdleTimeoutModule} from "./modules/idle-timeout/particle-idle-timeout.module";
 import {ParticleScrollToTopModule} from "./modules/scroll-to-top/particle-scroll-to-top.module";
 import {ParticleLayoutModule} from "./modules/layout/layout.module";
+import {ParticleToggleSwitchModule} from "./modules/toggle-switch/toggle-switch.module";
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import {ParticleLayoutModule} from "./modules/layout/layout.module";
     ParticleSlideoverModule,
     ParticleIdleTimeoutModule,
     ParticleScrollToTopModule,
-    ParticleLayoutModule
+    ParticleLayoutModule,
+    ParticleToggleSwitchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,7 +5,7 @@ import {NotificationService} from './modules/notification/services/notification.
 import {PushContainerComponent} from './modules/push-container/push-container.component';
 import {ThemingService} from './modules/theming/services/theming.service';
 import {Theme} from './modules/theming/models/theme.model';
-import {SlideoverComponent} from "./modules/slideover/slideover.component";
+import {ToggleOptions} from "./modules/toggle-switch/models/toggle-options.model";
 
 /**
  * App Component to test out stuff built here. Not useful for anything else. Should not be exported by this package.
@@ -105,6 +105,18 @@ export class AppComponent implements OnInit {
   colorPickerValue = '#44ff55';
 
   sliderValue = 69;
+
+  toggleValue = true;
+
+  toggleOptions: ToggleOptions = {
+    affirmativeColorClass: 'bg_blue',
+    affirmativeLabel: 'Yes',
+    affirmativeIcon: 'fas fa-check',
+    negativeColorClass: 'bg_red',
+    negativeLabel: 'No',
+    negativeIcon: 'fas fa-times',
+    accessibilityLabel: 'Toggle Switch'
+  } as ToggleOptions;
 
   themes: Array<Theme> = [
     {
