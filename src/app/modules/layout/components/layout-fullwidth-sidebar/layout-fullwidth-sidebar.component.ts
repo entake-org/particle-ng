@@ -25,6 +25,9 @@ export class LayoutFullwidthSidebarComponent {
   @Input()
   rightSidebarStickyOffset: number = 0;
 
+  @Input()
+  width: string = '250px';
+
   constructor() { }
 
 }

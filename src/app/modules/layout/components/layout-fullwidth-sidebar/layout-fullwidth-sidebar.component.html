@@ -6,7 +6,9 @@
   </div>
 
   <ng-container *ngIf="!rightSidebarSticky">
-    <div class="particle_layout_sidebar height100 hide_element" [ngClass]="rightSidebarContainerClassList">
+    <div class="particle_layout_sidebar height100 hide_element"
+         [ngClass]="rightSidebarContainerClassList"
+         [style.width]="width">
       <ng-template [ngTemplateOutlet]="rightSidebar"></ng-template>
     </div>
   </ng-container>
@@ -15,7 +17,8 @@
     <div class="particle_layout_sidebar height100 hide_element">
       <div class="row column sticky_sidebar"
            [ngClass]="rightSidebarContainerClassList"
-           [style.height]="'calc(100vh - ' + rightSidebarStickyOffset + 'px)'">
+           [style.height]="'calc(100vh - ' + rightSidebarStickyOffset + 'px)'"
+           [style.width]="width">
         <ng-template [ngTemplateOutlet]="rightSidebar"></ng-template>
       </div>
     </div>
