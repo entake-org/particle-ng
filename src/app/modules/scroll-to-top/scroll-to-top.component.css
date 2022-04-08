@@ -1,5 +1,5 @@
 .particle_scroll_button {
   position: fixed;
-  right: 35px;
+  right: 0;
   transition: all 0.2s ease-in-out;
 }

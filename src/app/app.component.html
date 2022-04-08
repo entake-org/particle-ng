@@ -822,35 +822,37 @@
         </ng-template>
 
         <ng-template #rightSidebar>
-          <div style="height:100vh; position: sticky; top:0;">
-            <div class="row column space_between bg_red pad_5 height100" style="padding-bottom: 110px;">
-              <div>
-              <div class="row_block mar_top5 bg_overlay brdr brad_3 pad_10">
-                <div class="text_center text sm bolder">
-                  Add basic controls here
+              <div class="bg_orange" style="position: sticky; top:0;width:100%;box-sizing: border-box;">
+                <div class="row column space_between bg_red pad_5" style="height: calc(100vh - 100px);box-sizing: border-box;">
+                  <div>
+                    <div class="row_block bg_overlay brdr brad_3 pad_10">
+                      <div class="text_center text sm bolder">
+                        Add basic controls here
+                      </div>
+                      <div class="bg_overlay brdr hr mar_y10 mar_x5"></div>
+                      <div class="mar_5 mar_y10 pad_bot10 pad_top10">
+                        <particle-theming></particle-theming>
+                      </div>
+                      <div class="mar_5 mar_y10 pad_5 brad_3 brdr test text_center text xsm">COOL COLOR VARIABLES</div>
+                    </div>
+                    <div class="row_block mar_top5 bg_overlay brdr brad_3 pad_10">
+                      <div class="text_center text sm bolder">
+                        Slide away...
+                      </div>
+                      <div class="bg_overlay brdr hr mar_y10 mar_x5"></div>
+                      <div class="mar_5 mar_y10 pad_bot10 pad_top10">
+                        <particle-slider [(ngModel)]="sliderValue" unit="%"></particle-slider>
+                      </div>
+                      <div class="mar_5 mar_y10 pad_5 brad_3 brdr bg_blue text_center text xsm">INTO OBLIVION</div>
+                    </div>
+                  </div>
+
+                  <div class="row_block mar_top5 bg_overlay brdr brad_3 pad_10">
+                    <div class="mar_5 mar_y10 pad_5 brad_3 brdr text_center bg_yellow text xsm">BOTTOM OBJECT</div>
+                  </div>
+                  
                 </div>
-                <div class="bg_overlay brdr hr mar_y10 mar_x5"></div>
-                <div class="mar_5 mar_y10 pad_bot10 pad_top10">
-                  <particle-theming></particle-theming>
-                </div>
-                <div class="mar_5 mar_y10 pad_5 brad_3 brdr test text_center text xsm">COOL COLOR VARIABLES</div>
-              </div>
-              <div class="row_block mar_top5 bg_overlay brdr brad_3 pad_10">
-                <div class="text_center text sm bolder">
-                  Add basic controls here
-                </div>
-                <div class="bg_overlay brdr hr mar_y10 mar_x5"></div>
-                <div class="mar_5 mar_y10 pad_bot10 pad_top10">
-                  <particle-theming></particle-theming>
-                </div>
-                <div class="mar_5 mar_y10 pad_5 brad_3 brdr test text_center text xsm">COOL COLOR VARIABLES</div>
-              </div>
-              </div>
-              <div class="row_block mar_top5 bg_overlay brdr brad_3 pad_10">
-                <div class="mar_5 mar_y10 pad_5 brad_3 brdr text_center bg_yellow text xsm">BOTTOM OBJECT</div>
-              </div>
             </div>
-          </div>
       </ng-template>
 
         </particle-layout-fullwidth-sidebar>
