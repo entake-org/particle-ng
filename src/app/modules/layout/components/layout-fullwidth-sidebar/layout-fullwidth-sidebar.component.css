@@ -1,21 +1,18 @@
-.particle_layout_main {
-  /**margin-right: 200px;*/
-}
-
 .particle_layout_sidebar {
   transition: all 0.2s ease-in-out;
-  display:block;
-  width:250px;
+  display: block;
+  width: 250px;
   box-sizing: border-box;
-  /**position: absolute;
-  right:0;*/
+}
+
+.sticky_sidebar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 768px) {
-  .particle_layout_main {
-    margin-right: 0;
-  }
-
   .particle_layout_sidebar {
     display: none;
   }

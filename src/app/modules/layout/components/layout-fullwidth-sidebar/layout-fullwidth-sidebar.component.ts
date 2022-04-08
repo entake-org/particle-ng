@@ -19,6 +19,12 @@ export class LayoutFullwidthSidebarComponent {
   @Input()
   rightSidebarContainerClassList = '';
 
+  @Input()
+  rightSidebarSticky = false;
+
+  @Input()
+  rightSidebarStickyOffset: number = 0;
+
   constructor() { }
 
 }
