@@ -6,6 +6,8 @@ import {DropdownOption} from './dropdown-option.model';
  */
 export interface DropdownOptionGroup {
 
+  type?: 'group';
+
   /**
    * The option group label
    */

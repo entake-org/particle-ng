@@ -3,6 +3,8 @@
  */
 export interface DropdownOption {
 
+  type?: 'option';
+
   /**
    * The value of the dropdown option
    */

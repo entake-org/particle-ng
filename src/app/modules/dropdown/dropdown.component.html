@@ -20,7 +20,7 @@
         </div>
       </ng-container>
       <ng-template #noCustomTemplate>
-        {{dataContext['$implicit'] || dataContext['label']}}
+        {{dataContext['$implicit'] || dataContext.label}}
       </ng-template>
     </ng-container>
     <ng-template #placeholderTemplate>
@@ -47,11 +47,11 @@
           <ng-container *ngIf="!!template else defaultOptionTemplate">
             <ng-container *ngFor="let option of options; index as i">
               <!-- OPTION GROUP -->
-              <ng-container *ngIf="!!$any(option)['groupLabel'] && !!$any(option)['options'] else nonGroupOption">
-                <div class="particle_dropdown_heading" aria-hidden="true">{{$any(option)['groupLabel']}}</div>
-                <ng-container *ngFor="let groupOption of $any(option)['options']; index as j">
+              <ng-container *ngIf="option.type === 'group' else nonGroupOption">
+                <div class="particle_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
+                <ng-container *ngFor="let groupOption of option.options; index as j">
                   <button #dropdownOption
-                          (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled)"
+                          (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled!)"
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
                           (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
                           (keyup.escape)="onEscapeKeyUp($event)"
@@ -62,26 +62,28 @@
                           [attr.data-dialog-close-override]="true"
                           [disabled]="groupOption.disabled"
                           class="particle_dropdown_option" role="option" tabindex="0">
-                    <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext"></ng-container>
+                    <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext!"></ng-container>
                   </button>
                 </ng-container>
               </ng-container>
               <!-- SINGULAR OPTION -->
               <ng-template #nonGroupOption>
-                <button #dropdownOption
-                        (click)="onDropdownOptionSelect($any(option)['value'], $any(option)['disabled'])"
-                        (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
-                        (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
-                        (keyup.escape)="onEscapeKeyUp($event)"
-                        [id]="dropdownId + '-' + $any(option)['value']"
-                        [ngClass]="{ 'unselected' : (_internalValue | async) !== $any(option)['value'] }"
-                        [attr.aria-selected]="(_internalValue | async) === $any(option)['value']"
-                        [attr.data-value]="$any(option)['value']"
-                        [attr.data-dialog-close-override]="true"
-                        [disabled]="$any(option)['disabled']"
-                        class="particle_dropdown_option" role="option" tabindex="0">
-                  <ng-container *ngTemplateOutlet="template; context: $any(option)['dataContext']"></ng-container>
-                </button>
+                <ng-container *ngIf="option.type === 'option'">
+                  <button #dropdownOption
+                          (click)="onDropdownOptionSelect(option.value, option.disabled!)"
+                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
+                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
+                          (keyup.escape)="onEscapeKeyUp($event)"
+                          [id]="dropdownId + '-' + option.value"
+                          [ngClass]="{ 'unselected' : (_internalValue | async) !== option.value }"
+                          [attr.aria-selected]="(_internalValue | async) === option.value"
+                          [attr.data-value]="option.value"
+                          [attr.data-dialog-close-override]="true"
+                          [disabled]="option.disabled"
+                          class="particle_dropdown_option" role="option" tabindex="0">
+                    <ng-container *ngTemplateOutlet="template; context: option.dataContext!"></ng-container>
+                  </button>
+                </ng-container>
               </ng-template>
             </ng-container>
           </ng-container>
@@ -89,21 +91,21 @@
           <ng-template #defaultOptionTemplate>
             <ng-container *ngFor="let option of options; index as i">
               <!-- OPTION GROUP -->
-              <ng-container *ngIf="!!$any(option)['groupLabel'] && !!$any(option)['options'] else nonGroupOption">
-                <div class="particle_dropdown_heading" aria-hidden="true">{{$any(option)['groupLabel']}}</div>
-                <ng-container *ngFor="let groupOption of $any(option)['options']; index as j">
+              <ng-container *ngIf="option.type === 'group' else nonGroupOption">
+                <div class="particle_dropdown_heading" aria-hidden="true">{{option.groupLabel}}</div>
+                <ng-container *ngFor="let groupOption of option.options; index as j">
                   <button #dropdownOption
-                          (click)="onDropdownOptionSelect(groupOption['value'], groupOption['disabled'])"
+                          (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled!)"
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
                           (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
                           (keyup.escape)="onEscapeKeyUp($event)"
                           [id]="dropdownId + '-' + groupOption.value"
-                          [ngClass]="{ 'unselected' : (_internalValue | async) !== groupOption['value'] }"
+                          [ngClass]="{ 'unselected' : (_internalValue | async) !== groupOption.value }"
                           [attr.aria-label]="groupOption.label"
-                          [attr.aria-selected]="(_internalValue | async) === groupOption['value']"
-                          [attr.data-value]="groupOption['value']"
+                          [attr.aria-selected]="(_internalValue | async) === groupOption.value"
+                          [attr.data-value]="groupOption.value"
                           [attr.data-dialog-close-override]="true"
-                          [disabled]="groupOption['disabled']"
+                          [disabled]="groupOption.disabled"
                           class="particle_dropdown_option"
                           role="option" tabindex="0">
                     {{groupOption.label}}
@@ -112,21 +114,23 @@
               </ng-container>
               <!-- SINGULAR OPTION -->
               <ng-template #nonGroupOption>
-                <button #dropdownOption
-                        (click)="onDropdownOptionSelect($any(option)['value'], $any(option)['disabled'])"
-                        (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
-                        (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
-                        (keyup.escape)="onEscapeKeyUp($event)"
-                        [id]="dropdownId + '-' + $any(option)['value']"
-                        [ngClass]="{ 'unselected' : (_internalValue | async) !== $any(option)['value'] }"
-                        [attr.aria-selected]="(_internalValue | async) === $any(option)['value']"
-                        [attr.data-value]="$any(option)['value']"
-                        [attr.data-dialog-close-override]="true"
-                        [disabled]="$any(option)['disabled']"
-                        class="particle_dropdown_option"
-                        role="option" tabindex="0">
-                  {{$any(option)['label']}}
-                </button>
+                <ng-container *ngIf="option.type === 'option'">
+                  <button #dropdownOption
+                          (click)="onDropdownOptionSelect(option.value, option.disabled!)"
+                          (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
+                          (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
+                          (keyup.escape)="onEscapeKeyUp($event)"
+                          [id]="dropdownId + '-' + option.value"
+                          [ngClass]="{ 'unselected' : (_internalValue | async) !== option.value }"
+                          [attr.aria-selected]="(_internalValue | async) === option.value"
+                          [attr.data-value]="option.value"
+                          [attr.data-dialog-close-override]="true"
+                          [disabled]="option.disabled"
+                          class="particle_dropdown_option"
+                          role="option" tabindex="0">
+                    {{option.label}}
+                  </button>
+                </ng-container>
               </ng-template>
             </ng-container>
           </ng-template>
