@@ -3,6 +3,8 @@
  */
 export interface MultiSelectOption {
 
+  type?: 'option';
+
   /**
    * The value of the multi-select option
    */

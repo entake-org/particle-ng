@@ -59,17 +59,17 @@
             <ng-container *ngIf="selectionValueMap$ | async as selectionValueMap">
               <ng-container *ngFor="let option of options; index as i">
                 <!-- OPTION GROUP -->
-                <ng-container *ngIf="!!$any(option)['groupLabel'] && !!$any(option)['options'] else nonGroupOption">
-                  <div class="particle_multiselect_heading" aria-hidden="true">{{$any(option)['groupLabel']}}</div>
-                  <ng-container *ngFor="let groupOption of $any(option)['options']; index as j">
+                <ng-container *ngIf="option.type === 'group' else nonGroupOption">
+                  <div class="particle_multiselect_heading" aria-hidden="true">{{option.groupLabel}}</div>
+                  <ng-container *ngFor="let groupOption of option.options; index as j">
                     <button #multiSelectOption
-                            (click)="onMultiSelectOptionSelect(groupOption.value, groupOption.disabled)"
+                            (click)="onMultiSelectOptionSelect(groupOption.value, groupOption.disabled!)"
                             (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i + j)"
                             (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i + j)"
                             (keyup.escape)="onEscapeKeyUp($event)"
                             [id]="multiSelectId + '-' + groupOption.value"
                             [ngClass]="{ 'unselected': !selectionValueMap['' + groupOption.value] }"
-                            [attr.aria-selected]="(_internalValue | async) === groupOption.value"
+                            [attr.aria-selected]="(_internalValue | async)?.includes(groupOption.value)"
                             [attr.data-value]="groupOption.value"
                             [attr.data-dialog-close-override]="true"
                             [disabled]="groupOption.disabled"
@@ -79,31 +79,33 @@
                            aria-hidden="true">
                         <div *ngIf="selectionValueMap['' + groupOption.value]"><i class="fas fa-check"></i></div>
                       </div>
-                      <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext"></ng-container>
+                      <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext!"></ng-container>
                     </button>
                   </ng-container>
                 </ng-container>
                 <!-- SINGULAR OPTION -->
                 <ng-template #nonGroupOption>
-                  <button #multiSelectOption
-                          (click)="onMultiSelectOptionSelect($any(option)['value'], $any(option)['disabled'])"
-                          (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i)"
-                          (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i)"
-                          (keyup.escape)="onEscapeKeyUp($event)"
-                          [id]="multiSelectId + '-' + $any(option)['value']"
-                          [attr.aria-selected]="(_internalValue | async) === $any(option)['value']"
-                          [attr.data-value]="$any(option)['value']"
-                          [attr.data-dialog-close-override]="true"
-                          [disabled]="$any(option)['disabled']"
-                          [ngClass]="{ 'unselected': !selectionValueMap['' + $any(option)['value']] }"
-                          class="particle_multiselect_option" role="option" tabindex="0">
-                    <div class="particle_multiselect_checkbox bg_overlay brdr"
-                         [ngClass]="selectionValueMap['' + $any(option)['value']] ? 'bg_blue' : 'unselected'"
-                         aria-hidden="true">
-                      <div *ngIf="selectionValueMap['' + $any(option)['value']]"><i class="fas fa-check"></i></div>
-                    </div>
-                    <ng-container *ngTemplateOutlet="template; context: $any(option)['dataContext']"></ng-container>
-                  </button>
+                  <ng-container *ngIf="option.type === 'option'">
+                    <button #multiSelectOption
+                            (click)="onMultiSelectOptionSelect(option.value, option.disabled!)"
+                            (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i)"
+                            (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i)"
+                            (keyup.escape)="onEscapeKeyUp($event)"
+                            [id]="multiSelectId + '-' + option.value"
+                            [attr.aria-selected]="(_internalValue | async)?.includes(option.value)"
+                            [attr.data-value]="option.value"
+                            [attr.data-dialog-close-override]="true"
+                            [disabled]="option.disabled"
+                            [ngClass]="{ 'unselected': !selectionValueMap['' + option.value] }"
+                            class="particle_multiselect_option" role="option" tabindex="0">
+                      <div class="particle_multiselect_checkbox bg_overlay brdr"
+                           [ngClass]="selectionValueMap['' + option.value] ? 'bg_blue' : 'unselected'"
+                           aria-hidden="true">
+                        <div *ngIf="selectionValueMap['' + option.value]"><i class="fas fa-check"></i></div>
+                      </div>
+                      <ng-container *ngTemplateOutlet="template; context: option.dataContext!"></ng-container>
+                    </button>
+                  </ng-container>
                 </ng-template>
               </ng-container>
             </ng-container>
@@ -113,17 +115,17 @@
             <ng-container *ngIf="selectionValueMap$ | async as selectionValueMap">
               <ng-container *ngFor="let option of options; index as i">
                 <!-- OPTION GROUP -->
-                <ng-container *ngIf="!!$any(option)['groupLabel'] && !!$any(option)['options'] else nonGroupOption">
-                  <div class="particle_multiselect_heading" aria-hidden="true">{{$any(option)['groupLabel']}}</div>
-                  <ng-container *ngFor="let groupOption of $any(option)['options']; index as j">
+                <ng-container *ngIf="option.type === 'group' else nonGroupOption">
+                  <div class="particle_multiselect_heading" aria-hidden="true">{{option.groupLabel}}</div>
+                  <ng-container *ngFor="let groupOption of option.options; index as j">
                     <button #multiSelectOption
-                            (click)="onMultiSelectOptionSelect(groupOption.value, groupOption.disabled)"
+                            (click)="onMultiSelectOptionSelect(groupOption.value, groupOption.disabled!)"
                             (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i + j)"
                             (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i + j)"
                             (keyup.escape)="onEscapeKeyUp($event)"
                             [id]="multiSelectId + '-' + groupOption.value"
                             [attr.aria-label]="groupOption.label"
-                            [attr.aria-selected]="(_internalValue | async) === groupOption.value"
+                            [attr.aria-selected]="(_internalValue | async)?.includes(groupOption.value)"
                             [attr.data-value]="groupOption.value"
                             [attr.data-dialog-close-override]="true"
                             [disabled]="groupOption.disabled"
@@ -141,26 +143,28 @@
                 </ng-container>
                 <!-- SINGULAR OPTION -->
                 <ng-template #nonGroupOption>
-                  <button #multiSelectOption
-                          (click)="onMultiSelectOptionSelect($any(option)['value'], $any(option)['disabled'])"
-                          (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i)"
-                          (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i)"
-                          (keyup.escape)="onEscapeKeyUp($event)"
-                          [id]="multiSelectId + '-' + $any(option)['value']"
-                          [attr.aria-selected]="(_internalValue | async) === $any(option)['value']"
-                          [attr.data-value]="$any(option)['value']"
-                          [attr.data-dialog-close-override]="true"
-                          [disabled]="$any(option)['disabled']"
-                          [ngClass]="{ 'unselected': !selectionValueMap['' + $any(option)['value']] }"
-                          class="particle_multiselect_option"
-                          role="option" tabindex="0">
-                    <div class="particle_multiselect_checkbox bg_overlay brdr"
-                         [ngClass]="selectionValueMap['' + $any(option)['value']] ? 'bg_blue' : 'unselected'"
-                         aria-hidden="true">
-                      <div *ngIf="selectionValueMap['' + $any(option)['value']]"><i class="fas fa-check"></i></div>
-                    </div>
-                    {{$any(option)['label']}}
-                  </button>
+                  <ng-container *ngIf="option.type === 'option'">
+                    <button #multiSelectOption
+                            (click)="onMultiSelectOptionSelect(option.value, option.disabled!)"
+                            (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i)"
+                            (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i)"
+                            (keyup.escape)="onEscapeKeyUp($event)"
+                            [id]="multiSelectId + '-' + option.value"
+                            [attr.aria-selected]="(_internalValue | async)?.includes(option.value)"
+                            [attr.data-value]="option.value"
+                            [attr.data-dialog-close-override]="true"
+                            [disabled]="option.disabled"
+                            [ngClass]="{ 'unselected': !selectionValueMap['' + option.value] }"
+                            class="particle_multiselect_option"
+                            role="option" tabindex="0">
+                      <div class="particle_multiselect_checkbox bg_overlay brdr"
+                           [ngClass]="selectionValueMap['' + option.value] ? 'bg_blue' : 'unselected'"
+                           aria-hidden="true">
+                        <div *ngIf="selectionValueMap['' + option.value]"><i class="fas fa-check"></i></div>
+                      </div>
+                      {{option.label}}
+                    </button>
+                  </ng-container>
                 </ng-template>
               </ng-container>
             </ng-container>

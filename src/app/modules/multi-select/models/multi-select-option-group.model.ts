@@ -6,6 +6,8 @@ import {MultiSelectOption} from './multi-select-option.model';
  */
 export interface MultiSelectOptionGroup {
 
+  type?: 'group';
+
   /**
    * The option group label
    */
