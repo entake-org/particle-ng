@@ -42,6 +42,9 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   @Input()
   topOffset = '0px';
 
+  @Input()
+  bottomOffset = '0px';
+
   /**
    * If the screen resizes, it will either overlay or close depending on this variable
    */
@@ -343,7 +346,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   private setDefaultHeight(): void {
-    this._height = `calc(100% - ${this.topOffset})`;
+    this._height = `calc(100% - ${this.topOffset} - ${this.bottomOffset})`;
   }
 
 }
