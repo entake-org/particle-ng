@@ -399,6 +399,14 @@
                     Bottom
                   </button>
 
+                  <particle-button
+                    rounded="slight"
+                    type="delete"
+                    width="69px"
+                    padding="5px"
+                    (click)="console.log('clicked')"
+                  ></particle-button>
+
                   <particle-slideover position="left" bgClass="bg_green" [modal]="false" #slideoverLeft
                                       (opened)="slideoverRight.close();slideoverBottom.close();slideoverTop.close()">
                     Left Side
