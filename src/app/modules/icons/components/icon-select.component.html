@@ -221,7 +221,7 @@
             <input #iconSearchInput
                    [ngModel]="_searchText | async"
                    (input)="_searchText.next(iconSearchInput.value)"
-                   (keyup.enter)="_searchInputEnterKeyup.next()"
+                   (keyup.enter)="_searchInputEnterKeyup.next($any(null))"
                    class="access input md bg_overlay brdr content_color"
                    aria-label="Search icons" placeholder="Search icons..." />
             <button *ngIf="(canSearch$ | async) && (_searchClick | async)"

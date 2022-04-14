@@ -346,7 +346,10 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   private setDefaultHeight(): void {
-    this._height = `calc(100% - ${this.topOffset} - ${this.bottomOffset})`;
+    const offset: number = +this.topOffset.replace(/\D/g, "") +
+      +this.bottomOffset.replace(/\D/g, "");
+
+    this._height = `calc(100% - ${offset}px)`;
   }
 
 }

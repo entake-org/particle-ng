@@ -217,46 +217,61 @@ export class ThemingService {
   changeColors(theme: Theme): void {
     const style = document.createElement('style');
 
-    let rootVars = ':root {';
-    rootVars += `--menu-color: ${theme.menuColor};`;
-    rootVars += `--header-color: ${theme.headerColor};`;
-    rootVars += `--footer-color: ${theme.footerColor};`;
-    rootVars += `--body-color: ${theme.bodyColor};`;
-    rootVars += `--content-color: ${theme.contentColor};`;
-    rootVars += `--bg-red-color: ${theme.bgRed};`;
-    rootVars += `--bg-orange-color: ${theme.bgOrange};`;
-    rootVars += `--bg-yellow-color: ${theme.bgYellow};`;
-    rootVars += `--bg-green-color: ${theme.bgGreen};`;
-    rootVars += `--bg-blue-color: ${theme.bgBlue};`;
-    rootVars += `--bg-purple-color: ${theme.bgPurple};`;
-    rootVars += `--bg-brown-color: ${theme.bgBrown};`;
-    rootVars += `--bg-grey-color: ${theme.bgGrey};`;
-    rootVars += '}';
+    // Generate CSS variables
+    if (theme.layoutColors && theme.colorPalette) {
+      let rootVars = ':root {';
+      rootVars += `--menu-color: ${theme.layoutColors.menuColor};`;
+      rootVars += `--header-color: ${theme.layoutColors.headerColor};`;
+      rootVars += `--footer-color: ${theme.layoutColors.footerColor};`;
+      rootVars += `--body-color: ${theme.layoutColors.bodyColor};`;
+      rootVars += `--content-color: ${theme.layoutColors.contentColor};`;
+      rootVars += `--bg-red-color: ${theme.colorPalette.bgRed};`;
+      rootVars += `--bg-orange-color: ${theme.colorPalette.bgOrange};`;
+      rootVars += `--bg-yellow-color: ${theme.colorPalette.bgYellow};`;
+      rootVars += `--bg-green-color: ${theme.colorPalette.bgGreen};`;
+      rootVars += `--bg-blue-color: ${theme.colorPalette.bgBlue};`;
+      rootVars += `--bg-purple-color: ${theme.colorPalette.bgPurple};`;
+      rootVars += `--bg-brown-color: ${theme.colorPalette.bgBrown};`;
+      rootVars += `--bg-grey-color: ${theme.colorPalette.bgGrey};`;
+      rootVars += '}';
 
-    style.appendChild(document.createTextNode(rootVars));
+      style.appendChild(document.createTextNode(rootVars));
+    }
 
-    for (const prop of Object.keys(theme)) {
-      if (prop.toLowerCase().includes('bg') || prop.toLowerCase().includes('color')) {
-        // @ts-ignore
-        const value = theme[prop] as string;
+    // Render the color palette styles
+    if (theme.colorPalette) {
+      for (const prop of Object.keys(theme.colorPalette)) {
+        if (prop !== 'extension') {
+          const value = (theme.colorPalette as any)[prop] as string;
+
+          const color = value.startsWith('#') ? value : '#' + value;
+          this.generateColors(style, color, this.toSnakeCase(prop));
+        }
+      }
+
+      for (const extension of theme.colorPalette.extension) {
+        this.generateColors(style, extension.color.startsWith('#') ? extension.color : '#' + extension.color, extension.className);
+      }
+    }
+
+    // Render the layout color styles
+    if (theme.layoutColors) {
+      for (const prop of Object.keys(theme.layoutColors)) {
+        const value = (theme.layoutColors as any)[prop] as string;
 
         const color = value.startsWith('#') ? value : '#' + value;
         this.generateColors(style, color, this.toSnakeCase(prop));
       }
-    }
 
-    for (const extension of theme.extension) {
-      this.generateColors(style, extension.color.startsWith('#') ? extension.color : '#' + extension.color, extension.className);
-    }
-
-    if (this.isDarkTheme(theme.bodyColor)) {
-      style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.05);color:inherit;}`));
-      style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.05);color:inherit;}`));
-      style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
-    } else {
-      style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.1);color:inherit;}`));
-      style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.04);color:inherit;}`));
-      style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
+      if (this.isDarkTheme(theme.layoutColors.bodyColor)) {
+        style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.05);color:inherit;}`));
+        style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.05);color:inherit;}`));
+        style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
+      } else {
+        style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.1);color:inherit;}`));
+        style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.04);color:inherit;}`));
+        style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
+      }
     }
 
     const head = document.head || document.getElementsByTagName('head')[0];

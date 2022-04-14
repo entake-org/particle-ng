@@ -43,7 +43,7 @@ export class ThemingComponent implements OnInit {
           value: theme.themeId,
           disabled: false,
           dataContext: {
-            'colorValue': theme.headerColor
+            'colorValue': theme.layoutColors.headerColor
           }
         } as DropdownOption);
       }
