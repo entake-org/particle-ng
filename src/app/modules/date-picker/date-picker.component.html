@@ -1,5 +1,5 @@
 <!-- date picker input -->
-<div #datePickerDiv [ngClass]="inputClassList ? inputClassList : 'input md bg_overlay brdr page_container_color'"
+<div #datePickerDiv [ngClass]="inputClassList ? inputClassList : 'input md bg_overlay brdr content_color'"
      class="particle_datepicker" [style.filter]="disabled ? 'brightness(.95)' : ''">
   <ng-container *ngIf="!disabled else disabledDatePicker">
     <input [(ngModel)]="dateString"

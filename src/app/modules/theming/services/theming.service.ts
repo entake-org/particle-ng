@@ -219,13 +219,10 @@ export class ThemingService {
 
     let rootVars = ':root {';
     rootVars += `--menu-color: ${theme.menuColor};`;
-    rootVars += `--nav-color: ${theme.navColor};`;
+    rootVars += `--header-color: ${theme.headerColor};`;
     rootVars += `--footer-color: ${theme.footerColor};`;
     rootVars += `--body-color: ${theme.bodyColor};`;
-    rootVars += `--page-container-color: ${theme.pageContainerColor};`;
-    rootVars += `--dialog-header-color: ${theme.dialogHeaderColor};`;
-    rootVars += `--dialog-body-color: ${theme.dialogBodyColor};`;
-    rootVars += `--push-container-color: ${theme.pushContainerColor};`;
+    rootVars += `--content-color: ${theme.contentColor};`;
     rootVars += `--bg-red-color: ${theme.bgRed};`;
     rootVars += `--bg-orange-color: ${theme.bgOrange};`;
     rootVars += `--bg-yellow-color: ${theme.bgYellow};`;

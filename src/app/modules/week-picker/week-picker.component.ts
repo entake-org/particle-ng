@@ -151,7 +151,7 @@ export class WeekPickerComponent implements ControlValueAccessor {
    * Class list to apply to the date range input
    */
   @Input()
-  inputClassList = 'input md bg_overlay brdr page_container_color';
+  inputClassList = 'input md bg_overlay brdr content_color';
 
   /**
    * Class list to apply to the week picker button

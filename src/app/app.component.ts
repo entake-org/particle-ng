@@ -6,6 +6,7 @@ import {PushContainerComponent} from './modules/push-container/push-container.co
 import {ThemingService} from './modules/theming/services/theming.service';
 import {Theme} from './modules/theming/models/theme.model';
 import {ToggleOptions} from "./modules/toggle-switch/models/toggle-options.model";
+import {Observable} from "rxjs";
 
 /**
  * App Component to test out stuff built here. Not useful for anything else. Should not be exported by this package.
@@ -124,13 +125,10 @@ export class AppComponent implements OnInit {
       isDefault: true,
       name: 'Default',
       menuColor: '#3f6570',
-      navColor: '#1f5a69',
+      headerColor: '#1f5a69',
       footerColor: '#4d4d4d',
       bodyColor: '#d9d9d9',
-      pageContainerColor: '#FEFEFE',
-      dialogHeaderColor: '#43555e',
-      dialogBodyColor: '#FEFEFE',
-      pushContainerColor: '#FEFEFE',
+      contentColor: '#FEFEFE',
       bgRed: '#823841',
       bgOrange: '#946a15',
       bgYellow: '#7a7626',
@@ -139,6 +137,8 @@ export class AppComponent implements OnInit {
       bgPurple: '#7b507d',
       bgBrown: '#67523f',
       bgGrey: '#707070',
+      headerHeight: '100px',
+      footerHeight: '0',
       extension: [
         {className: 'bg_red_alt', color: '#944646'},
         {className: 'bg_orange_alt', color: '#a1660d'},
@@ -159,13 +159,10 @@ export class AppComponent implements OnInit {
       isDefault: false,
       name: 'Other',
       menuColor: '#230e26',
-      navColor: '#2c0a38',
+      headerColor: '#2c0a38',
       footerColor: '#192752',
       bodyColor: '#151515',
-      pageContainerColor: '#000000',
-      dialogHeaderColor: '#2b4044',
-      dialogBodyColor: '#2c2c2c',
-      pushContainerColor: '#413f3f',
+      contentColor: '#000000',
       bgRed: '#910f20',
       bgOrange: '#9f6f03',
       bgYellow: '#6e680d',
@@ -174,6 +171,8 @@ export class AppComponent implements OnInit {
       bgPurple: '#56185b',
       bgBrown: '#493c31',
       bgGrey: '#4b4848',
+      headerHeight: '150px',
+      footerHeight: '0',
       extension: [
         {className: 'bg_red_alt', color: '#944646'},
         {className: 'bg_orange_alt', color: '#a1660d'},
@@ -190,6 +189,8 @@ export class AppComponent implements OnInit {
       ]
     } as Theme
   ];
+
+  currentTheme: Observable<Theme> = this.themingService.selectedTheme;
 
   /**
    * Constructor

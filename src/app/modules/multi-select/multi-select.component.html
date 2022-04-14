@@ -1,6 +1,6 @@
 <div #multiSelect class="particle_multiselect" [style.filter]="disabled ? 'brightness(.95)' : ''"
      style="cursor:default;"
-     [ngClass]="classList ? classList : 'input md bg_overlay brdr page_container_color'">
+     [ngClass]="classList ? classList : 'input md bg_overlay brdr content_color'">
   <!-- maybe switch this to a div? -->
   <button #multiSelectButton
           role="combobox"
@@ -12,7 +12,7 @@
           [attr.aria-label]="ariaLabel"
           [attr.aria-expanded]="opened"
           [attr.data-dialog-close-override]="true"
-          class="access page_container_color particle_multiselect_input">
+          class="access content_color particle_multiselect_input">
     <ng-container *ngIf="selectionCount$ | async as selectionCount else placeholderTemplate">
       <div class="pill brad_3 bg_grey" style="margin-right:1em; font-size:0.75em; padding:0.3em 0.65em;">
         {{selectionCount}}
@@ -51,7 +51,7 @@
        (@openClose.start)="onAnimationStart($event)"
        (@openClose.done)="onAnimationDone($event)"
        class="position_absolute">
-    <div class="particle_multiselect_options page_container_color">
+    <div class="particle_multiselect_options content_color">
       <ng-container *ngIf="_options | async as options">
         <div class="particle_multiselect_list" role="listbox" tabindex="-1" [attr.aria-label]="ariaLabel">
           <!-- CUSTOM TEMPLATE -->

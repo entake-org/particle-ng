@@ -34,7 +34,7 @@ export class SlideoverComponent implements OnDestroy {
   height = '100px';
 
   @Input()
-  bgClass = 'dialog_body_color';
+  bgClass = 'content_color';
 
   @Output()
   opened = new EventEmitter<any>();

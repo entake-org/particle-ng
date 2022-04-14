@@ -3,13 +3,10 @@ export interface Theme {
   isDefault: boolean;
   name: string;
   menuColor: string;
-  navColor: string;
+  headerColor: string;
   footerColor: string;
   bodyColor: string;
-  pageContainerColor: string;
-  dialogHeaderColor: string;
-  dialogBodyColor: string;
-  pushContainerColor: string;
+  contentColor: string;
   bgRed: string;
   bgOrange: string;
   bgYellow: string;
@@ -18,6 +15,8 @@ export interface Theme {
   bgPurple: string;
   bgBrown: string;
   bgGrey: string;
+  headerHeight: string;
+  footerHeight: string;
   extension: Array<ThemeExtension>;
   fonts: Array<ThemeFont>;
 }

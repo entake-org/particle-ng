@@ -1,5 +1,5 @@
 <!-- choose button -->
-<button [ngClass]="buttonColorClass ? buttonColorClass : 'page_container_color'"
+<button [ngClass]="buttonColorClass ? buttonColorClass : 'content_color'"
         [ngStyle]="{
                      'width': buttonSizing,
                      'min-width': buttonSizing,
@@ -182,7 +182,7 @@
 
       <!-- ICONS -->
       <div class="col size_2 column">
-        <div class="col dialog_body_color_dark_1 pad_x5">
+        <div class="col content_color_dark_1 pad_x5">
           <!-- paginator -->
           <div *ngIf="totalPages$ | async as totalPages"
                class="col v_center mar_10">
@@ -222,7 +222,7 @@
                    [ngModel]="_searchText | async"
                    (input)="_searchText.next(iconSearchInput.value)"
                    (keyup.enter)="_searchInputEnterKeyup.next()"
-                   class="access input md bg_overlay brdr page_container_color"
+                   class="access input md bg_overlay brdr content_color"
                    aria-label="Search icons" placeholder="Search icons..." />
             <button *ngIf="(canSearch$ | async) && (_searchClick | async)"
                     (click)="clearSearch()" aria-label="Clear search"
@@ -251,7 +251,7 @@
               <ng-container *ngFor="let icon of paginatedIcons$ | async">
                 <div class="col size_1 min_w75 mar_5">
                   <button class="access wis_icon_btn" (click)="handleIconSelect(icon)" [attr.aria-label]="'Select ' + icon.name">
-                    <div [ngClass]="((_internalValue | async)?.prefix === icon.prefix) && ((_internalValue | async)?.name === icon.name) ? 'bg_blue' : 'page_container_color'"
+                    <div [ngClass]="((_internalValue | async)?.prefix === icon.prefix) && ((_internalValue | async)?.name === icon.name) ? 'bg_blue' : 'content_color'"
                          class="wis_icon_btn_preview square_50px brad_3 bg_overlay brdr mar_bot5">
                       <i class="{{icon.prefix}} {{icon.name}}"></i>
                     </div>

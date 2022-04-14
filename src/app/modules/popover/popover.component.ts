@@ -70,7 +70,7 @@ export class PopoverComponent implements OnDestroy {
    * A class-list to apply to the popover content
    */
   @Input()
-  classList = 'page_container_color';
+  classList = 'content_color';
 
   /**
    * Event emitted on popover open

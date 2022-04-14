@@ -41,7 +41,7 @@ export class ParticleButtonComponent {
   size: string = null as any;
 
   get classList(): string {
-    let classList = 'btn ';
+    let classList = 'btn access ';
 
     if (this.rounded) {
       classList += this.getRoundedClass();

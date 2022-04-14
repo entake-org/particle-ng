@@ -1,11 +1,11 @@
 <button (click)="handleClick()" [attr.aria-label]="options.accessibilityLabel" [disabled]="disabled"
         [ngClass]="value ? options.affirmativeColorClass : options.negativeColorClass"
         class="access btn sm v_center hov_glow p_toggle_button" style="">
-  <div [ngClass]="value ? 'page_container_color' : 'opac_50'"
+  <div [ngClass]="value ? 'content_color' : 'opac_50'"
        class="p_toggle_status">
     <i [ngClass]="options.affirmativeIcon" class="fa-fw mar_right5"></i>{{options.affirmativeLabel}}
   </div>
-  <div [ngClass]="!value ? 'page_container_color' : 'opac_50'"
+  <div [ngClass]="!value ? 'content_color' : 'opac_50'"
        class="p_toggle_status">
     <i [ngClass]="options.negativeIcon" class="fa-fw mar_right5"></i>{{options.negativeLabel}}
   </div>

@@ -55,7 +55,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    * Background color for the container
    */
   @Input()
-  backgroundColorClass = 'push_container_color';
+  backgroundColorClass = 'content_color';
 
   /**
    * Breakpoint that will make the container take over the screen when it's crossed.
@@ -73,7 +73,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   showTabOnClose = false;
 
   @Input()
-  tabColorClass = 'push_container_color_dark_2';
+  tabColorClass = 'content_color_dark_2';
 
   /**
    * Event emitter for open

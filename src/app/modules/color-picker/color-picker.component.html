@@ -1,6 +1,6 @@
 <div *ngIf="render" [style.filter]="_disabled ? 'brightness(.95)' : ''"
      class="wcp_container"
-     [ngClass]="classList ? classList : 'input md bg_overlay brdr page_container_color'">
+     [ngClass]="classList ? classList : 'input md bg_overlay brdr content_color'">
   <ng-container *ngIf="colorPickerSupported else colorSwatch">
     <input #colorPicker
            type="color"

@@ -84,7 +84,7 @@ export class DialogComponent {
    * Class to apply to the title of the dialog
    */
   @Input()
-  titleClass = 'dialog_header_color';
+  titleClass = 'header_color';
 
   /**
    * Show or hide the title bar
@@ -102,7 +102,7 @@ export class DialogComponent {
    * Class to apply to the body of the dialog
    */
   @Input()
-  bodyClass = 'dialog_body_color';
+  bodyClass = 'content_color';
 
   /**
    * Height of the dialog (can use any height measurement)
