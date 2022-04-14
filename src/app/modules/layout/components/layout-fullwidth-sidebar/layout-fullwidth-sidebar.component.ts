@@ -23,10 +23,20 @@ export class LayoutFullwidthSidebarComponent {
   rightSidebarSticky = false;
 
   @Input()
-  rightSidebarStickyOffset: number = 0;
+  headerHeight: string = '0';
+
+  @Input()
+  footerHeight: string = '0';
 
   @Input()
   width: string = '250px';
+
+  get stickySidebarHeight(): string {
+    const offset: number = +this.headerHeight.replace(/\D/g, "") +
+      +this.footerHeight.replace(/\D/g, "");
+
+    return `calc(100vh - ${offset}px)`;
+  }
 
   constructor() { }
 

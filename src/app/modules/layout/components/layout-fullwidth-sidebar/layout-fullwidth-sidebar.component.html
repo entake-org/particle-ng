@@ -17,7 +17,7 @@
     <div class="particle_layout_sidebar height100 hide_element" [style.width]="width">
       <div class="row column sticky_sidebar"
            [ngClass]="rightSidebarContainerClassList"
-           [style.height]="'calc(100vh - ' + rightSidebarStickyOffset + 'px)'">
+           [style.height]="stickySidebarHeight">
         <ng-template [ngTemplateOutlet]="rightSidebar"></ng-template>
       </div>
     </div>
