@@ -4,5 +4,5 @@
   [style.margin]="margin"
   [style.padding]="padding"
 >
-  {{label}}
+  <i *ngIf="icon" [ngClass]="icon"></i> {{label}}
 </button>

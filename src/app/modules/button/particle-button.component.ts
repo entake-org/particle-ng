@@ -11,7 +11,7 @@ export class ParticleButtonComponent {
   type: 'standard' | 'ok' | 'cancel' | 'delete' | 'save' | 'next' | 'previous' | 'open' | 'close' | 'basic' = 'standard';
 
   @Input()
-  color: 'solid' | 'fill' = 'fill';
+  color: 'outline' | 'fill' = 'fill';
 
   @Input()
   rounded: 'none' | 'less' | 'more' | 'pill' | 'circle' = 'none';
@@ -52,6 +52,12 @@ export class ParticleButtonComponent {
       classList += this.getColor();
       classList += ' ';
     }
+
+    if (this.size) {
+      classList += this.size;
+      classList += ' ';
+    }
+
     return classList;
   }
 
@@ -69,7 +75,6 @@ export class ParticleButtonComponent {
       case 'previous': return 'Previous';
       case 'open': return 'Open';
       case 'close': return 'Close';
-      case 'basic': return 'Basic';
       default: return '';
     }
   }
