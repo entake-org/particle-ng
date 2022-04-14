@@ -41,7 +41,7 @@ export class ParticleButtonComponent {
   size: string = null as any;
 
   get classList(): string {
-    let classList = 'btn access ';
+    let classList = 'pb_button pb_access ';
 
     if (this.rounded) {
       classList += this.getRoundedClass();
@@ -52,7 +52,6 @@ export class ParticleButtonComponent {
       classList += this.getColor();
       classList += ' ';
     }
-
     return classList;
   }
 
@@ -77,10 +76,10 @@ export class ParticleButtonComponent {
 
   private getRoundedClass(): string {
     switch(this.rounded) {
-      case 'circle': return '';
-      case 'more': return 'brad_5';
-      case 'less': return 'brad_3';
-      case "pill": return 'brad_10';
+      case 'less': return 'pb_border_3';
+      case 'more': return 'pb_border_6';
+      case 'circle': return 'pb_circle';
+      case "pill": return 'pb_pill';
       default: return '';
     }
   }

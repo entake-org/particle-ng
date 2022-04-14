@@ -22,12 +22,10 @@
 }
 .access:hover{
   outline:rgba(17,212,17,1.0) 1px solid !important;
-  outline-offset: 3px;
-  border-radius: inherit;
+  outline-offset: 2px;
 }
 
 .access:focus{
   outline:rgba(17,212,17,1.0) 1px solid !important;
-  outline-offset: 3px;
-  border-radius: inherit;
+  outline-offset: 2px;
 }
