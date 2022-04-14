@@ -50,7 +50,72 @@
             </div>
 
           </div>
-
+          <!-- ROW -->
+          <div class="col size_1 min_w280 min_h200 pad_15 content_color box_shadow mar_10  scroll_none">
+            <particle-button
+              rounded="less"
+              type="delete"
+              width="69px"
+              padding="5px"
+              (click)="console.log('clicked')"
+            ></particle-button>
+            <particle-button
+              rounded="less"
+              type="ok"
+              width="69px"
+              padding="5px"
+              (click)="console.log('clicked')"
+            ></particle-button>
+            <particle-button
+              rounded="less"
+              type="cancel"
+              width="69px"
+              padding="5px"
+              (click)="console.log('clicked')"
+            ></particle-button>
+            <particle-button
+              rounded="less"
+              type="save"
+              width="69px"
+              padding="5px"
+              (click)="console.log('clicked')"
+            ></particle-button>
+            <particle-button
+              rounded="less"
+              type="previous"
+              width="69px"
+              padding="5px"
+              (click)="console.log('clicked')"
+            ></particle-button>
+            <particle-button
+              rounded="less"
+              type="next"
+              width="69px"
+              padding="5px"
+              (click)="console.log('clicked')"
+            ></particle-button>
+            <particle-button
+              rounded="less"
+              type="open"
+              width="69px"
+              padding="5px"
+              (click)="console.log('clicked')"
+            ></particle-button>
+            <particle-button
+              rounded="less"
+              type="close"
+              width="69px"
+              padding="5px"
+              (click)="console.log('clicked')"
+            ></particle-button>
+            <particle-button
+              rounded="less"
+              type="basic"
+              width="69px"
+              padding="5px"
+              (click)="console.log('clicked')"
+            ></particle-button>
+          </div>
           <!-- ROW -->
           <div class="col wrap">
 
@@ -400,15 +465,6 @@
                   <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="slideoverBottom.toggle()">
                     Bottom
                   </button>
-
-                  <particle-button
-                    rounded="slight"
-                    type="delete"
-                    width="69px"
-                    padding="5px"
-                    (click)="console.log('clicked')"
-                  ></particle-button>
-
                   <particle-slideover position="left" bgClass="bg_green" [modal]="false" #slideoverLeft
                                       (opened)="slideoverRight.close();slideoverBottom.close();slideoverTop.close()">
                     Left Side
@@ -796,6 +852,7 @@
             </div>
 
           </div>
+
 
           <!-- ROW -->
           <div class="col wrap">

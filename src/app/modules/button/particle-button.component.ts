@@ -8,13 +8,13 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 export class ParticleButtonComponent {
 
   @Input()
-  type: 'standard' | 'ok' | 'cancel' | 'delete' | 'save' = 'standard';
+  type: 'standard' | 'ok' | 'cancel' | 'delete' | 'save' | 'next' | 'previous' | 'open' | 'close' | 'basic' = 'standard';
 
   @Input()
   color: 'solid' | 'fill' = 'fill';
 
   @Input()
-  rounded: 'none' | 'slight' | 'heavy' | 'pill' | 'circle' = 'none';
+  rounded: 'none' | 'less' | 'more' | 'pill' | 'circle' = 'none';
 
   @Input()
   icon: string = null as any;
@@ -66,6 +66,11 @@ export class ParticleButtonComponent {
       case 'save': return 'Save';
       case 'cancel': return 'Cancel';
       case 'delete': return 'Delete';
+      case 'next': return 'Next';
+      case 'previous': return 'Previous';
+      case 'open': return 'Open';
+      case 'close': return 'Close';
+      case 'basic': return 'Basic';
       default: return '';
     }
   }
@@ -73,8 +78,8 @@ export class ParticleButtonComponent {
   private getRoundedClass(): string {
     switch(this.rounded) {
       case 'circle': return '';
-      case 'heavy': return 'brad_5';
-      case 'slight': return 'brad_3';
+      case 'more': return 'brad_5';
+      case 'less': return 'brad_3';
       case "pill": return 'brad_10';
       default: return '';
     }
@@ -86,6 +91,11 @@ export class ParticleButtonComponent {
       case 'save': return 'bg_green';
       case 'cancel': return 'bg_grey';
       case 'delete': return 'bg_red';
+      case 'next': return 'bg_blue';
+      case 'previous': return 'bg_purple';
+      case 'open': return 'bg_orange';
+      case 'close': return 'bg_grey_dark_2';
+      case 'basic': return 'bg_overlay_rev brdr';
       default: return 'bg_overlay';
     }
   }
