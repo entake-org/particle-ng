@@ -35,10 +35,11 @@ export class ParticleButtonComponent {
   margin: string = '0 5px 0 5px';
 
   @Input()
-  size: 'xsm' | 'sm' | 'md' | 'lg' | 'xlg' = 'md';
+  size: 'xsm' | 'sm' | 'md' | 'lg' | 'xlg' | 'circle_xsm' | 'circle_sm' | 'circle_md' | 'circle_lg' | 'circle_xlg' = 'md';
+
 
   get classList(): string {
-    let classList = 'pb_button pb_access ';
+    let classList = 'pb_button access ';
 
     if (this.rounded) {
       classList += this.getRoundedClass();
