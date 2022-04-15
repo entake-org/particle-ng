@@ -1,11 +1,13 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {BehaviorSubject} from "rxjs";
+import {ButtonState} from "./button-state.model";
 
 @Component({
   selector: 'particle-button',
   templateUrl: './particle-button.component.html',
   styleUrls: ['./particle-button.component.css']
 })
-export class ParticleButtonComponent {
+export class ParticleButtonComponent implements OnInit {
 
   @Input()
   type: 'standard' | 'ok' | 'cancel' | 'delete' | 'save' | 'next' | 'previous' | 'open' | 'close' = 'standard';
@@ -37,8 +39,26 @@ export class ParticleButtonComponent {
   @Input()
   size: 'xsm' | 'sm' | 'md' | 'lg' | 'xlg' = 'md';
 
+  private _buttonState: BehaviorSubject<ButtonState> = new BehaviorSubject<ButtonState>(null as any);
 
-  get classList(): string {
+  buttonState = this._buttonState.asObservable();
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this._buttonState.next({
+      icon: this.icon,
+      border: this.getBorder(),
+      classList: this.getClassList(),
+      fontColor: this.getFontColor(),
+      iconSide: this.iconSide,
+      label: this.getLabel(),
+      margin: this.margin,
+      width: this.width
+    });
+  }
+
+  private getClassList(): string {
     let classList = 'pb_button access ';
 
     if (this.rounded) {
@@ -74,22 +94,25 @@ export class ParticleButtonComponent {
     return classList;
   }
 
-  get label(): string {
-    if (this.text && this.iconSide !== 'only') {
-      return this.text;
+  private getLabel(): string {
+    if (this.iconSide !== 'only') {
+      if (this.text) {
+        return this.text;
+      }
+
+      switch (this.type) {
+        case 'ok': return 'OK';
+        case 'save': return 'Save';
+        case 'cancel': return 'Cancel';
+        case 'delete': return 'Delete';
+        case 'next': return 'Next';
+        case 'previous': return 'Previous';
+        case 'open': return 'Open';
+        case 'close': return 'Close';
+      }
     }
 
-    switch (this.type) {
-      case 'ok': return 'OK';
-      case 'save': return 'Save';
-      case 'cancel': return 'Cancel';
-      case 'delete': return 'Delete';
-      case 'next': return 'Next';
-      case 'previous': return 'Previous';
-      case 'open': return 'Open';
-      case 'close': return 'Close';
-      default: return null as any;
-    }
+    return null as any;
   }
 
   private getRoundedClass(): string {
@@ -104,32 +127,28 @@ export class ParticleButtonComponent {
 
   private getColor(): string {
     if (this.type === 'standard') {
-      return 'bg_overlay_rev brdr';
+      return 'bg_overlay_rev';
     }
 
     return `${this.type}_button_color`;
   }
 
-  get border(): string {
+  private getBorder(): string {
     if (this.color === 'outline' && this.type !== 'standard') {
-      const s = `1px solid var(--${this.getColor().split('_').join('-')})`
-      console.log(s)
-      return s;
+      return `1px solid var(--${this.getColor().split('_').join('-')})`
+    } else if (this.type === 'standard') {
+      return '1px solid rgba(150,150,150,0.5)';
     }
 
     return '';
   }
 
-  get fontColor(): string {
+  private getFontColor(): string {
     if (this.color === 'outline' && this.type !== 'standard') {
-      const s = `var(--${this.getColor().split('_').join('-')})`
-      console.log(s);
-      return s;
+      return `var(--${this.getColor().split('_').join('-')})`
     }
 
     return '';
   }
-
-  constructor() { }
 
 }

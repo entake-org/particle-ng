@@ -1,19 +1,21 @@
-<button
-  [ngClass]="classList"
-  [style.width]="width"
-  [style.margin]="margin"
-  [style.border]="border"
-  [style.color]="fontColor"
->
-  <ng-container *ngIf="iconSide === 'left'">
-    <i *ngIf="icon" [ngClass]="icon"></i>
-  </ng-container>
+<ng-container *ngIf="buttonState | async as state">
+  <button
+    [ngClass]="state.classList"
+    [style.width]="state.width"
+    [style.margin]="state.margin"
+    [style.border]="state.border"
+    [style.color]="state.fontColor"
+  >
+    <ng-container *ngIf="['left', 'only'].includes(state.iconSide)">
+      <i *ngIf="state.icon" [ngClass]="state.icon"></i>
+    </ng-container>
 
-  <ng-container *ngIf="label">
-    {{label}}
-  </ng-container>
+    <ng-container *ngIf="state.label">
+      {{state.label}}
+    </ng-container>
 
-  <ng-container *ngIf="iconSide === 'right'">
-    <i *ngIf="icon" [ngClass]="icon"></i>
-  </ng-container>
-</button>
+    <ng-container *ngIf="state.iconSide === 'right'">
+      <i *ngIf="state.icon" [ngClass]="state.icon"></i>
+    </ng-container>
+  </button>
+</ng-container>
