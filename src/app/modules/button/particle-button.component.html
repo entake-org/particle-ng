@@ -2,7 +2,14 @@
   [ngClass]="classList"
   [style.width]="width"
   [style.margin]="margin"
-  [style.padding]="padding"
 >
-  <i *ngIf="icon" [ngClass]="icon"></i> {{label}}
+  <ng-container *ngIf="iconSide === 'left'">
+    <i *ngIf="icon" [ngClass]="icon"></i>
+  </ng-container>
+
+  {{label}}
+
+  <ng-container *ngIf="iconSide === 'right'">
+    <i *ngIf="icon" [ngClass]="icon"></i>
+  </ng-container>
 </button>

@@ -35,10 +35,7 @@ export class ParticleButtonComponent {
   margin: string = '0 5px 0 5px';
 
   @Input()
-  padding: string = null as any;
-
-  @Input()
-  size: string = null as any;
+  size: 'xsm' | 'sm' | 'md' | 'lg' | 'xlg' = 'md';
 
   get classList(): string {
     let classList = 'pb_button pb_access ';
@@ -55,6 +52,11 @@ export class ParticleButtonComponent {
 
     if (this.size) {
       classList += this.size;
+      classList += ' ';
+    }
+
+    if (this.hover) {
+      classList += this.hover;
       classList += ' ';
     }
 
