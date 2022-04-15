@@ -7,6 +7,7 @@ import {ThemingService} from './modules/theming/services/theming.service';
 import {Theme} from './modules/theming/models/theme.model';
 import {ToggleOptions} from "./modules/toggle-switch/models/toggle-options.model";
 import {Observable} from "rxjs";
+import {CarouselOptions} from "./modules/background-carousel/carousel-options.model";
 
 /**
  * App Component to test out stuff built here. Not useful for anything else. Should not be exported by this package.
@@ -203,6 +204,17 @@ export class AppComponent implements OnInit {
   ];
 
   currentTheme: Observable<Theme> = this.themingService.selectedTheme;
+
+  carouselOptions = new CarouselOptions(
+    [
+      'http://www.pixlb.it/media/headlines/1089.png',
+      'http://www.pixlb.it/media/headlines/1064.jpg',
+      'http://www.pixlb.it/media/headlines/1031.jpg'
+    ],
+    2,
+    10,
+    false
+  );
 
   /**
    * Constructor

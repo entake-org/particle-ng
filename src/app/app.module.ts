@@ -28,6 +28,7 @@ import {ParticleScrollToTopModule} from "./modules/scroll-to-top/particle-scroll
 import {ParticleLayoutModule} from "./modules/layout/layout.module";
 import {ParticleToggleSwitchModule} from "./modules/toggle-switch/toggle-switch.module";
 import {ParticleButtonModule} from "./modules/button/button.module";
+import {ParticleBackgroundCarouselModule} from "./modules/background-carousel/particle-background-carousel.module";
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import {ParticleButtonModule} from "./modules/button/button.module";
     ParticleScrollToTopModule,
     ParticleLayoutModule,
     ParticleToggleSwitchModule,
-    ParticleButtonModule
+    ParticleButtonModule,
+    ParticleBackgroundCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
