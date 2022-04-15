@@ -5,6 +5,7 @@ export interface Theme {
   layoutColors: ThemeLayoutColors;
   layoutVariables: ThemeLayoutVariables;
   colorPalette: ThemeColorPalette;
+  buttonColorPalette: ThemeButtonColorPalette;
   fonts: Array<ThemeFont>;
 }
 
@@ -27,6 +28,17 @@ export interface ThemeColorPalette {
   bgGrey: string;
 
   extension: Array<ThemeColorPaletteExtension>;
+}
+
+export interface ThemeButtonColorPalette {
+  okButtonColor: string;
+  cancelButtonColor: string;
+  deleteButtonColor: string;
+  saveButtonColor: string;
+  nextButtonColor: string;
+  previousButtonColor: string;
+  openButtonColor: string;
+  closeButtonColor: string;
 }
 
 export interface ThemeLayoutVariables {

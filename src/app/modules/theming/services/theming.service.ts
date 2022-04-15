@@ -52,6 +52,10 @@ export class ThemingService {
     return prop.split(/(?=[A-Z])/).join('_').toLowerCase();
   }
 
+  private toKebabCase(prop: string): string {
+    return prop.split(/(?=[A-Z])/).join('-').toLowerCase();
+  }
+
   /**
    * For the given color, it'll lighten or darken the color by the percentage supplied. Positive percent will lighten, negative to darken.
    *
@@ -216,27 +220,7 @@ export class ThemingService {
    */
   changeColors(theme: Theme): void {
     const style = document.createElement('style');
-
-    // Generate CSS variables
-    if (theme.layoutColors && theme.colorPalette) {
-      let rootVars = ':root {';
-      rootVars += `--menu-color: ${theme.layoutColors.menuColor};`;
-      rootVars += `--header-color: ${theme.layoutColors.headerColor};`;
-      rootVars += `--footer-color: ${theme.layoutColors.footerColor};`;
-      rootVars += `--body-color: ${theme.layoutColors.bodyColor};`;
-      rootVars += `--content-color: ${theme.layoutColors.contentColor};`;
-      rootVars += `--bg-red-color: ${theme.colorPalette.bgRed};`;
-      rootVars += `--bg-orange-color: ${theme.colorPalette.bgOrange};`;
-      rootVars += `--bg-yellow-color: ${theme.colorPalette.bgYellow};`;
-      rootVars += `--bg-green-color: ${theme.colorPalette.bgGreen};`;
-      rootVars += `--bg-blue-color: ${theme.colorPalette.bgBlue};`;
-      rootVars += `--bg-purple-color: ${theme.colorPalette.bgPurple};`;
-      rootVars += `--bg-brown-color: ${theme.colorPalette.bgBrown};`;
-      rootVars += `--bg-grey-color: ${theme.colorPalette.bgGrey};`;
-      rootVars += '}';
-
-      style.appendChild(document.createTextNode(rootVars));
-    }
+    let rootVars = ':root {';
 
     // Render the color palette styles
     if (theme.colorPalette) {
@@ -246,6 +230,8 @@ export class ThemingService {
 
           const color = value.startsWith('#') ? value : '#' + value;
           this.generateColors(style, color, this.toSnakeCase(prop));
+
+          rootVars += `--${this.toKebabCase(prop)}-color: ${color};`;
         }
       }
 
@@ -261,6 +247,7 @@ export class ThemingService {
 
         const color = value.startsWith('#') ? value : '#' + value;
         this.generateColors(style, color, this.toSnakeCase(prop));
+        rootVars += `--${this.toKebabCase(prop)}: ${color};`;
       }
 
       if (this.isDarkTheme(theme.layoutColors.bodyColor)) {
@@ -274,6 +261,18 @@ export class ThemingService {
       }
     }
 
+    // Render the button color styles
+    if (theme.buttonColorPalette) {
+      for (const prop of Object.keys(theme.buttonColorPalette)) {
+        const value = (theme.buttonColorPalette as any)[prop] as string;
+
+        const color = value.startsWith('#') ? value : '#' + value;
+        this.generateColors(style, color, this.toSnakeCase(prop));
+
+        rootVars += `--${this.toKebabCase(prop)}: ${color};`;
+      }
+    }
+
     const head = document.head || document.getElementsByTagName('head')[0];
 
     for (const child of <any>head.childNodes) {
@@ -283,8 +282,13 @@ export class ThemingService {
       }
     }
 
+    // Write the fonts to the header
     this.addFonts(theme, head, style);
+
+    rootVars += '}';
+    style.appendChild(document.createTextNode(rootVars));
     head.appendChild(style);
+
     this.themeChangeDetectionService.changeTheme();
   }
 

@@ -8,7 +8,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 export class ParticleButtonComponent {
 
   @Input()
-  type: 'standard' | 'ok' | 'cancel' | 'delete' | 'save' | 'next' | 'previous' | 'open' | 'close' | 'basic' = 'standard';
+  type: 'standard' | 'ok' | 'cancel' | 'delete' | 'save' | 'next' | 'previous' | 'open' | 'close' = 'standard';
 
   @Input()
   color: 'outline' | 'fill' = 'fill';
@@ -29,7 +29,7 @@ export class ParticleButtonComponent {
   width: string = 'auto';
 
   @Input()
-  hover: string = 'none';
+  hover: string = null as any;
 
   @Input()
   margin: string = '0 5px 0 5px';
@@ -38,7 +38,7 @@ export class ParticleButtonComponent {
   size: 'xsm' | 'sm' | 'md' | 'lg' | 'xlg' = 'md';
 
   get classList(): string {
-    let classList = 'pb_button pb_access ';
+    let classList = 'pb_button access ';
 
     if (this.rounded) {
       classList += this.getRoundedClass();
@@ -46,12 +46,22 @@ export class ParticleButtonComponent {
     }
 
     if (this.type) {
-      classList += this.getColor();
+      if (this.color === 'fill') {
+        classList += this.getColor();
+      } else {
+        classList += 'bg_overlay';
+      }
+
       classList += ' ';
     }
 
     if (this.size) {
-      classList += this.size;
+      if (this.rounded === 'circle') {
+        classList += 'circle_' + this.size;
+      } else {
+        classList += this.size;
+      }
+
       classList += ' ';
     }
 
@@ -77,7 +87,7 @@ export class ParticleButtonComponent {
       case 'previous': return 'Previous';
       case 'open': return 'Open';
       case 'close': return 'Close';
-      default: return '';
+      default: return null as any;
     }
   }
 
@@ -92,18 +102,31 @@ export class ParticleButtonComponent {
   }
 
   private getColor(): string {
-    switch (this.type) {
-      case 'ok': return 'bg_blue';
-      case 'save': return 'bg_green';
-      case 'cancel': return 'bg_grey';
-      case 'delete': return 'bg_red';
-      case 'next': return 'bg_blue';
-      case 'previous': return 'bg_purple';
-      case 'open': return 'bg_orange';
-      case 'close': return 'bg_grey_dark_2';
-      case 'basic': return 'bg_overlay_rev brdr';
-      default: return 'bg_overlay';
+    if (this.type === 'standard') {
+      return 'bg_overlay_rev brdr';
     }
+
+    return `${this.type}_button_color`;
+  }
+
+  get border(): string {
+    if (this.color === 'outline' && this.type !== 'standard') {
+      const s = `1px solid var(--${this.getColor().split('_').join('-')})`
+      console.log(s)
+      return s;
+    }
+
+    return '';
+  }
+
+  get fontColor(): string {
+    if (this.color === 'outline' && this.type !== 'standard') {
+      const s = `var(--${this.getColor().split('_').join('-')})`
+      console.log(s);
+      return s;
+    }
+
+    return '';
   }
 
   constructor() { }

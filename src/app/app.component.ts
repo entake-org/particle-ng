@@ -152,6 +152,16 @@ export class AppComponent implements OnInit {
           {className: 'bg_grey_alt', color: '#616161'},
         ],
       },
+      buttonColorPalette: {
+        cancelButtonColor: '#616161',
+        closeButtonColor: '#444141',
+        deleteButtonColor: '#944646',
+        okButtonColor: '#0b799e',
+        nextButtonColor: '#a1660d',
+        openButtonColor: '#544310',
+        previousButtonColor: '#8a4878',
+        saveButtonColor: '#37852b'
+      },
       layoutVariables: {
         headerHeight: '100px',
         footerHeight: '0',
@@ -191,6 +201,16 @@ export class AppComponent implements OnInit {
           {className: 'bg_brown_alt', color: '#6b6032'},
           {className: 'bg_grey_alt', color: '#616161'},
         ],
+      },
+      buttonColorPalette: {
+        cancelButtonColor: '#616161',
+        closeButtonColor: '#444141',
+        deleteButtonColor: '#944646',
+        okButtonColor: '#0b799e',
+        nextButtonColor: '#a1660d',
+        openButtonColor: '#544310',
+        previousButtonColor: '#8a4878',
+        saveButtonColor: '#37852b'
       },
       layoutVariables: {
         headerHeight: '150px',
