@@ -141,3 +141,24 @@
   min-height: 35px;
   font-size: 20px;
 }
+/* PULSE BUTTONS */
+.pulse {
+  user-select: none;
+  border-radius: 50%;
+  --hover: #000;
+  outline: none;
+  padding:0;
+  overflow:visible;
+}
+
+.pulse:hover {
+  -webkit-animation: pulser 1s;
+  animation: pulser 1s;
+  box-shadow: 0 0 0 1em rgba(255, 255, 255, 0);
+}
+
+@keyframes pulser {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
