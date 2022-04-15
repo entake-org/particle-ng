@@ -31,7 +31,7 @@ export class ParticleButtonComponent implements OnInit {
   width: string = 'auto';
 
   @Input()
-  hover: string = null as any;
+  hover: 'slide_up' | 'slide_down' | 'slide_right' | 'slide_left' | 'grow' | 'shrink' | 'lighten' | 'darken' = null as any;
 
   @Input()
   margin: string = '0 5px 0 5px';
