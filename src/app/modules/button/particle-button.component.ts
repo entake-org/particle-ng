@@ -18,17 +18,44 @@ export class ParticleButtonComponent implements OnInit {
   @Input()
   rounded: 'none' | 'less' | 'more' | 'pill' | 'circle' = 'none';
 
+  private _icon: string = null as any;
+
   @Input()
-  icon: string = null as any;
+  set icon(icon: string) {
+    this._icon = icon;
+    this.updateButtonState();
+  }
+
+  get icon(): string {
+    return this._icon;
+  }
 
   @Input()
   iconSide: 'left' | 'right' | 'only' = 'left';
 
-  @Input()
-  text: string = null as any;
+  private _text: string = null as any;
 
   @Input()
-  width: string = 'auto';
+  set text(text: string) {
+    this._text = text;
+    this.updateButtonState();
+  }
+
+  get text(): string {
+    return this._text;
+  }
+
+  private _width: string = 'auto';
+
+  @Input()
+  set width(width: string) {
+    this._width = width;
+    this.updateButtonState();
+  }
+
+  get width(): string {
+    return this._width;
+  }
 
   @Input()
   hover: 'slide_up' | 'slide_down' | 'slide_right' | 'slide_left' | 'grow' | 'shrink' | 'lighten' | 'darken' = null as any;
@@ -46,6 +73,10 @@ export class ParticleButtonComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.updateButtonState();
+  }
+
+  updateButtonState(): void {
     this._buttonState.next({
       icon: this.icon,
       border: this.getBorder(),
