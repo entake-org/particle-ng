@@ -17,7 +17,7 @@
 
 /* REGULAR ACCESS CLASS */
 .access{
-  outline: var(--bg-green-color) 1px solid !important;
+  outline: var(--bg-blue-color) 1px solid !important;
   outline-color: transparent !important;
   transition:all 0.2s ease-in-out;
 }
@@ -27,7 +27,18 @@
   box-shadow: inset 0 0 0 100px rgba(255,255,255,0.15);
 }
 .access:focus{
-  outline: var(--bg-red-color) 1px solid !important;
+  outline: var(--bg-blue-color) 1px solid !important;
   outline-offset: 2px;
-  box-shadow: inset 0 0 0 100px var(--bg-red-color);
+  box-shadow: inset 0 0 0 100px rgba(255,255,255,0.15);
+}
+
+
+a:link, a:visited {
+  cursor: pointer;
+  color: var(--bg-blue-color);
+  text-decoration: underline;
+}
+
+a:hover, a:active {
+  color: var(--bg-purple-color) 1px solid !important;
 }
