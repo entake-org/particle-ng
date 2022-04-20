@@ -16,7 +16,7 @@ export class ParticleButtonComponent implements OnInit {
   color: 'outline' | 'fill' = 'fill';
 
   @Input()
-  rounded: 'none' | 'less' | 'more' | 'pill' | 'circle' = 'none';
+  rounded: 'none' | 'less' | 'more' | 'pill' | 'circle' | 'square' = 'none';
 
   private _icon: string = null as any;
 
@@ -110,6 +110,8 @@ export class ParticleButtonComponent implements OnInit {
     if (this.size) {
       if (this.rounded === 'circle') {
         classList += 'circle_' + this.size;
+      } else if (this.rounded === 'square') {
+        classList += 'square_' + this.size;
       } else {
         classList += this.size;
       }

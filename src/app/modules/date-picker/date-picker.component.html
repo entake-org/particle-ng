@@ -11,6 +11,7 @@
            maxlength="10"
            [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"
            class="access particle_datepicker_input" />
+  
     <button (click)="openCalendar($event)"
             [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'bg_overlay brdr bg_blue_alt'"
             class="access btn particle_datepicker_button"

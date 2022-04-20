@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import { SlideoverComponent } from './slideover.component';
+import {ParticleButtonModule} from "../button/button.module";
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { SlideoverComponent } from './slideover.component';
     SlideoverComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ParticleButtonModule
   ]
 })
 export class ParticleSlideoverModule {

@@ -23,13 +23,11 @@
 }
 .access:hover{
   outline: var(--bg-blue-color) 1px solid !important;
-  outline-offset: 2px;
-  box-shadow: inset 0 0 0 100px rgba(255,255,255,0.15);
+  outline-offset: 1px;
 }
 .access:focus{
   outline: var(--bg-blue-color) 1px solid !important;
-  outline-offset: 2px;
-  box-shadow: inset 0 0 0 100px rgba(255,255,255,0.15);
+  outline-offset: 1px;
 }
 
 

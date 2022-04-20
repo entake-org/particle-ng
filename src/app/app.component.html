@@ -351,7 +351,6 @@
                     <particle-button
                       rounded="more"
                       type="ok"
-                      color="outline"
                       (click)="console.log('clicked')"
                     ></particle-button>
                     <particle-button
@@ -418,6 +417,7 @@
                       type="ok"
                       text="O"
                       size="xsm"
+                      hover="grow"
                       (click)="console.log('clicked')"
                     ></particle-button>
                     <particle-button
@@ -425,6 +425,7 @@
                       type="ok"
                       text="O"
                       size="sm"
+                      hover="grow"
                       (click)="console.log('clicked')"
                     ></particle-button>
                     <particle-button
@@ -433,6 +434,7 @@
                       iconSide="only"
                       icon="fas fa-paper-plane"
                       size="md"
+                      hover="grow"
                       (click)="console.log('clicked')"
                     ></particle-button>
                     <particle-button
@@ -440,6 +442,7 @@
                       type="ok"
                       text="O"
                       size="lg"
+                      hover="grow"
                       (click)="console.log('clicked')"
                     ></particle-button>
                     <particle-button
@@ -447,6 +450,7 @@
                       type="ok"
                       text="O"
                       size="xlg"
+                      hover="grow"
                       (click)="console.log('clicked')"
                     ></particle-button>
                     <particle-button
@@ -466,6 +470,7 @@
                       icon="fas fa-image fa-fw"
                       iconSide="only"
                       size="lg"
+                      hover="grow"
                       (click)="console.log('clicked')"
                     ></particle-button>
                     <particle-button
@@ -475,6 +480,7 @@
                       icon="fas fa-image fa-fw"
                       iconSide="only"
                       size="md"
+                      hover="grow"
                       (click)="console.log('clicked')"
                     ></particle-button>
                     <particle-button
@@ -484,6 +490,7 @@
                       icon="fas fa-image fa-fw"
                       iconSide="only"
                       size="sm"
+                      hover="grow"
                       (click)="console.log('clicked')"
                     ></particle-button>
                     <particle-button
@@ -493,10 +500,100 @@
                       icon="fas fa-image fa-fw"
                       iconSide="only"
                       size="xsm"
+                      hover="grow"
                       (click)="console.log('clicked')"
                     ></particle-button>
                   </div>
 
+                  <!-- SQUARES -->
+                  <div class="row center_center wrap pad_15">
+                    <particle-button
+                      rounded="square"
+                      type="ok"
+                      text="O"
+                      size="xsm"
+                      hover="shrink"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+                    <particle-button
+                      rounded="square"
+                      type="ok"
+                      text="O"
+                      size="sm"
+                      hover="shrink"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+                    <particle-button
+                      rounded="square"
+                      type="ok"
+                      text="O"
+                      size="md"
+                      hover="shrink"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+                    <particle-button
+                      rounded="square"
+                      type="ok"
+                      text="O"
+                      size="lg"
+                      hover="shrink"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+                    <particle-button
+                      rounded="square"
+                      type="ok"
+                      text="O"
+                      size="xlg"
+                      hover="shrink"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+                    <particle-button
+                      rounded="square"
+                      type="ok"
+                      text="O"
+                      size="xlg"
+                      hover="shrink"
+                      color="outline"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+                    <particle-button
+                      rounded="square"
+                      type="ok"
+                      text="O"
+                      size="lg"
+                      hover="shrink"
+                      color="outline"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+                    <particle-button
+                      rounded="square"
+                      type="ok"
+                      text="O"
+                      size="md"
+                      hover="shrink"
+                      color="outline"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+                    <particle-button
+                      rounded="square"
+                      type="ok"
+                      text="O"
+                      size="sm"
+                      hover="shrink"
+                      color="outline"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+                    <particle-button
+                      rounded="square"
+                      type="ok"
+                      text="O"
+                      size="xsm"
+                      hover="shrink"
+                      color="outline"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+
+                  </div>
                   <!-- HOVER STATES -->
                   <div class="row center_center wrap pad_15">
                     <particle-button
@@ -825,11 +922,17 @@
                   <div class="circle_20px bg_purple mar_right5"><i class="far fa-window-restore"></i></div>
                   Dialog
                 </div>
-                <div class="pad_15">
-                  <div class="form_label mar_bot5">Select the button below to preview the dialog</div>
-                  <button class="access btn sm bg_overlay brdr bg_purple_alt" (click)="obj2 = {}">
-                    Preview Dialog
-                  </button>
+                <div class="row_block pad_15">
+                  <div class="text_center text sm">Select the button below to preview the dialog  <br/>- FIX THE ROW COLUMN LAYOUT -</div>
+                  <div class="row center_center mar_top10">
+                    <particle-button
+                      type="ok"
+                      size="sm"
+                      text="Preview Dialog"
+                      (click)="obj2 = {}"
+                    ></particle-button>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -865,15 +968,21 @@
                 </div>
                 <div class="pad_15">
                   <div class="form_label mar_bot5">Select the button below to open the popover</div>
-                  <button class="access btn sm bg_overlay brdr bg_grey_alt" (click)="popover.toggle($event)">
-                    Preview Popover
-                  </button>
+                  <particle-button
+                    type="ok"
+                    size="sm"
+                    text="Preview Popover"
+                    (click)="popover.toggle($event)"
+                  ></particle-button>
                   <particle-popover width="500" #popover>
                     <div class="pad_10">
                       <div class="mar_bot10">This is some popover content</div>
-                      <button (click)="popover.toggle($event)" class="access btn bg_overlay brdr sm mar_5">
-                        <i class="fas fa-times mar_right5"></i>Close Popover
-                      </button>
+                      <particle-button
+                        type="cancel"
+                        size="sm"
+                        text="Close Popover"
+                        (click)="popover.toggle($event)"
+                      ></particle-button>
                     </div>
                   </particle-popover>
                 </div>
@@ -888,36 +997,57 @@
                 </div>
                 <div class="pad_15">
                   <div class="form_label mar_bot5">Test each slide over type below</div>
-                  <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="slideoverLeft.toggle()">
-                    Left
-                  </button>
-                  <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="slideoverRight.toggle()">
-                    Right
-                  </button>
-                  <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="slideoverTop.toggle()">
-                    Top
-                  </button>
-                  <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="slideoverBottom.toggle()">
-                    Bottom
-                  </button>
+                  <particle-button
+                    type="save"
+                    size="sm"
+                    iconSide="left"
+                    text="left"
+                    icon="fas fa-arrow-left"
+                    (click)="slideoverLeft.toggle()"
+                  ></particle-button>
+                  <particle-button
+                    type="ok"
+                    size="sm"
+                    iconSide="right"
+                    text="right"
+                    icon="fas fa-arrow-right"
+                    (click)="slideoverRight.toggle()"
+                  ></particle-button>
+                  <particle-button
+                    type="delete"
+                    size="sm"
+                    iconSide="left"
+                    text="top"
+                    icon="fas fa-arrow-up"
+                    (click)="slideoverTop.toggle()"
+                  ></particle-button>
+                  <particle-button
+                    type="next"
+                    size="sm"
+                    iconSide="right"
+                    text="bottom"
+                    icon="fas fa-arrow-down"
+                    (click)="slideoverBottom.toggle()"
+                  ></particle-button>
+
                   <particle-slideover position="left" bgClass="bg_green" [modal]="false" #slideoverLeft
                                       (opened)="slideoverRight.close();slideoverBottom.close();slideoverTop.close()">
-                    Left Side
+                    <div class="height100 center_center">Left Side</div>
                   </particle-slideover>
 
                   <particle-slideover position="right" bgClass="bg_blue" #slideoverRight
                                       (opened)="slideoverLeft.close();slideoverBottom.close();slideoverTop.close()">
-                    Right Side
+                    <div class="height100 center_center">Right Side</div>
                   </particle-slideover>
 
                   <particle-slideover position="top" bgClass="bg_red" [modal]="false" #slideoverTop
                                       (opened)="slideoverRight.close();slideoverBottom.close();slideoverLeft.close()">
-                    Up Top
+                    <div class="height100 center_center">Up Top</div>
                   </particle-slideover>
 
                   <particle-slideover position="bottom" bgClass="bg_orange" [modal]="false" #slideoverBottom
                                       (opened)="slideoverRight.close();slideoverLeft.close();slideoverTop.close()">
-                    Down Low
+                    <div class="height100 center_center">Down Low</div>
                   </particle-slideover>
                 </div>
               </div>
@@ -937,22 +1067,30 @@
                 <div class="pad_15">
                   <div class="form_label mar_bot5">Select a button below to preview a notification type</div>
                   <div class="row wrap v_center" style="margin:0 -5px;">
-                    <button (click)="addNotification('success')"
-                            class="access btn sm bg_overlay brdr bg_green_alt mar_5">
-                      Show Success
-                    </button>
-                    <button (click)="addNotification('warn')"
-                            class="access btn sm bg_overlay brdr bg_orange_alt mar_5">
-                      Show Warning
-                    </button>
-                    <button (click)="addNotification('error')"
-                            class="access btn sm bg_overlay brdr bg_red_alt mar_5">
-                      Show Error
-                    </button>
-                    <button (click)="addNotification('info')"
-                            class="access btn sm bg_overlay brdr bg_purple_alt mar_5">
-                      Show Info
-                    </button>
+                    <particle-button
+                      type="open"
+                      size="sm"
+                      text="Show Success"
+                      (click)="addNotification('success')"
+                    ></particle-button>
+                    <particle-button
+                      type="open"
+                      size="sm"
+                      text="Show Warning"
+                      (click)="addNotification('warn')"
+                    ></particle-button>
+                    <particle-button
+                      type="open"
+                      size="sm"
+                      text="Show Error"
+                      (click)="addNotification('error')"
+                    ></particle-button>
+                    <particle-button
+                      type="open"
+                      size="sm"
+                      text="Show Info"
+                      (click)="addNotification('info')"
+                    ></particle-button>
                   </div>
                 </div>
               </div>
@@ -968,22 +1106,34 @@
                 <div class="pad_15">
                   <div class="form_label mar_bot5">Hover a box below to see a tooltip</div>
                   <div class="row wrap v_center" style="margin:0 -5px;">
-                    <div class="bg_overlay_rev brdr text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
-                         particleTooltip="I'm left out" tooltipPosition="left">
-                      <i class="fas fa-arrow-left mar_right5"></i>Left Tooltip
-                    </div>
-                    <div class="bg_overlay_rev brdr text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
-                         particleTooltip="I'm always right" tooltipPosition="right">
-                      <i class="fas fa-arrow-right mar_right5"></i>Right Tooltip
-                    </div>
-                    <div class="bg_overlay_rev brdr text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
-                         particleTooltip="I'm above it" tooltipPosition="top">
-                      <i class="fas fa-arrow-up mar_right5"></i>Top Tooltip
-                    </div>
-                    <div class="bg_overlay_rev brdr text sm pad_3 pad_x10 brad_3 mar_5" style="user-select:none;"
-                         particleTooltip="I'm feeling down" tooltipPosition="bottom">
-                      <i class="fas fa-arrow-down mar_right5"></i>Bottom Tooltip
-                    </div>
+                    <particle-button
+                      type="ok"
+                      size="sm"
+                      text="Left Tooltip"
+                      particleTooltip="I'm left out" tooltipPosition="left"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+                    <particle-button
+                      type="ok"
+                      size="sm"
+                      text="Top Tooltip"
+                      particleTooltip="Lt. Topper Harley" tooltipPosition="top"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+                    <particle-button
+                      type="ok"
+                      size="sm"
+                      text="Bottom Tooltip"
+                      particleTooltip="Power" tooltipPosition="bottom"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
+                    <particle-button
+                      type="ok"
+                      size="sm"
+                      text="Right Tooltip"
+                      particleTooltip="Tell your sister, you were..." tooltipPosition="right"
+                      (click)="console.log('clicked')"
+                    ></particle-button>
                   </div>
                 </div>
               </div>
@@ -1372,65 +1522,101 @@
 
         </particle-layout-fullwidth-sidebar>
 
-<!--        &lt;!&ndash; DIALOG DEMONSTRATION &ndash;&gt;-->
-<!--        <particle-dialog title="This thing" [object]="obj" (closed)="obj = null;" #dialog>-->
-<!--          <div class="center_center" style="font-size: 24pt;height: 100%;text-align: center;">-->
-<!--            <div>Here's some text dawg</div>-->
-<!--          </div>-->
-<!--        </particle-dialog>-->
 
         <!-- DIALOG DEMONSTRATION -->
         <particle-dialog title="Parent Dialog" [object]="obj2" (closed)="obj2 = null" [allowClose]="true"
-                     width="300px" height="200px">
-          <div class="pad_10">
-          <div class="form_label mar_bot3">Basic Dropdown</div>
-            <particle-dropdown
-              [placeholder]="'Select an option...'"
-              [options]="[
-                             { value: 'red', label: 'Option A' },
-                             { value: 'green', label: 'Disabled Option', disabled: true },
-                             { value: 'blue', label: 'Option C' },
-                             {
-                               groupLabel: 'Option Group',
-                               options: [
-                                 { value: 'darkPurple', label: 'Group Option 1' },
-                                 { value: 'purple', label: 'Group Option $' },
-                                 { value: 'lightPurple', label: 'Group Option X' }
-                               ]
-                             }
-                           ]"
-              [disabled]="false">
-            </particle-dropdown>
-            <button class="access btn md bg_overlay brdr bg_blue_alt mar_10" (click)="obj3 = {}">Open Child</button>
+                     width="400px" height="200px">
+          <div class="row_block width100 mar_10">
+            <div class="text sm text_center">You can open child dialogs from dialogs!</div>
+            <div class="row center_center">
+              <div class="col mar_15">
+                <particle-dropdown
+                  [placeholder]="'Select an option...'"
+                  [options]="[
+                                 { value: 'red', label: 'Option A' },
+                                 { value: 'green', label: 'Disabled Option', disabled: true },
+                                 { value: 'blue', label: 'Option C' },
+                                 {
+                                   groupLabel: 'Option Group',
+                                   options: [
+                                     { value: 'darkPurple', label: 'Group Option 1' },
+                                     { value: 'purple', label: 'Group Option $' },
+                                     { value: 'lightPurple', label: 'Group Option X' }
+                                   ]
+                                 }
+                               ]"
+                  [disabled]="false">
+                </particle-dropdown>
+              </div>
+            </div>
+            <div class="row center_center mar_top10">
+              <particle-button
+                type="open"
+                size="sm"
+                text="Open Child"
+                (click)="obj3 = {}"
+              ></particle-button>
+              <particle-button
+                type="close"
+                text="Close This"
+                size="sm"
+                (click)="obj2 = null"
+              ></particle-button>
+            </div>
           </div>
+
+
+
+
+
           <!-- CHILD DIALOG -->
           <particle-dialog title="Child of Parent Dialog" [object]="obj3" (closed)="obj3 = null"
                        [allowClose]="false"
-                       width="350px" height="250px">
-            <div class="pad_10">
-              <div class="form_label mar_bot3">Basic Date Picker</div>
-              <particle-date-picker
-                [disabled]="false"
-                [inputClassList]="'form_input content_color'"
-                [calendarButtonClassList]="'bg_overlay brdr border_left brad_0'">
-              </particle-date-picker>
-              <button class="access btn md bg_overlay brdr bg_blue_alt mar_10" (click)="obj4 = {}">Open Child</button>
-              <button class="access btn md bg_overlay brdr bg_blue_alt mar_10" (click)="obj3 = null">Close</button>
+                       width="300px" height="300px">
+            <div class="row_block width100 mar_10">
+              <div class="text sm text_center">You can open child dialogs from CHILD dialogs!</div>
+                <div class="col mar_15">
+                  <particle-date-picker
+                    [disabled]="false"
+                    [inputClassList]="'form_input content_color'"
+                    [calendarButtonClassList]="'bg_overlay brdr border_left brad_0'">
+                  </particle-date-picker>
+                </div>
+                <div class="row center_center">
+                  <particle-button
+                    type="open"
+                    size="sm"
+                    (click)="obj4 = {}"
+                  ></particle-button>
+                  <particle-button
+                    type="close"
+                    size="sm"
+                    (click)="obj3 = null"
+                  ></particle-button>
+                </div>
             </div>
             <!-- SECOND CHILD DIALOG -->
             <particle-dialog title="Child of Child of Parent Dialog" [object]="obj4" (closed)="obj4 = null"
-                         width="400px" height="300px">
+                         width="450px" height="200px">
               <div class="pad_15">
                 <div class="form_label mar_bot5">Select the button below to open the popover</div>
-                <button class="access btn sm bg_overlay brdr bg_grey_alt" (click)="dialogPopover.toggle($event)">
-                  Preview Popover
-                </button>
+                <particle-button
+                  type="close"
+                  size="sm"
+                  text="View Some More"
+                  (click)="dialogPopover.toggle($event)"
+                ></particle-button>
+
                 <particle-popover width="500" #dialogPopover>
-                  <div class="pad_10">
-                    <div class="mar_bot10">This is some popover content</div>
-                    <button (click)="dialogPopover.toggle($event)" class="access btn bg_overlay brdr sm mar_5">
-                      <i class="fas fa-times mar_right5"></i>Close Popover
-                    </button>
+                  <div class="row_center_center pad_10">
+                    <div class="text sm mar_bot10">This is some popover content</div>
+
+                    <particle-button
+                      type="close"
+                      size="sm"
+                      text="close popover"
+                      (click)="dialogPopover.toggle($event)"
+                    ></particle-button>
                   </div>
                 </particle-popover>
               </div>

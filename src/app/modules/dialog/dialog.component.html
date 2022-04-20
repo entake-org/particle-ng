@@ -8,26 +8,29 @@
          *ngIf="effectiveWidth$ | async as effectiveWidth"
          [ngStyle]="{'width': effectiveWidth, 'height': height}">
       <!-- dialog header -->
-      <div *ngIf="showTitle" class="col" [ngClass]="titleClass">
-        <div class="col particle_dialog_accent" [ngClass]="titleClass + '_light_3'"></div>
-        <div class="col size_1 v_center" style="padding:5px 5px 5px 10px;">
+      <div *ngIf="showTitle" class="col content_color">
+        <div class="row bg_overlay_rev v_center pad_5 space_between">
           <div class="text lg bold paragraph">
-            {{title}}
+              {{title}}
+          </div>
+          <div>
+            <ng-container *ngIf="allowClose">
+              <particle-button
+                type="standard"
+                size="sm"
+                rounded="circle"
+                iconSide="only"
+                icon="fas fa-times"
+                [attr.aria-label]="'Close ' + title + ' Dialog'"
+                (click)="close()"
+              ></particle-button>
+            </ng-container>
           </div>
         </div>
-        <div class="col" style="padding:5px 10px 5px 5px;">
-          <ng-container *ngIf="allowClose">
-            <button #closeButton
-                    (click)="close()"
-                    class="access btn_pulse sm"
-                    [attr.aria-label]="'Close ' + title + ' Dialog'">
-              <i class="fas fa-times"></i>
-            </button>
-          </ng-container>
-        </div>
+
       </div>
       <!-- dialog container -->
-      <div class="col size_1 scroll_yauto" [ngClass]="bodyClass" style="-ms-flex: 1 1 auto;">
+      <div class="col size_1 scroll_yauto center_center" [ngClass]="bodyClass">
         <div class="row_block width100 height100">
           <!-- content -->
           <ng-content></ng-content>

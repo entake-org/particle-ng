@@ -269,10 +269,12 @@
                 [emptyText]="'We couldn\'t find anything'"
                 [emptySubtext]="'Please try modifying your search criteria'">
               </particle-endpoint-state>
-              <button (click)="clearSearch()"
-                      class="access btn sm overlay mar_top15">
-                Clear Search
-              </button>
+              <particle-button
+                type="cancel"
+                margin="10px"
+                text="Clear Search Results"
+                (click)="clearSearch()"
+              ></particle-button>
             </div>
           </ng-template>
         </div>

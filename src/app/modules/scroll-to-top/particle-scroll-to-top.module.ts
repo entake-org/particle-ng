@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScrollToTopComponent } from './scroll-to-top.component';
+import {ParticleButtonModule} from "../button/button.module";
 
 
 
@@ -11,8 +12,9 @@ import { ScrollToTopComponent } from './scroll-to-top.component';
   exports: [
     ScrollToTopComponent
   ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule,
+        ParticleButtonModule
+    ]
 })
 export class ParticleScrollToTopModule { }

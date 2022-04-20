@@ -9,10 +9,14 @@
   [style.top]="position === 'top' && !slideoverOpen ? '-' + height : null"
 >
   <div class="push_close_bar">
-    <button (click)="close()" class="data_hide_button access" tabindex="0"
-            [attr.aria-label]="'Close ' + position + ' Slide Over'">
-      <i class="fas fa-times"></i>
-    </button>
+    <particle-button
+      size="sm"
+      iconSide="only"
+      icon="fas fa-times"
+      rounded="circle"
+      [attr.aria-label]="'Close ' + position + ' Slide Over'"
+      (click)="close()"
+    ></particle-button>
   </div>
   <ng-content></ng-content>
 </div>
