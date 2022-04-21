@@ -1526,7 +1526,7 @@
         <!-- DIALOG DEMONSTRATION -->
         <particle-dialog title="Parent Dialog" [object]="obj2" (closed)="obj2 = null" [allowClose]="true"
                      width="400px" height="200px">
-          <div class="row_block width100 mar_10">
+          <div class="row_block width100">
             <div class="text sm text_center">You can open child dialogs from dialogs!</div>
             <div class="row center_center">
               <div class="col mar_15">
@@ -1573,7 +1573,7 @@
           <particle-dialog title="Child of Parent Dialog" [object]="obj3" (closed)="obj3 = null"
                        [allowClose]="false"
                        width="300px" height="300px">
-            <div class="row_block width100 mar_10">
+            <div class="row_block width100">
               <div class="text sm text_center">You can open child dialogs from CHILD dialogs!</div>
                 <div class="col mar_15">
                   <particle-date-picker

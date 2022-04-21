@@ -7,6 +7,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { DatePickerComponent } from './date-picker.component';
 import { OrdinalNumberPipe } from '../ordinal-number-pipe/ordinal-number.pipe';
 import { ParticleOrdinalNumberPipeModule } from '../ordinal-number-pipe/ordinal-number-pipe.module';
+import {ParticleButtonModule} from "../button/button.module";
 
 @NgModule({
   declarations: [DatePickerComponent, CalendarComponent],
@@ -15,7 +16,8 @@ import { ParticleOrdinalNumberPipeModule } from '../ordinal-number-pipe/ordinal-
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
-    ParticleOrdinalNumberPipeModule
+    ParticleOrdinalNumberPipeModule,
+    ParticleButtonModule
   ],
   exports: [DatePickerComponent, CalendarComponent],
   providers: [OrdinalNumberPipe]
