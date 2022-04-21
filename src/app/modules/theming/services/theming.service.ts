@@ -261,6 +261,16 @@ export class ThemingService {
       }
     }
 
+    if (theme.accessibility && theme.accessibility.enabled) {
+      const outlineColor = theme.accessibility.highlightColor.startsWith('#') ? theme.accessibility.highlightColor : '#' + theme.accessibility.highlightColor;
+      style.appendChild(document.createTextNode(`.access{outline: ${outlineColor} ${theme.accessibility.highlightThickness} solid !important;outline-color: transparent !important;transition:all 0.3s ease-in-out;}`));
+      style.appendChild(document.createTextNode(`.access:focus{outline: ${outlineColor} ${theme.accessibility.highlightThickness} solid !important;outline-offset: ${theme.accessibility.highlightOffset};}`));
+
+      if (theme.accessibility.hoverEnabled) {
+        style.appendChild(document.createTextNode(`.access:hover{outline: ${outlineColor} ${theme.accessibility.highlightThickness} solid !important;outline-offset: ${theme.accessibility.highlightOffset};}`));
+      }
+    }
+
     // Render the button color styles
     if (theme.buttonColorPalette) {
       for (const prop of Object.keys(theme.buttonColorPalette)) {
@@ -276,7 +286,7 @@ export class ThemingService {
     const head = document.head || document.getElementsByTagName('head')[0];
 
     for (const child of <any>head.childNodes) {
-      if ((child as Element).innerHTML && (child as Element).innerHTML.startsWith('.menu_color')) {
+      if ((child as Element).innerHTML && (child as Element).innerHTML.startsWith('.bg_red')) {
         head.removeChild(child);
         break;
       }

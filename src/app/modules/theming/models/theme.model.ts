@@ -7,6 +7,7 @@ export interface Theme {
   colorPalette: ThemeColorPalette;
   buttonColorPalette: ThemeButtonColorPalette;
   fonts: Array<ThemeFont>;
+  accessibility: ThemeAccessibility;
 }
 
 export interface ThemeLayoutColors {
@@ -58,4 +59,12 @@ export interface ThemeFont {
   source?: 'google' | 'adobe';
   isDefault?: boolean;
   isSerif?: boolean;
+}
+
+export interface ThemeAccessibility {
+  enabled: boolean;
+  highlightColor: string;
+  highlightThickness: string;
+  highlightOffset: string;
+  hoverEnabled: boolean;
 }

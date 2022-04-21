@@ -15,22 +15,6 @@
   color: var(--content-color);
 }
 
-/* REGULAR ACCESS CLASS */
-.access{
-  outline: var(--bg-blue-color) 2px solid !important;
-  outline-color: transparent !important;
-  transition:all 0.3s ease-in-out;
-}
-.access:hover{
-  outline: var(--bg-blue-color) 2px solid !important;
-  outline-offset: 1px;
-}
-.access:focus{
-  outline: var(--bg-blue-color) 2px solid !important;
-  outline-offset: 1px;
-}
-
-
 a:link, a:visited {
   cursor: pointer;
   color: var(--bg-blue-color);

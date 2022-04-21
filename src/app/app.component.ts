@@ -153,7 +153,7 @@ export class AppComponent implements OnInit {
         ],
       },
       buttonColorPalette: {
-        cancelButtonColor: '#616161',
+        cancelButtonColor: '#7e7e7e',
         closeButtonColor: '#444141',
         deleteButtonColor: '#944646',
         okButtonColor: '#0b799e',
@@ -169,7 +169,14 @@ export class AppComponent implements OnInit {
       fonts: [
         {name: 'Roboto'},
         {name: 'Montserrat', isDefault: true}
-      ]
+      ],
+      accessibility: {
+        enabled: true,
+        hoverEnabled: false,
+        highlightColor: '#0b799e',
+        highlightOffset: '1px',
+        highlightThickness: '2px'
+      }
     } as Theme,
     {
       themeId: 'c12fd008-88eb-49ec-bcfe-bb4cfced56a5',
@@ -219,7 +226,14 @@ export class AppComponent implements OnInit {
       fonts: [
         {name: 'acumin-pro', id: 'gna4twy', source: 'adobe', isSerif: false, isDefault: true},
         {name: 'Open Sans'}
-      ]
+      ],
+      accessibility: {
+        enabled: true,
+        hoverEnabled: true,
+        highlightColor: '#0b799e',
+        highlightOffset: '1px',
+        highlightThickness: '2px'
+      }
     } as Theme
   ];
 
