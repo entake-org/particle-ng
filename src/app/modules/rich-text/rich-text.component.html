@@ -6,7 +6,7 @@
       class="btn access pad_5 mar_right5 mar_left5"
       particleTooltip="Heading 1" tooltipPosition="top"
       (click)="editor.chain().focus().toggleHeading({ level: 1 }).run()"
-      [ngClass]="{ 'bg_blue': this.editor.isActive('heading', { level: 1 }) }"
+      [ngClass]="{ 'ok_button_color': this.editor.isActive('heading', { level: 1 }) }"
     >
       <i class="fas fa-header fa-fw"></i>1
     </button>
@@ -16,7 +16,7 @@
       class="btn access pad_5 mar_right5"
       particleTooltip="Heading 2" tooltipPosition="top"
       (click)="editor.chain().focus().toggleHeading({ level: 2 }).run()"
-      [ngClass]="{ 'bg_blue': this.editor.isActive('heading', { level: 2 }) }"
+      [ngClass]="{ 'ok_button_color': this.editor.isActive('heading', { level: 2 }) }"
     >
       <i class="fas fa-header fa-fw"></i>2
     </button>
@@ -28,7 +28,7 @@
       class="btn access pad_5 mar_right5 mar_left5"
       particleTooltip="Bold" tooltipPosition="top"
       (click)="editor.chain().focus().toggleBold().run()"
-      [ngClass]="{ 'bg_blue': this.editor.isActive('bold') }"
+      [ngClass]="{ 'ok_button_color': this.editor.isActive('bold') }"
     >
       <i class="fas fa-bold fa-fw"></i>
     </button>
@@ -38,7 +38,7 @@
       class="btn access pad_5 mar_right5"
       particleTooltip="Italic" tooltipPosition="top"
       (click)="editor.chain().focus().toggleItalic().run()"
-      [ngClass]="{ 'bg_blue': this.editor.isActive('italic') }"
+      [ngClass]="{ 'ok_button_color': this.editor.isActive('italic') }"
     >
       <i class="fas fa-italic fa-fw"></i>
     </button>
@@ -48,7 +48,7 @@
       class="btn access pad_5 mar_right5"
       particleTooltip="Strike" tooltipPosition="top"
       (click)="editor.chain().focus().toggleStrike().run()"
-      [ngClass]="{ 'bg_blue': this.editor.isActive('strike') }"
+      [ngClass]="{ 'ok_button_color': this.editor.isActive('strike') }"
     >
       <i class="fas fa-strikethrough fa-fw"></i>
     </button>
@@ -60,7 +60,7 @@
       class="btn access pad_5 mar_right5 mar_left5"
       particleTooltip="Bulleted List" tooltipPosition="top"
       (click)="editor.chain().focus().toggleBulletList().run()"
-      [ngClass]="{ 'bg_blue': this.editor.isActive('bullet-list') }"
+      [ngClass]="{ 'ok_button_color': this.editor.isActive('bullet-list') }"
     >
       <i class="fas fa-list fa-fw"></i>
     </button>
@@ -70,7 +70,7 @@
       class="btn access pad_5 mar_right5"
       particleTooltip="Ordered List" tooltipPosition="top"
       (click)="editor.chain().focus().toggleOrderedList().run()"
-      [ngClass]="{ 'bg_blue': this.editor.isActive('ordered-list') }"
+      [ngClass]="{ 'ok_button_color': this.editor.isActive('ordered-list') }"
     >
       <i class="fas fa-list-ol fa-fw"></i>
     </button>
@@ -82,7 +82,7 @@
     class="btn access pad_5 mar_right5 mar_left5"
     particleTooltip="Left Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('left').run()"
-    [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'left' }) }"
+    [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'left' }) }"
   >
     <i class="fas fa-align-left fa-fw"></i>
   </button>
@@ -92,7 +92,7 @@
     class="btn access pad_5 mar_right5"
     particleTooltip="Center Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('center').run()"
-    [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'center' }) }"
+    [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'center' }) }"
   >
     <i class="fas fa-align-center fa-fw"></i>
   </button>
@@ -102,7 +102,7 @@
     class="btn access pad_5 mar_right5"
     particleTooltip="Right Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('right').run()"
-    [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'right' }) }"
+    [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'right' }) }"
   >
     <i class="fas fa-align-right fa-fw"></i>
   </button>
@@ -112,7 +112,7 @@
     class="btn access pad_5 mar_right5"
     particleTooltip="Justify Align" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('justify').run()"
-    [ngClass]="{ 'bg_blue': this.editor.isActive({ textAlign: 'justify' }) }"
+    [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'justify' }) }"
   >
     <i class="fas fa-align-justify fa-fw"></i>
   </button>
@@ -124,7 +124,7 @@
             class="btn access pad_5 mar_right5 mar_left5"
             particleTooltip="Set Link" tooltipPosition="top"
             (click)="openLinkDialog()"
-            [ngClass]="{ 'bg_blue': this.editor.isActive('link') }"
+            [ngClass]="{ 'ok_button_color': this.editor.isActive('link') }"
     >
         <i class="fas fa-link fa-fw"></i>
     </button>
@@ -172,7 +172,20 @@
   </div>
 
   <div class="center_center">
-    <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="changeEditorLink('cancel')">Cancel</button>
-    <button class="access btn sm bg_overlay brdr bg_grey_alt mar_5" (click)="changeEditorLink('save')">Update</button>
+    <particle-button
+      type="cancel"
+      hover="darken"
+      rounded="less"
+      icon="fas fa-times"
+      (click)="changeEditorLink('cancel')"
+    ></particle-button>
+    <particle-button
+      type="ok"
+      hover="darken"
+      rounded="less"
+      text="Update"
+      icon="fas fa-check"
+      (click)="changeEditorLink('save')"
+    ></particle-button>
   </div>
 </particle-dialog>

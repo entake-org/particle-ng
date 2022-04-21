@@ -8,6 +8,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {RenderRichTextComponent} from "./render-rich-text.component";
 import {DOMPURIFY_CONFIG, NgDompurifyModule} from "@tinkoff/ng-dompurify";
 import {ParticleDialogModule} from "../dialog/dialog.module";
+import {ParticleButtonModule} from "../button/button.module";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {ParticleDialogModule} from "../dialog/dialog.module";
     BrowserModule,
     NgDompurifyModule,
     ParticleDialogModule,
+    ParticleButtonModule,
   ],
   providers: [
     {
