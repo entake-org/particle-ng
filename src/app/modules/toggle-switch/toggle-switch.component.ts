@@ -16,10 +16,10 @@ export class ToggleSwitchComponent implements ControlValueAccessor {
 
   @Input()
   options: ToggleOptions = {
-    affirmativeColorClass: 'bg_green',
+    affirmativeColorClass: 'ok_button_color',
     affirmativeLabel: 'On',
     affirmativeIcon: 'fas fa-check',
-    negativeColorClass: 'bg_grey',
+    negativeColorClass: 'cancel_button_color',
     negativeLabel: 'Off',
     negativeIcon: 'fas fa-times',
     accessibilityLabel: 'Toggle Switch'

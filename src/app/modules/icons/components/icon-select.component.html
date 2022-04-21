@@ -188,12 +188,12 @@
                class="col v_center mar_10">
             <button *ngIf="canPaginatePrevious$ | async else disabledPreviousButton"
                     (click)="paginatePrevious()"
-                    class="access btn square_24px bg_overlay brdr ok_button_color_alt"
+                    class="access btn square_24px bg_overlay brdr ok_button_color"
                     aria-label="Previous Page">
               <span class="icon slide_left"><i class="fas fa-arrow-left"></i></span>
             </button>
             <ng-template #disabledPreviousButton>
-              <button disabled class="access btn square_24px bg_overlay brdr ok_button_color_alt"
+              <button disabled class="access btn square_24px bg_overlay brdr ok_button_color"
                       aria-label="Previous Page">
                 <span class="icon slide_left"><i class="fas fa-arrow-left"></i></span>
               </button>
@@ -205,12 +205,12 @@
             </div>
             <button *ngIf="canPaginateNext$ | async else disabledNextButton"
                     (click)="paginateNext()"
-                    class="access btn square_24px bg_overlay brdr ok_button_color_alt"
+                    class="access btn square_24px bg_overlay brdr ok_button_color"
                     aria-label="Next Page">
               <span class="icon slide_right"><i class="fas fa-arrow-right"></i></span>
             </button>
             <ng-template #disabledNextButton>
-              <button disabled class="access btn square_24px bg_overlay brdr ok_button_color_alt"
+              <button disabled class="access btn square_24px bg_overlay brdr ok_button_color"
                       aria-label="Next Page">
                 <span class="icon slide_right"><i class="fas fa-arrow-right"></i></span>
               </button>
@@ -231,13 +231,13 @@
             </button>
             <button *ngIf="canSearch$ | async else disabledSearchButton"
                     (click)="_searchClick.next(iconSearchInput.value); _activePage.next(0)"
-                    class="access btn square_28px bg_overlay brdr ok_button_color_alt brad_3 wis_search_btn"
+                    class="access btn square_28px bg_overlay brdr ok_button_color brad_3 wis_search_btn"
                     aria-label="Submit Search" type="submit">
               <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
             </button>
             <ng-template #disabledSearchButton>
               <button disabled
-                      class="access btn square_28px bg_overlay brdr ok_button_color_alt brad_3 wis_search_btn"
+                      class="access btn square_28px bg_overlay brdr ok_button_color brad_3 wis_search_btn"
                       aria-label="Submit Search" type="submit">
                 <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
               </button>
@@ -289,7 +289,7 @@
           </div>
           <div class="col v_center mar_10">
             <button (click)="handleIconSelectConfirm()"
-                    class="access btn md icon_right bg_overlay brdr bg_green_alt">
+                    class="access btn md icon_right bg_overlay brdr save_button_color">
               Confirm<span class="icon grow"><i class="fas fa-check"></i></span>
             </button>
           </div>

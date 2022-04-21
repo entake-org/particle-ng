@@ -29,27 +29,27 @@
       </div>
       <!-- previous button -->
       <ng-container *ngIf="activePage !== 0 else disabledPrevious">
-        <button class="access btn circle_20px bg_overlay brdr bg_grey_alt" style="margin:1px 3px;" aria-label="Previous Page"
+        <button class="access btn circle_20px bg_overlay brdr cancel_button_color" style="margin:1px 3px;" aria-label="Previous Page"
                 (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
           <span class="icon slide_left"><i class="fas fa-angle-left"></i></span>
         </button>
       </ng-container>
       <!-- previous button disabled -->
       <ng-template #disabledPrevious>
-        <button class="circle_20px bg_overlay brdr bg_grey_alt btn" disabled style="margin:1px 3px;" aria-label="Disabled Previous">
+        <button class="circle_20px bg_overlay brdr cancel_button_color btn" disabled style="margin:1px 3px;" aria-label="Disabled Previous">
           <i class="fas fa-angle-left"></i>
         </button>
       </ng-template>
       <!-- next button -->
       <ng-container *ngIf="activePage !== numberOfPages - 1 else disabledNext">
-        <button class="access btn circle_20px bg_overlay brdr bg_grey_alt" style="margin:1px 3px;" aria-label="Next Page"
+        <button class="access btn circle_20px bg_overlay brdr cancel_button_color" style="margin:1px 3px;" aria-label="Next Page"
                 (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
           <span class="icon slide_right"><i class="fas fa-angle-right"></i></span>
         </button>
       </ng-container>
       <!-- next button disabled -->
       <ng-template #disabledNext>
-        <button class="circle_20px bg_overlay brdr bg_grey_alt btn" disabled style="margin:1px 3px;">
+        <button class="circle_20px bg_overlay brdr cancel_button_color btn" disabled style="margin:1px 3px;">
           <i class="fas fa-angle-right"></i>
         </button>
       </ng-template>
@@ -73,19 +73,19 @@
   <div class="col center_center mar_3">
     <!-- first -->
     <button *ngIf="activePage !== 0 else disabledFirst"
-            class="access btn circle_20px bg_overlay brdr bg_grey_alt hide_element" style="margin:1px 0 1px 3px;"
+            class="access btn circle_20px bg_overlay brdr cancel_button_color hide_element" style="margin:1px 0 1px 3px;"
             aria-label="First Page" (click)="goToFirst()">
       <span class="icon slide_left"><i class="fas fa-angle-double-left"></i></span>
     </button>
     <!-- first button disabled -->
     <ng-template #disabledFirst>
-      <button class="circle_20px bg_overlay brdr bg_grey_alt btn" disabled style="margin:1px 0 1px 3px;" aria-label="Disabled First Page">
+      <button class="circle_20px bg_overlay brdr cancel_button_color btn" disabled style="margin:1px 0 1px 3px;" aria-label="Disabled First Page">
         <i class="fas fa-angle-double-left"></i>
       </button>
     </ng-template>
     <!-- previous -->
     <ng-container *ngIf="activePage !== 0 else disabledPrevious">
-      <button class="access btn circle_20px bg_overlay brdr bg_grey_alt" style="margin:1px 3px;"
+      <button class="access btn circle_20px bg_overlay brdr cancel_button_color" style="margin:1px 3px;"
               aria-label="Previous Page"
               (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
         <span class="icon slide_left"><i class="fas fa-angle-left"></i></span>
@@ -93,7 +93,7 @@
     </ng-container>
     <!-- previous button disabled -->
     <ng-template #disabledPrevious>
-      <button class="circle_20px bg_overlay brdr bg_grey_alt btn" disabled style="margin:1px 3px;" aria-label="Disabled Previous">
+      <button class="circle_20px bg_overlay brdr cancel_button_color btn" disabled style="margin:1px 3px;" aria-label="Disabled Previous">
         <i class="fas fa-angle-left"></i>
       </button>
     </ng-template>
@@ -151,7 +151,7 @@
     </div>
     <!-- next -->
     <ng-container *ngIf="activePage !== numberOfPages - 1 else disabledNext">
-      <button class="access btn circle_20px bg_overlay brdr bg_grey_alt" style="margin:1px 3px;"
+      <button class="access btn circle_20px bg_overlay brdr cancel_button_color" style="margin:1px 3px;"
               aria-label="Next Page"
               (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
         <span class="icon slide_right"><i class="fas fa-angle-right"></i></span>
@@ -159,19 +159,19 @@
     </ng-container>
     <!-- next button disabled -->
     <ng-template #disabledNext>
-      <button class="circle_20px bg_overlay brdr bg_grey_alt btn" disabled style="margin:1px 3px;" aria-label="Disabled Next">
+      <button class="circle_20px bg_overlay brdr cancel_button_color btn" disabled style="margin:1px 3px;" aria-label="Disabled Next">
         <i class="fas fa-angle-right"></i>
       </button>
     </ng-template>
     <!-- last -->
     <button *ngIf="activePage !== numberOfPages - 1 else disabledLast"
-            class="access btn circle_20px bg_overlay brdr bg_grey_alt hide_element" style="margin:1px 3px 1px 0;"
+            class="access btn circle_20px bg_overlay brdr cancel_button_color hide_element" style="margin:1px 3px 1px 0;"
             aria-label="Last Page" (click)="goToLast()">
       <span class="icon slide_right"><i class="fas fa-angle-double-right"></i></span>
     </button>
     <!-- last button disabled -->
     <ng-template #disabledLast>
-      <button class="circle_20px bg_overlay brdr bg_grey_alt btn" disabled style="margin:1px 3px 1px 0;" aria-label="Disabled Last Page">
+      <button class="circle_20px bg_overlay brdr cancel_button_color btn" disabled style="margin:1px 3px 1px 0;" aria-label="Disabled Last Page">
         <i class="fas fa-angle-double-right"></i>
       </button>
     </ng-template>
