@@ -17,16 +17,16 @@
 
 /* REGULAR ACCESS CLASS */
 .access{
-  outline: var(--bg-blue-color) 1px solid !important;
+  outline: var(--bg-blue-color) 2px solid !important;
   outline-color: transparent !important;
-  transition:all 0.2s ease-in-out;
+  transition:all 0.3s ease-in-out;
 }
 .access:hover{
-  outline: var(--bg-blue-color) 1px solid !important;
+  outline: var(--bg-blue-color) 2px solid !important;
   outline-offset: 1px;
 }
 .access:focus{
-  outline: var(--bg-blue-color) 1px solid !important;
+  outline: var(--bg-blue-color) 2px solid !important;
   outline-offset: 1px;
 }
 
