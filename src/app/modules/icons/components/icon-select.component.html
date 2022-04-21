@@ -47,7 +47,7 @@
                       aria-label="Show All Icons">
                 <div class="v_center">
                   <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                    <div *ngIf="filter.type === 'all' && filter.style === 'all'" class="circle_8px bg_blue"></div>
+                    <div *ngIf="filter.type === 'all' && filter.style === 'all'" class="circle_8px ok_button_color"></div>
                   </div>
                   <div class="text md">See All Icons</div>
                 </div>
@@ -65,7 +65,7 @@
                         aria-label="Filter by Font Awesome Icons">
                   <div class="v_center">
                     <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                      <div *ngIf="filter.type === 'fontawesome' && filter.style === 'all'" class="circle_8px bg_blue"></div>
+                      <div *ngIf="filter.type === 'fontawesome' && filter.style === 'all'" class="circle_8px ok_button_color"></div>
                     </div>
                     <div class="text md">All</div>
                   </div>
@@ -79,7 +79,7 @@
                         aria-label="Filter by Solid Font Awesome Icons">
                   <div class="v_center">
                     <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                      <div *ngIf="filter.type === 'fontawesome' &&  filter.style === 'solid'" class="circle_8px bg_blue"></div>
+                      <div *ngIf="filter.type === 'fontawesome' &&  filter.style === 'solid'" class="circle_8px ok_button_color"></div>
                     </div>
                     <div class="text md">Solid</div>
                   </div>
@@ -93,7 +93,7 @@
                         aria-label="Filter by Regular Font Awesome Icons">
                   <div class="v_center">
                     <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                      <div *ngIf="filter.type === 'fontawesome' &&  filter.style === 'regular'" class="circle_8px bg_blue"></div>
+                      <div *ngIf="filter.type === 'fontawesome' &&  filter.style === 'regular'" class="circle_8px ok_button_color"></div>
                     </div>
                     <div class="text md">Regular</div>
                   </div>
@@ -107,7 +107,7 @@
                         aria-label="Filter by Brand Font Awesome Icons">
                   <div class="v_center">
                     <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                      <div *ngIf="filter.type === 'fontawesome' &&  filter.style === 'brands'" class="circle_8px bg_blue"></div>
+                      <div *ngIf="filter.type === 'fontawesome' &&  filter.style === 'brands'" class="circle_8px ok_button_color"></div>
                     </div>
                     <div class="text md">Brands</div>
                   </div>
@@ -126,7 +126,7 @@
                         aria-label="Filter by All Custom Icons">
                   <div class="v_center">
                     <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                      <div *ngIf="filter.type === 'particle' && filter.style === 'all'" class="circle_8px bg_blue"></div>
+                      <div *ngIf="filter.type === 'particle' && filter.style === 'all'" class="circle_8px ok_button_color"></div>
                     </div>
                     <div class="text md">All</div>
                   </div>
@@ -140,7 +140,7 @@
                         aria-label="Filter by Solid Custom Icons">
                   <div class="v_center">
                     <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                      <div *ngIf="filter.type === 'particle' && filter.style === 'solid'" class="circle_8px bg_blue"></div>
+                      <div *ngIf="filter.type === 'particle' && filter.style === 'solid'" class="circle_8px ok_button_color"></div>
                     </div>
                     <div class="text md">Solid</div>
                   </div>
@@ -154,7 +154,7 @@
                         aria-label="Filter by Regular Custom Icons">
                   <div class="v_center">
                     <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                      <div *ngIf="filter.type === 'particle' && filter.style === 'regular'" class="circle_8px bg_blue"></div>
+                      <div *ngIf="filter.type === 'particle' && filter.style === 'regular'" class="circle_8px ok_button_color"></div>
                     </div>
                     <div class="text md">Regular</div>
                   </div>
@@ -168,7 +168,7 @@
                         aria-label="Filter by Light Custom Icons">
                   <div class="v_center">
                     <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                      <div *ngIf="filter.type === 'particle' && filter.style === 'light'" class="circle_8px bg_blue"></div>
+                      <div *ngIf="filter.type === 'particle' && filter.style === 'light'" class="circle_8px ok_button_color"></div>
                     </div>
                     <div class="text md">Light</div>
                   </div>
@@ -188,12 +188,12 @@
                class="col v_center mar_10">
             <button *ngIf="canPaginatePrevious$ | async else disabledPreviousButton"
                     (click)="paginatePrevious()"
-                    class="access btn square_24px bg_overlay brdr bg_blue_alt"
+                    class="access btn square_24px bg_overlay brdr ok_button_color_alt"
                     aria-label="Previous Page">
               <span class="icon slide_left"><i class="fas fa-arrow-left"></i></span>
             </button>
             <ng-template #disabledPreviousButton>
-              <button disabled class="access btn square_24px bg_overlay brdr bg_blue_alt"
+              <button disabled class="access btn square_24px bg_overlay brdr ok_button_color_alt"
                       aria-label="Previous Page">
                 <span class="icon slide_left"><i class="fas fa-arrow-left"></i></span>
               </button>
@@ -205,12 +205,12 @@
             </div>
             <button *ngIf="canPaginateNext$ | async else disabledNextButton"
                     (click)="paginateNext()"
-                    class="access btn square_24px bg_overlay brdr bg_blue_alt"
+                    class="access btn square_24px bg_overlay brdr ok_button_color_alt"
                     aria-label="Next Page">
               <span class="icon slide_right"><i class="fas fa-arrow-right"></i></span>
             </button>
             <ng-template #disabledNextButton>
-              <button disabled class="access btn square_24px bg_overlay brdr bg_blue_alt"
+              <button disabled class="access btn square_24px bg_overlay brdr ok_button_color_alt"
                       aria-label="Next Page">
                 <span class="icon slide_right"><i class="fas fa-arrow-right"></i></span>
               </button>
@@ -231,13 +231,13 @@
             </button>
             <button *ngIf="canSearch$ | async else disabledSearchButton"
                     (click)="_searchClick.next(iconSearchInput.value); _activePage.next(0)"
-                    class="access btn square_28px bg_overlay brdr bg_blue_alt brad_3 wis_search_btn"
+                    class="access btn square_28px bg_overlay brdr ok_button_color_alt brad_3 wis_search_btn"
                     aria-label="Submit Search" type="submit">
               <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
             </button>
             <ng-template #disabledSearchButton>
               <button disabled
-                      class="access btn square_28px bg_overlay brdr bg_blue_alt brad_3 wis_search_btn"
+                      class="access btn square_28px bg_overlay brdr ok_button_color_alt brad_3 wis_search_btn"
                       aria-label="Submit Search" type="submit">
                 <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
               </button>
@@ -251,7 +251,7 @@
               <ng-container *ngFor="let icon of paginatedIcons$ | async">
                 <div class="col size_1 min_w75 mar_5">
                   <button class="access wis_icon_btn" (click)="handleIconSelect(icon)" [attr.aria-label]="'Select ' + icon.name">
-                    <div [ngClass]="((_internalValue | async)?.prefix === icon.prefix) && ((_internalValue | async)?.name === icon.name) ? 'bg_blue' : 'content_color'"
+                    <div [ngClass]="((_internalValue | async)?.prefix === icon.prefix) && ((_internalValue | async)?.name === icon.name) ? 'ok_button_color' : 'content_color'"
                          class="wis_icon_btn_preview square_50px brad_3 bg_overlay brdr mar_bot5">
                       <i class="{{icon.prefix}} {{icon.name}}"></i>
                     </div>

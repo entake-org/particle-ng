@@ -82,7 +82,7 @@
               <button (click)="onWeekSelect(week.week, week.selectable)"
                       [disabled]="!week.selectable"
                       [ngClass]="((selectedWeek$ | async) === week.week) && ((selectedYear$ | async) === week.year)
-                                    ? 'bg_blue'
+                                    ? 'ok_button_color'
                                     : 'bg_overlay_rev brdr hov_bg'"
                       class="access wwp_week_btn">
                 <ng-container *ngFor="let date of week.dates">
