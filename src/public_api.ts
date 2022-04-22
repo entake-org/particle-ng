@@ -25,6 +25,7 @@ export * from './app/modules/slideover/particle-slideover.module';
 export * from './app/modules/scroll-to-top/particle-scroll-to-top.module';
 export * from './app/modules/layout/layout.module';
 export * from './app/modules/toggle-switch/toggle-switch.module';
+export * from './app/modules/button/button.module';
 
 /** DIRECTIVES */
 export * from './app/modules/tooltip/tooltip.directive';
@@ -59,6 +60,7 @@ export * from './app/modules/idle-timeout/idle-timeout.component';
 export * from './app/modules/scroll-to-top/scroll-to-top.component';
 export * from './app/modules/layout/components/layout-fullwidth-sidebar/layout-fullwidth-sidebar.component';
 export * from './app/modules/toggle-switch/toggle-switch.component';
+export * from './app/modules/button/particle-button.component';
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';
@@ -87,6 +89,7 @@ export * from './app/modules/multi-select/models/multi-select-option-group.model
 export * from './app/modules/notification/models/notification.model';
 export * from './app/modules/theming/models/theme.model';
 export * from './app/modules/toggle-switch/models/toggle-options.model';
+export * from './app/modules/button/button-state.model';
 
 /** ENUMS */
 export * from './app/shared/enums/endpoint-status.enum';
