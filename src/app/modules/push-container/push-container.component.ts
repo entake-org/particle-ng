@@ -40,10 +40,30 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
    * Top offset to account for a nav bar
    */
   @Input()
-  topOffset = '0px';
+  set topOffset(topOffset: string) {
+    this._topOffset = topOffset;
+    this.setDefaultHeight();
+    this.updateContainerState();
+  }
+
+  get topOffset(): string {
+    return this._topOffset;
+  }
+
+  private _topOffset = '0px';
 
   @Input()
-  bottomOffset = '0px';
+  set bottomOffset(bottomOffset: string) {
+    this._bottomOffset = bottomOffset;
+    this.setDefaultHeight();
+    this.updateContainerState();
+  }
+
+  get bottomOffset(): string {
+    return this._bottomOffset;
+  }
+
+  private _bottomOffset = '0px';
 
   /**
    * If the screen resizes, it will either overlay or close depending on this variable

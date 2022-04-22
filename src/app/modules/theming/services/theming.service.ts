@@ -305,7 +305,7 @@ export class ThemingService {
   private addFonts(theme: Theme, head: HTMLHeadElement, style: HTMLStyleElement): void {
     let defaultFont: ThemeFont = null as any;
     for (const font of theme.fonts) {
-      if (font.isDefault) {
+      if (font.isDefault || theme.fonts.length === 1) {
         defaultFont = font;
       }
 
