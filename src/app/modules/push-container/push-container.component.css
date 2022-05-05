@@ -1,8 +1,6 @@
 .layout_sidebar {
   position: fixed;
   z-index: 3;
-  overflow-y: scroll;
-  overflow-x: hidden;
   user-select: none;
 }
 
