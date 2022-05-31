@@ -217,8 +217,13 @@ export class ThemingService {
    * Writes the theme information to a style tag in the header so that the theme is applied.
    *
    * @param theme
+   * @param prefix
    */
-  changeColors(theme: Theme): void {
+  changeColors(theme: Theme, prefix?: string): void {
+    if (!prefix) {
+      prefix = '';
+    }
+
     const style = document.createElement('style');
     let rootVars = ':root {';
 
@@ -229,14 +234,14 @@ export class ThemingService {
           const value = (theme.colorPalette as any)[prop] as string;
 
           const color = value.startsWith('#') ? value : '#' + value;
-          this.generateColors(style, color, this.toSnakeCase(prop));
+          this.generateColors(style, color, prefix + this.toSnakeCase(prop));
 
-          rootVars += `--${this.toKebabCase(prop)}-color: ${color};`;
+          rootVars += `--${prefix}${this.toKebabCase(prop)}-color: ${color};`;
         }
       }
 
       for (const extension of theme.colorPalette.extension) {
-        this.generateColors(style, extension.color.startsWith('#') ? extension.color : '#' + extension.color, extension.className);
+        this.generateColors(style, extension.color.startsWith('#') ? extension.color : '#' + extension.color, prefix + extension.className);
       }
     }
 
@@ -246,28 +251,28 @@ export class ThemingService {
         const value = (theme.layoutColors as any)[prop] as string;
 
         const color = value.startsWith('#') ? value : '#' + value;
-        this.generateColors(style, color, this.toSnakeCase(prop));
-        rootVars += `--${this.toKebabCase(prop)}: ${color};`;
+        this.generateColors(style, color, prefix + this.toSnakeCase(prop));
+        rootVars += `--${prefix}${this.toKebabCase(prop)}: ${color};`;
       }
 
       if (this.isDarkTheme(theme.layoutColors.bodyColor)) {
-        style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.05);color:inherit;}`));
-        style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.05);color:inherit;}`));
-        style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
+        style.appendChild(document.createTextNode(`.${prefix}bg_overlay{background-color:rgba(255,255,255,0.05);color:inherit;}`));
+        style.appendChild(document.createTextNode(`.${prefix}bg_overlay_rev{background-color:rgba(0,0,0,0.05);color:inherit;}`));
+        style.appendChild(document.createTextNode(`.${prefix}brdr{border:1px solid rgba(150,150,150,0.5);}`));
       } else {
-        style.appendChild(document.createTextNode(`.bg_overlay{background-color:rgba(255,255,255,0.1);color:inherit;}`));
-        style.appendChild(document.createTextNode(`.bg_overlay_rev{background-color:rgba(0,0,0,0.04);color:inherit;}`));
-        style.appendChild(document.createTextNode(`.brdr{border:1px solid rgba(150,150,150,0.5);}`));
+        style.appendChild(document.createTextNode(`.${prefix}bg_overlay{background-color:rgba(255,255,255,0.1);color:inherit;}`));
+        style.appendChild(document.createTextNode(`.${prefix}bg_overlay_rev{background-color:rgba(0,0,0,0.04);color:inherit;}`));
+        style.appendChild(document.createTextNode(`.${prefix}brdr{border:1px solid rgba(150,150,150,0.5);}`));
       }
     }
 
     if (theme.accessibility && theme.accessibility.enabled) {
       const outlineColor = theme.accessibility.highlightColor.startsWith('#') ? theme.accessibility.highlightColor : '#' + theme.accessibility.highlightColor;
-      style.appendChild(document.createTextNode(`.access{outline: ${outlineColor} ${theme.accessibility.highlightThickness} solid !important;outline-color: transparent !important;transition:all 0.3s ease-in-out;}`));
-      style.appendChild(document.createTextNode(`.access:focus{outline: ${outlineColor} ${theme.accessibility.highlightThickness} solid !important;outline-offset: ${theme.accessibility.highlightOffset};}`));
+      style.appendChild(document.createTextNode(`.${prefix}access{outline: ${outlineColor} ${theme.accessibility.highlightThickness} solid !important;outline-color: transparent !important;transition:all 0.3s ease-in-out;}`));
+      style.appendChild(document.createTextNode(`.${prefix}access:focus{outline: ${outlineColor} ${theme.accessibility.highlightThickness} solid !important;outline-offset: ${theme.accessibility.highlightOffset};}`));
 
       if (theme.accessibility.hoverEnabled) {
-        style.appendChild(document.createTextNode(`.access:hover{outline: ${outlineColor} ${theme.accessibility.highlightThickness} solid !important;outline-offset: ${theme.accessibility.highlightOffset};}`));
+        style.appendChild(document.createTextNode(`.${prefix}access:hover{outline: ${outlineColor} ${theme.accessibility.highlightThickness} solid !important;outline-offset: ${theme.accessibility.highlightOffset};}`));
       }
     }
 
@@ -277,23 +282,20 @@ export class ThemingService {
         const value = (theme.buttonColorPalette as any)[prop] as string;
 
         const color = value.startsWith('#') ? value : '#' + value;
-        this.generateColors(style, color, this.toSnakeCase(prop));
+        this.generateColors(style, color, prefix + this.toSnakeCase(prop));
 
-        rootVars += `--${this.toKebabCase(prop)}: ${color};`;
+        rootVars += `--${prefix}${this.toKebabCase(prop)}: ${color};`;
       }
     }
 
     const head = document.head || document.getElementsByTagName('head')[0];
 
-    for (const child of <any>head.childNodes) {
-      if ((child as Element).innerHTML && (child as Element).innerHTML.startsWith('.bg_red')) {
-        head.removeChild(child);
-        break;
-      }
-    }
+    this.removeThemeFromHeader(prefix);
 
     // Write the fonts to the header
-    this.addFonts(theme, head, style);
+    if (prefix === '') {
+      this.addFonts(theme, head, style);
+    }
 
     rootVars += '}';
     style.appendChild(document.createTextNode(rootVars));
@@ -334,6 +336,16 @@ export class ThemingService {
     }
 
     return false;
+  }
+
+  removeThemeFromHeader(prefix: string): void {
+    const head = document.head || document.getElementsByTagName('head')[0];
+    for (const child of <any>head.childNodes) {
+      if ((child as Element).innerHTML && (child as Element).innerHTML.startsWith(`.${prefix}bg_red`)) {
+        head.removeChild(child);
+        break;
+      }
+    }
   }
 
   /**
