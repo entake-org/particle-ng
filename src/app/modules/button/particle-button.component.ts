@@ -66,6 +66,9 @@ export class ParticleButtonComponent implements OnInit {
   @Input()
   size: 'xsm' | 'sm' | 'md' | 'lg' | 'xlg' = 'md';
 
+  @Input()
+  colorClassOverride: string = null as any;
+
   private _buttonState: BehaviorSubject<ButtonState> = new BehaviorSubject<ButtonState>(null as any);
 
   buttonState = this._buttonState.asObservable();
@@ -159,6 +162,10 @@ export class ParticleButtonComponent implements OnInit {
   }
 
   private getColor(): string {
+    if (this.colorClassOverride) {
+      return this.colorClassOverride;
+    }
+
     if (this.type === 'standard') {
       return 'bg_overlay_rev';
     }
