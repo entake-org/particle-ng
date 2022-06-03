@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "particle-ng"
+  "defaultProject": "particle-ng",
+  "cli": {
+    "analytics": false
+  }
 }

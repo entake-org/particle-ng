@@ -17,6 +17,16 @@ export class BaseDataService {
   }
 
   /**
+   * If you receive a 404 from an endpoint, you can choose to treat it like a successful empty response
+   * by overriding this and returning true.
+   *
+   * @protected
+   */
+  protected ignoreNoResultsError(): boolean {
+    return false;
+  }
+
+  /**
    * Takes an HTTPClient object so that it can make REST calls.
    *
    * @param http
@@ -182,8 +192,12 @@ export class BaseDataService {
    * @param error
    */
   handleError(error: HttpErrorResponse): Observable<any> {
+    if (this.ignoreNoResultsError() && error.status === 404) {
+      return of({});
+    }
+
     console.error(error);
-    return throwError(error);
+    return throwError(() => error);
   }
 
   /**

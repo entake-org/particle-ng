@@ -82,7 +82,7 @@ export class NotificationComponent {
   readonly severityIconMap = {
     'success': 'fa-check-circle',
     'warn': 'fa-exclamation-circle',
-    'error': 'fa-circle-radiation',
+    'error': 'fa-circle-xmark',
     'info': 'fa-info-circle'
   };
 
