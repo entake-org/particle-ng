@@ -52,7 +52,7 @@ export class BaseDataService {
   handleGetOne(url: string): Observable<any> {
     return this.handleGet(url).pipe(
       map(d => d),
-      catchError(this.handleError)
+      catchError(error => this.handleError(error, this.ignoreNoResultsError()))
     );
   }
 
@@ -64,7 +64,7 @@ export class BaseDataService {
   handleGetList(url: string): Observable<any> {
     return this.handleGet(url).pipe(
       map(d => d.data),
-      catchError(this.handleError)
+      catchError(error => this.handleError(error, this.ignoreNoResultsError()))
     );
   }
 
@@ -92,7 +92,7 @@ export class BaseDataService {
     return this.http.get(this.getBaseUrl() + url, options)
       .pipe(
         map(res => res),
-        catchError(this.handleError)
+        catchError(error => this.handleError(error, this.ignoreNoResultsError()))
       );
   }
 
@@ -135,7 +135,7 @@ export class BaseDataService {
       payloadFinal,
       this.getOptions(isFileResponse)).pipe(
         map(res => res),
-        catchError(this.handleError)
+        catchError(error => this.handleError(error, this.ignoreNoResultsError()))
       );
   }
 
@@ -163,7 +163,10 @@ export class BaseDataService {
     }
 
     return this.http.put(this.getBaseUrl() + url, payloadFinal, this.getOptions())
-      .pipe(map(res => res), catchError(this.handleError));
+      .pipe(
+        map(res => res),
+        catchError(error => this.handleError(error, this.ignoreNoResultsError()))
+      );
   }
 
   /**
@@ -173,7 +176,10 @@ export class BaseDataService {
    */
   handleDelete(url: string): Observable<any> {
     return this.http.delete(this.getBaseUrl() + url)
-      .pipe(map(res => res), catchError(this.handleError));
+      .pipe(
+        map(res => res),
+        catchError(error => this.handleError(error, this.ignoreNoResultsError()))
+      );
   }
 
   /**
@@ -182,7 +188,7 @@ export class BaseDataService {
    * @param error
    */
   handleObservableError(error: HttpErrorResponse): Observable<any> {
-    this.handleError(error);
+    this.handleError(error, this.ignoreNoResultsError());
     return of(null);
   }
 
@@ -190,9 +196,10 @@ export class BaseDataService {
    * Logs an error and rethrows it
    *
    * @param error
+   * @param ignoreNoResultsError
    */
-  handleError(error: HttpErrorResponse): Observable<any> {
-    if (this.ignoreNoResultsError() && error.status === 404) {
+  handleError(error: HttpErrorResponse, ignoreNoResultsError: boolean): Observable<any> {
+    if (ignoreNoResultsError && error.status === 404) {
       return of({});
     }
 
