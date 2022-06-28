@@ -1,0 +1,16 @@
+<button
+  class="access center_center particle_checkbox brdr content_color_dark_1 btn"
+  tabindex="0"
+  role="checkbox"
+  [disabled]="disabled"
+  [attr.aria-label]="value === 'Y' ? 'Uncheck checkbox' : 'Check checkbox'"
+  (click)="click()">
+  <!-- show if checked state -->
+  <span *ngIf="value === 'Y'">
+    <i class="fas fa-check"></i>
+  </span>
+</button>
+<input type="hidden"
+       [id]="inputId"
+       [value]="value"
+       #hiddenInput />
