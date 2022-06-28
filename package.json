@@ -1,6 +1,6 @@
 {
   "name": "@sdsolutions/particle-ng",
-  "version": "14.1.0",
+  "version": "14.1.1",
   "license": "MIT",
   "description": "This package offers a selection of reusable components for your Angular project. Instead of Material or PrimeNG, give Particle a shot for all of your needs! If you're interested in contributing or find any bugs, feel free to catch us on GitHub.",
   "repository": {

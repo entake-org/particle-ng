@@ -26,6 +26,7 @@ export * from './app/modules/scroll-to-top/particle-scroll-to-top.module';
 export * from './app/modules/layout/layout.module';
 export * from './app/modules/toggle-switch/toggle-switch.module';
 export * from './app/modules/button/button.module';
+export * from './app/modules/checkbox/checkbox.module';
 
 /** DIRECTIVES */
 export * from './app/modules/tooltip/tooltip.directive';
@@ -61,6 +62,7 @@ export * from './app/modules/scroll-to-top/scroll-to-top.component';
 export * from './app/modules/layout/components/layout-fullwidth-sidebar/layout-fullwidth-sidebar.component';
 export * from './app/modules/toggle-switch/toggle-switch.component';
 export * from './app/modules/button/particle-button.component';
+export * from './app/modules/checkbox/checkbox.component';
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';
