@@ -27,6 +27,7 @@ export * from './app/modules/layout/layout.module';
 export * from './app/modules/toggle-switch/toggle-switch.module';
 export * from './app/modules/button/button.module';
 export * from './app/modules/checkbox/checkbox.module';
+export * from './app/modules/input-mask/input-mask.module';
 
 /** DIRECTIVES */
 export * from './app/modules/tooltip/tooltip.directive';
@@ -63,6 +64,7 @@ export * from './app/modules/layout/components/layout-fullwidth-sidebar/layout-f
 export * from './app/modules/toggle-switch/toggle-switch.component';
 export * from './app/modules/button/particle-button.component';
 export * from './app/modules/checkbox/checkbox.component';
+export * from './app/modules/input-mask/input-mask.component';
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';
@@ -79,12 +81,13 @@ export * from './app/modules/theming/services/theme-change-detection.service';
 export * from './app/modules/ordinal-number-pipe/ordinal-number.pipe';
 
 /** MODELS */
-export * from './app/modules/paginator/pagination-event.model';
-export * from './app/modules/background-carousel/carousel-options.model';
 export * from './app/shared/models/auditable.model';
 export * from './app/shared/models/data-list.model';
 export * from './app/shared/models/id.model';
 export * from './app/shared/models/observable-container';
+
+export * from './app/modules/paginator/pagination-event.model';
+export * from './app/modules/background-carousel/carousel-options.model';
 export * from './app/modules/dropdown/models/dropdown-option.model';
 export * from './app/modules/dropdown/models/dropdown-option-group.model';
 export * from './app/modules/multi-select/models/multi-select-option.model';
