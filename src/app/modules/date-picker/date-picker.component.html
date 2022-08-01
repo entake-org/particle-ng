@@ -7,7 +7,8 @@
            (keydown)="filterInput($event)"
            (input)="handleInput()"
            (blur)="onTouched(); handleBlur()"
-           type="text" placeholder="mm/dd/yyyy"
+           type="text"
+           [placeholder]="placeholder"
            maxlength="10"
            [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"
            class="access particle_datepicker_input" />
@@ -22,7 +23,8 @@
   <ng-template #disabledDatePicker>
     <input disabled
            [ngModel]="dateString"
-           type="text" placeholder="mm/dd/yyyy"
+           type="text"
+           [placeholder]="placeholder"
            maxlength="10"
            [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"
            class="access particle_datepicker_input" />

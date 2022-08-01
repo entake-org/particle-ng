@@ -151,6 +151,11 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   closeOnSelect: boolean = true;
 
   /**
+   * Placeholder override
+   */
+  placeholder = 'mm/dd/yyyy';
+
+  /**
    * Event emitted on date picker input
    */
   @Output()
