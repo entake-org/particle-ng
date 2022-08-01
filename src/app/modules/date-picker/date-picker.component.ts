@@ -153,6 +153,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   /**
    * Placeholder override
    */
+  @Input()
   placeholder = 'mm/dd/yyyy';
 
   /**

@@ -757,6 +757,14 @@
                   <particle-date-picker
                     [disabled]="true">
                   </particle-date-picker>
+                  <div class="pad_10"></div>
+                  <div class="form_label mar_bot3">Date Range Picker</div>
+                  <particle-date-range-picker
+                    [(ngModel)]="dateRangePickerValue"
+                    [inputClassList]="'form_input content_color'"
+                    [calendarButtonClassList]="'bg_overlay brdr border_left brad_0'"
+                    [disabled]="false">
+                  </particle-date-range-picker>
                 </div>
               </div>
             </div>

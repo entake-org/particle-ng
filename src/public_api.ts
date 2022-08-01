@@ -48,6 +48,7 @@ export * from './app/modules/endpoint-state/components/endpoint-state.component'
 export * from './app/modules/dialog/dialog.component';
 export * from './app/modules/date-picker/date-picker.component';
 export * from './app/modules/date-picker/components/calendar/calendar.component';
+export * from './app/modules/date-picker/components/date-range-picker/date-range-picker.component';
 export * from './app/modules/dropdown/dropdown.component';
 export * from './app/modules/multi-select/multi-select.component';
 export * from './app/modules/popover/popover.component';

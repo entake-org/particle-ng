@@ -1,0 +1,27 @@
+<ng-container *ngIf="_value.asObservable() | async as value">
+  <div class="row space_between wrap">
+    <div class="particle_date_range_date">
+      <particle-date-picker [(ngModel)]="beginDate"
+                            [inputId]="inputId + '.beginDate'"
+                            [dateRange]="dateRange"
+                            [disabled]="disabled"
+                            [inputClassList]="inputClassList"
+                            placeholder="Begin - mm/dd/yyyy"
+                            [calendarButtonClassList]="calendarButtonClassList">
+      </particle-date-picker>
+    </div>
+    <div class="particle_date_range_center center_center hide_element">
+      <i class="fa-solid fa-arrows-left-right"></i>
+    </div>
+    <div class="particle_date_range_date">
+      <particle-date-picker [(ngModel)]="endDate"
+                            [inputId]="inputId + '.endDate'"
+                            [dateRange]="_endDateRange"
+                            [disabled]="disabled"
+                            [inputClassList]="inputClassList"
+                            placeholder="End - mm/dd/yyyy"
+                            [calendarButtonClassList]="calendarButtonClassList">
+      </particle-date-picker>
+    </div>
+  </div>
+</ng-container>
