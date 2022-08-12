@@ -252,6 +252,8 @@ export class AppComponent implements OnInit {
     false
   );
 
+  buttonsDisabled = 'N';
+
   /**
    * Constructor
    */

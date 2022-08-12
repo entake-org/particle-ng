@@ -57,6 +57,18 @@ export class ParticleButtonComponent implements OnInit {
     return this._width;
   }
 
+  private _disabled: boolean = false;
+
+  @Input()
+  set disabled(disabled: boolean) {
+    this._disabled = disabled;
+    this.updateButtonState();
+  }
+
+  get disabled(): boolean {
+    return this._disabled;
+  }
+
   @Input()
   hover: 'slide_up' | 'slide_down' | 'slide_right' | 'slide_left' | 'grow' | 'shrink' | 'lighten' | 'darken' = null as any;
 
@@ -88,12 +100,17 @@ export class ParticleButtonComponent implements OnInit {
       iconSide: this.iconSide,
       label: this.getLabel(),
       margin: this.margin,
-      width: this.width
+      width: this.width,
+      disabled: this.disabled
     });
   }
 
   private getClassList(): string {
-    let classList = 'pb_button access ';
+    let classList = 'pb_button ';
+
+    if (!this.disabled) {
+      classList += 'access ';
+    }
 
     if (this.rounded) {
       classList += this.getRoundedClass();
@@ -122,7 +139,7 @@ export class ParticleButtonComponent implements OnInit {
       classList += ' ';
     }
 
-    if (this.hover) {
+    if (this.hover && !this.disabled) {
       classList += this.hover;
       classList += ' ';
     }

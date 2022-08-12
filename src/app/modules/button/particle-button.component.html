@@ -1,11 +1,13 @@
 <ng-container *ngIf="buttonState | async as state">
   <button
+    type="button"
     [ngClass]="state.classList"
     [style.width]="state.width"
     [style.margin]="state.margin"
     [style.border]="state.border"
     [style.color]="state.fontColor"
     [attr.aria-label]="state.label"
+    [disabled]="state.disabled"
   >
     <ng-container *ngIf="['left', 'only'].includes(state.iconSide)">
       <i *ngIf="state.icon" [ngClass]="state.icon"></i>

@@ -7,4 +7,5 @@ export interface ButtonState {
   iconSide: string;
   icon: string;
   label: string;
+  disabled: boolean;
 }
