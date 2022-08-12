@@ -16,7 +16,7 @@ import {coerceBooleanProperty} from '@angular/cdk/coercion';
 })
 export class CheckboxComponent implements ControlValueAccessor {
 
-  private _value = false;
+  _value: boolean = false;
   private _disabled = false;
   onChange: (value: any) => void = () => {};
   onTouched: () => any = () => {};
@@ -31,20 +31,28 @@ export class CheckboxComponent implements ControlValueAccessor {
   }
 
   @Input()
-  set value(value: string) {
-    if (value) {
+  set value(value: string | boolean) {
+    if (typeof value === 'string') {
       this._value = value.toUpperCase() === 'Y';
+      this.type = 'string';
     } else {
-      this._value = false;
+      this._value = value;
+      this.type = 'boolean';
     }
   }
 
-  get value(): string {
+  get value(): string | boolean {
+    if (this.type === 'boolean') {
+      return this._value;
+    }
+
     return this._value ? 'Y' : 'N';
   }
 
   @Input()
   inputId: string = null as any;
+
+  type: string = 'boolean';
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef

@@ -253,6 +253,7 @@ export class AppComponent implements OnInit {
   );
 
   buttonsDisabled = 'N';
+  checkboxActive = true;
 
   /**
    * Constructor
