@@ -79,7 +79,16 @@ export class ParticleButtonComponent implements OnInit {
   size: 'xsm' | 'sm' | 'md' | 'lg' | 'xlg' = 'md';
 
   @Input()
-  colorClassOverride: string = null as any;
+  set colorClassOverride(colorClassOverride: string) {
+    this._colorClassOverride = colorClassOverride;
+    this.updateButtonState();
+  }
+
+  get colorClassOverride(): string {
+    return this._colorClassOverride;
+  }
+
+  _colorClassOverride: string = null as any;
 
   private _buttonState: BehaviorSubject<ButtonState> = new BehaviorSubject<ButtonState>(null as any);
 
@@ -179,8 +188,8 @@ export class ParticleButtonComponent implements OnInit {
   }
 
   private getColor(): string {
-    if (this.colorClassOverride) {
-      return this.colorClassOverride;
+    if (this._colorClassOverride) {
+      return this._colorClassOverride;
     }
 
     if (this.type === 'standard') {
