@@ -42,6 +42,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   @Input()
   set topOffset(topOffset: string) {
     this._topOffset = topOffset;
+    this._originalTopOffset = topOffset;
     this.setDefaultHeight();
     this.updateContainerState();
   }
