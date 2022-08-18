@@ -1,7 +1,7 @@
 <ng-container *ngIf="containerState | async as state">
   <div class="layout_sidebar"
     [ngClass]="state.sidePanelClass"
-    [style.top]="topOffset"
+    [style.top]="state.topOffset"
     [style.height]="state.height"
     [style.width]="(breakpointExceeded && showSidePanel) ? '100%' : width + 'px'"
     [style.left]="state.left"

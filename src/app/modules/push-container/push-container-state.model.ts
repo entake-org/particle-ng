@@ -3,4 +3,5 @@ export interface PushContainerState {
   right: string;
   sidePanelClass: string;
   height: string;
+  topOffset: string;
 }
