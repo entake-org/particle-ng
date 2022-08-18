@@ -361,7 +361,8 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
       right: this.getRightProperty(),
       left: this.getLeftProperty(),
       sidePanelClass: this.getSidePanelClass(),
-      height: this._height
+      height: this._height,
+      topOffset: this._topOffset
     } as PushContainerState);
   }
 
