@@ -247,8 +247,9 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
 
     if (window.innerWidth > 768) {
       this.setMargin(this.width + 'px');
+      this._topOffset = this._originalTopOffset;
     } else {
-      this.topOffset = '0';
+      this._topOffset = '0';
       this.zIndex = 1000;
       this.hideCloseButton = false;
       this._height = '100%';
