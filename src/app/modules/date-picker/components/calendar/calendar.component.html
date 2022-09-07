@@ -69,8 +69,8 @@
                       [attr.data-dialog-close-override]="true"
                       [attr.aria-label]="'Select ' + weekDays[dayInMonth.day] + ' the ' + (dayInMonth.date | ordinalNumber)"
                       [ngClass]="{
-                        'ok_button_color': (dayInMonth.date === selectedDate?.date && dayInMonth.month === selectedDate?.month && dayInMonth.year === selectedDate?.year),
-                        'bg_overlay_rev brdr hov_bg': (dayInMonth.date !== selectedDate?.date || dayInMonth.month !== selectedDate?.month || dayInMonth.year !== selectedDate?.year)
+                        'ok_button_color': (dayInMonth.date === selectedDate.date && dayInMonth.month === selectedDate.month && dayInMonth.year === selectedDate.year),
+                        'bg_overlay_rev brdr hov_bg': (dayInMonth.date !== selectedDate.date || dayInMonth.month !== selectedDate.month || dayInMonth.year !== selectedDate.year)
                       }"
                       class="access day_button">
                 {{dayInMonth.date}}

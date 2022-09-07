@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {ButtonState} from "./button-state.model";
 
@@ -17,6 +17,9 @@ export class ParticleButtonComponent implements OnInit {
 
   @Input()
   rounded: 'none' | 'less' | 'more' | 'pill' | 'circle' | 'square' = 'none';
+
+  @Output()
+  clicked: EventEmitter<any> = new EventEmitter<any>();
 
   private _icon: string = null as any;
 

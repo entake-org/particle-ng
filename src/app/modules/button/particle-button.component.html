@@ -8,6 +8,7 @@
     [style.color]="state.fontColor"
     [attr.aria-label]="state.label"
     [disabled]="state.disabled"
+    (click)="clicked.emit($event)"
   >
     <ng-container *ngIf="['left', 'only'].includes(state.iconSide)">
       <i *ngIf="state.icon" [ngClass]="state.icon"></i>

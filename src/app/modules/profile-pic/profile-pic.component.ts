@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Md5} from 'md5-typescript';
 
 /**
  * Profile Pic display shortcut
@@ -43,9 +44,19 @@ export class ProfilePicComponent {
   toolTip: string = null as any;
 
   /**
+   * Use gravatar instead of a custom image
+   */
+  @Input()
+  gravatarEmail: string = null as any;
+
+  /**
    * Returns a CSS URL of the Image URL.
    */
   getUrl(): string {
+    if (this.gravatarEmail) {
+       return `url(https://www.gravatar.com/avatar/${Md5.init(this.gravatarEmail.trim().toLowerCase())}?d=retro&s=${this.size.substring(0, this.size.length - 2)})`;
+    }
+
     if (this.imageUrl) {
       return `url(${this.imageUrl})`;
     }
