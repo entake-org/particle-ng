@@ -1761,7 +1761,7 @@
         <particle-push-container
           mainContentId="site-content"
           side="left"
-          [width]="250"
+          [width]="+$any(theme.layoutVariables.menuWidth)"
           [topOffset]="theme.layoutVariables.headerHeight"
           [bottomOffset]="theme.layoutVariables.footerHeight"
           [closeOnResize]="true"

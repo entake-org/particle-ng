@@ -12,11 +12,21 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  private _width = 230;
+
   /**
    * Width of the container in pixels.
    */
   @Input()
-  width = 230;
+  set width(width: number) {
+    this._width = width;
+    this.setMargin(width + 'px');
+    this.updateContainerState();
+  }
+
+  get width(): number {
+    return this._width;
+  }
 
   /**
    * Show the side panel on load?

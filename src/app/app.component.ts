@@ -167,6 +167,7 @@ export class AppComponent implements OnInit {
       layoutVariables: {
         headerHeight: '100px',
         footerHeight: '0',
+        menuWidth: '250'
       },
       fonts: [
         {name: 'Roboto'},
@@ -224,6 +225,7 @@ export class AppComponent implements OnInit {
       layoutVariables: {
         headerHeight: '150px',
         footerHeight: '0',
+        menuWidth: '300'
       },
       fonts: [
         {name: 'acumin-pro', id: 'gna4twy', source: 'adobe', isSerif: false, isDefault: true},
