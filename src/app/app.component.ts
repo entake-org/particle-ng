@@ -257,13 +257,16 @@ export class AppComponent implements OnInit {
   buttonsDisabled = 'N';
   checkboxActive = true;
 
+  progressBarAmount = 69;
+
   /**
    * Constructor
    */
   constructor(
     private notificationService: NotificationService,
     private themingService: ThemingService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.themingService.appInit('particle_ng', this.themes);

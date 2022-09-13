@@ -30,6 +30,7 @@ import {ParticleToggleSwitchModule} from "./modules/toggle-switch/toggle-switch.
 import {ParticleButtonModule} from "./modules/button/button.module";
 import {ParticleBackgroundCarouselModule} from "./modules/background-carousel/particle-background-carousel.module";
 import {ParticleCheckboxModule} from './modules/checkbox/checkbox.module';
+import {ParticleProgressBarModule} from './modules/progress-bar/progress-bar.module';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {ParticleCheckboxModule} from './modules/checkbox/checkbox.module';
     ParticleToggleSwitchModule,
     ParticleButtonModule,
     ParticleBackgroundCarouselModule,
-    ParticleCheckboxModule
+    ParticleCheckboxModule,
+    ParticleProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

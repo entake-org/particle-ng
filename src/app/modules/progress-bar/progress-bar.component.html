@@ -1,0 +1,12 @@
+<div class="brdr" [ngClass]="backgroundColorClass" [style.border-radius]="borderRadius + 'px'">
+  <div class="container_progress"
+       [ngClass]="progressColorClass"
+       [style.width]="percentComplete + '%'"
+       [style.border-radius]="borderRadius + 'px'"
+  >
+    <ng-container *ngIf="showPercentComplete else blank">
+      {{percentComplete}}%
+    </ng-container>
+    <ng-template #blank>&nbsp;</ng-template>
+  </div>
+</div>
