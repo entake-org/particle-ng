@@ -28,6 +28,7 @@ export * from './app/modules/toggle-switch/toggle-switch.module';
 export * from './app/modules/button/button.module';
 export * from './app/modules/checkbox/checkbox.module';
 export * from './app/modules/input-mask/input-mask.module';
+export * from './app/modules/progress-bar/progress-bar.module';
 
 /** DIRECTIVES */
 export * from './app/modules/tooltip/tooltip.directive';
@@ -66,6 +67,7 @@ export * from './app/modules/toggle-switch/toggle-switch.component';
 export * from './app/modules/button/particle-button.component';
 export * from './app/modules/checkbox/checkbox.component';
 export * from './app/modules/input-mask/input-mask.component';
+export * from './app/modules/progress-bar/progress-bar.component';
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';
