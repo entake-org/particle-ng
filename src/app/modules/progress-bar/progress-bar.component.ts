@@ -1,14 +1,22 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'particle-progress-bar',
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.css']
 })
-export class ProgressBarComponent implements OnInit {
+export class ProgressBarComponent {
+
+  private _percentComplete: number = 0;
 
   @Input()
-  percentComplete: number = 0;
+  set percentComplete(percentComplete: number) {
+    this._percentComplete = Math.floor(percentComplete);
+  }
+
+  get percentComplete(): number {
+    return this._percentComplete;
+  }
 
   @Input()
   backgroundColorClass: string = 'content_color_dark_1';
@@ -22,9 +30,12 @@ export class ProgressBarComponent implements OnInit {
   @Input()
   borderRadius: number = 9999;
 
-  constructor() { }
+  @Input()
+  height: number = 20;
 
-  ngOnInit(): void {
-  }
+  @Input()
+  showBorder: boolean = true;
+
+  constructor() { }
 
 }

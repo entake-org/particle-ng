@@ -257,7 +257,7 @@ export class AppComponent implements OnInit {
   buttonsDisabled = 'N';
   checkboxActive = true;
 
-  progressBarAmount = 69;
+  progressBarAmount = 69.69696969;
 
   /**
    * Constructor
