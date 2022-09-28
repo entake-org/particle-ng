@@ -15,7 +15,6 @@ export class FontawesomeIconsBrands {
     'fa-500px',
     'fa-accessible-icon',
     'fa-accusoft',
-    'fa-acquisitions-incorporated',
     'fa-adn',
     'fa-adversal',
     'fa-affiliatetheme',

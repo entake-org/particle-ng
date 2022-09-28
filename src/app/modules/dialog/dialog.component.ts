@@ -3,6 +3,7 @@ import {DialogService} from '../../shared/services/dialog.service';
 import {fromEvent, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
+import {DialogText} from '../../shared/models/particle-component-text.model';
 
 /**
  * Component to display a dialog with dynamic content
@@ -115,6 +116,11 @@ export class DialogComponent {
    */
   @Input()
   width = '900px';
+
+  @Input()
+  text: DialogText = {
+    close: 'Close Dialog'
+  } as DialogText;
 
   /**
    * Event Emitter for when the dialog is closed

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output, OnChanges} from '@angular/core';
 import {PaginationEvent} from './pagination-event.model';
+import {PaginatorText} from '../../shared/models/particle-component-text.model';
 
 /**
  * An Particle paginator, because we hated the other ones on the market.
@@ -34,6 +35,20 @@ export class PaginatorComponent implements OnChanges {
    */
   @Input()
   totalLength: number = null as any;
+
+  @Input()
+  text: PaginatorText = {
+    itemsPerPage: 'Items Per Page',
+    choosePageSize: 'Choose Page Size',
+    previousPage: 'Previous Page',
+    nextPage: 'Next Page',
+    disabled: 'Disabled',
+    firstPage: 'First Page',
+    lastPage: 'Last Page',
+    jumpToPage: 'Jump to Page',
+    page: 'Page',
+    outOf: 'out of'
+  } as PaginatorText;
 
   /**
    * Event Emitter for pagination or page size change.

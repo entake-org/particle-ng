@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, Input, OnDestroy, Renderer2} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
+import {ScrollToTopText} from '../../shared/models/particle-component-text.model';
 
 @Component({
   selector: 'particle-scroll-to-top',
@@ -16,6 +17,11 @@ export class ScrollToTopComponent implements OnDestroy, AfterViewInit {
 
   @Input()
   bottomOffset = 50;
+
+  @Input()
+  text: ScrollToTopText = {
+    scrollToTop: 'Scroll back to the top of the page'
+  } as ScrollToTopText;
 
   $scrollTop = new BehaviorSubject<number>(0);
 

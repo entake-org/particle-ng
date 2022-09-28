@@ -5,6 +5,7 @@ import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {RichTextEditorText} from '../../shared/models/particle-component-text.model';
 
 export const RICH_TEXT_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -40,6 +41,28 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     this._editable = !readonly;
     this.editor.setEditable(this._editable);
   }
+
+  @Input()
+  text: RichTextEditorText = {
+    heading1: 'Heading 1',
+    heading2: 'Heading 2',
+    bold: 'Bold',
+    italic: 'Italic',
+    strike: 'Strike',
+    bulletedList: 'Bulleted List',
+    orderedList: 'Ordered List',
+    leftAlign: 'Left Align',
+    centerAlign: 'Center Align',
+    rightAlign: 'Right Align',
+    justifyAlign: 'Justify Align',
+    setLink: 'Set Link',
+    removeLink: 'Remove Link',
+    clearFormat: 'Clear Format',
+    modifyLink: 'Modify Link',
+    cancel: 'Cancel',
+    update: 'Update',
+    url: 'URL'
+  } as RichTextEditorText;
 
   @Output()
   textChanged = new EventEmitter<{

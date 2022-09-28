@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {SliderText} from '../../shared/models/particle-component-text.model';
 
 /**
  * Component that wraps the native HTML5 slider
@@ -90,6 +91,12 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
    */
   @Input()
   ariaLabel: string = null as any;
+
+  @Input()
+  text: SliderText = {
+    selectAValue: 'Select a value',
+    enterAValue: 'Enter a value'
+  } as SliderText;
 
   /**
    * Event emitted on slider/slider input input event

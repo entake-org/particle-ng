@@ -42,7 +42,7 @@ export class TooltipDirective implements OnDestroy {
   tooltipPosition: 'left' | 'right' | 'top' | 'bottom' = 'bottom';
 
   /**
-   * Whether or not to disable the tooltip
+   * Whether to disable the tooltip
    * @param disabled disabled or not
    */
   @Input()

@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {EndpointStateText} from '../../../shared/models/particle-component-text.model';
 
 /**
  * Component to display different endpoint states
@@ -23,18 +24,6 @@ export class EndpointStateComponent {
   loadingIcon: 'double_helix' | string = 'double_helix';
 
   /**
-   * Main text for loading state
-   */
-  @Input()
-  loadingText = 'Loading';
-
-  /**
-   * Subtext for loading state
-   */
-  @Input()
-  loadingSubtext: string = null as any;
-
-  /**
    * Flag to determine if in empty state
    */
   @Input()
@@ -45,18 +34,6 @@ export class EndpointStateComponent {
    */
   @Input()
   emptyIcon = 'fas fa-folder-open fa-fw fa-3x';
-
-  /**
-   * Text for loading state
-   */
-  @Input()
-  emptyText = 'There\'s nothing here yet.';
-
-  /**
-   * Subtext for empty state
-   */
-  @Input()
-  emptySubtext: string = null as any;
 
   /**
    * Flag to determine if in error state
@@ -71,18 +48,6 @@ export class EndpointStateComponent {
   errorIcon = 'fas fa-bomb fa-fw fa-3x';
 
   /**
-   * Main text for error state
-   */
-  @Input()
-  errorText = 'An error has occurred';
-
-  /**
-   * Subtext for error state
-   */
-  @Input()
-  errorSubtext = 'Please try again';
-
-  /**
    * Flag to determine if overlay spinner
    */
   @Input()
@@ -94,17 +59,13 @@ export class EndpointStateComponent {
   @Input()
   loadingOverlayIcon = 'fas fa-spinner fa-spin';
 
-  /**
-   * Main text for loading overlay
-   */
   @Input()
-  loadingOverlayText: string = null as any;
-
-  /**
-   * Subtext for loading overlay
-   */
-  @Input()
-  loadingOverlaySubtext: string = null as any;
+  text: EndpointStateText = {
+    loadingText: 'Loading',
+    emptyText: 'There\'s nothing here yet.',
+    errorText: 'An error has occurred',
+    errorSubtext: 'Please try again'
+  } as EndpointStateText;
 
   /**
    * Component constructor

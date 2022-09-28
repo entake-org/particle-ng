@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {PushContainerState} from './push-container-state.model';
 import {BehaviorSubject} from 'rxjs';
+import {PushContainerText} from '../../shared/models/particle-component-text.model';
 
 /**
  * Push Container that'll either push the content or overlay the content based on screen width.
@@ -95,7 +96,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
   breakpoint = 769;
 
   /**
-   * Whether or not to always hide the close button, defaults to false.
+   * Whether to always hide the close button, defaults to false.
    */
   @Input()
   hideCloseButton = false;
@@ -105,6 +106,12 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
 
   @Input()
   tabColorClass = 'content_color_dark_2';
+
+  @Input()
+  text: PushContainerText = {
+    close: 'Close',
+    expand: 'Expand'
+  } as PushContainerText;
 
   /**
    * Event emitter for open

@@ -4,10 +4,11 @@ import {
   Component,
   ContentChildren,
   Input,
-  QueryList, ViewChild, ViewChildren
+  QueryList,
+  ViewChildren
 } from '@angular/core';
 import { AccordionItemDirective } from './directives/accordion-item.directive';
-import {AccordionContentDirective} from "./directives/accordion-content.directive";
+import {AccordionText} from '../../shared/models/particle-component-text.model';
 
 @Component({
   selector: 'particle-accordion',
@@ -38,6 +39,12 @@ export class AccordionComponent implements AfterContentInit, AfterViewInit {
 
   @Input()
   showIcon = true;
+
+  @Input()
+  text: AccordionText = {
+    expand: 'Expand',
+    collapse: 'Collapse'
+  } as AccordionText;
 
   @ContentChildren(AccordionItemDirective)
   items: QueryList<AccordionItemDirective> = null as any;

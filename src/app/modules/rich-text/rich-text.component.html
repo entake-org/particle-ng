@@ -2,9 +2,9 @@
   <div class="col v_center bg_overlay brdr border_right pad_5">
     <button
       id="heading1"
-      aria-label="Heading 1"
+      [attr.aria-label]="text.heading1"
       class="btn access pad_5 mar_right5 mar_left5"
-      particleTooltip="Heading 1" tooltipPosition="top"
+      [particleTooltip]="text.heading1" tooltipPosition="top"
       (click)="editor.chain().focus().toggleHeading({ level: 1 }).run()"
       [ngClass]="{ 'ok_button_color': this.editor.isActive('heading', { level: 1 }) }"
     >
@@ -12,9 +12,9 @@
     </button>
     <button
       id="heading2"
-      aria-label="Heading 2"
+      [attr.aria-label]="text.heading2"
       class="btn access pad_5 mar_right5"
-      particleTooltip="Heading 2" tooltipPosition="top"
+      [particleTooltip]="text.heading2" tooltipPosition="top"
       (click)="editor.chain().focus().toggleHeading({ level: 2 }).run()"
       [ngClass]="{ 'ok_button_color': this.editor.isActive('heading', { level: 2 }) }"
     >
@@ -24,9 +24,9 @@
   <div class="col v_center bg_overlay brdr border_right pad_5">
     <button
       id="bold"
-      aria-label="Bold"
+      [attr.aria-label]="text.bold"
       class="btn access pad_5 mar_right5 mar_left5"
-      particleTooltip="Bold" tooltipPosition="top"
+      [particleTooltip]="text.bold" tooltipPosition="top"
       (click)="editor.chain().focus().toggleBold().run()"
       [ngClass]="{ 'ok_button_color': this.editor.isActive('bold') }"
     >
@@ -34,9 +34,9 @@
     </button>
     <button
       id="italic"
-      aria-label="Italic"
+      [attr.aria-label]="text.italic"
       class="btn access pad_5 mar_right5"
-      particleTooltip="Italic" tooltipPosition="top"
+      [particleTooltip]="text.italic" tooltipPosition="top"
       (click)="editor.chain().focus().toggleItalic().run()"
       [ngClass]="{ 'ok_button_color': this.editor.isActive('italic') }"
     >
@@ -44,9 +44,9 @@
     </button>
     <button
       id="strike"
-      aria-label="Strike"
+      [attr.aria-label]="text.strike"
       class="btn access pad_5 mar_right5"
-      particleTooltip="Strike" tooltipPosition="top"
+      [particleTooltip]="text.strike" tooltipPosition="top"
       (click)="editor.chain().focus().toggleStrike().run()"
       [ngClass]="{ 'ok_button_color': this.editor.isActive('strike') }"
     >
@@ -56,9 +56,9 @@
   <div class="col v_center bg_overlay brdr border_right pad_5">
     <button
       id="bullet-list"
-      aria-label="Bulleted List"
+      [attr.aria-label]="text.bulletedList"
       class="btn access pad_5 mar_right5 mar_left5"
-      particleTooltip="Bulleted List" tooltipPosition="top"
+      [particleTooltip]="text.bulletedList" tooltipPosition="top"
       (click)="editor.chain().focus().toggleBulletList().run()"
       [ngClass]="{ 'ok_button_color': this.editor.isActive('bullet-list') }"
     >
@@ -66,9 +66,9 @@
     </button>
     <button
       id="ordered-list"
-      aria-label="Ordered List"
+      [attr.aria-label]="text.orderedList"
       class="btn access pad_5 mar_right5"
-      particleTooltip="Ordered List" tooltipPosition="top"
+      [particleTooltip]="text.orderedList" tooltipPosition="top"
       (click)="editor.chain().focus().toggleOrderedList().run()"
       [ngClass]="{ 'ok_button_color': this.editor.isActive('ordered-list') }"
     >
@@ -78,9 +78,9 @@
   <div class="col v_center bg_overlay brdr border_right pad_5">
   <button
     id="left-align"
-    aria-label="Left Align"
+    [attr.aria-label]="text.leftAlign"
     class="btn access pad_5 mar_right5 mar_left5"
-    particleTooltip="Left Align" tooltipPosition="top"
+    [particleTooltip]="text.leftAlign" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('left').run()"
     [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'left' }) }"
   >
@@ -88,9 +88,9 @@
   </button>
   <button
     id="center-align"
-    aria-label="Center Align"
+    [attr.aria-label]="text.centerAlign"
     class="btn access pad_5 mar_right5"
-    particleTooltip="Center Align" tooltipPosition="top"
+    [particleTooltip]="text.centerAlign" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('center').run()"
     [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'center' }) }"
   >
@@ -98,9 +98,9 @@
   </button>
   <button
     id="right-align"
-    aria-label="Right Align"
+    [attr.aria-label]="text.rightAlign"
     class="btn access pad_5 mar_right5"
-    particleTooltip="Right Align" tooltipPosition="top"
+    [particleTooltip]="text.rightAlign" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('right').run()"
     [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'right' }) }"
   >
@@ -108,9 +108,9 @@
   </button>
   <button
     id="justify-align"
-    aria-label="Justify Align"
+    [attr.aria-label]="text.justifyAlign"
     class="btn access pad_5 mar_right5"
-    particleTooltip="Justify Align" tooltipPosition="top"
+    [particleTooltip]="text.justifyAlign" tooltipPosition="top"
     (click)="editor.chain().focus().setTextAlign('justify').run()"
     [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'justify' }) }"
   >
@@ -120,9 +120,9 @@
   <div class="col v_center bg_overlay brdr border_right pad_5">
     <button
             id="link"
-            aria-label="Set Link"
+            [attr.aria-label]="text.setLink"
             class="btn access pad_5 mar_right5 mar_left5"
-            particleTooltip="Set Link" tooltipPosition="top"
+            [particleTooltip]="text.setLink" tooltipPosition="top"
             (click)="openLinkDialog()"
             [ngClass]="{ 'ok_button_color': this.editor.isActive('link') }"
     >
@@ -130,9 +130,9 @@
     </button>
     <button
       id="unlink"
-      aria-label="Remove Link"
+      [attr.aria-label]="text.removeLink"
       class="btn access pad_5 mar_right5 mar_left5"
-      particleTooltip="Remove Link" tooltipPosition="top"
+      [particleTooltip]="text.removeLink" tooltipPosition="top"
       (click)="this.editor.isActive('link') ? changeEditorLink('remove') : null"
       [disabled]="!this.editor.isActive('link')"
     >
@@ -142,9 +142,9 @@
   <div class="col size_1 v_center bg_overlay brdr border_none pad_5">
   <button
     id="clear-format"
-    aria-label="Clear Format"
+    [attr.aria-label]="text.clearFormat"
     class="btn access pad_5 mar_right5 mar_left5"
-    particleTooltip="Clear Format" tooltipPosition="top"
+    [particleTooltip]="text.clearFormat" tooltipPosition="top"
     (click)="editor.chain().focus().clearNodes().unsetAllMarks().run()"
   >
     <i class="fas fa-text-slash fa-fw"></i>
@@ -156,7 +156,7 @@
 </div>
 
 <particle-dialog
-  title="Modify Link"
+  [title]="text.modifyLink"
   [object]="showDialog"
   [allowClose]="false"
   width="400px"
@@ -165,7 +165,7 @@
   <div class="pad_10 text sm">
     <input class="access input md"
            [(ngModel)]="dialogLink"
-           aria-label="URL"
+           [attr.aria-label]="text.url"
            placeholder="eg. https://www.google.com"
            (keyup.enter)="changeEditorLink('save')"
     />
@@ -177,13 +177,14 @@
       hover="darken"
       rounded="less"
       icon="fas fa-times"
+      [label]="text.cancel"
       (clicked)="changeEditorLink('cancel')"
     ></particle-button>
     <particle-button
       type="ok"
       hover="darken"
       rounded="less"
-      text="Update"
+      [label]="text.update"
       icon="fas fa-check"
       (clicked)="changeEditorLink('save')"
     ></particle-button>

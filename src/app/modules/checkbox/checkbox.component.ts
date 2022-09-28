@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {coerceBooleanProperty} from '@angular/cdk/coercion';
+import {CheckboxText} from '../../shared/models/particle-component-text.model';
 
 @Component({
   selector: 'particle-checkbox',
@@ -51,6 +52,12 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   @Input()
   inputId: string = null as any;
+
+  @Input()
+  text: CheckboxText = {
+    check: 'Check the Box',
+    uncheck: 'Uncheck the Box'
+  } as CheckboxText;
 
   type: string = 'boolean';
 
