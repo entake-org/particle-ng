@@ -15,6 +15,7 @@ import {
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { format, isEqual, isValid, isWithinInterval, parse } from 'date-fns';
+import {DatePickerText} from '../../shared/models/particle-component-text.model';
 
 /**
  * Component to allow a user to input/select a date
@@ -155,6 +156,22 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   @Input()
   placeholder = 'mm/dd/yyyy';
+
+  private _text: DatePickerText = {
+    enterInFormat: 'enter in format',
+    openCalendar: 'Open the calendar'
+  } as DatePickerText;
+
+  @Input()
+  set text(text: DatePickerText) {
+    if (text) {
+      this._text = text;
+    }
+  }
+
+  get text(): DatePickerText {
+    return this._text;
+  }
 
   /**
    * Event emitted on date picker input

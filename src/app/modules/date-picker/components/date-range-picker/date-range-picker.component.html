@@ -6,7 +6,8 @@
                             [dateRange]="dateRange"
                             [disabled]="disabled"
                             [inputClassList]="inputClassList"
-                            placeholder="Begin - mm/dd/yyyy"
+                            [placeholder]="text.begin + ' - mm/dd/yyyy'"
+                            [text]="text.datePickerText"
                             [calendarButtonClassList]="calendarButtonClassList">
       </particle-date-picker>
     </div>
@@ -19,7 +20,8 @@
                             [dateRange]="_endDateRange"
                             [disabled]="disabled"
                             [inputClassList]="inputClassList"
-                            placeholder="End - mm/dd/yyyy"
+                            [placeholder]="text.end + ' - mm/dd/yyyy'"
+                            [text]="text.datePickerText"
                             [calendarButtonClassList]="calendarButtonClassList">
       </particle-date-picker>
     </div>

@@ -14,6 +14,44 @@ export interface ButtonText {
   close: string;
 }
 
+export interface CalendarText {
+  selectAYear: string;
+  selectAMonth: string;
+  january: string;
+  february: string;
+  march: string;
+  april: string;
+  may: string;
+  june: string;
+  july: string;
+  august: string;
+  september: string;
+  october: string;
+  november: string;
+  december: string;
+  sundayAbbr: string;
+  mondayAbbr: string;
+  tuesdayAbbr: string;
+  wednesdayAbbr: string;
+  thursdayAbbr: string;
+  fridayAbbr: string;
+  saturdayAbbr: string;
+  sunday: string;
+  monday: string;
+  tuesday: string;
+  wednesday: string;
+  thursday: string;
+  friday: string;
+  saturday: string;
+  select: string;
+  the: string;
+  resetDateToToday: string;
+  selectToday: string;
+  saveDate: string;
+  done: string;
+  minGreaterThenMax: string;
+}
+
 export interface CheckboxText {
   check: string;
   uncheck: string;
@@ -25,7 +63,15 @@ export interface ColorPickerText {
 }
 
 export interface DatePickerText {
+  calendarText?: CalendarText;
+  enterInFormat: string;
+  openCalendar: string;
+}
 
+export interface DateRangePickerText {
+  datePickerText?: DatePickerText;
+  begin: string;
+  end: string;
 }
 
 export interface DialogText {
@@ -131,5 +177,32 @@ export interface ThemingText {
 }
 
 export interface WeekPickerText {
-
+  openCalendar: string;
+  selectWeek: string;
+  selectYear: string;
+  selectMonth: string;
+  january: string;
+  february: string;
+  march: string;
+  april: string;
+  may: string;
+  june: string;
+  july: string;
+  august: string;
+  september: string;
+  october: string;
+  november: string;
+  december: string;
+  sundayAbbr: string;
+  mondayAbbr: string;
+  tuesdayAbbr: string;
+  wednesdayAbbr: string;
+  thursdayAbbr: string;
+  fridayAbbr: string;
+  saturdayAbbr: string;
+  selectLastWeek: string;
+  lastWeek: string;
+  resetWeekSelection: string;
+  selectNextWeek: string;
+  nextWeek: string;
 }

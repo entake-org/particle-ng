@@ -5,14 +5,14 @@
   <button (click)="openCalendar($event)"
           aria-haspopup="dialog"
           [disabled]="disabled"
-          [attr.aria-label]="ariaLabel + ', open calendar to select week'"
+          [attr.aria-label]="ariaLabel + ', ' + text.openCalendar"
           [attr.aria-expanded]="calendarPopover.visible"
           class="access content_color wwp_input">
     <ng-container *ngIf="_internalValue | async as internalValue else placeholderTemplate">
       {{internalValue.start | date: dateFormat}} - {{internalValue.end | date: dateFormat}}
     </ng-container>
     <ng-template #placeholderTemplate>
-      <div class="wwp_placeholder">Select a week...</div>
+      <div class="wwp_placeholder">{{text.selectWeek}}...</div>
     </ng-template>
   </button>
   <div class="wwp_button" [ngClass]="calendarButtonClassList">
@@ -33,7 +33,7 @@
                   [attr.data-dialog-close-override]="true"
                   (change)="_selectedYear.next(+yearSelect.value)"
                   class="access input sm content_color"
-                  aria-label="Select a year">
+                  [attr.aria-label]="text.selectYear">
             <option *ngFor="let year of validYearRange$ | async"
                     [value]="year">
               {{year}}
@@ -45,19 +45,19 @@
                   [ngModel]="_selectedMonth | async"
                   (change)="_selectedMonth.next(+monthSelect.value)"
                   class="access input sm content_color"
-                  aria-label="Select a month">
-            <option value="0">January</option>
-            <option value="1">February</option>
-            <option value="2">March</option>
-            <option value="3">April</option>
-            <option value="4">May</option>
-            <option value="5">June</option>
-            <option value="6">July</option>
-            <option value="7">August</option>
-            <option value="8">September</option>
-            <option value="9">October</option>
-            <option value="10">November</option>
-            <option value="11">December</option>
+                  [attr.aria-label]="text.selectMonth">
+            <option value="0">{{text.january}}</option>
+            <option value="1">{{text.february}}</option>
+            <option value="2">{{text.march}}</option>
+            <option value="3">{{text.april}}</option>
+            <option value="4">{{text.may}}</option>
+            <option value="5">{{text.june}}</option>
+            <option value="6">{{text.july}}</option>
+            <option value="7">{{text.august}}</option>
+            <option value="8">{{text.september}}</option>
+            <option value="9">{{text.october}}</option>
+            <option value="10">{{text.november}}</option>
+            <option value="11">{{text.december}}</option>
           </select>
         </div>
       </div>
@@ -66,13 +66,13 @@
       <!-- weekdays -->
       <div class="mar_5 mar_bot10">
         <div class="row wrap space_between body_color brad_3 mar_bot5">
-          <div class="wwp_weekday">Su</div>
-          <div class="wwp_weekday">Mo</div>
-          <div class="wwp_weekday">Tu</div>
-          <div class="wwp_weekday">We</div>
-          <div class="wwp_weekday">Th</div>
-          <div class="wwp_weekday">Fr</div>
-          <div class="wwp_weekday">Sa</div>
+          <div class="wwp_weekday">{{text.sundayAbbr}}</div>
+          <div class="wwp_weekday">{{text.mondayAbbr}}</div>
+          <div class="wwp_weekday">{{text.tuesdayAbbr}}</div>
+          <div class="wwp_weekday">{{text.wednesdayAbbr}}</div>
+          <div class="wwp_weekday">{{text.thursdayAbbr}}</div>
+          <div class="wwp_weekday">{{text.fridayAbbr}}</div>
+          <div class="wwp_weekday">{{text.saturdayAbbr}}</div>
         </div>
         <!-- days -->
         <ng-container *ngIf="fullMonth$ | async as fullMonth">
@@ -100,30 +100,30 @@
         <button *ngIf="canSelectLastWeek$ | async else disabledLastWeekButton"
                 (click)="selectLastWeek()"
                 class="access btn sm icon_left bg_overlay_rev brdr hov_bg mar_5"
-                aria-label="Select last week">
+                [attr.aria-label]="text.selectLastWeek">
           <span class="icon slide_left"><i class="fas fa-chevron-left"></i></span>
           Last Week
         </button>
         <ng-template #disabledLastWeekButton>
           <button disabled
                   class="access btn sm icon_left mar_5"
-                  aria-label="Select last week">
+                  [attr.aria-label]="text.selectLastWeek">
             <span class="icon"><i class="fas fa-chevron-left"></i></span>
-            Last Week
+            {{text.lastWeek}}
           </button>
         </ng-template>
         <ng-container *ngIf="currentDate.selectable">
           <button *ngIf="((selectedWeek$ | async) === currentDate.week) && ((selectedYear$ | async) === currentDate.year) else selectCurrentWeekButton"
                   disabled
                   class="access btn sm mar_5"
-                  aria-label="Reset week selection to current week">
+                  [attr.aria-label]="text.resetWeekSelection">
             <i class="fas fa-undo-alt"></i>
           </button>
           <ng-template #selectCurrentWeekButton>
             <button (click)="selectCurrentWeek()"
                     particleTooltip="Reset to Current Week"
                     class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
-                    aria-label="Reset week selection to current week">
+                    [attr.aria-label]="text.resetWeekSelection">
               <i class="fas fa-undo-alt"></i>
             </button>
           </ng-template>
@@ -131,15 +131,15 @@
         <button *ngIf="canSelectNextWeek$ | async else disabledNextWeekButton"
                 (click)="selectNextWeek()"
                 class="access btn sm icon_right bg_overlay_rev brdr hov_bg mar_5"
-                aria-label="Select next week">
-          Next Week
+                [attr.aria-label]="text.selectNextWeek">
+          {{text.nextWeek}}
           <span class="icon slide_right"><i class="fas fa-chevron-right"></i></span>
         </button>
         <ng-template #disabledNextWeekButton>
           <button disabled
                   class="access btn sm icon_right mar_5"
-                  aria-label="Select next week">
-            Next Week
+                  [attr.aria-label]="text.selectNextWeek">
+            {{text.nextWeek}}
             <span class="icon slide_right"><i class="fas fa-chevron-right"></i></span>
           </button>
         </ng-template>

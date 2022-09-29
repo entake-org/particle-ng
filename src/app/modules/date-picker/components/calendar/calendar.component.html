@@ -13,7 +13,7 @@
                 (change)="_selectedYear.next(+yearSelect.value)"
                 (keyup.escape)="closed.emit()"
                 class="access input sm content_color"
-                aria-label="Select a year">
+                [attr.aria-label]="text.selectAYear">
           <option *ngFor="let year of validYearRange$ | async"
                   [value]="year">
               {{year}}
@@ -27,19 +27,19 @@
                 (keyup.escape)="closed.emit()"
                 [attr.data-dialog-close-override]="true"
                 class="access input sm content_color"
-                aria-label="Select a month">
-          <option value="0">January</option>
-          <option value="1">February</option>
-          <option value="2">March</option>
-          <option value="3">April</option>
-          <option value="4">May</option>
-          <option value="5">June</option>
-          <option value="6">July</option>
-          <option value="7">August</option>
-          <option value="8">September</option>
-          <option value="9">October</option>
-          <option value="10">November</option>
-          <option value="11">December</option>
+                [attr.aria-label]="text.selectAMonth">
+          <option value="0">{{text.january}}</option>
+          <option value="1">{{text.february}}</option>
+          <option value="2">{{text.march}}</option>
+          <option value="3">{{text.april}}</option>
+          <option value="4">{{text.may}}</option>
+          <option value="5">{{text.june}}</option>
+          <option value="6">{{text.july}}</option>
+          <option value="7">{{text.august}}</option>
+          <option value="8">{{text.september}}</option>
+          <option value="9">{{text.october}}</option>
+          <option value="10">{{text.november}}</option>
+          <option value="11">{{text.december}}</option>
         </select>
       </div>
     </div>
@@ -48,13 +48,13 @@
     <!-- weekdays -->
     <div class="mar_5 mar_bot10">
       <div class="row wrap space_between body_color brad_3 mar_bot5">
-        <div class="particle_datepicker_weekday">Su</div>
-        <div class="particle_datepicker_weekday">Mo</div>
-        <div class="particle_datepicker_weekday">Tu</div>
-        <div class="particle_datepicker_weekday">We</div>
-        <div class="particle_datepicker_weekday">Th</div>
-        <div class="particle_datepicker_weekday">Fr</div>
-        <div class="particle_datepicker_weekday">Sa</div>
+        <div class="particle_datepicker_weekday">{{text.sundayAbbr}}</div>
+        <div class="particle_datepicker_weekday">{{text.mondayAbbr}}</div>
+        <div class="particle_datepicker_weekday">{{text.tuesdayAbbr}}</div>
+        <div class="particle_datepicker_weekday">{{text.wednesdayAbbr}}</div>
+        <div class="particle_datepicker_weekday">{{text.thursdayAbbr}}</div>
+        <div class="particle_datepicker_weekday">{{text.fridayAbbr}}</div>
+        <div class="particle_datepicker_weekday">{{text.saturdayAbbr}}</div>
       </div>
       <!-- days -->
       <div class="row wrap space_between">
@@ -67,7 +67,7 @@
                       (keyup.escape)="closed.emit()"
                       [attr.data-date]="dayInMonth.date"
                       [attr.data-dialog-close-override]="true"
-                      [attr.aria-label]="'Select ' + weekDays[dayInMonth.day] + ' the ' + (dayInMonth.date | ordinalNumber)"
+                      [attr.aria-label]="text.select + ' ' + weekDays[dayInMonth.day] + ' ' + text.the + ' ' + (dayInMonth.date | ordinalNumber)"
                       [ngClass]="{
                         'ok_button_color': (dayInMonth.date === selectedDate.date && dayInMonth.month === selectedDate.month && dayInMonth.year === selectedDate.year),
                         'bg_overlay_rev brdr hov_bg': (dayInMonth.date !== selectedDate.date || dayInMonth.month !== selectedDate.month || dayInMonth.year !== selectedDate.year)
@@ -91,16 +91,16 @@
         <button *ngIf="(currentDate.date === selectedDate?.date && currentDate.month === selectedDate?.month && currentDate.year === selectedDate?.year) else selectTodayButton"
                 disabled
                 class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
-                aria-label="Reset date selection to today's date">
-            <span class="text bold">Select Today</span>
+                [attr.aria-label]="text.resetDateToToday">
+            <span class="text bold">{{text.selectToday}}</span>
           </button>
         <ng-template #selectTodayButton>
           <button (keyup.escape)="closed.emit()"
                   (click)="selectToday()"
                   [attr.data-dialog-close-override]="true"
                   class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
-                  aria-label="Reset date selection to today's date">
-            <span class="text bold">Select Today</span>
+                  [attr.aria-label]="text.resetDateToToday">
+            <span class="text bold">{{text.selectToday}}</span>
           </button>
         </ng-template>
       </ng-container>
@@ -109,8 +109,8 @@
               (click)="closed.emit()"
               [attr.data-dialog-close-override]="true"
               class="access btn sm bg_overlay brdr mar_5 hov_glow"
-              aria-label="Save date selection">
-        <i class="fas fa-check mar_right5"></i><span class="text bold">Done</span>
+              [attr.aria-label]="text.saveDate">
+        <i class="fas fa-check mar_right5"></i><span class="text bold">{{text.done}}</span>
       </button>
     </div>
   </div>

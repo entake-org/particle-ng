@@ -22,6 +22,7 @@ import {
 } from 'date-fns';
 import { BehaviorSubject, Observable, combineLatest, map, shareReplay, withLatestFrom,  } from 'rxjs';
 import { PopoverComponent } from '../popover/popover.component';
+import {WeekPickerText} from '../../shared/models/particle-component-text.model';
 
 /**
  * Interface representing a Date broken down by day/date/week/month/year
@@ -55,7 +56,7 @@ declare interface MetaDate {
   year: number;
 
   /**
-   * Whether or not the day is selectable
+   * Whether the day is selectable
    */
   selectable: boolean;
 }
@@ -76,7 +77,7 @@ declare interface MetaWeek {
   year: number;
 
   /**
-   * Whether or not the week can be selected in the week picker
+   * Whether the week can be selected in the week picker
    */
   selectable: boolean;
 
@@ -178,6 +179,38 @@ export class WeekPickerComponent implements ControlValueAccessor {
   @Input()
   closeOnSelect = true;
 
+  @Input()
+  text: WeekPickerText = {
+    openCalendar: 'open calendar to select week',
+    selectWeek: 'Select a week',
+    selectYear: 'Select a year',
+    selectMonth: 'Select a month',
+    january: 'January',
+    february: 'February',
+    march: 'March',
+    april: 'April',
+    may: 'May',
+    june: 'June',
+    july: 'July',
+    august: 'August',
+    september: 'September',
+    october: 'October',
+    november: 'November',
+    december: 'December',
+    sundayAbbr: 'Su',
+    mondayAbbr: 'Mo',
+    tuesdayAbbr: 'Tu',
+    wednesdayAbbr: 'We',
+    thursdayAbbr: 'Th',
+    fridayAbbr: 'Fr',
+    saturdayAbbr: 'Sa',
+    selectLastWeek: 'Select last week',
+    lastWeek: 'Last Week',
+    resetWeekSelection: 'Reset week selection to current week',
+    selectNextWeek: 'Select next week',
+    nextWeek: 'Next Week'
+  } as WeekPickerText;
+
   /**
    * Event emitted on week select
    */
@@ -194,19 +227,6 @@ export class WeekPickerComponent implements ControlValueAccessor {
    * The current date
    */
   readonly currentDate: MetaDate;
-
-  /**
-   * Array of days of the week
-   */
-  readonly weekDays = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
 
   /**
    * BehaviorSubject tracking the value of the week picker
@@ -338,7 +358,7 @@ export class WeekPickerComponent implements ControlValueAccessor {
   private _value = null;
 
   /**
-   * Whether or not the control is disabled
+   * Whether the control is disabled
    * @private
    */
   private _disabled = false;
@@ -454,7 +474,7 @@ export class WeekPickerComponent implements ControlValueAccessor {
   }
 
   /**
-   * Get whether or not the control is disabled
+   * Get whether the control is disabled
    */
   get disabled(): boolean {
     return this._disabled;
