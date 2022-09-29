@@ -1008,7 +1008,7 @@
                     [(ngModel)]="multiSelectValue"
                     (ngModelChange)="console.log(multiSelectValue); console.log('Multi-select model change')"
                     (change)="console.log(multiSelectValue); console.log('Multi-select value change')"
-                    [placeholder]="'Select your favorite foods...'"
+                    [text]="{placeholder: 'Select your favorite foods...'}"
                     [options]="[
                          { value: 'chicken', label: 'Chicken', dataContext: { 'iconClass': 'fas fa-drumstick-bite' } },
                          { value: 'apples', label: 'Apples', disabled: true, dataContext: { 'iconClass': 'fas fa-apple-alt' } },
