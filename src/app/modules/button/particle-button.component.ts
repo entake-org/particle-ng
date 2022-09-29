@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {ButtonState} from "./button-state.model";
+import {ButtonText} from '../../shared/models/particle-component-text.model';
 
 @Component({
   selector: 'particle-button',
@@ -36,16 +37,16 @@ export class ParticleButtonComponent implements OnInit {
   @Input()
   iconSide: 'left' | 'right' | 'only' = 'left';
 
-  private _text: string = null as any;
+  private _label: string = null as any;
 
   @Input()
-  set text(text: string) {
-    this._text = text;
+  set label(text: string) {
+    this._label = text;
     this.updateButtonState();
   }
 
-  get text(): string {
-    return this._text;
+  get label(): string {
+    return this._label;
   }
 
   private _width: string = 'auto';
@@ -80,6 +81,18 @@ export class ParticleButtonComponent implements OnInit {
 
   @Input()
   size: 'xsm' | 'sm' | 'md' | 'lg' | 'xlg' = 'md';
+
+  @Input()
+  text: ButtonText = {
+    ok: 'OK',
+    save: 'Save',
+    cancel: 'Cancel',
+    delete: 'Delete',
+    next: 'Next',
+    previous: 'Previous',
+    open: 'Open',
+    close: 'Close'
+  } as ButtonText;
 
   @Input()
   set colorClassOverride(colorClassOverride: string) {
@@ -161,19 +174,19 @@ export class ParticleButtonComponent implements OnInit {
 
   private getLabel(): string {
     if (this.iconSide !== 'only') {
-      if (this.text) {
-        return this.text;
+      if (this.label) {
+        return this.label;
       }
 
       switch (this.type) {
-        case 'ok': return 'OK';
-        case 'save': return 'Save';
-        case 'cancel': return 'Cancel';
-        case 'delete': return 'Delete';
-        case 'next': return 'Next';
-        case 'previous': return 'Previous';
-        case 'open': return 'Open';
-        case 'close': return 'Close';
+        case 'ok': return this.text.ok;
+        case 'save': return this.text.save;
+        case 'cancel': return this.text.cancel;
+        case 'delete': return this.text.delete;
+        case 'next': return this.text.next;
+        case 'previous': return this.text.previous;
+        case 'open': return this.text.open;
+        case 'close': return this.text.close;
       }
     }
 

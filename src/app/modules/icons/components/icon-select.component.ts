@@ -13,6 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { IconsService } from '../services/icons.service';
+import {IconSelectText} from '../../../shared/models/particle-component-text.model';
 
 /**
  * Particle Icon Select component provides a button and an icon picker that includes all of the Particle Icons as well as the FAS icons.
@@ -72,6 +73,29 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    */
   @Input()
   buttonSizing = '40px';
+
+  @Input()
+  text: IconSelectText = {
+    selectAnIcon: 'Select an Icon',
+    seeAllIcons: 'See All Icons',
+    fontAwesomeIcons: 'Font Awesome Icons',
+    all: 'All',
+    solid: 'Solid',
+    regular: 'Regular',
+    brands: 'Brands',
+    light: 'Light',
+    customIcons: 'Custom Icons',
+    previousPage: 'Previous Page',
+    nextPage: 'Next Page',
+    searchIcons: 'Search Icons',
+    submitSearch: 'Submit Search',
+    clearResults: 'Clear Results',
+    couldntFindAnything: 'We couldn\'t find anything',
+    modifySearchCriteria: 'Please try modifying your search criteria',
+    selection: 'Selection',
+    confirm: 'Confirm',
+    select: 'Select'
+  } as IconSelectText;
 
   /**
    * Icon select opened event emitter

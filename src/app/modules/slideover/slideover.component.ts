@@ -1,4 +1,5 @@
 import {Component, ElementRef, EventEmitter, Input, OnDestroy, Output, Renderer2, ViewChild} from '@angular/core';
+import {SlideoverText} from '../../shared/models/particle-component-text.model';
 
 @Component({
   selector: 'particle-slideover',
@@ -35,6 +36,11 @@ export class SlideoverComponent implements OnDestroy {
 
   @Input()
   bgClass = 'content_color';
+
+  @Input()
+  text: SlideoverText = {
+    close: 'Close Slideover'
+  } as SlideoverText;
 
   @Output()
   opened = new EventEmitter<any>();

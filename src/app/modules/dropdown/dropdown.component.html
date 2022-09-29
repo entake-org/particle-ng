@@ -9,7 +9,7 @@
           (keyup.escape)="onEscapeKeyUp($event)"
           [id]="dropdownId"
           [disabled]="disabled"
-          [attr.aria-label]="ariaLabel"
+          [attr.aria-label]="text.placeholder"
           [attr.aria-expanded]="opened"
           [attr.data-dialog-close-override]="true"
           class="access content_color particle_dropdown_input">
@@ -24,7 +24,7 @@
       </ng-template>
     </ng-container>
     <ng-template #placeholderTemplate>
-      <div class="particle_dropdown_placeholder">{{placeholder}}</div>
+      <div class="particle_dropdown_placeholder">{{text.placeholder}}</div>
     </ng-template>
   </button>
   <div class="particle_dropdown_caret">
@@ -42,7 +42,7 @@
        class="position_absolute">
     <div class="particle_dropdown_options content_color">
       <ng-container *ngIf="_options | async as options">
-        <div class="particle_dropdown_list" role="listbox" tabindex="-1" [attr.aria-label]="ariaLabel">
+        <div class="particle_dropdown_list" role="listbox" tabindex="-1" [attr.aria-label]="text.placeholder">
           <!-- CUSTOM TEMPLATE -->
           <ng-container *ngIf="!!template else defaultOptionTemplate">
             <ng-container *ngFor="let option of options; index as i">

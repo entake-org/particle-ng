@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, forwardRef, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BehaviorSubject} from 'rxjs';
+import {DateRangePickerText} from '../../../../shared/models/particle-component-text.model';
 
 @Component({
   selector: 'particle-date-range-picker',
@@ -25,13 +26,16 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   inputId: string = null as any;
 
   @Input()
-  ariaLabel = 'Date';
-
-  @Input()
   inputClassList = '';
 
   @Input()
   calendarButtonClassList = '';
+
+  @Input()
+  text: DateRangePickerText = {
+    begin: 'Begin',
+    end: 'End'
+  } as DateRangePickerText;
 
   @Input()
   set dateRange(value: {minDate: Date,  maxDate: Date}) {

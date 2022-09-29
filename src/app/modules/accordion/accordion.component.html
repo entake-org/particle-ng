@@ -3,7 +3,7 @@
           [ngClass]="(item.headerClass ? item.headerClass : headerClass) + (!item.disabled ? ' access' : '')"
           [style.height]="height"
           (click)="!item.disabled ? toggleState(i) : {}"
-          aria-label="View More...">
+          [attr.aria-label]="!expanded.has(i) ? text.expand : text.collapse">
     <ng-container *ngIf="item.headerTemplate">
       <ng-container *ngTemplateOutlet="item.headerTemplate.templateRef"></ng-container>
     </ng-container>

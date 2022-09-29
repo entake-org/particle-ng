@@ -12,7 +12,7 @@
            [ngModel]="_value"
            [min]="_min" [max]="_max" [step]="_step"
            [disabled]="_disabled"
-           [attr.aria-label]="'Select a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
+           [attr.aria-label]="text.selectAValue + (ariaLabel ? ' - ' + ariaLabel : '')"
            (input)="handleInput(+slider.value); input.emit(+slider.value)"
            (change)="handleInput(+slider.value); input.emit(+slider.value)"
            class="access" style="width:100%; z-index:2; margin:10px 0;" />
@@ -26,7 +26,7 @@
            [min]="_min" [max]="_max" [step]="_step"
            [size]="(_max + '').length"
            [disabled]="_disabled"
-           [attr.aria-label]="'Enter a value' + (ariaLabel ? ' - ' + ariaLabel : '')"
+           [attr.aria-label]="text.enterAValue + (ariaLabel ? ' - ' + ariaLabel : '')"
            (input)="handleInput(+sliderInput.value); input.emit(+sliderInput.value)"
            (blur)="handleInput(+sliderInput.value)"
            (paste)="preventPaste($event)"

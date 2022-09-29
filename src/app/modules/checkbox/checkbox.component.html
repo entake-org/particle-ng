@@ -3,7 +3,7 @@
   tabindex="0"
   role="checkbox"
   [disabled]="disabled"
-  [attr.aria-label]="_value ? 'Uncheck checkbox' : 'Check checkbox'"
+  [attr.aria-label]="_value ? text.uncheck : text.check"
   (click)="click()">
   <!-- show if checked state -->
   <span *ngIf="_value">

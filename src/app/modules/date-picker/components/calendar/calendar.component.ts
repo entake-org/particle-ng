@@ -15,6 +15,7 @@ import {
 import { addDays, endOfMonth, isWithinInterval, subDays } from 'date-fns';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {CalendarText} from '../../../../shared/models/particle-component-text.model';
 
 /**
  * Interface representing a date interval
@@ -51,7 +52,7 @@ declare interface MetaDate {
   year: number;
 
   /**
-   * Whether or not the day is selectable
+   * Whether the day is selectable
    */
   selectable: boolean;
 }
@@ -122,7 +123,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
   @Input()
   set dateRange(dateRange: { minDate: Date, maxDate: Date }) {
     if (dateRange?.minDate > dateRange?.maxDate) {
-      throw new Error('Min date must be less than max date');
+      throw new Error(this.text.minGreaterThenMax);
     }
 
     const {year} = this.currentDate;
@@ -131,6 +132,64 @@ export class CalendarComponent implements OnDestroy, OnInit {
       end: dateRange?.maxDate ?? new Date(year + 50, 11, 31)
     });
   }
+
+  @Input()
+  set text(text: CalendarText) {
+    if (text) {
+      this._text = text;
+      this.weekDays = [
+        text.sunday,
+        text.monday,
+        text.tuesday,
+        text.wednesday,
+        text.thursday,
+        text.friday,
+        text.saturday
+      ];
+    }
+  }
+
+  get text(): CalendarText {
+    return this._text;
+  }
+
+  private _text: CalendarText = {
+    selectAYear: 'Select a Year',
+    selectAMonth: 'Select a Month',
+    january: 'January',
+    february: 'February',
+    march: 'March',
+    april: 'April',
+    may: 'May',
+    june: 'June',
+    july: 'July',
+    august: 'August',
+    september: 'September',
+    october: 'October',
+    november: 'November',
+    december: 'December',
+    sundayAbbr: 'Su',
+    mondayAbbr: 'Mo',
+    tuesdayAbbr: 'Tu',
+    wednesdayAbbr: 'We',
+    thursdayAbbr: 'Th',
+    fridayAbbr: 'Fr',
+    saturdayAbbr: 'Sa',
+    sunday: 'Sunday',
+    monday: 'Monday',
+    tuesday: 'Tuesday',
+    wednesday: 'Wednesday',
+    thursday: 'Thursday',
+    friday: 'Friday',
+    saturday: 'Saturday',
+    select: 'Select',
+    the: 'the',
+    resetDateToToday: 'Reset date selection to today\'s date',
+    selectToday: 'Select Today',
+    saveDate: 'Save date selection',
+    done: 'Done',
+    minGreaterThenMax: 'Min date must be less than max date'
+} as CalendarText;
 
   /**
    * Event emitted on date select
@@ -154,14 +213,14 @@ export class CalendarComponent implements OnDestroy, OnInit {
   /**
    * Array of days of the week
    */
-  readonly weekDays = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
+  weekDays = [
+    this.text.sunday,
+    this.text.monday,
+    this.text.tuesday,
+    this.text.wednesday,
+    this.text.thursday,
+    this.text.friday,
+    this.text.saturday
   ];
 
   /**

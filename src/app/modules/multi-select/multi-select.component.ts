@@ -18,6 +18,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {BehaviorSubject, Observable, map} from 'rxjs';
 import {MultiSelectOption} from './models/multi-select-option.model';
 import {MultiSelectOptionGroup} from './models/multi-select-option-group.model';
+import {MultiSelectText} from '../../shared/models/particle-component-text.model';
 
 /**
  * Type representing the multi-select component option input
@@ -136,28 +137,21 @@ export class MultiSelectComponent implements ControlValueAccessor {
   template: TemplateRef<HTMLElement> = null as any;
 
   /**
-   * Whether or not the multi-select should be disabled
+   * Whether the multi-select should be disabled
    */
   @Input()
   disabled: boolean = false;
-
-  /**
-   * Placeholder text to display when no option is selected
-   */
-  @Input()
-  placeholder = 'Make a selection...';
-
-  /**
-   * Aria label text
-   */
-  @Input()
-  ariaLabel = 'Make a selection';
 
   /**
    * Class list to assign to the multi-select
    */
   @Input()
   classList: string = null as any;
+
+  @Input()
+  text: MultiSelectText = {
+    placeholder: 'Make a Selection'
+  } as MultiSelectText;
 
   /**
    * Event emitted on value change, emits the new value

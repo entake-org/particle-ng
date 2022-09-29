@@ -19,6 +19,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {map, withLatestFrom} from 'rxjs/operators';
 import {DropdownOption} from './models/dropdown-option.model';
 import {DropdownOptionGroup} from './models/dropdown-option-group.model';
+import {DropdownText} from '../../shared/models/particle-component-text.model';
 
 /**
  * Type representing the dropdown component option input
@@ -141,22 +142,15 @@ export class DropdownComponent implements ControlValueAccessor {
   template: TemplateRef<HTMLElement> = null as any;
 
   /**
-   * Whether or not the dropdown should be disabled
+   * Whether the dropdown should be disabled
    */
   @Input()
   disabled: boolean = false;
 
-  /**
-   * Placeholder text to display when no option is selected
-   */
   @Input()
-  placeholder = 'Make a selection...';
-
-  /**
-   * Aria label text
-   */
-  @Input()
-  ariaLabel = 'Make a selection';
+  text: DropdownText = {
+     placeholder: 'Make a selection'
+  }
 
   /**
    * Class list to assign to the dropdown
@@ -232,12 +226,12 @@ export class DropdownComponent implements ControlValueAccessor {
   readonly dropdownId;
 
   /**
-   * Whether or not the dropdown should be rendered
+   * Whether the dropdown should be rendered
    */
   render = false;
 
   /**
-   * Whether or not the dropdown is open
+   * Whether the dropdown is open
    */
   opened = false;
 

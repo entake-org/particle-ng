@@ -10,13 +10,13 @@
            type="text"
            [placeholder]="placeholder"
            maxlength="10"
-           [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"
+           [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
            class="access particle_datepicker_input" />
 
     <button (click)="openCalendar($event)"
             [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'bg_overlay brdr ok_button_color'"
             class="access btn particle_datepicker_button"
-            aria-label="Open the calendar" aria-haspopup="dialog">
+            [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
       <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
     </button>
   </ng-container>
@@ -26,11 +26,11 @@
            type="text"
            [placeholder]="placeholder"
            maxlength="10"
-           [attr.aria-label]="ariaLabel + ', enter in format mm/dd/yyyy'"
+           [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
            class="access particle_datepicker_input" />
     <button disabled class="access btn particle_datepicker_button"
             [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'bg_overlay brdr ok_button_color'"
-            aria-label="Open the calendar" aria-haspopup="dialog">
+            [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
       <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
     </button>
   </ng-template>
@@ -47,6 +47,7 @@
        (@openClose.done)="onAnimationDone($event)"
        class="position_absolute">
     <particle-calendar [value]="showCalendar.currentValue!"
+                       [text]="text.calendarText"
                    [dateRange]="{ minDate: validSelectionInterval.start!, maxDate: validSelectionInterval.end! }"
                    (selected)="updateModel($event)"
                    (closed)="handleCalendarClose()">

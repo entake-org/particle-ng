@@ -3,6 +3,7 @@ import {ThemingService} from '../services/theming.service';
 import {Theme} from '../models/theme.model';
 import {map} from 'rxjs/operators';
 import {DropdownOption} from '../../dropdown/models/dropdown-option.model';
+import {ThemingText} from '../../../shared/models/particle-component-text.model';
 
 /**
  * This will produce a dropdown that can be embedded to allow a user to choose their theme.
@@ -24,6 +25,11 @@ export class ThemingComponent implements OnInit {
    */
   @Input()
   selectId: string = null as any;
+
+  @Input()
+  text: ThemingText = {
+    placeholder: 'Select a theme...'
+  }
 
   /**
    * Selected Theme ID

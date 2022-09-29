@@ -9,8 +9,7 @@
     [style.visibility]="visibility ? 'visible' : 'hidden'"
     [style.z-index]="zIndex">
     <div class="push_close_bar" *ngIf="(!hideCloseButton || breakpointExceeded) && !hideCloseButton">
-      <button (click)="close()" class="data_hide_button access" tabindex="0"
-              [attr.aria-label]="'Close ' + side + ' sidebar'">
+      <button (click)="close()" class="data_hide_button access" tabindex="0" [attr.aria-label]="text.close">
         <i class="fas fa-times"></i>
       </button>
     </div>
@@ -27,9 +26,9 @@
     (click)="open()"
     [style.left]="side === 'left' ? 0 : undefined"
     [style.right]="side !== 'left' ? 0 : undefined"
-    particleTooltip="Expand"
+    [particleTooltip]="text.expand"
+    [attr.aria-label]="text.expand"
     tooltipPosition="right"
-    aria-label="Expand"
   >
     <div class="text md">
       <i [ngClass]="side === 'left' ? 'fas fa-angle-right' : 'fas fa-angle-left'"></i>

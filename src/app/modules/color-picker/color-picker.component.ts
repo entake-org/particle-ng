@@ -11,6 +11,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {ColorPickerText} from '../../shared/models/particle-component-text.model';
 
 /**
  * Component that wraps the native HTML5 color picker for supported browsers
@@ -97,16 +98,16 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Aria label input
-   */
-  @Input()
-  ariaLabel = 'Color picker';
-
-  /**
    * Class list to apply to the hex string input
    */
   @Input()
   classList: string = null as any;
+
+  @Input()
+  text: ColorPickerText = {
+    chooseColor: 'Choose a Color',
+    enterHexCode: 'Enter a Hex Code'
+  } as ColorPickerText;
 
   /**
    * Event emitted on hex string input event. Emits the current value of the input
@@ -129,12 +130,12 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   colorInput: ElementRef<HTMLInputElement> = null as any;
 
   /**
-   * Whether or not to render the component
+   * Whether to render the component
    */
   render: boolean = false;
 
   /**
-   * Whether or not the native HTML5 color picker is supported
+   * Whether the native HTML5 color picker is supported
    */
   colorPickerSupported: boolean = false;
 
@@ -144,7 +145,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   _value = '';
 
   /**
-   * Whether or not the color picker is disabled
+   * Whether the color picker is disabled
    * @private
    */
   _disabled = false;
@@ -215,7 +216,7 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
   }
 
   /**
-   * Set whether or not the control should be disabled
+   * Set whether the control should be disabled
    * @param isDisabled disabled or not
    */
   setDisabledState(isDisabled: boolean): void {
