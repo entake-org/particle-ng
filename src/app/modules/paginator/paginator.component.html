@@ -9,7 +9,7 @@
     <!-- items per page -->
     <div class="center_center mar_3" *ngIf="version === '1'">
       <div class="text xsm center_right mar_right5" style="width:80px;">
-        <label for="pageSizeV1">{{text.itemsPerPage}}}:</label>
+        <label for="pageSizeV1">{{text.itemsPerPage}}:</label>
       </div>
       <select class="access fullwidth_input content_color text sm" style="width:50px;"
               [(ngModel)]="pageSize" (change)="pageSizeChange()" [title]="text.choosePageSize" id="pageSizeV1">
