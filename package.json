@@ -31,11 +31,25 @@
   },
   "private": false,
   "peerDependencies": {
+    "@angular/animations": "^14.2.5",
+    "@angular/cdk": "^14.2.4",
+    "@angular/common": "^14.2.5",
+    "@angular/core": "^14.2.5",
+    "@angular/forms": "^14.2.5",
+    "@angular/platform-browser": "^14.2.5",
     "@fortawesome/fontawesome-free": "^6.2.0",
+    "@tinkoff/ng-dompurify": "^3.0.0",
+    "@tiptap/core": "^2.0.0-beta.199",
+    "@tiptap/extension-link": "^2.0.0-beta.199",
+    "@tiptap/extension-placeholder": "^2.0.0-beta.199",
+    "@tiptap/extension-text-align": "^2.0.0-beta.199",
+    "@tiptap/starter-kit": "^2.0.0-beta.199",
     "classlist.js": "^1.1.20150312",
     "core-js": "^3.25.5",
     "date-fns": "^2.29.3",
     "intl": "^1.2.5",
+    "md5-typescript": "^1.0.5",
+    "ngx-tiptap": "^6.0.0",
     "rxjs": "^7.5.7",
     "web-animations-js": "^2.3.2",
     "zone.js": "^0.11.8"
@@ -96,20 +110,6 @@
     "zone.js": "^0.11.8"
   },
   "dependencies": {
-    "@angular/animations": "^14.2.5",
-    "@angular/cdk": "^14.2.4",
-    "@angular/common": "^14.2.5",
-    "@angular/core": "^14.2.5",
-    "@angular/forms": "^14.2.5",
-    "@angular/platform-browser": "^14.2.5",
-    "@tinkoff/ng-dompurify": "^3.0.0",
-    "@tiptap/core": "^2.0.0-beta.199",
-    "@tiptap/extension-link": "^2.0.0-beta.199",
-    "@tiptap/extension-placeholder": "^2.0.0-beta.199",
-    "@tiptap/extension-text-align": "^2.0.0-beta.199",
-    "@tiptap/starter-kit": "^2.0.0-beta.199",
-    "md5-typescript": "^1.0.5",
-    "ngx-tiptap": "^6.0.0",
     "tslib": "^2.4.0"
   }
 }
