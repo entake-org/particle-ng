@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {DialogComponent} from "../dialog/dialog.component";
 import {IdleTimer} from "./idle-timer";
+import {IdleTimeoutText} from '../../shared/models/particle-component-text.model';
 
 @Component({
   selector: 'particle-idle-timeout',
@@ -10,6 +11,14 @@ export class IdleTimeoutComponent implements OnInit {
 
   @Input()
   timeoutInSeconds = 600;
+
+  @Input()
+  text: IdleTimeoutText = {
+    sessionExpiring: 'Your Session is Expiring',
+    second: 'second',
+    seconds: 'seconds',
+    stayLoggedIn: 'Click to stay logged in'
+  } as IdleTimeoutText;
 
   @Output()
   timerEnd: EventEmitter<any> = new EventEmitter<any>();
@@ -42,7 +51,7 @@ export class IdleTimeoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.idleTimer = new IdleTimer(this.timeoutInSeconds - 60, () => {console.log('firing dialog');this.openDialog()});
+    this.idleTimer = new IdleTimer(this.timeoutInSeconds - 60, () => {this.openDialog()});
   }
 
   openDialog(): void {

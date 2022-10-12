@@ -116,6 +116,13 @@ export interface IconSelectText {
   select: string;
 }
 
+export interface IdleTimeoutText {
+  sessionExpiring: string;
+  second: string;
+  seconds: string;
+  stayLoggedIn: string;
+}
+
 export interface MultiSelectText {
   placeholder: string;
 }
