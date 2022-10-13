@@ -1584,6 +1584,16 @@
                       ></particle-toggle-switch>
                     </div>
                   </div>
+                  <div class="row pad_top5">
+                    <div class="col size_1 center_center">
+                      <particle-toggle-switch
+                        [(ngModel)]="toggleValue"
+                        [options]="$any({affirmativeColorClass: 'ok_button_color', negativeColorClass: 'cancel_button_color', toggleTrackWidth: 60, toggleSwitchWidth: 26})"
+                        [disabled]="false"
+                        (change)="console.log('Toggle Val: ' + toggleValue)"
+                      ></particle-toggle-switch>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
