@@ -852,15 +852,15 @@
                 </div>
                 <div class="pad_15">
                   <div class="form_label mar_bot3">Basic Date Picker</div>
-                  <particle-date-picker [(ngModel)]="datePickerValue"
-                                    (ngModelChange)="console.log(datePickerValue); console.log('Date picker model change')"
-                                    (dateSelected)="console.log($event); console.log('Date selected')"
+                  <form [formGroup]="formGroup">
+                    <particle-date-picker [formControlName]="'dateTest'"
                                     (input)="console.log('Date picker input')"
                                     [disabled]="false"
                                     [closeOnSelect]="true"
                                     [inputClassList]="'form_input content_color'"
                                     [calendarButtonClassList]="'bg_overlay brdr border_left brad_0'">
-                  </particle-date-picker>
+                    </particle-date-picker>
+                  </form>
                   <div class="pad_10"></div>
                   <div class="form_label mar_bot3">Week Picker</div>
                   <particle-week-picker

@@ -8,6 +8,7 @@ import {Theme} from './modules/theming/models/theme.model';
 import {ToggleOptions} from "./modules/toggle-switch/models/toggle-options.model";
 import {Observable} from "rxjs";
 import {CarouselOptions} from "./modules/background-carousel/carousel-options.model";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 /**
  * App Component to test out stuff built here. Not useful for anything else. Should not be exported by this package.
@@ -258,6 +259,8 @@ export class AppComponent implements OnInit {
   checkboxActive = true;
 
   progressBarAmount = 69.69696969;
+
+  formGroup = new FormGroup({ dateTest: new FormControl(null, Validators.required)});
 
   /**
    * Constructor

@@ -10,7 +10,7 @@ import {ParticlePaginatorModule} from './modules/paginator/particle-paginator.mo
 import {ParticlePushContainerModule} from './modules/push-container/particle-push-container.module';
 import {ParticleRichTextModule} from './modules/rich-text/particle-rich-text.module';
 import {ParticleIconsModule} from './modules/icons/particle-icons.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ParticleEndpointStateModule} from './modules/endpoint-state/endpoint-state.module';
 import {ParticleDialogModule} from './modules/dialog/dialog.module';
 import {ParticleDatePickerModule} from './modules/date-picker/date-picker.module';
@@ -67,7 +67,8 @@ import {ParticleProgressBarModule} from './modules/progress-bar/progress-bar.mod
     ParticleButtonModule,
     ParticleBackgroundCarouselModule,
     ParticleCheckboxModule,
-    ParticleProgressBarModule
+    ParticleProgressBarModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

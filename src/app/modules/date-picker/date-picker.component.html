@@ -46,7 +46,7 @@
        (@openClose.start)="onAnimationStart($event)"
        (@openClose.done)="onAnimationDone($event)"
        class="position_absolute">
-    <particle-calendar [value]="showCalendar.currentValue!"
+    <particle-calendar [value]="showCalendar ? showCalendar.currentValue : $any(null)"
                        [text]="$any(text.calendarText)"
                    [dateRange]="{ minDate: validSelectionInterval.start!, maxDate: validSelectionInterval.end! }"
                    (selected)="updateModel($event)"

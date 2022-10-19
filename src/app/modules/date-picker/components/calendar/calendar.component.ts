@@ -288,7 +288,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
   /**
    * The currently selected date
    */
-  selectedDate: MetaDate = null as any;
+  selectedDate: MetaDate | null = null;
 
   /**
    * Generate a 42 element array representing the input month's days with
