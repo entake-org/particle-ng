@@ -1,6 +1,6 @@
 {
   "name": "@sdsolutions/particle-ng",
-  "version": "14.7.0",
+  "version": "14.7.1",
   "license": "MIT",
   "description": "Reusable Angular components to use in lieu of Material or PrimeNG",
   "repository": {
