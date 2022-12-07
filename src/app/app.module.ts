@@ -31,12 +31,23 @@ import {ParticleButtonModule} from "./modules/button/button.module";
 import {ParticleBackgroundCarouselModule} from "./modules/background-carousel/particle-background-carousel.module";
 import {ParticleCheckboxModule} from './modules/checkbox/checkbox.module';
 import {ParticleProgressBarModule} from './modules/progress-bar/progress-bar.module';
+import {FormComponent} from './form.component';
+import {HomeComponent} from './home.component';
+import {RouterModule, Routes} from '@angular/router';
+
+const routes: Routes = [
+  {path: '', component: HomeComponent},
+  {path: 'form', component: FormComponent}
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FormComponent,
+    HomeComponent
   ],
   imports: [
+    RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,
     ParticleTooltipModule,
