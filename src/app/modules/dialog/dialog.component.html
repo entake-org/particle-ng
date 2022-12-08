@@ -4,7 +4,7 @@
        (@dialog.done)="onAnimationDone($event)"
        [cdkTrapFocus]="true"
        [cdkTrapFocusAutoCapture]="true">
-    <div class="col shadow particle_dialog_box"
+    <div class="col shadow particle_dialog_box" [style.border-radius]="borderRadius"
          *ngIf="effectiveWidth$ | async as effectiveWidth"
          [ngStyle]="{'width': effectiveWidth, 'height': height}">
       <!-- dialog header -->

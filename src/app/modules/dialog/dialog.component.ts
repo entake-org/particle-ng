@@ -118,6 +118,9 @@ export class DialogComponent {
   width = '900px';
 
   @Input()
+  borderRadius = '0px';
+
+  @Input()
   text: DialogText = {
     close: 'Close Dialog'
   } as DialogText;
