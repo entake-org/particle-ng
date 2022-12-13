@@ -21,7 +21,7 @@
         <particle-date-picker [formControlName]="'dateTest'"
                               [disabled]="false"
                               [closeOnSelect]="true"
-                              [inputClassList]="'input_set input_height input_bg_color input_text_size input_brdr_color brad_5'"
+                              [inputClassList]="''"
                               [calendarButtonClassList]="'bg_overlay_rev'">
         </particle-date-picker>
       </form>
@@ -37,7 +37,8 @@
       <div class="form_label mar_bot5">Regular Input</div>
       <input
              aria-label="Does Everthing" placeholder="Abc... 123... !?&..."
-             [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+             class="access ptl_input ptl_input_height ptl_input_text ptl_input_padding ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
+             [disabled]="false">
 
       <br/><br/>
       <div class="form_label mar_bot5">Alpha Text Only</div>
@@ -80,7 +81,7 @@
       </div>
       <!-- END SUBHEADER -->
       <div class="form_label mar_bot5">Check Box</div>
-      <particle-checkbox [classList]="'square_60px input_text_size input_bg_color input_brdr_color brad_5'" [disabled]="false" [inputId]="'checkboxTest'"></particle-checkbox>
+      <particle-checkbox [classList]="''" [disabled]="false" [inputId]="'checkboxTest'"></particle-checkbox>
       <br/><br/>
 
       <!-- SUBHEADER -->

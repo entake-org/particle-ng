@@ -41,7 +41,7 @@ input[type=radio]{
   accent-color: var(--ok-button-color)
 }
 
-.input_set {
+.ptl_input {
   display: flex;
   align-items: center;
   flex:auto;
@@ -49,19 +49,25 @@ input[type=radio]{
   margin: 0;
   outline: none;
 }
-.input_text_size{
-  font-size: 16pt;
+.ptl_input_text {
+  font-size: 14pt;
 }
-.input_bg_color{
+.ptl_input_bg_color{
   background-color: #ffe5fa;
 }
-.input_brdr_color{
-  border-style: solid;
+.ptl_input_brdr_color{
   border-color: #ef06d2;
+}
+.ptl_input_brdr_size{
+  border-style: solid;
   border-width: 2px;
 }
-
-.input_height{
-  height:60px;
+.ptl_input_brdr_radius{
+  border-radius: 5px;
 }
-
+.ptl_input_height{
+  height:40px;
+}
+.ptl_input_padding{
+  padding: 0 10px;
+}

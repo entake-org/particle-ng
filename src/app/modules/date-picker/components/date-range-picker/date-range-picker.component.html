@@ -1,6 +1,6 @@
 <ng-container *ngIf="_value.asObservable() | async as value">
   <div class="row space_between wrap">
-    <div class="particle_date_range_date">
+    <div class="col size_1">
       <particle-date-picker [(ngModel)]="beginDate"
                             [inputId]="inputId + '.beginDate'"
                             [dateRange]="dateRange"
@@ -11,10 +11,10 @@
                             [calendarButtonClassList]="calendarButtonClassList">
       </particle-date-picker>
     </div>
-    <div class="particle_date_range_center center_center hide_element">
+    <div class="center_center hide_element">
       <i class="fa-solid fa-arrows-left-right"></i>
     </div>
-    <div class="particle_date_range_date">
+    <div class="col size_1">
       <particle-date-picker [(ngModel)]="endDate"
                             [inputId]="inputId + '.endDate'"
                             [dateRange]="_endDateRange"

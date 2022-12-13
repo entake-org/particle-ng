@@ -1,5 +1,5 @@
-
-<button
+<div class="access ptl_input ptl_input_height ptl_input_text ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius">
+  <button
     class="access btn clear" style="width: 100%; height: 100%;"
     tabindex="0"
     role="checkbox"
@@ -9,11 +9,13 @@
     <!-- show if checked state -->
 
     <div *ngIf="_value" >
-      <i class="fas fa-check fa-2x"></i>
+      <i class="fas fa-check fa-1x"></i>
     </div>
-</button>
+  </button>
 
-<input type="hidden"
-       [id]="inputId"
-       [value]="value"
-       #hiddenInput />
+  <input type="hidden"
+         [id]="inputId"
+         [value]="value"
+         #hiddenInput />
+</div>
+

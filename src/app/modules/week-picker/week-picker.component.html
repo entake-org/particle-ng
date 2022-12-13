@@ -1,7 +1,39 @@
-<!-- week picker input -->
+<div style="cursor:default;"
+     [ngClass]="inputClassList"
+     [style.filter]="disabled ? 'brightness(.95)' : ''">
+<div class="ptl_input ptl_input_height ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius">
+  <div class="col size_1 height100 width100">
+
+      <ng-container *ngIf="_internalValue | async as internalValue else placeholderTemplate">
+        {{internalValue.start | date: dateFormat}} - {{internalValue.end | date: dateFormat}}
+      </ng-container>
+      <ng-template #placeholderTemplate>
+        {{text.selectWeek}}...
+      </ng-template>
+
+  </div>
+  <div class="col min_w50 bg_overlay height100 center_center "  [ngClass]="calendarButtonClassList">
+    <button (click)="openCalendar($event)"
+            aria-haspopup="dialog"
+            [disabled]="disabled"
+            [attr.aria-label]="ariaLabel + ', ' + text.openCalendar"
+            [attr.aria-expanded]="calendarPopover.visible"
+            class="access btnset width100 height100 clear">
+      <i class="fas fa-calendar-week"></i>
+    </button>
+  </div>
+
+</div>
+
+
+</div>
+
+
+<!-- week picker input
 <div class="wwp_container" style="cursor:default;"
      [ngClass]="inputClassList"
      [style.filter]="disabled ? 'brightness(.95)' : ''">
+
   <button (click)="openCalendar($event)"
           aria-haspopup="dialog"
           [disabled]="disabled"
@@ -19,7 +51,7 @@
     <i class="fas fa-calendar-week"></i>
   </div>
 </div>
-
+-->
 <!-- TODO: instead of offset 1, attach to wwp_container -->
 <!-- calendar widget -->
 <particle-popover [offset]="1" #calendarPopover>
