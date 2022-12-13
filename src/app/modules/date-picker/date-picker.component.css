@@ -28,7 +28,6 @@
   right:0;
   bottom:0;
   padding:inherit;
-  border:none;
   width: calc(100% - 2.25em);
   /*max-width: 100%;*/
   -moz-appearance: none;

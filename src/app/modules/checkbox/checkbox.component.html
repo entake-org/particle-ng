@@ -1,15 +1,18 @@
+
 <button
-  class="access center_center particle_checkbox brdr content_color_dark_1 btn"
-  tabindex="0"
-  role="checkbox"
-  [disabled]="disabled"
-  [attr.aria-label]="_value ? text.uncheck : text.check"
-  (click)="click()">
-  <!-- show if checked state -->
-  <span *ngIf="_value">
-    <i class="fas fa-check"></i>
-  </span>
+    class="access btn clear" style="width: 100%; height: 100%;"
+    tabindex="0"
+    role="checkbox"
+    [disabled]="disabled"
+    [attr.aria-label]="_value ? text.uncheck : text.check"
+    (click)="click()">
+    <!-- show if checked state -->
+
+    <div *ngIf="_value" >
+      <i class="fas fa-check fa-2x"></i>
+    </div>
 </button>
+
 <input type="hidden"
        [id]="inputId"
        [value]="value"

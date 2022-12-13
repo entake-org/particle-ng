@@ -22,3 +22,46 @@ a:link, a:visited {
 a:hover, a:active {
   color: var(--bg-purple-color) 1px solid !important;
 }
+
+
+input{
+
+}
+
+input::placeholder {
+  opacity: .5;
+  color: inherit;
+}
+select::placeholder {
+  opacity: .5;
+  color: inherit;
+}
+
+input[type=radio]{
+  accent-color: var(--ok-button-color)
+}
+
+.input_set {
+  display: flex;
+  align-items: center;
+  flex:auto;
+  width: 100%;
+  margin: 0;
+  outline: none;
+}
+.input_text_size{
+  font-size: 16pt;
+}
+.input_bg_color{
+  background-color: #ffe5fa;
+}
+.input_brdr_color{
+  border-style: solid;
+  border-color: #ef06d2;
+  border-width: 2px;
+}
+
+.input_height{
+  height:60px;
+}
+

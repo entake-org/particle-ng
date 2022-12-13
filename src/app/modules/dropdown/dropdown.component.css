@@ -20,6 +20,8 @@
 /* dropdown button style */
 .particle_dropdown_input {
   position:absolute;
+  display:flex;
+  align-items: center;
   top:0;
   left:0;
   right:0;

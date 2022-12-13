@@ -1,1 +1,254 @@
-Form page
+
+<div class="site scroll_y">
+  <div class="row top_center mar_top20">
+    <div class="row_block content_color width100 pad_20 min_h200 brad_5" style="max-width: 1000px;">
+
+      <br/><br/>
+      <div class="center_center input_brdr_color input_bg_color pad_5">BORDER/BACKGROUND COLOR TEST</div>
+      <br/><br/>
+
+
+      <!-- SUBHEADER -->
+      <div class="width100 brdr border_bottom pad_bot5 mar_bot5 mar_top5">
+        <div class="text xlg bold">
+          DATE PICKERS
+        </div>
+      </div>
+      <!-- END SUBHEADER -->
+      <div class="form_label mar_bot3">Basic Date Picker</div>
+
+      <form>
+        <particle-date-picker [formControlName]="'dateTest'"
+                              [disabled]="false"
+                              [closeOnSelect]="true"
+                              [inputClassList]="'input_set input_height input_bg_color input_text_size input_brdr_color brad_5'"
+                              [calendarButtonClassList]="'bg_overlay_rev'">
+        </particle-date-picker>
+      </form>
+      <br/><br/>
+
+      <!-- SUBHEADER -->
+      <div class="width100 brdr border_bottom pad_bot5 mar_bot5 mar_top5">
+        <div class="text xlg bold">
+          FORM INPUTS
+        </div>
+      </div>
+      <!-- END SUBHEADER -->
+      <div class="form_label mar_bot5">Regular Input</div>
+      <input
+             aria-label="Does Everthing" placeholder="Abc... 123... !?&..."
+             [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+
+      <br/><br/>
+      <div class="form_label mar_bot5">Alpha Text Only</div>
+      <input particleKeyfilter="alpha"
+             aria-label="Alpha Text Only" placeholder="Abc..."
+             [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+
+      <br/><br/>
+      <div class="form_label mar_bot5">Numeric Text Only</div>
+      <input particleKeyfilter="numeric"
+             aria-label="Numeric Text Only" placeholder="123..."
+             [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+      <br/><br/>
+      <div class="form_label mar_bot5">Alphanumeric Text Only (with spaces)</div>
+      <input particleKeyfilter="alphanumeric" [allowSpaces]="true"
+             aria-label="Alphanumeric Text" placeholder="Abc 123..."
+             [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+      <br/><br/>
+
+      <!-- SUBHEADER -->
+      <div class="width100 brdr border_bottom pad_bot5 mar_bot5 mar_top5">
+        <div class="text xlg bold">
+          DROPDOWNS
+        </div>
+      </div>
+      <!-- END SUBHEADER -->
+
+      <div class="form_label mar_bot3">Basic Particle Dropdown</div>
+      <select class="input_set input_brdr_color input_bg_color input_height input_text_size brad_5 pad_left15 pad_right15">
+        <option class="input_bg_color min_h50"  value="" disabled selected>Select your option</option>
+        <option class="input_bg_color min_h50 pad_10">Super Basic Option</option>
+      </select>
+      <br/><br/>
+
+      <!-- SUBHEADER -->
+      <div class="width100 brdr border_bottom pad_bot5 mar_bot5 mar_top5">
+        <div class="text xlg bold">
+          Checkbox
+        </div>
+      </div>
+      <!-- END SUBHEADER -->
+      <div class="form_label mar_bot5">Check Box</div>
+      <particle-checkbox [classList]="'square_60px input_text_size input_bg_color input_brdr_color brad_5'" [disabled]="false" [inputId]="'checkboxTest'"></particle-checkbox>
+      <br/><br/>
+
+      <!-- SUBHEADER -->
+      <div class="width100 brdr border_bottom pad_bot5 mar_bot5 mar_top5">
+        <div class="text xlg bold">
+          Radio
+        </div>
+      </div>
+      <!-- END SUBHEADER -->
+
+      <div class="form_label mar_bot5">Radio Button</div>
+      <div class="col v_center mar_top10 mar_bot10">
+        <input type="radio" class="access input_brdr_color input_bg_color circle_30px mar_0" name="star" value="backoff">
+        <label class="input_text_size pad_left10">Back off, man. I'm a scientist.</label>
+      </div>
+      <div class="col v_center mar_top10 mar_bot10">
+        <input type="radio" class="access input_brdr_color input_bg_color circle_30px mar_0" name="star" value="gozer">
+        <label class="input_text_size pad_left10">Gozer the Gozerian, good evening.</label>
+      </div>
+      <br/><br/>
+
+      <!-- SUBHEADER -->
+      <div class="width100 brdr border_bottom pad_bot5 mar_bot5 mar_top5">
+        <div class="text xlg bold">
+          SLIDER
+        </div>
+      </div>
+      <!-- END SUBHEADER -->
+
+
+      <div class="form_label mar_bot3">Basic Slider</div>
+      <particle-slider unit="%"></particle-slider>
+      <br/><br/>
+      <div class="form_label mar_bot5">Is this framework rad?</div>
+        <particle-toggle-switch
+          [options]="$any({affirmativeColorClass: 'ok_button_color', negativeColorClass: 'cancel_button_color', toggleTrackWidth: 100, toggleSwitchWidth: 26})"
+          [disabled]="false"
+        ></particle-toggle-switch>
+      <br/><br/>
+
+      <!-- SUBHEADER -->
+      <div class="width100 brdr border_bottom pad_bot5 mar_bot5 mar_top5">
+        <div class="text xlg bold">
+          TEXT EDITOR
+        </div>
+      </div>
+      <!-- END SUBHEADER -->
+
+      <div class="form_label mar_bot3">Enter some formatted text below</div>
+      <particle-rich-text
+        [placeholder]="'Some placeholder text...'">
+      </particle-rich-text>
+      <div class="form_label mar_bot3 pad_top5">Render the text from the editor</div>
+      <div class="form_label mar_bot3">
+        <particle-render-rich-text>wdawdw</particle-render-rich-text>
+      </div>
+      <br/><br/>
+
+
+
+
+
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      <!-- SUBHEADER -->
+      <div class="width100 brdr border_bottom pad_bot5 mar_bot5 mar_top5">
+        <div class="text xlg bold">
+          PARTICLE SPECIFIC INPUTS
+        </div>
+      </div>
+      <!-- END SUBHEADER -->
+
+
+      <!-- SUBHEADER -->
+      <div class="width100 brdr border_bottom pad_bot5 mar_bot5 mar_top5">
+        <div class="text xlg bold">
+          MULTI SELECTS
+        </div>
+      </div>
+      <!-- END SUBHEADER -->
+
+
+
+      <div class="form_label mar_bot3">Basic Multi Select</div>
+      <particle-multi-select
+        [options]="[
+                         { value: 'a', label: 'Option A' },
+                         { value: 'b', label: 'Disabled Option', disabled: true },
+                         { value: 'c', label: 'Option C' },
+                         {
+                           groupLabel: 'Option Group',
+                           options: [
+                             { value: '1', label: 'Group Option 1' },
+                             { value: '2', label: 'Group Option $' },
+                             { value: '3', label: 'Group Option X' }
+                           ]
+                         }
+                       ]"
+        [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+      </particle-multi-select>
+      <br/><br/>
+      <div class="form_label mar_bot3">Option Multi Select</div>
+      <particle-multi-select
+        [text]="{placeholder: 'Select your favorite foods...'}"
+        [options]="[
+                         { value: 'chicken', label: 'Chicken', dataContext: { 'iconClass': 'fas fa-drumstick-bite' } },
+                         { value: 'apples', label: 'Apples', disabled: true, dataContext: { 'iconClass': 'fas fa-apple-alt' } },
+                         { value: 'cheese', label: 'Cheese', dataContext: { 'iconClass': 'fas fa-cheese' } },
+                         {
+                           groupLabel: 'Forbidden Foods',
+                           options: [
+                             { value: 'lemon', label: 'Lemon', dataContext: { 'iconClass': 'fas fa-lemon' } },
+                             { value: 'stroopwafel', label: 'Stroopwafel', dataContext: { 'iconClass': 'fas fa-stroopwafel' } },
+                             { value: 'fish', label: 'Fish', dataContext: { 'iconClass': 'fas fa-fish' } }
+                           ]
+                         }
+                       ]"
+        [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+        <ng-template let-iconClass="iconClass" let-label>
+          <i [ngClass]="iconClass + ' fa-fw mar_right5'"></i> {{label}}
+        </ng-template>
+      </particle-multi-select>
+      <br/><br/>
+
+
+
+      <div class="form_label mar_bot3">Basic Particle Dropdown</div>
+      <particle-dropdown
+        [text]="{placeholder: 'Select an option...'}"
+        [options]="[
+                           { value: 'red', label: 'Option A' },
+                           { value: 'green', label: 'Disabled Option', disabled: true },
+                           { value: 'blue', label: 'Option C' },
+                           {
+                             groupLabel: 'Option Group',
+                             options: [
+                               { value: 'darkPurple', label: 'Group Option 1' },
+                               { value: 'purple', label: 'Group Option $' },
+                               { value: 'lightPurple', label: 'Group Option X' }
+                             ]
+                           }
+                         ]"
+        [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+      </particle-dropdown>
+      <br/><br/>
+      <div class="form_label mar_bot3">Dropdown with Templating</div>
+      <particle-dropdown
+        [text]="{placeholder: 'Select a color...'}"
+        [options]="[
+                           { value: 'red', label: 'Red', dataContext: { 'colorClass': 'bg_red' } },
+                           { value: 'green', label: 'Green', disabled: true, dataContext: { 'colorClass': 'bg_green' } },
+                           { value: 'blue', label: 'Blue', dataContext: { 'colorClass': 'bg_blue' } },
+                           {
+                             groupLabel: 'Purple Values',
+                             options: [
+                               { value: 'darkPurple', label: 'Dark Purple', dataContext: { 'colorClass': 'bg_purple_dark_4' } },
+                               { value: 'purple', label: 'Purple', dataContext: { 'colorClass': 'bg_purple' } },
+                               { value: 'lightPurple', label: 'Light Purple', dataContext: { 'colorClass': 'bg_purple_light_4' } }
+                             ]
+                           }
+                         ]"
+        [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+        <ng-template let-colorClass="colorClass" let-label>
+          <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{label}}
+        </ng-template>
+      </particle-dropdown>
+
+    </div>
+  </div>
+</div>
+
+

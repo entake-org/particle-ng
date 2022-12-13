@@ -1,5 +1,54 @@
-<!-- date picker input -->
-<div #datePickerDiv [ngClass]="inputClassList ? inputClassList : 'input md bg_overlay brdr content_color'"
+<div #datePickerDiv [ngClass]="inputClassList ? inputClassList : 'row'"
+      [style.filter]="disabled ? 'brightness(.95)' : ''" >
+
+    <ng-container *ngIf="!disabled else disabledDatePicker">
+      <div class="col size_1 height100 width100">
+      <input [(ngModel)]="dateString"
+             [id]="inputId"
+             (keydown)="filterInput($event)"
+             (input)="handleInput()"
+             (blur)="onTouched(); handleBlur()"
+             type="text"
+             [placeholder]="placeholder"
+             maxlength="10"
+             [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
+             class="access height100 width100 pad_left15 pad_right15 brdr brad_5 border_right input_text_size" />
+      </div>
+      <div class="col center_center min_w50 height100">
+        <button (click)="openCalendar($event)"
+                [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'brdr ok_button_color'"
+                class="access btnset center_center height100 width100 input_text_size"
+                [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
+          <i class="fas fa-calendar-day"></i>
+        </button>
+      </div>
+
+
+
+    </ng-container>
+
+    <ng-template #disabledDatePicker>
+      <input disabled
+             [ngModel]="dateString"
+             type="text"
+             [placeholder]="placeholder"
+             maxlength="10"
+             [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
+             class="access " />
+      <button disabled class="access btn "
+              [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'bg_overlay brdr ok_button_color'"
+              [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
+        <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
+      </button>
+    </ng-template>
+
+</div>
+
+
+
+
+<!--
+<div #datePickerDiv [ngClass]="inputClassList ? inputClassList : 'input md bg_overlay content_color'"
      class="particle_datepicker" [style.filter]="disabled ? 'brightness(.95)' : ''">
   <ng-container *ngIf="!disabled else disabledDatePicker">
     <input [(ngModel)]="dateString"
@@ -20,6 +69,7 @@
       <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
     </button>
   </ng-container>
+
   <ng-template #disabledDatePicker>
     <input disabled
            [ngModel]="dateString"
@@ -35,6 +85,7 @@
     </button>
   </ng-template>
 </div>
+-->
 
 <!-- TODO: convert to use popover component -->
 
