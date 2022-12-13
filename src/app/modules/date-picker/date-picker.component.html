@@ -1,50 +1,29 @@
-
-
-
 <div #datePickerDiv [ngClass]="inputClassList ? inputClassList : ''"
-      [style.filter]="disabled ? 'brightness(.95)' : ''" class="ptl_input ptl_input_height  ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius">
-
-    <ng-container *ngIf="!disabled else disabledDatePicker">
-      <div class="col size_1 height100 width100">
-      <input [(ngModel)]="dateString"
-             [id]="inputId"
-             (keydown)="filterInput($event)"
-             (input)="handleInput()"
-             (blur)="onTouched(); handleBlur()"
-             type="text"
-             [placeholder]="placeholder"
-             maxlength="10"
-             [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
-             class="access height100 ptl_input_text ptl_input_padding border_none width100" />
-      </div>
-      <div class="col center_center min_w50 height100">
-        <button (click)="openCalendar($event)"
-                [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'brdr ok_button_color'"
-                class="access btnset center_center height100 width100 ptl_input_text"
-                [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
-          <i class="fas fa-calendar-day"></i>
-        </button>
-      </div>
-
-
-
-    </ng-container>
-
-    <ng-template #disabledDatePicker>
-      <input disabled
-             [ngModel]="dateString"
-             type="text"
-             [placeholder]="placeholder"
-             maxlength="10"
-             [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
-             class="access " />
-      <button disabled class="access btn "
-              [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'bg_overlay brdr ok_button_color'"
-              [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
-        <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
-      </button>
-    </ng-template>
-
+     [style.filter]="disabled ? 'brightness(.95)' : ''"
+     class="ptl_input ptl_input_height  ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
+>
+  <div class="col size_1 height100 width100">
+    <input [(ngModel)]="dateString"
+           [id]="inputId"
+           (keydown)="filterInput($event)"
+           (input)="handleInput()"
+           (blur)="onTouched(); handleBlur()"
+           type="text"
+           [placeholder]="placeholder"
+           maxlength="10"
+           [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
+           [disabled]="disabled"
+           class="access height100 ptl_input_text ptl_input_padding border_none width100"/>
+  </div>
+  <div class="col center_center min_w50 height100">
+    <button (click)="openCalendar($event)"
+            [disabled]="disabled"
+            [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'brdr ok_button_color'"
+            class="access btnset center_center height100 width100 ptl_input_text"
+            [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
+      <i class="fas fa-calendar-day"></i>
+    </button>
+  </div>
 </div>
 
 
