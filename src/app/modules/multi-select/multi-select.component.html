@@ -7,7 +7,7 @@
   <div class="col size_1 height100 width100 v_center ptl_input_text ptl_input_padding border_none width100 overflow_hide">
 
     <ng-container *ngIf="selectionCount$ | async as selectionCount else placeholderTemplate">
-      <div class="ptl_input_brdr_radius ok_button_color ptl_input_text pad_top5 pad_bot5 pad_left10 pad_right10">
+      <div class="ptl_input_brdr_radius ok_button_color ptl_input_text pad_top3 pad_bot3 min_w30 center_center">
         {{selectionCount}}
       </div>
       <ng-container *ngIf="dataContextMap$ | async as dataContextMap">

@@ -1,11 +1,14 @@
 
 @import 'C:\\dev\\particle\\particle-styles\\styles\\borders.css';
 @import 'C:\\dev\\particle\\particle-styles\\styles\\buttons.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\effects.css';
 @import 'C:\\dev\\particle\\particle-styles\\styles\\forms.css';
 @import 'C:\\dev\\particle\\particle-styles\\styles\\layout.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\media.css';
 @import 'C:\\dev\\particle\\particle-styles\\styles\\shapes.css';
 @import 'C:\\dev\\particle\\particle-styles\\styles\\spacing.css';
 @import 'C:\\dev\\particle\\particle-styles\\styles\\styles.css';
+@import 'C:\\dev\\particle\\particle-styles\\styles\\text.css';
 @import 'C:\\dev\\particle\\particle-styles\\styles\\z_responsive.css';
 
 .test {
@@ -21,56 +24,4 @@ a:link, a:visited {
 
 a:hover, a:active {
   color: var(--bg-purple-color) 1px solid !important;
-}
-
-
-input{
-
-}
-
-input::placeholder {
-  opacity: .5;
-  color: inherit;
-}
-select::placeholder {
-  opacity: .5;
-  color: inherit;
-}
-
-input[type=radio]{
-  accent-color: var(--ok-button-color)
-}
-.ptl_placeholder {
-  opacity: .5;
-  color: inherit;
-}
-.ptl_input {
-  display: flex;
-  align-items: center;
-  flex:auto;
-  width: 100%;
-  margin: 0;
-  outline: none;
-}
-.ptl_input_text {
-  font-size: 14pt;
-}
-.ptl_input_bg_color{
-  background-color: #ffe5fa;
-}
-.ptl_input_brdr_color{
-  border-color: #ef06d2;
-}
-.ptl_input_brdr_size{
-  border-style: solid;
-  border-width: 2px;
-}
-.ptl_input_brdr_radius{
-  border-radius: 5px;
-}
-.ptl_input_height{
-  height:50px;
-}
-.ptl_input_padding{
-  padding: 0 10px;
 }
