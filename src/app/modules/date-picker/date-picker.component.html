@@ -15,11 +15,11 @@
            [disabled]="disabled"
            class="access height100 ptl_input_text ptl_input_padding border_none width100"/>
   </div>
-  <div class="col center_center min_w50 height100">
+  <div class="col center_center min_w50 height100 brdr border_left">
     <button (click)="openCalendar($event)"
             [disabled]="disabled"
-            [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'brdr ok_button_color'"
-            class="access btnset center_center height100 width100 ptl_input_text"
+            [ngClass]="calendarButtonClassList ? calendarButtonClassList : ''"
+            class="access btnset clear center_center height100 width100 ptl_input_text"
             [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
       <i class="fas fa-calendar-day"></i>
     </button>

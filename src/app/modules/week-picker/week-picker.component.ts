@@ -152,13 +152,13 @@ export class WeekPickerComponent implements ControlValueAccessor {
    * Class list to apply to the date range input
    */
   @Input()
-  inputClassList = 'input md bg_overlay brdr content_color';
+  inputClassList = '';
 
   /**
    * Class list to apply to the week picker button
    */
   @Input()
-  calendarButtonClassList = 'bg_overlay brdr ok_button_color brad_3';
+  calendarButtonClassList = '';
 
   /**
    * The aria label to apply to the date range input

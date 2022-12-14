@@ -380,17 +380,20 @@
                       <div class="pad_15">
                         <!-- alpha text -->
                         <div class="form_label mar_bot5">Alpha Text Only</div>
-                        <input particleKeyfilter="alpha" class="access input md"
+                        <input particleKeyfilter="alpha"
+                               class="access ptl_input ptl_input_height ptl_input_text ptl_input_padding ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
                                aria-label="Alpha Text Only" placeholder="Abc..." />
                         <div class="pad_10"></div>
                         <!-- numeric text -->
                         <div class="form_label mar_bot5">Numeric Text Only</div>
-                        <input particleKeyfilter="numeric" class="access input md"
+                        <input particleKeyfilter="numeric"
+                               class="access ptl_input ptl_input_height ptl_input_text ptl_input_padding ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
                                aria-label="Numeric Text Only" placeholder="123..." />
                         <div class="pad_10"></div>
                         <!-- alphanumeric text with spaces -->
                         <div class="form_label mar_bot5">Alphanumeric Text Only (with spaces)</div>
-                        <input particleKeyfilter="alphanumeric" [allowSpaces]="true" class="access input md"
+                        <input particleKeyfilter="alphanumeric" [allowSpaces]="true"
+                               class="access ptl_input ptl_input_height ptl_input_text ptl_input_padding ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
                                aria-label="Alphanumeric Text" placeholder="Abc 123..." />
                       </div>
                     </div>
@@ -416,7 +419,7 @@
                                                 [disabled]="false"
                                                 [closeOnSelect]="true"
                                                 [inputClassList]="''"
-                                                [calendarButtonClassList]="'bg_overlay brdr border_left brad_0'">
+                                                [calendarButtonClassList]="''">
                           </particle-date-picker>
                         </form>
                         <div class="pad_10"></div>
@@ -438,7 +441,7 @@
                         <particle-date-range-picker
                           [(ngModel)]="dateRangePickerValue"
                           [inputClassList]="''"
-                          [calendarButtonClassList]="'bg_overlay brdr border_left brad_0'"
+                          [calendarButtonClassList]="''"
                           [disabled]="false">
                         </particle-date-range-picker>
                       </div>
@@ -519,7 +522,7 @@
                              ]
                            }
                          ]"
-                          [classList]="'form_input content_color'"
+                          [classList]="''"
                           [disabled]="false">
                           <ng-template let-colorClass="colorClass" let-label>
                             <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{label}}
@@ -558,7 +561,7 @@
                            ]
                          }
                        ]"
-                          [classList]="'form_input content_color'" [disabled]="false">
+                          [classList]="''" [disabled]="false">
                         </particle-multi-select>
                         <div class="pad_10"></div>
                         <div class="form_label mar_bot3">Select one or more options from the dropdown below</div>
@@ -580,7 +583,7 @@
                            ]
                          }
                        ]"
-                          [disabled]="false" [classList]="'input md bg_overlay brdr content_color'">
+                          [disabled]="false" [classList]="''">
                           <ng-template let-iconClass="iconClass" let-label>
                             <i [ngClass]="iconClass + ' fa-fw mar_right5'"></i> {{label}}
                           </ng-template>
@@ -836,6 +839,7 @@
                         Theming
                       </div>
                       <div class="pad_15">
+                        <div class="form_label mar_bot5">Change things up yo!</div>
                         <particle-theming></particle-theming>
                       </div>
                     </div>

@@ -44,18 +44,18 @@
       <div class="form_label mar_bot5">Alpha Text Only</div>
       <input particleKeyfilter="alpha"
              aria-label="Alpha Text Only" placeholder="Abc..."
-             [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+             [classList]="'access ptl_input ptl_input_height ptl_input_text ptl_input_padding ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius'" [disabled]="false">
 
       <br/><br/>
       <div class="form_label mar_bot5">Numeric Text Only</div>
       <input particleKeyfilter="numeric"
              aria-label="Numeric Text Only" placeholder="123..."
-             [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+             [classList]="'access ptl_input ptl_input_height ptl_input_text ptl_input_padding ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius'" [disabled]="false">
       <br/><br/>
       <div class="form_label mar_bot5">Alphanumeric Text Only (with spaces)</div>
       <input particleKeyfilter="alphanumeric" [allowSpaces]="true"
              aria-label="Alphanumeric Text" placeholder="Abc 123..."
-             [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+             [classList]="'access ptl_input ptl_input_height ptl_input_text ptl_input_padding ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius'" [disabled]="false">
       <br/><br/>
 
       <!-- SUBHEADER -->
@@ -67,7 +67,7 @@
       <!-- END SUBHEADER -->
 
       <div class="form_label mar_bot3">Basic Particle Dropdown</div>
-      <select class="input_set input_brdr_color input_bg_color input_height input_text_size brad_5 pad_left15 pad_right15">
+      <select class="access ptl_input ptl_input_height ptl_input_text ptl_input_padding ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius">
         <option class="input_bg_color min_h50"  value="" disabled selected>Select your option</option>
         <option class="input_bg_color min_h50 pad_10">Super Basic Option</option>
       </select>
@@ -179,7 +179,7 @@
                            ]
                          }
                        ]"
-        [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+        [classList]="''" [disabled]="false">
       </particle-multi-select>
       <br/><br/>
       <div class="form_label mar_bot3">Option Multi Select</div>
@@ -198,7 +198,7 @@
                            ]
                          }
                        ]"
-        [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+        [classList]="''" [disabled]="false">
         <ng-template let-iconClass="iconClass" let-label>
           <i [ngClass]="iconClass + ' fa-fw mar_right5'"></i> {{label}}
         </ng-template>
@@ -223,7 +223,7 @@
                              ]
                            }
                          ]"
-        [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+        [classList]="''" [disabled]="false">
       </particle-dropdown>
       <br/><br/>
       <div class="form_label mar_bot3">Dropdown with Templating</div>
@@ -242,7 +242,7 @@
                              ]
                            }
                          ]"
-        [classList]="'access input_set input_brdr_color input_height input_text_size input_bg_color brad_5 pad_left15 pad_right15'" [disabled]="false">
+        [classList]="''" [disabled]="false">
         <ng-template let-colorClass="colorClass" let-label>
           <div class="circle_14px mar_right5" [ngClass]="colorClass"></div> {{label}}
         </ng-template>

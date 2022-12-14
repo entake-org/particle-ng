@@ -40,7 +40,10 @@ select::placeholder {
 input[type=radio]{
   accent-color: var(--ok-button-color)
 }
-
+.ptl_placeholder {
+  opacity: .5;
+  color: inherit;
+}
 .ptl_input {
   display: flex;
   align-items: center;
@@ -66,7 +69,7 @@ input[type=radio]{
   border-radius: 5px;
 }
 .ptl_input_height{
-  height:40px;
+  height:50px;
 }
 .ptl_input_padding{
   padding: 0 10px;

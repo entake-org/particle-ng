@@ -1,33 +1,26 @@
-<div #multiSelect class="particle_multiselect" [style.filter]="disabled ? 'brightness(.95)' : ''"
+<div #multiSelect
+     class="ptl_input ptl_input_height ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
+     [style.filter]="disabled ? 'brightness(.95)' : ''"
      style="cursor:default;"
-     [ngClass]="classList ? classList : 'input md bg_overlay brdr content_color'">
+     [ngClass]="classList ? classList : ''">
   <!-- maybe switch this to a div? -->
-  <button #multiSelectButton
-          role="combobox"
-          aria-haspopup="listbox"
-          (click)="openMultiSelect($event)"
-          (keyup.escape)="onEscapeKeyUp($event)"
-          [id]="multiSelectId"
-          [disabled]="disabled"
-          [attr.aria-label]="text.placeholder"
-          [attr.aria-expanded]="opened"
-          [attr.data-dialog-close-override]="true"
-          class="access content_color particle_multiselect_input">
+  <div class="col size_1 height100 width100 v_center ptl_input_text ptl_input_padding border_none width100 overflow_hide">
+
     <ng-container *ngIf="selectionCount$ | async as selectionCount else placeholderTemplate">
-      <div class="pill brad_3 bg_grey" style="margin-right:1em; font-size:0.75em; padding:0.3em 0.65em;">
+      <div class="ptl_input_brdr_radius ok_button_color ptl_input_text pad_top5 pad_bot5 pad_left10 pad_right10">
         {{selectionCount}}
       </div>
       <ng-container *ngIf="dataContextMap$ | async as dataContextMap">
-        <div style="display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+        <div class="col overflow_hide">
           <ng-container *ngIf="!!template else noCustomTemplate">
-            <div class="particle_multiselect_selection" *ngFor="let value of _internalValue | async">
-              <div class="v_center">
+            <div class="mar_5 pad_5" *ngFor="let value of _internalValue | async">
+              <div class="ptl_input_text">
                 <ng-container *ngTemplateOutlet="template; context: dataContextMap['' + value]"></ng-container>
               </div>
             </div>
           </ng-container>
           <ng-template #noCustomTemplate>
-            <div class="particle_multiselect_selection" *ngFor="let value of _internalValue | async">
+            <div class="ptl_input_text mar_5 pad_5" *ngFor="let value of _internalValue | async">
               {{dataContextMap['' + value]['$implicit'] || dataContextMap['' + value]['label']}}
             </div>
           </ng-template>
@@ -35,11 +28,24 @@
       </ng-container>
     </ng-container>
     <ng-template #placeholderTemplate>
-      <div class="particle_multiselect_placeholder">{{text.placeholder + '...'}}</div>
+      <div class="ptl_placeholder">{{text.placeholder + '...'}}</div>
     </ng-template>
-  </button>
-  <div class="particle_multiselect_caret">
-    <i class="fas fa-caret-down"></i>
+  </div>
+  <div class="col center_center min_w50 height100 brdr border_left">
+    <button #multiSelectButton
+            role="combobox"
+            aria-haspopup="listbox"
+            (click)="openMultiSelect($event)"
+            (keyup.escape)="onEscapeKeyUp($event)"
+            [id]="multiSelectId"
+            [disabled]="disabled"
+            [attr.aria-label]="text.placeholder"
+            [attr.aria-expanded]="opened"
+            [attr.data-dialog-close-override]="true"
+            class="access btnset clear center_center height100 width100 ptl_input_text">
+      <i class="fas fa-caret-down"></i>
+    </button>
+
   </div>
 </div>
 
