@@ -1,0 +1,31 @@
+/*
+.......
+PARTICLE STYLES
+.......
+*/
+
+/* OVERALL BACKGROUND IMAGES */
+.bgimage{
+  background-image: url('https://images5.alphacoders.com/432/thumb-1920-432766.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.bgimage_fixed{
+  background-image: url('http://www.terrysinay.com/wp-content/uploads/2021/02/dense_woods.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
+.bgimage_fixed2{
+  background-image: url('https://images5.alphacoders.com/432/thumb-1920-432766.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* GENERIC VIDEO BACKGROUND */
+video {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position:absolute;
+  left: 0;
+}

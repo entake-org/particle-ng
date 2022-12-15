@@ -28,7 +28,18 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/styles.css"
+              "src/styles/borders.css",
+              "src/styles/buttons.css",
+              "src/styles/effects.css",
+              "src/styles/forms.css",
+              "src/styles/layout.css",
+              "src/styles/media.css",
+              "src/styles/shapes.css",
+              "src/styles/spacing.css",
+              "src/styles/styles.css",
+              "src/styles/text.css",
+              "src/styles/z_responsive.css",
+              "src/dev.css"
             ],
             "scripts": [
               "node_modules/@fortawesome/fontawesome-free/js/all.js"
@@ -97,7 +108,18 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles/styles.css"
+              "src/styles/borders.css",
+              "src/styles/buttons.css",
+              "src/styles/effects.css",
+              "src/styles/forms.css",
+              "src/styles/layout.css",
+              "src/styles/media.css",
+              "src/styles/shapes.css",
+              "src/styles/spacing.css",
+              "src/styles/styles.css",
+              "src/styles/text.css",
+              "src/styles/z_responsive.css",
+              "src/dev.css"
             ],
             "scripts": [
               "node_modules/@fortawesome/fontawesome-free/js/all.js"

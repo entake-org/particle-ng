@@ -1,27 +1,67 @@
+/*
+.......
+PARTICLE STYLES
+.......
+*/
 
-@import 'C:\\dev\\particle\\particle-styles\\styles\\borders.css';
-@import 'C:\\dev\\particle\\particle-styles\\styles\\buttons.css';
-@import 'C:\\dev\\particle\\particle-styles\\styles\\effects.css';
-@import 'C:\\dev\\particle\\particle-styles\\styles\\forms.css';
-@import 'C:\\dev\\particle\\particle-styles\\styles\\layout.css';
-@import 'C:\\dev\\particle\\particle-styles\\styles\\media.css';
-@import 'C:\\dev\\particle\\particle-styles\\styles\\shapes.css';
-@import 'C:\\dev\\particle\\particle-styles\\styles\\spacing.css';
-@import 'C:\\dev\\particle\\particle-styles\\styles\\styles.css';
-@import 'C:\\dev\\particle\\particle-styles\\styles\\text.css';
-@import 'C:\\dev\\particle\\particle-styles\\styles\\z_responsive.css';
-
-.test {
-  background-color: var(--bg-red-color);
-  color: var(--content-color);
+/* OVERALL APPLICATION FRAMEWORK */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
-a:link, a:visited {
-  cursor: pointer;
-  color: var(--bg-blue-color);
-  text-decoration: underline;
+html {
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
-a:hover, a:active {
-  color: var(--bg-purple-color) 1px solid !important;
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+}
+header{
+  display:block;
+}
+main {
+  flex: auto;
+}
+footer {
+  display: block;
+  align-items: unset;
+  min-height: unset;
+}
+
+
+/* AUTHORING STRUCTURE ONLY */
+.site {
+  position:fixed; /* so 100% height works correctly in ios safari */
+  height:100%;
+  display: flex;
+  flex:1;
+  flex-direction: column;
+  /* stretch to fill screen */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* div holding main content under nav */
+.site-content {
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  overflow-y:scroll;
+  overflow-x:hidden;
 }

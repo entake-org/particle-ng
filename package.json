@@ -1,6 +1,6 @@
 {
   "name": "@sdsolutions/particle-ng",
-  "version": "15.0.1",
+  "version": "15.0.2",
   "license": "MIT",
   "description": "Reusable Angular components to use in lieu of Material or PrimeNG",
   "repository": {
@@ -25,9 +25,13 @@
     "test": "ng test",
     "eslint": "eslint",
     "e2e": "ng e2e",
-    "package": "ng-packagr -p ng-package.json",
+    "package": "npm run css-build && ng-packagr -p ng-package.json",
     "compodoc": "npx compodoc -p src/tsconfig.app.json",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "css-concat": "concat-glob-cli -f ./src/styles/*.css -o ./dist/particle.css",
+    "css-minify": "postcss ./dist/particle.css --replace",
+    "css-copy": "copyfiles -f ./dist/particle.css ./",
+    "css-build": "npm run css-concat && npm run css-minify && npm run css-copy"
   },
   "private": false,
   "peerDependencies": {
@@ -91,7 +95,10 @@
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "classlist.js": "^1.1.20150312",
     "codelyzer": "^6.0.2",
+    "concat-glob-cli": "^0.1.0",
+    "copyfiles": "^2.4.1",
     "core-js": "^3.26.1",
+    "cssnano": "^5.1.14",
     "date-fns": "^2.29.3",
     "dompurify": "^2.4.1",
     "eslint": "^8.28.0",
@@ -106,6 +113,7 @@
     "md5-typescript": "^1.0.5",
     "ng-packagr": "^15.0.1",
     "ngx-tiptap": "^6.0.0",
+    "postcss-cli": "^10.1.0",
     "protractor": "~7.0.0",
     "rxjs": "^7.5.7",
     "ts-node": "~10.9.1",

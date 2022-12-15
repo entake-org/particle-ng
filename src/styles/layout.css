@@ -1,0 +1,363 @@
+/*
+.......
+PARTICLE STYLES
+.......
+*/
+
+
+
+/* SIMPLE 100% */
+.height100 {
+    height: 100%;
+}
+
+.width100 {
+    width: 100%;
+}
+
+/* ROWS */
+.row_block {
+    display: block;
+}
+
+.row {
+    display: flex;
+    flex: 1;
+    -ms-flex:1 1 100%;
+}
+
+.row.column {
+    flex-direction: column;
+}
+
+/* COLUMNS */
+.col {
+    display: flex;
+    flex: 0 1 auto;
+}
+
+.col.column {
+    flex-direction: column;
+}
+
+/* COLUMN SIZING BASED ON FLEX VALUES */
+.col.size_1 {
+    flex: 1;
+}
+
+.col.size_2 {
+    flex: 2;
+}
+
+.col.size_3 {
+    flex: 3;
+}
+
+.col.size_4 {
+    flex: 4;
+}
+
+.col.size_5 {
+    flex: 5;
+}
+
+.col.size_6 {
+    flex: 6;
+}
+
+.col.size_7 {
+    flex: 7;
+}
+
+.col.size_8 {
+    flex: 8;
+}
+
+.col.size_9 {
+    flex: 9;
+}
+
+.col.size_10 {
+    flex: 10;
+}
+
+
+
+/* LIST ITEMS WITH ALTERNATING BACKGROUND COLORS - ODD */
+.bg_everyodd > * {
+    background-color:rgba(128,128,128,0.05);
+}
+.bg_everyodd > :nth-child(even) {
+    background:none !important;
+}
+/* alternative if list items are components */
+.bg_everyodd_component > * > div {
+    background-color:rgba(128,128,128,0.05);
+}
+.bg_everyodd_component > :nth-child(even) > div {
+    background:none !important;
+}
+
+/* LIST ITEMS WITH ALTERNATING BACKGROUND COLORS - EVEN */
+.bg_everyeven > * {
+    background-color:rgba(128,128,128,0.05);
+}
+.bg_everyeven > :nth-child(odd) {
+    background:none !important;
+}
+/* alternative if list items are components */
+.bg_everyeven_component > * > div {
+    background-color:rgba(128,128,128,0.05);
+}
+.bg_everyeven_component > :nth-child(odd) > div {
+    background:none !important;
+}
+
+/* SCROLLING */
+.scroll_y {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.scroll_yauto {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.scroll_x {
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.scroll_xauto {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.scroll_xy {
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+.scroll_xyauto {
+    overflow-x: auto;
+    overflow-y: auto;
+}
+.no_scroll, .no_overflow {
+    overflow:hidden !important;
+}
+
+
+
+/* WRAPPING */
+.wrap {
+    flex-wrap: wrap;
+}
+
+.wrap_reverse {
+    flex-wrap: wrap-reverse;
+}
+
+.nowrap {
+    flex-wrap: nowrap;
+}
+
+/* FLEX ALIGNMENTS */
+.top_center {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.top_left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.top_right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.center_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center_left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.center_right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.bottom_left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.bottom_center {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.bottom_right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.space_between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.space_around {
+    display: flex;
+    justify-content: space-around;
+}
+
+.space_evenly {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.v_center {
+    display: flex;
+    align-items: center;
+}
+
+.h_center {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/* RELATIVE AND ABSOLUTE POSITIONING */
+.position_relative {
+    position:relative;
+}
+
+.position_absolute {
+    position:absolute;
+}
+
+
+/* TOOLTIP STYLES FOR 'particle_toolip' COMPONENT */
+.particle_tooltip {
+    min-width: 75px;
+    max-width: 200px;
+    background-color: #2f2f2f;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 3px 5px;
+    font-size:12px;
+    line-height:1.5;
+    position: absolute;
+    z-index: 1000;
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,0.2);
+    animation-name: fadeInTooltip;
+    animation-duration: 0.4s;
+}
+@keyframes fadeInTooltip {
+    0%   {opacity:0;}
+    100% {opacity:1;}
+}
+
+.particle_tooltip.top {
+    transform-origin:bottom center;
+}
+
+/* PARTICLE TOOL TIPS */
+
+.particle_tooltip.top::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #2f2f2f transparent transparent transparent;
+}
+.particle_tooltip.bottom {
+    transform-origin:top center;
+}
+.particle_tooltip.bottom::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #2f2f2f transparent;
+}
+.particle_tooltip.left {
+    transform-origin:right center;
+}
+.particle_tooltip.left::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #2f2f2f;
+}
+.particle_tooltip.right {
+    transform-origin:left center;
+}
+.particle_tooltip.right::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #2f2f2f transparent transparent;
+}
+
+/* LINES with ELLIPSIS */
+
+.line_item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+}
+.line_ellipsis {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    text-align: left;
+}
+.line_end {
+    white-space: nowrap;
+}
+
+/*  */
+.overflow_hide
+{
+    text-overflow:ellipsis;
+    overflow: hidden;
+    white-space:nowrap;
+}
+
+

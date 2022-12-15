@@ -1,0 +1,14 @@
+.test {
+  background-color: var(--bg-red-color);
+  color: var(--content-color);
+}
+
+a:link, a:visited {
+  cursor: pointer;
+  color: var(--bg-blue-color);
+  text-decoration: underline;
+}
+
+a:hover, a:active {
+  color: var(--bg-purple-color) 1px solid !important;
+}

@@ -1,0 +1,489 @@
+/*
+.......
+PARTICLE STYLES
+.......
+*/
+
+/* INTAKE FORM STYLES  */
+input::placeholder {
+  opacity: .5;
+  color: inherit;
+}
+select::placeholder {
+  opacity: .5;
+  color: inherit;
+}
+
+input[type=radio]{
+  accent-color: var(--ok-button-color)
+}
+.ptl_placeholder {
+  opacity: .5;
+  color: inherit;
+}
+.ptl_input {
+  display: flex;
+  align-items: center;
+  flex:auto;
+  width: 100%;
+  margin: 0;
+  outline: none;
+}
+.ptl_input_text {
+  font-size: 14pt;
+}
+.ptl_input_bg_color{
+  background-color: #ffffff;
+  color: #333;
+}
+.ptl_input_brdr_color{
+  border-color: #e7e7e7;
+}
+.ptl_input_brdr_size{
+  border-style: solid;
+  border-width: 1px;
+}
+.ptl_input_brdr_radius{
+  border-radius: 5px;
+}
+.ptl_input_height{
+  height:50px;
+}
+.ptl_input_padding{
+  padding: 0 10px;
+}
+
+
+/* AUTHORING FORM BUILDER UI BITS */
+
+.draggable_placeholder {
+  background-color: rgba(200,200,200,0.2);
+  border: dotted 3px rgba(200,200,200,0.3);
+  box-sizing: border-box;
+  height: 75px;
+}
+.editor_slide{
+  transition:0.1s ease all;
+}
+
+.drag_handle {
+  opacity: 0.5;
+  transition: all .3s ease-in-out;
+  cursor: ns-resize;
+}
+
+.drag_handle:hover{
+  opacity: 1.0;
+  cursor: ns-resize;
+}
+.row_handle {
+  opacity: 0.5;
+  transition: all .3s ease-in-out;
+}
+
+.row_handle:hover{
+  opacity: 1.0;
+}
+.drag_field{
+  z-index: 900;
+  cursor: move;
+  border-radius: 3px;
+  transition: all .3s ease-in-out;
+}
+.drag_field:hover{
+  cursor: move;
+  background-color: rgba(6, 119, 197, 0.1);
+}
+
+.row_config {
+  opacity: 0.5;
+  transition: all .3s ease-in-out;
+}
+
+.row_config:hover{
+  opacity: 1.0;
+  cursor: pointer;
+}
+.rowgrow{
+  opacity: 0.8;
+  box-shadow: 0 0 0 5px rgba(255,255,255,0);
+  transition: all .1s ease-in-out;
+}
+.rowgrow:hover{
+  opacity: 1.0;
+  z-index: 900;
+  transform: scale(1.4);
+  box-shadow: 0 0 0 5px rgba(255,255,255,1);
+}
+.rowadd{
+  transform: scale(0.7);
+  transition: all .1s ease-in-out;
+}
+.rowadd:hover{
+  transform: scale(1.0);
+}
+.edit_field {
+  display: flex;
+  flex: 1;
+  transition: all .3s ease-in-out;
+  opacity: 0;
+}
+.editfieldhov:hover .edit_field {
+  opacity:1;
+}
+
+
+
+
+
+/* DISABLED STATES FOR INPUTS */
+input:disabled, textarea:disabled, select:disabled {
+    filter: brightness(0.95);
+    cursor:not-allowed;
+}
+
+.field_error {
+    border: 1px solid var(--delete-button-color);
+}
+
+
+.field_set {
+  width: 100%;
+  margin: 0;
+  padding: 5px;
+  min-height: 40px;
+  outline: none;
+  transition: all .2s ease-in-out;
+  font-size: 16px;
+}
+
+
+
+/* FORM INPUT TYPES */
+.form_input {
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+    padding: 5px;
+    min-height: 30px;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    border:1px solid rgba(128,128,128,0.4);
+    font-size:13px;
+}
+
+.form_input:hover {
+    box-shadow: inset 0 -2px 0 0 rgba(120,120,120,0.2);
+}
+
+.form_input:hover:disabled {
+    box-shadow: none;
+}
+
+.form_input:focus {
+    outline: 1px solid rgba(128,128,128,0.6);
+}
+
+
+.form_checkbox {
+    width: 20px;
+    min-width:20px;
+    height: 20px;
+    min-height:20px;
+    margin: 0;
+    outline: none;
+}
+.form_checkbox:focus {
+    outline: 1px solid rgba(128,128,128,0.6);
+  }
+
+.form_textarea {
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+    min-height: 30px;
+    outline: none;
+    resize: vertical;
+    transition: all 0.2s ease-in-out;
+    padding: 5px;
+}
+
+.form_group_header {
+    font-size: 10pt;
+}
+
+.label_group {
+    display: flex;
+    align-items: center;
+    margin: 3px 0;
+}
+
+.form_cell.col.size_2 {
+    flex-basis:28px;
+}
+
+.field_required {
+    margin-left: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 4pt;
+}
+
+.field_valid {
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.field_help {
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 10pt;
+}
+
+/* FORM LABELS FOR FORM INPUTS */
+.form_label {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0;
+}
+
+.form_label.sm {
+    font-size: 10px;
+}
+
+.form_label.md {
+    font-size: 12px;
+}
+
+.form_label.lg {
+    font-size: 14px;
+}
+
+.form_label.light {
+    font-weight: 300;
+}
+
+.form_label.bold {
+    font-weight: 600;
+}
+
+/* INPUT LABEL FOR REGULAR INPUTS */
+.input_label {
+    display:inline-block;
+    font-size:14px;
+    margin-bottom:4px;
+}
+
+/**************** INPUTS AND ICONS *****************/
+
+/* style input fields */
+input,select {
+    border:1px solid rgba(128,128,128,0.3);
+    background-color:inherit;
+    color:inherit;
+}
+
+/* show pointer on selects */
+select:not(:disabled) {
+    cursor:pointer;
+}
+
+/* style input classes */
+.input, .select,
+.input_lefticon > input,
+.input_righticon > input {
+    border-radius:3px;
+    width:100%;
+    outline:none;
+}
+
+/* style selects */
+.select {
+    cursor:pointer;
+}
+.select_icon {
+    border-radius:3px;
+    border:1px solid rgba(128,128,128,0.3);
+    background-color:inherit;
+}
+.select_icon > select {
+    cursor:pointer;
+    width:100%;
+    border:none;
+    background-color:inherit;
+    color:inherit;
+    outline:none;
+}
+
+/* medium (default) input/select */
+.input,
+.input.md,
+.input_lefticon > input,
+.input_lefticon.md > input,
+.input_righticon > input,
+.input_righticon.md > input {
+    padding:6px 12px;
+    font-size:14px;
+}
+.select,
+.select.md {
+    padding:5px 12px;
+    font-size:14px;
+}
+.select_icon > select,
+.select_icon.md > select {
+    padding:5px 12px 5px 3px;
+    font-size:14px;
+}
+.input_lefticon,
+.input_lefticon.md,
+.input_righticon,
+.input_righticon.md,
+.select_icon,
+.select_icon.md {
+    font-size:14px;
+}
+
+/* small input */
+.input.sm,
+.input_lefticon.sm > input,
+.input_righticon.sm > input {
+    padding:5px 10px;
+    font-size:12px;
+}
+.select.sm {
+    padding:4px 10px;
+    font-size:12px;
+}
+.select_icon.sm > select {
+    padding:4px 10px 4px 2px;
+    font-size:12px;
+}
+.input_lefticon.sm,
+.input_righticon.sm,
+.select_icon.sm {
+    font-size:12px;
+}
+
+/* large input */
+.input.lg,
+.input_lefticon.lg > input,
+.input_righticon.lg > input {
+    padding:8px 12px;
+    font-size:16px;
+}
+.select.lg {
+    padding:7px 12px;
+    font-size:16px;
+}
+.select_icon.lg > select {
+    padding:7px 12px 7px 3px;
+    font-size:16px;
+}
+.input_lefticon.lg,
+.input_righticon.lg,
+.select_icon.lg {
+    font-size:16px;
+}
+
+/* to position the icon in the container */
+.input_lefticon,
+.input_righticon,
+.select_icon {
+    position:relative;
+}
+
+/* left icon; position */
+.input_lefticon > svg,
+.select_icon > svg {
+    position: absolute;
+    left:0.6em;
+    top:50%;
+    margin-top:-0.5em;
+    opacity:0.8;
+    font-size:inherit;
+    z-index:2;
+}
+
+/* left icon; add border and padding to input */
+.input_lefticon > input {
+    padding-left:3em !important;
+    background-image: linear-gradient(to right, #999999, #999999);
+    background-position: 2.25em 50%;
+    background-size: 1px 1em;
+    background-repeat: no-repeat;
+}
+
+/* select icon; add border and padding to container */
+.select_icon {
+    padding-left:2.5em !important;
+    background-image: linear-gradient(to right, #999999, #999999);
+    background-position: 2.25em 50%;
+    background-size: 1px 1em;
+    background-repeat: no-repeat;
+}
+
+/* right icon; position */
+.input_righticon > svg {
+    position: absolute;
+    right:0.6em;
+    opacity:0.8;
+    font-size:inherit;
+    z-index:2;
+}
+
+/* right icon; add border and padding to input */
+.input_righticon > input {
+    padding-right:3em !important;
+    background-image: linear-gradient(to right, #999999, #999999);
+    background-position: calc(100% - 2.25em) 50%;
+    background-size: 1px 1em;
+    background-repeat: no-repeat;
+}
+
+/* textarea additions */
+textarea.input {
+    min-height:2em;
+    line-height:150%;
+    resize:none;
+}
+
+/************************************ DEPRECATED ***************************************/
+/* REGULAR INPUT TYPES */
+.fullwidth_input {
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(50, 50, 50, 0.2);
+    font-size: 11pt;
+    outline: none;
+}
+
+/* FIX TO MAKE SELECT SAME SIZE AS INPUT */
+select.fullwidth_input {
+    padding:4px 10px;
+}
+
+.fullwidth_input.sm {
+    padding: 2px 5px;
+    font-size: 10pt;
+}
+
+.fullwidth_textarea {
+    width: 100%;
+    resize: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(50, 50, 50, 0.2);
+    min-height: 50px;
+    font-size: 11pt;
+}
+
+.fullwidth_textarea.sm {
+    padding: 2px 5px;
+    font-size: 10pt;
+}
+/************************************ END DEPRECATED ***************************************/

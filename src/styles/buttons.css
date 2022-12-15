@@ -1,0 +1,413 @@
+/*
+.......
+PARTICLE STYLES
+.......
+*/
+
+/* remove tap color on mobile */
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent; /* For some Androids */
+}
+
+button:focus {
+    outline: 0;
+    outline: none;
+}
+
+button.clear {
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+}
+
+/********************** TRADITIONAL BUTTON CLASSES ************************/
+/* button class */
+.btn {
+    user-select: none;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    padding:0;
+    white-space:nowrap;
+    overflow:hidden;
+    transition:all 0.2s ease-in-out;
+    border-radius:3px;
+    position:relative;
+    flex-shrink:0;
+}
+
+/* button sizes */
+.btn.xsm {
+    font-size:10px;
+    padding:2px 6px;
+}
+.btn.sm {
+    font-size:12px;
+    padding:3px 8px;
+}
+.btn.md {
+    font-size:14px;
+    padding:4px 10px;
+}
+.btn.lg {
+    font-size:16px;
+    padding:5px 12px;
+}
+.btn.xlg {
+    font-size:18px;
+    padding:6px 14px;
+}
+
+
+/********************** UNIVERSAL BUTTON CLASSES ************************/
+
+.btnset {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    white-space:nowrap;
+    flex-shrink:0;
+    padding:0;
+
+}
+
+.btnset.xsm{
+    font-size: 7pt;
+    line-height: 7pt;
+    padding: 3px 15px;
+    height:20px;
+}
+.btnset.sm{
+    font-size: 9pt;
+    line-height: 9pt;
+    padding: 3px 15px;
+}
+.btnset.md{
+    font-size: 11pt;
+    line-height: 11pt;
+    padding: 5px 15px;
+}
+.btnset.lg {
+    font-size: 13pt;
+    line-height: 13pt;
+    padding: 7px 20px;
+}
+.btnset.xlg {
+    font-size: 15pt;
+    line-height: 15pt;
+    padding: 9px 25px;
+}
+.btnset.spaced{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.btnset.pilled{
+    border-radius:88px;
+}
+
+
+
+
+
+/* style the icon in the button */
+.btn.icon_left > .icon,
+.btn.icon_right > .icon {
+    position:absolute;
+    top:0;
+    width:2em;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+/* style border to left or right of icon */
+.btn.icon_left > .icon:not(.no_line)::after,
+.btn.icon_right > .icon:not(.no_line)::after {
+    content: '';
+    height:0.75em;
+    position:absolute;
+    border-style:solid;
+    border-color:currentColor;
+    opacity:0.5;
+    margin-top:-0.37em; /* IE11 fix */
+    top:50%;
+}
+
+/* specific styling for left icons */
+.btn.icon_left > .icon {
+    left:0;
+}
+.btn.icon_left > .icon:not(.no_line)::after {
+    right:0;
+    border-width:0 1px 0 0;
+}
+
+/* specific styling for right icons */
+.btn.icon_right > .icon {
+    right:0;
+}
+.btn.icon_right > .icon:not(.no_line)::after {
+    left:0;
+    border-width:0 0 0 1px;
+}
+
+/* round corners on button */
+.btn.round {
+    border-radius:50px;
+}
+
+/* icon hover animations */
+.btn > .icon > * {
+    transition:all 0.15s ease-out;
+}
+
+/* shrink */
+.btn:hover > .icon.shrink > * {
+    transform:scale(0.85);
+}
+
+/* grow */
+.btn:hover > .icon.grow > * {
+    transform:scale(1.2);
+}
+
+/* turn slightly */
+.btn:hover > .icon.turn > * {
+    transform:rotate(20deg);
+}
+
+/* spin 90 degrees */
+.btn > .icon.spin > * {
+    transition:all 0.3s ease-out;
+}
+.btn:hover > .icon.spin > * {
+    transform:rotate(90deg);
+}
+
+/* slide left */
+.btn:hover > .icon.slide_left > * {
+    transform:translateX(-0.3em);
+}
+
+/* slide right */
+.btn:hover > .icon.slide_right > * {
+    transform:translateX(0.3em);
+}
+
+/* slide up */
+.btn:hover > .icon.slide_up > * {
+    transform:translateY(-0.3em);
+}
+
+/* slide down */
+.btn:hover > .icon.slide_down > * {
+    transform:translateY(0.3em);
+}
+
+/* reverse animation effect when user clicks button */
+.btn:active > .icon > * {
+    transform:none !important;
+}
+
+/* when button is disabled */
+button[disabled] {
+    cursor:not-allowed;
+    opacity:0.5;
+}
+.btn[disabled]:hover > .icon > * {
+    transform:none !important;
+}
+.btn[disabled].glow:hover {
+    box-shadow:none !important;
+}
+
+/************************* END TRADITIONAL BUTTON CLASSES *********************************/
+
+/* for adding a simple hand grabbing pointer */
+.t_drag_btn {
+    cursor: grab;
+}
+
+.t_drag_btn:hover {
+    cursor: grab;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.t_drag_btn:active {
+    cursor: grabbing;
+}
+
+
+/* INFO BUTTONS */
+/* TODO: check usages */
+.info_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    border-radius: 3px;
+    margin: 5px;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    text-align: center;
+    flex-basis: 220px;
+}
+
+.info_btn_number {
+    font-size: 34pt;
+    font-weight: 500;
+}
+
+
+
+/***************** FLOATING TABS *********************/
+.tabs .btn_tab {
+    margin-top:1px;
+    margin-bottom:1px;
+    border-radius:0 !important;
+    min-height:30px;
+}
+.tabs .btn_tab:first-child {
+    margin-left:1px;
+    margin-right:1px;
+    border-radius:3px 0 0 3px !important;
+}
+.tabs .btn_tab:last-child {
+    margin-right:1px;
+    border-radius:0 3px 3px 0 !important;
+}
+.tabs .btn_tab:not(:first-child):not(:last-child) {
+    margin-right:1px;
+}
+/***************** END FLOATING TABS *********************/
+
+/***************** FULLWIDTH TABS *********************/
+.tabs_fullwidth .btn_tab {
+    display:flex;
+    /*margin-top:1px;*/
+    margin-bottom:1px;
+    border-radius:0;
+    user-select:none;
+    outline:none;
+    border:0;
+    cursor:pointer;
+    justify-content:center;
+    align-items:center;
+    padding:0;
+    transition:all 0.2s ease-in-out;
+    position:relative;
+    text-align:center;
+}
+/* remove bottom margin when selected so tab blends with page */
+.tabs_fullwidth .btn_tab.selected {
+    margin-bottom:0;
+}
+/* color bar above tabs when hover/selected */
+.tabs_fullwidth > .btn_tab > .tab_color {
+    position:absolute;
+    height:3px;
+    top:0;
+    left:0;
+    width:0;
+    transition:width 0.3s ease-in-out;
+}
+.tabs_fullwidth > .btn_tab.selected > .tab_color {
+    width:100%;
+}
+/* brighten tab slightly on hover */
+.tabs_fullwidth .btn_tab:hover {
+    filter: brightness(1.05);
+}
+/* extend color bar on hover */
+.tabs_fullwidth .btn_tab:hover .tab_color {
+    width:100%;
+}
+/* small tab */
+.tabs_fullwidth.sm > .btn_tab {
+    padding:8px 5px;
+    font-size:10px;
+}
+/* medium tab */
+.tabs_fullwidth.md > .btn_tab {
+    padding:10px 5px;
+    font-size:12px;
+}
+/* large tab */
+.tabs_fullwidth.lg > .btn_tab {
+    padding:12px 5px;
+    font-size:14px;
+}
+/* give all tabs except last a right margin */
+.tabs_fullwidth .btn_tab:not(:last-child) {
+    margin-right:1px;
+}
+/* spacer */
+.tabs_fullwidth .tab_spacer {
+    display:flex;
+    /*margin-top:1px;*/
+    margin-bottom:1px;
+    border-radius:0;
+    border:0;
+}
+/***************** END FULLWIDTH TABS *********************/
+
+/* BTN_GROUP */
+/* group of buttons, such as for toggles */
+.btn_group {
+    display:flex;
+    flex:1;
+    transition:all 0.2s ease-in-out;
+}
+.btn_group.rounded {
+    border-radius:50px;
+}
+.btn_group .btn {
+    display:flex;
+    flex:1;
+    border-radius: 0;
+    align-items:center;
+    font-size:14px;
+    margin:0;
+    border-width: 1px 0;
+    justify-content:center;
+    text-align:center;
+}
+/* small tab */
+.btn_group.sm .btn {
+    padding:6px 5px;
+    font-size:12px;
+}
+/* medium tab */
+.btn_group.md .btn {
+    padding:6px 5px;
+    font-size:14px;
+}
+/* large tab */
+.btn_group.lg .btn {
+    padding:10px 5px;
+    font-size:16px;
+}
+.btn_group .btn:first-child {
+    border-left-width:1px;
+    border-right-width:1px;
+    border-top-left-radius:3px !important;
+    border-bottom-left-radius:3px !important;
+}
+.btn_group .btn:last-child {
+    border-right-width:1px;
+    border-top-right-radius:3px !important;
+    border-bottom-right-radius:3px !important;
+}
+.btn_group .btn:not(:first-child):not(:last-child) {
+    border-right-width:1px;
+}
+.btn_group.rounded .btn {
+    border-radius:50px !important;
+}

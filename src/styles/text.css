@@ -1,0 +1,222 @@
+/*
+.......
+PARTICLE STYLES
+.......
+*/
+
+
+/* BASIC TEXT ALIGNMENTS */
+.text_center {
+    text-align: center;
+}
+
+.text_left {
+    text-align: left;
+}
+
+.text_right {
+    text-align: right;
+}
+
+/* COMPLEX TEXT ELEMENTS */
+.text {
+    font-weight:400;
+}
+
+.text.paragraph {
+    line-height: 150%;
+}
+
+.text.lighter {
+    font-weight: 100;
+}
+
+.text.light {
+    font-weight: 200;
+}
+
+.text.bold {
+    font-weight: 600;
+}
+
+.text.bolder {
+    font-weight: 800;
+}
+
+.text.faded {
+    opacity:0.8;
+}
+
+.text.left {
+    text-align: left;
+}
+
+.text.center {
+    text-align: center;
+}
+
+.text.right {
+    text-align: right;
+}
+
+.text.justify {
+    text-align: justify;
+}
+
+.text.underline {
+    text-decoration:underline;
+}
+
+.text.italic {
+    font-style:italic;
+}
+
+.text.xsm {
+    font-size: 8px;
+}
+
+.text.sm {
+    font-size: 11px;
+}
+
+.text.md {
+    font-size: 13px;
+}
+
+.text.lg {
+    font-size: 18px;
+}
+
+.text.xlg {
+    font-size: 22px;
+}
+
+.text.caps {
+    text-transform: capitalize;
+}
+
+.text.uppercase {
+    text-transform: uppercase;
+}
+
+/* TEXT OVERFLOW CLASSES */
+.text_nowrap {
+    white-space: nowrap;
+}
+
+.text_wrap {
+    white-space:normal;
+}
+
+.overflow_hide
+{
+    text-overflow:ellipsis;
+    overflow: hidden;
+    white-space:nowrap;
+}
+
+
+/* NO OVERFLOW WITH ELLIPSIS */
+.text_ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+p {
+    margin:0;
+}
+
+/* fix image width in paragraph elements */
+p img {
+    max-width: 100%;
+}
+
+
+/* RESPONSIVE HEADERS */
+.header {
+    outline: none;
+    font-weight:500;
+    opacity:0.9;
+    transition: all 0.3s ease-in-out;
+}
+
+.header.paragraph {
+    line-height:1.5;
+}
+
+/* center header */
+.header.center {
+    text-align: center;
+}
+
+.header.xsm {
+    font-size: 20px;
+}
+
+.header.sm {
+    font-size: 24px;
+}
+
+.header.md {
+    font-size: 28px;
+}
+
+.header.lg {
+    font-size: 32px;
+}
+
+.header.xlg {
+    font-size: 36px;
+}
+
+.header.lighter {
+    font-weight: 200;
+}
+
+.header.light {
+    font-weight: 300;
+}
+
+.header.bold {
+    font-weight: 600;
+}
+
+.header.bolder {
+    font-weight: 700;
+}
+
+.subheader {
+    line-height: 12px;
+}
+
+
+/* LINES with ELLIPSIS */
+
+.line_item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+}
+.line_ellipsis {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    text-align: left;
+}
+.line_end {
+    white-space: nowrap;
+}
+
+/*  */
+.overflow_hide
+{
+    text-overflow:ellipsis;
+    overflow: hidden;
+    white-space:nowrap;
+}
+
+

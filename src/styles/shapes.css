@@ -1,0 +1,369 @@
+/*
+.......
+PARTICLE STYLES
+.......
+*/
+
+
+/* pill class for rounded pills */
+.pill {
+    padding:0.2em 0.6em;
+    border-radius:3px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    -ms-flex: 0 0 auto;
+}
+.pill.round {
+    border-radius:50px;
+}
+/* pill sizes */
+.pill.xsm {
+    font-size:10px;
+}
+.pill.sm {
+    font-size:12px;
+}
+.pill.md {
+    font-size:14px;
+}
+.pill.lg {
+    font-size:16px;
+}
+.pill.xlg {
+    font-size:18px;
+}
+
+
+/* CIRCLE CLASSES */
+.circle_8px,
+.circle_12px,
+.circle_14px,
+.circle_16px,
+.circle_18px,
+.circle_20px,
+.circle_22px,
+.circle_24px,
+.circle_26px,
+.circle_28px,
+.circle_30px,
+.circle_32px,
+.circle_36px,
+.circle_40px,
+.circle_46px,
+.circle_50px,
+.circle_60px,
+.circle_70px,
+.circle_80px,
+.circle_90px,
+.circle_100px {
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.circle_8px {
+    width: 8px;
+    min-width: 8px;
+    height: 8px;
+    min-height: 8px;
+    font-size: 4px;
+}
+
+.circle_12px {
+    width: 12px;
+    min-width: 12px;
+    height: 12px;
+    min-height: 12px;
+    font-size: 8px;
+}
+
+.circle_14px {
+    width: 14px;
+    min-width: 14px;
+    height: 14px;
+    min-height: 14px;
+    font-size: 8px;
+}
+
+.circle_16px {
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    min-height: 16px;
+    font-size: 10px;
+}
+
+.circle_18px {
+    width: 18px;
+    min-width: 18px;
+    height: 18px;
+    min-height: 18px;
+    font-size: 12px;
+}
+
+.circle_20px {
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
+    min-height: 20px;
+    font-size: 12px;
+}
+
+.circle_22px {
+    width: 22px;
+    min-width: 22px;
+    height: 22px;
+    min-height: 22px;
+    font-size: 12px;
+}
+
+.circle_24px {
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    min-height: 24px;
+    font-size: 14px;
+}
+
+.circle_26px {
+    width: 26px;
+    min-width: 26px;
+    height: 26px;
+    min-height: 26px;
+    font-size: 14px;
+}
+
+.circle_28px {
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    min-height: 28px;
+    font-size: 14px;
+}
+
+.circle_30px {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    min-height: 30px;
+    font-size: 16px;
+}
+
+.circle_32px {
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    min-height: 32px;
+    font-size: 16px;
+}
+
+.circle_36px {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    min-height: 36px;
+    font-size: 18px;
+}
+
+.circle_40px {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    font-size: 20px;
+}
+
+.circle_46px {
+    width: 46px;
+    min-width: 46px;
+    height: 46px;
+    min-height: 46px;
+    font-size: 24px;
+}
+
+.circle_50px {
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    min-height: 50px;
+    font-size: 28px;
+}
+
+.circle_60px {
+    width: 60px;
+    min-width: 60px;
+    height: 60px;
+    min-height: 60px;
+    font-size: 30px;
+}
+
+.circle_70px {
+    width: 70px;
+    min-width: 70px;
+    height: 70px;
+    min-height: 70px;
+    font-size: 40px;
+}
+
+.circle_80px {
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    min-height: 80px;
+    font-size: 44px;
+}
+
+.circle_90px {
+    width: 90px;
+    min-width: 90px;
+    height: 90px;
+    min-height: 90px;
+    font-size: 44px;
+}
+
+.circle_100px {
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    min-height: 100px;
+    font-size: 50px;
+}
+
+/* SQUARE CLASSES */
+.square_16px,
+.square_18px,
+.square_20px,
+.square_22px,
+.square_24px,
+.square_26px,
+.square_28px,
+.square_30px,
+.square_36px,
+.square_40px,
+.square_42px,
+.square_46px,
+.square_50px,
+.square_60px {
+    padding:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    user-select:none;
+}
+
+.square_16px {
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    min-height: 16px;
+    font-size: 8px;
+}
+
+.square_18px {
+    width: 18px;
+    min-width: 18px;
+    height: 18px;
+    min-height: 18px;
+    font-size: 10px;
+}
+
+.square_20px {
+    min-width: 20px;
+    width: 20px;
+    min-height: 20px;
+    height: 20px;
+    font-size: 12px;
+}
+
+.square_22px {
+    min-width: 22px;
+    width: 22px;
+    min-height: 22px;
+    height: 22px;
+    font-size: 13px;
+}
+
+.square_24px {
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    min-height: 24px;
+    font-size: 14px;
+}
+
+.square_26px {
+    width: 26px;
+    min-width: 26px;
+    height: 26px;
+    min-height: 26px;
+    font-size: 16px;
+}
+
+.square_28px {
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    min-height: 28px;
+    font-size: 16px;
+}
+
+.square_30px {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    min-height: 30px;
+    font-size: 16px;
+}
+
+.square_36px {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    min-height: 36px;
+    font-size: 18px;
+}
+
+.square_40px {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+    font-size: 22px;
+}
+
+.square_42px {
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    min-height: 42px;
+    font-size: 22px;
+}
+
+.square_46px {
+    width: 46px;
+    min-width: 46px;
+    height: 46px;
+    min-height: 46px;
+    font-size: 22px;
+}
+
+.square_50px {
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    min-height: 50px;
+    font-size: 24px;
+}
+
+.square_60px {
+    width: 60px;
+    min-width: 60px;
+    height:60px;
+    min-height: 60px;
+    font-size: 30px;
+}
