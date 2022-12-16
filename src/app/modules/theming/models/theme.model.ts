@@ -4,6 +4,7 @@ export interface Theme {
   name: string;
   layoutColors: ThemeLayoutColors;
   layoutVariables: ThemeLayoutVariables;
+  inputVariables: ThemeInputVariables;
   colorPalette: ThemeColorPalette;
   buttonColorPalette: ThemeButtonColorPalette;
   fonts: Array<ThemeFont>;
@@ -46,6 +47,16 @@ export interface ThemeLayoutVariables {
   headerHeight: string;
   footerHeight: string;
   menuWidth?: string;
+}
+
+export interface ThemeInputVariables {
+  inputText: string;
+  inputHeight: string;
+  inputBgColor: string;
+  inputBorderColor: string;
+  inputBorderSize: string;
+  inputBorderRadius: string;
+  inputPadding: string;
 }
 
 export interface ThemeColorPaletteExtension {

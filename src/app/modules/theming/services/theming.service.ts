@@ -288,6 +288,36 @@ export class ThemingService {
       }
     }
 
+    if (theme.inputVariables) {
+      if (theme.inputVariables.inputText) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_input_text{font-size: ${theme.inputVariables.inputText};}`));
+      }
+
+      if (theme.inputVariables.inputBgColor) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_input_bg_color{background-color: ${this.addHashmark(theme.inputVariables.inputBgColor)};color: ${this.getTextColor(theme.inputVariables.inputBgColor)}}`));
+      }
+
+      if (theme.inputVariables.inputBorderColor) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_input_brdr_color{border-color: ${this.addHashmark(theme.inputVariables.inputBorderColor)};}`));
+      }
+
+      if (theme.inputVariables.inputBorderSize) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_input_brdr_size{border-width: ${theme.inputVariables.inputBorderSize};border-style:solid;}`));
+      }
+
+      if (theme.inputVariables.inputBorderRadius) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_input_brdr_radius{border-radius: ${theme.inputVariables.inputBorderRadius};}`));
+      }
+
+      if (theme.inputVariables.inputHeight) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_input_height{height: ${theme.inputVariables.inputHeight};}`));
+      }
+
+      if (theme.inputVariables.inputPadding) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_input_padding{padding: ${theme.inputVariables.inputPadding};}`));
+      }
+    }
+
     const head = document.head || document.getElementsByTagName('head')[0];
 
     this.removeThemeFromHeader(prefix);
@@ -299,9 +329,14 @@ export class ThemingService {
 
     rootVars += '}';
     style.appendChild(document.createTextNode(rootVars));
+    style.setAttribute('id', (prefix ? prefix + '-' : '') + 'particle-theme');
     head.appendChild(style);
 
     this.themeChangeDetectionService.changeTheme();
+  }
+
+  private addHashmark(color: string): string {
+    return color.startsWith('#') ? color : '#' + color;
   }
 
   private addFonts(theme: Theme, head: HTMLHeadElement, style: HTMLStyleElement): void {
@@ -340,8 +375,9 @@ export class ThemingService {
 
   removeThemeFromHeader(prefix: string): void {
     const head = document.head || document.getElementsByTagName('head')[0];
+
     for (const child of <any>head.childNodes) {
-      if ((child as Element).innerHTML && (child as Element).innerHTML.startsWith(`.${prefix}bg_red`)) {
+      if ((child as Element).id === (prefix ? prefix + '-' : '') + 'particle-theme') {
         head.removeChild(child);
         break;
       }

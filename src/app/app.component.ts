@@ -68,6 +68,14 @@ export class AppComponent implements OnInit {
         highlightColor: '#0b799e',
         highlightOffset: '1px',
         highlightThickness: '2px'
+      },
+      inputVariables: {
+        inputHeight: '50px',
+        inputText: '14pt',
+        inputBorderRadius: '5px',
+        inputBorderColor: '#e7e7e7',
+        inputBgColor: '#ffffff',
+        inputPadding: '0 10px'
       }
     } as Theme,
     {
