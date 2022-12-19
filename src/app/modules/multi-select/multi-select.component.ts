@@ -154,6 +154,12 @@ export class MultiSelectComponent implements ControlValueAccessor {
   } as MultiSelectText;
 
   /**
+   * Style of the multi-select
+   */
+  @Input()
+  type: 'input' | 'expanded' = 'input';
+
+  /**
    * Event emitted on value change, emits the new value
    */
   @Output()
@@ -225,12 +231,12 @@ export class MultiSelectComponent implements ControlValueAccessor {
   readonly multiSelectId;
 
   /**
-   * Whether or not to render the multi-select list
+   * Whether to render the multi-select list
    */
   render = false;
 
   /**
-   * Whether or not the multi-select is open
+   * Whether the multi-select is open
    */
   opened = false;
 
