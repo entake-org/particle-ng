@@ -18,7 +18,7 @@
       <div class="form_label mar_bot3">Basic Date Picker</div>
 
       <form>
-        <particle-date-picker [formControlName]="'dateTest'"
+        <particle-date-picker
                               [disabled]="false"
                               [closeOnSelect]="true"
                               [inputClassList]="''"
@@ -167,6 +167,7 @@
       <div class="form_label mar_bot3">Basic Multi Select</div>
       <particle-multi-select
         type="expanded"
+        [disabled]="true"
         [options]="[
                          { value: 'a', label: 'Option A' },
                          { value: 'b', label: 'Disabled Option', disabled: true },
@@ -180,7 +181,7 @@
                            ]
                          }
                        ]"
-        [classList]="''" [disabled]="false">
+        [classList]="''">
       </particle-multi-select>
       <br/><br/>
       <div class="form_label mar_bot3">Option Multi Select</div>

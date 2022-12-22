@@ -89,7 +89,7 @@
                         [attr.aria-selected]="(_internalValue | async)?.includes(groupOption.value)"
                         [attr.data-value]="groupOption.value"
                         [attr.data-dialog-close-override]="true"
-                        [disabled]="groupOption.disabled"
+                        [disabled]="groupOption.disabled || disabled"
                         class="particle_multiselect_option" role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + groupOption.value] ? 'ok_button_color' : 'unselected'"
@@ -112,7 +112,7 @@
                         [attr.aria-selected]="(_internalValue | async)?.includes(option.value)"
                         [attr.data-value]="option.value"
                         [attr.data-dialog-close-override]="true"
-                        [disabled]="option.disabled"
+                        [disabled]="option.disabled || disabled"
                         [ngClass]="{ 'unselected': !selectionValueMap['' + option.value] }"
                         class="particle_multiselect_option" role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox bg_overlay brdr"
@@ -145,7 +145,7 @@
                         [attr.aria-selected]="(_internalValue | async)?.includes(groupOption.value)"
                         [attr.data-value]="groupOption.value"
                         [attr.data-dialog-close-override]="true"
-                        [disabled]="groupOption.disabled"
+                        [disabled]="groupOption.disabled || disabled"
                         [ngClass]="{ 'unselected': !selectionValueMap['' + groupOption.value] }"
                         class="particle_multiselect_option"
                         role="option" tabindex="0">
@@ -170,7 +170,7 @@
                         [attr.aria-selected]="(_internalValue | async)?.includes(option.value)"
                         [attr.data-value]="option.value"
                         [attr.data-dialog-close-override]="true"
-                        [disabled]="option.disabled"
+                        [disabled]="option.disabled || disabled"
                         [ngClass]="{ 'unselected': !selectionValueMap['' + option.value] }"
                         class="particle_multiselect_option"
                         role="option" tabindex="0">
