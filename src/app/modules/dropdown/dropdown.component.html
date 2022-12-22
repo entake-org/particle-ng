@@ -1,3 +1,4 @@
+<ng-container *ngIf="!isMobile else mobile">
 <div #dropdown
      class="ptl_input ptl_input_height ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
      [style.filter]="disabled ? 'brightness(.95)' : ''"
@@ -145,3 +146,38 @@
 </div>
 
 <ng-content select="template"></ng-content>
+</ng-container>
+
+<ng-template #mobile>
+  <select
+    class="access ptl_input ptl_input_height ptl_input_text ptl_input_padding ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
+    [id]="dropdownId"
+    [(ngModel)]="value">
+    <ng-container *ngIf="_options | async as options">
+      <ng-container *ngFor="let option of options">
+        <ng-container *ngIf="option.type === 'group'">
+          <optgroup class="input_bg_color min_h50 pad_10" [label]="option.groupLabel">
+            <ng-container *ngFor="let groupOption of option.options">
+              <option
+                [disabled]="groupOption.disabled"
+                class="input_bg_color min_h50 pad_10"
+                [value]="groupOption.value"
+              >
+                {{groupOption.label}}
+              </option>
+            </ng-container>
+          </optgroup>
+        </ng-container>
+        <ng-container *ngIf="option.type === 'option'">
+          <option
+            [disabled]="option.disabled"
+            class="input_bg_color min_h50 pad_10"
+            [value]="option.value"
+          >
+            {{option.label}}
+          </option>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </select>
+</ng-template>

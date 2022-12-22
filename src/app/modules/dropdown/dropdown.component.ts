@@ -241,6 +241,11 @@ export class DropdownComponent implements ControlValueAccessor {
   selectionIndex: number = null as any;
 
   /**
+   * In mobile (screen width is less than 768), swap to a native input
+   */
+  isMobile = window.innerWidth <= 768;
+
+  /**
    * The current value of the dropdown
    * @private
    */
@@ -423,6 +428,11 @@ export class DropdownComponent implements ControlValueAccessor {
         }
       }
     }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.isMobile = event.target.innerWidth <= 768;
   }
 
   /**
