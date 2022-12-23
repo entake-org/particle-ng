@@ -637,9 +637,11 @@ export class WeekPickerComponent implements ControlValueAccessor {
    * @private
    */
   private setSelectionInterval(interval: { start?: Date, end?: Date }): void {
-    if (!!interval) {
+    if (!interval) {
       throw new Error('Start date must be less than end date');
     }
+
+    console.log(interval);
 
     if ((interval as any)?.start > (interval as any)?.end) {
       throw new Error('Start date must be less than end date');
