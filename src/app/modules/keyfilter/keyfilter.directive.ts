@@ -15,7 +15,7 @@ export class KeyfilterDirective {
    */
   private static readonly ALLOWED_KEYS = [
     'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown',
-    'Backspace', 'Delete', 'Tab', 'Esc', 'Escape'
+    'Backspace', 'Delete', 'Tab', 'Esc', 'Escape', 'Home', 'End'
   ];
 
   /**
@@ -32,7 +32,7 @@ export class KeyfilterDirective {
    * The type of filtering to apply
    */
   @Input('particleKeyfilter')
-  filterType: 'alpha' | 'numeric' | 'alphanumeric' = null as any;
+  filterType: 'alpha' | 'numeric' | 'alphanumeric' | 'digits' = null as any;
 
   /**
    * Whether or not to allow spaces (default false)
@@ -46,7 +46,15 @@ export class KeyfilterDirective {
    * @private
    */
   private static keyIsNumeric(key: string): boolean {
+    return new RegExp('^\\d|[\.-]$', 'g').test(key);
+  }
+
+  private static keyIsDigit(key: string): boolean {
     return new RegExp('^\\d$', 'g').test(key);
+  }
+
+  private static valueIsNumeric(value: string): boolean {
+    return new RegExp('^(-?\\d+\\.\\d+)$|^(-?\\d+)$', 'g').test(value);
   }
 
   /**
@@ -83,8 +91,10 @@ export class KeyfilterDirective {
         preventDefault = !KeyfilterDirective.keyIsAlpha(key);
       } else if (this.filterType === 'numeric') {
         preventDefault = !event.ctrlKey && !KeyfilterDirective.keyIsNumeric(key);
+      } else if (this.filterType === 'digits') {
+        preventDefault = !KeyfilterDirective.keyIsDigit(key);
       } else if (this.filterType === 'alphanumeric') {
-        const isNumeric = KeyfilterDirective.keyIsNumeric(key);
+        const isNumeric = KeyfilterDirective.keyIsDigit(key);
         const isAlpha = KeyfilterDirective.keyIsAlpha(key);
 
         preventDefault = !(isNumeric || isAlpha);
@@ -118,11 +128,13 @@ export class KeyfilterDirective {
           const isSpace = char === ' ';
           const isAlpha = KeyfilterDirective.keyIsAlpha(char);
           const isNumeric = KeyfilterDirective.keyIsNumeric(char);
-          const isAlphaNumeric = isAlpha || isNumeric;
+          const isDigit = KeyfilterDirective.keyIsDigit(char);
+          const isAlphaNumeric = isAlpha || isDigit;
 
           const charIsValid = (isSpace && this.allowSpaces) ||
             (this.filterType === 'alpha' && isAlpha) ||
             (this.filterType === 'numeric' && isNumeric) ||
+            (this.filterType === 'digits' && isDigit) ||
             (this.filterType === 'alphanumeric' && isAlphaNumeric);
 
           if (!charIsValid) {
@@ -130,6 +142,13 @@ export class KeyfilterDirective {
           }
         }
       }
+    }
+  }
+
+  @HostListener('blur')
+  onBlur(): void {
+    if (this.filterType === 'numeric' && !KeyfilterDirective.valueIsNumeric(this.hostElement.nativeElement.value)) {
+      this.hostElement.nativeElement.value = '';
     }
   }
 }
