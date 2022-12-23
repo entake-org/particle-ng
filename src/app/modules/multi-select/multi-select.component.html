@@ -4,52 +4,54 @@
        [style.filter]="disabled ? 'brightness(.95)' : ''"
        style="cursor:default;"
        [ngClass]="classList ? classList : ''">
-    <!-- maybe switch this to a div? -->
-    <div class="col size_1 height100 width100 v_center ptl_input_text ptl_input_padding border_none width100 overflow_hide">
+    <button #multiSelectButton
+            role="combobox"
+            aria-haspopup="listbox"
+            (click)="openMultiSelect($event)"
+            (keyup.escape)="onEscapeKeyUp($event)"
+            [id]="multiSelectId"
+            [disabled]="disabled"
+            [attr.aria-label]="text.placeholder"
+            [attr.aria-expanded]="opened"
+            [attr.data-dialog-close-override]="true"
+            class="access btnset clear center_center height100 width100"
+    >
+      <div class="col size_1 height100 width100 v_center ptl_input_text ptl_input_padding border_none width100 overflow_hide">
 
-      <ng-container *ngIf="selectionCount$ | async as selectionCount else placeholderTemplate">
-        <div class="ptl_input_brdr_radius ok_button_color ptl_input_text pad_top3 pad_bot3 min_w30 center_center">
-          {{selectionCount}}
-        </div>
-        <ng-container *ngIf="dataContextMap$ | async as dataContextMap">
-          <div class="col overflow_hide">
-            <ng-container *ngIf="!!template else noCustomTemplate">
-              <div class="mar_5 pad_5" *ngFor="let value of _internalValue | async">
-                <div class="ptl_input_text">
-                  <ng-container *ngTemplateOutlet="template; context: dataContextMap['' + value]"></ng-container>
-                </div>
-              </div>
-            </ng-container>
-            <ng-template #noCustomTemplate>
-              <div class="ptl_input_text mar_5 pad_5" *ngFor="let value of _internalValue | async">
-                {{dataContextMap['' + value]['$implicit'] || dataContextMap['' + value]['label']}}
-              </div>
-            </ng-template>
+        <ng-container *ngIf="selectionCount$ | async as selectionCount else placeholderTemplate">
+          <div class="ptl_input_brdr_radius ok_button_color ptl_input_text pad_top3 pad_bot3 min_w30 center_center">
+            {{selectionCount}}
           </div>
+          <ng-container *ngIf="dataContextMap$ | async as dataContextMap">
+            <div class="col overflow_hide">
+              <ng-container *ngIf="!!template else noCustomTemplate">
+                <div class="mar_5 pad_tb2 pad_lr5 bg_overlay_rev brdr brad_5" *ngFor="let value of _internalValue | async">
+                  <div class="ptl_input_text">
+                    <ng-container *ngTemplateOutlet="template; context: dataContextMap['' + value]"></ng-container>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-template #noCustomTemplate>
+                <div class="ptl_input_text mar_5 pad_tb2 pad_lr5 bg_overlay_rev brdr brad_5" *ngFor="let value of _internalValue | async">
+                  {{dataContextMap['' + value]['$implicit'] || dataContextMap['' + value]['label']}}
+                </div>
+              </ng-template>
+            </div>
+          </ng-container>
         </ng-container>
-      </ng-container>
-      <ng-template #placeholderTemplate>
-        <div class="ptl_placeholder">{{text.placeholder + '...'}}</div>
-      </ng-template>
-    </div>
-    <div class="col center_center min_w50 height100 brdr border_left">
-      <button #multiSelectButton
-              role="combobox"
-              aria-haspopup="listbox"
-              (click)="openMultiSelect($event)"
-              (keyup.escape)="onEscapeKeyUp($event)"
-              [id]="multiSelectId"
-              [disabled]="disabled"
-              [attr.aria-label]="text.placeholder"
-              [attr.aria-expanded]="opened"
-              [attr.data-dialog-close-override]="true"
-              class="access btnset clear center_center height100 width100 ptl_input_text">
-        <i class="fas fa-caret-down"></i>
-      </button>
-
-    </div>
+        <ng-template #placeholderTemplate>
+          <div class="ptl_placeholder">{{text.placeholder + '...'}}</div>
+        </ng-template>
+      </div>
+      <div class="col center_center min_w50 height100 brdr border_left">
+        <div class="center_center height100 width100">
+          <i class="fas fa-caret-down ptl_input_text"></i>
+        </div>
+      </div>
+    </button>
   </div>
 </ng-container>
+
 <ng-container *ngIf="type === 'expanded'">
   <ng-container [ngTemplateOutlet]="multiSelectOptions"></ng-container>
 </ng-container>

@@ -138,9 +138,9 @@ PARTICLE STYLES
 /* LINK STYLES FOR 'richtext' COMPONENT */
 
 .rich-text-link {
-    font-weight:700;
-    text-decoration:underline;
-    color: inherit;
+  font-weight: 700;
+  color: var(--bg-blue-color);
+  text-decoration: underline;
 }
 
 .test {

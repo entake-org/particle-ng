@@ -434,6 +434,7 @@
                           [(ngModel)]="weekPickerValue"
                           (ngModelChange)="console.log(weekPickerValue); console.log('Week picker model change')"
                           (weekSelected)="console.log($event); console.log('Week selected');"
+                          [dateRange]="dateRange"
                           [closeOnSelect]="true"
                           [disabled]="false">
                         </particle-week-picker>

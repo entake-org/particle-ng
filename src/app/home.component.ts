@@ -22,6 +22,8 @@ export class HomeComponent {
    */
   title = 'app';
 
+  dateRange: any = {start: new Date(new Date().setDate(new Date().getDate() - 14)), end: new Date(new Date().setDate(new Date().getDate() + 14))};
+
   /**
    * List of icons (name/class pairs)
    */
