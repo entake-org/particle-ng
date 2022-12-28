@@ -79,6 +79,7 @@ export class DropdownComponent implements ControlValueAccessor {
   @Input()
   set options(options: DropdownOptionInput) {
     this._options.next(DropdownComponent.sanitizeOptionInput(options));
+    this._allOptions = DropdownComponent.getAllOptions(this._options.value);
     this.setSelectionIndex();
   }
 
@@ -171,6 +172,25 @@ export class DropdownComponent implements ControlValueAccessor {
   readonly _options = new BehaviorSubject<DropdownOptionInput>(null as any);
 
   /**
+   * Full list of all active options, whether they are in a group or not
+   * @private
+   */
+  private _allOptions: Array<DropdownOption> = null as any;
+
+  /**
+   * Typeahead string while users are typing into the input field
+   * @private
+   */
+  private _fullPredictiveTextString = '';
+
+  /**
+   * Timeout to clear the _fullPredictiveTextString after a user stops typing for a certain amount of time
+   * @private
+   */
+  private _timeout = null as any;
+
+
+  /**
    * BehaviorSubject tracking the current value of the dropdown
    */
   readonly _internalValue = new BehaviorSubject<number | string>(null as any);
@@ -219,6 +239,23 @@ export class DropdownComponent implements ControlValueAccessor {
       return dataContext;
     })
   );
+
+  private static getAllOptions(options: DropdownOptionInput): Array<DropdownOption> {
+    const allOptions: Array<DropdownOption> = [];
+    for (const option of options) {
+      if (option.type === 'group') {
+        for (const groupOption of option.options) {
+          if (!groupOption.disabled) {
+            allOptions.push(groupOption);
+          }
+        }
+      } else if (option.type === 'option' && !option.disabled) {
+        allOptions.push(option as DropdownOption);
+      }
+    }
+
+    return allOptions;
+  }
 
   /**
    * Unique ID to assign to the dropdown
@@ -403,6 +440,21 @@ export class DropdownComponent implements ControlValueAccessor {
         this.onArrowKeyUp(key);
       } else if (key === 'Tab') {
         this.closeDropdown();
+      } else {
+        this._fullPredictiveTextString += key;
+        if (this._timeout) {
+          clearTimeout(this._timeout);
+        }
+
+        this._timeout = setTimeout(() => this._fullPredictiveTextString = '', 500);
+
+        const filteredOptions = this._allOptions.filter(option => {
+          return option.label && option.label.toLowerCase().startsWith(this._fullPredictiveTextString.toLowerCase())
+        });
+
+        if (filteredOptions && filteredOptions.length > 0) {
+          this.handleDropdownOptionSelect(filteredOptions[0].value);
+        }
       }
     }
   }
