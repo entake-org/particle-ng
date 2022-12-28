@@ -9,6 +9,6 @@ export interface ToggleOptions {
 
   accessibilityLabel?: string;
 
-  toggleSwitchWidth?: number;
-  toggleTrackWidth?: number;
+  toggleSwitchWidth: number;
+  toggleTrackWidth: number;
 }

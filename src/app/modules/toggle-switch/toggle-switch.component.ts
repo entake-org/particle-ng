@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {ToggleOptions} from "./models/toggle-options.model";
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'particle-toggle-switch',
@@ -14,16 +15,30 @@ import {ToggleOptions} from "./models/toggle-options.model";
 })
 export class ToggleSwitchComponent implements ControlValueAccessor {
 
-  @Input()
-  options: ToggleOptions = {
+  private _options$ = new BehaviorSubject<ToggleOptions>({
     affirmativeColorClass: 'ok_button_color',
     affirmativeLabel: 'On',
     affirmativeIcon: 'fas fa-check',
     negativeColorClass: 'cancel_button_color',
     negativeLabel: 'Off',
     negativeIcon: 'fas fa-times',
-    accessibilityLabel: 'Toggle Switch'
-  } as ToggleOptions;
+    accessibilityLabel: 'Toggle Switch',
+  } as ToggleOptions);
+
+  options$ = this._options$.asObservable();
+
+  @Input()
+  set options(options: ToggleOptions) {
+    if (!options.negativeIcon) {
+      options.negativeIcon = 'mar_right5';
+    }
+
+    if (!options.affirmativeIcon) {
+      options.affirmativeIcon = 'mar_right5';
+    }
+
+    this._options$.next(options);
+  }
 
   @Input()
   disabled: boolean = false;

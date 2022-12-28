@@ -1,16 +1,29 @@
-<button (click)="handleClick()" [attr.aria-label]="options.accessibilityLabel" [disabled]="disabled"
-        [ngClass]="value ? options.affirmativeColorClass : options.negativeColorClass"
-        class="access btn sm v_center hov_glow p_toggle_button" style="">
-  <div [ngClass]="!value ? 'content_color' : 'opac_50'"
-       class="p_toggle_status"
-       [style.min-width]="options.toggleSwitchWidth && options.toggleTrackWidth ? (!value ? options.toggleSwitchWidth + 'px' : (options.toggleTrackWidth - options.toggleSwitchWidth) + 'px') : ''"
+<ng-container *ngIf="options$ | async as options">
+  <button
+    (click)="handleClick()"
+    [attr.aria-label]="options.accessibilityLabel"
+    [disabled]="disabled"
+    [ngClass]="value ? options.affirmativeColorClass : options.negativeColorClass"
+    class="access btn sm v_center hov_glow p_toggle_button"
   >
-    <i [ngClass]="options.negativeIcon" class="fa-fw mar_right5"></i>{{options.negativeLabel}}
-  </div>
-  <div [ngClass]="value ? 'content_color' : 'opac_50'"
-       class="p_toggle_status"
-       [style.min-width]="options.toggleSwitchWidth && options.toggleTrackWidth ? (value ? options.toggleSwitchWidth + 'px' : (options.toggleTrackWidth - options.toggleSwitchWidth) + 'px') : ''"
-  >
-    <i [ngClass]="options.affirmativeIcon" class="fa-fw mar_right5"></i>{{options.affirmativeLabel}}
-  </div>
-</button>
+    <ng-container *ngIf="value else negativeSelected" [ngTemplateOutlet]="affirmativeSelected"></ng-container>
+  </button>
+
+  <ng-template #negativeSelected>
+    <div class="content_color p_toggle_shadow p_toggle_status" [style.min-width]="options.toggleSwitchWidth + 'px'">
+      <i [ngClass]="options.negativeIcon" class="fa-fw"></i>
+    </div>
+    <div class="opac_50 p_toggle_status" [style.min-width]="(options.toggleTrackWidth - options.toggleSwitchWidth) + 'px'">
+      {{options.negativeLabel}}
+    </div>
+  </ng-template>
+
+  <ng-template #affirmativeSelected>
+    <div class="opac_50 p_toggle_status" [style.min-width]="(options.toggleTrackWidth - options.toggleSwitchWidth) + 'px'">
+      {{options.affirmativeLabel}}
+    </div>
+    <div class="content_color p_toggle_shadow p_toggle_status" [style.min-width]="options.toggleSwitchWidth + 'px'">
+      <i [ngClass]="options.affirmativeIcon" class="fa-fw mar_right5"></i>
+    </div>
+  </ng-template>
+</ng-container>

@@ -111,10 +111,10 @@ export class HomeComponent {
   toggleValue = true;
 
   toggleOptions: ToggleOptions = {
-    affirmativeColorClass: 'bg_blue',
+    affirmativeColorClass: 'bg_green',
     affirmativeLabel: 'Yes',
     affirmativeIcon: 'fas fa-check',
-    negativeColorClass: 'bg_red',
+    negativeColorClass: 'bg_grey',
     negativeLabel: 'No',
     negativeIcon: 'fas fa-times',
     accessibilityLabel: 'Toggle Switch'
