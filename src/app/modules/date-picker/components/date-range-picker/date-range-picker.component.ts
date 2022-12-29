@@ -1,7 +1,8 @@
-import {ChangeDetectorRef, Component, forwardRef, Input} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, Input, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BehaviorSubject} from 'rxjs';
 import {DateRangePickerText} from '../../../../shared/models/particle-component-text.model';
+import {PopoverComponent} from '../../../popover/popover.component';
 
 @Component({
   selector: 'particle-date-range-picker',
@@ -34,7 +35,9 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   @Input()
   text: DateRangePickerText = {
     begin: 'Begin',
-    end: 'End'
+    end: 'End',
+    openCalendar: 'Open Calendar',
+    selectRange: 'Choose a Range'
   } as DateRangePickerText;
 
   @Input()
@@ -67,6 +70,10 @@ export class DateRangePickerComponent implements ControlValueAccessor {
 
   @Input()
   set value(value: { start: Date, end: Date }) {
+    if (!value) {
+      value = {start: null as any, end: null as any};
+    }
+
     this._value.next(value);
 
     if (value) {
@@ -87,8 +94,25 @@ export class DateRangePickerComponent implements ControlValueAccessor {
     return this._disabled;
   }
 
+  @Input()
+  ariaLabel: string = null as any;
+
+  /**
+   * Format for the selected date range in the selection preview. Must
+   * be a valid Angular DatePipe format
+   */
+  @Input()
+  dateFormat = 'MM/dd/y';
+
+  @ViewChild('calendarPopover')
+  calendarPopover: PopoverComponent = null as any;
+
   get beginDate(): Date {
-    return this._value.value.start;
+    if (this._value.value) {
+      return this._value.value.start;
+    }
+
+    return null as any;
   }
 
   set beginDate(beginDate: Date) {
@@ -108,7 +132,11 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   }
 
   get endDate(): Date {
-    return this._value.value.end;
+    if (this._value.value) {
+      return this._value.value.end;
+    }
+
+    return null as any;
   }
 
   set endDate(endDate: Date) {
@@ -166,4 +194,17 @@ export class DateRangePickerComponent implements ControlValueAccessor {
     this.changeDetectorRef.markForCheck();
   }
 
+  openCalendar(event: Event): void {
+    if (!this.disabled) {
+      this.calendarPopover.toggle(event);
+    }
+  }
+
+  updateModel(isBegin: boolean, date: Date): void {
+    if (isBegin) {
+      this.beginDate = date;
+    } else {
+      this.endDate = date;
+    }
+  }
 }

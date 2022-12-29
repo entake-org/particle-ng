@@ -1,4 +1,5 @@
-<ng-container *ngIf="_value.asObservable() | async as value">
+
+<!--
   <div class="row space_between wrap">
     <div class="col size_1">
       <particle-date-picker [(ngModel)]="beginDate"
@@ -26,4 +27,52 @@
       </particle-date-picker>
     </div>
   </div>
-</ng-container>
+-->
+
+
+<div style="cursor:default;"
+     class="ptl_input ptl_input_height ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
+     [ngClass]="inputClassList"
+     [style.filter]="disabled ? 'brightness(.95)' : ''">
+  <button (click)="openCalendar($event)"
+          aria-haspopup="dialog"
+          [disabled]="disabled"
+          [attr.aria-label]="ariaLabel + ', ' + text.openCalendar"
+          [attr.aria-expanded]="calendarPopover.visible"
+          class="access btnset clear width100 height100 center_center"
+  >
+    <div class="col size_1 height100 width100 ptl_input_text ptl_input_padding v_center">
+      <ng-container *ngIf="_value.asObservable() | async as value else placeholderTemplate">
+        {{value.start | date: dateFormat}} - {{value.end | date: dateFormat}}
+      </ng-container>
+      <ng-template #placeholderTemplate>
+        {{text.selectRange}}...
+      </ng-template>
+    </div>
+    <div class="col min_w50 bg_overlay height100 center_center brdr border_left"  [ngClass]="calendarButtonClassList">
+      <div class="width100 height100 center_center">
+        <i class="fas fa-calendar-week ptl_input_text"></i>
+      </div>
+    </div>
+  </button>
+</div>
+
+<particle-popover #calendarPopover>
+  <div class="width100 space_between">
+    <div>
+      <particle-calendar [value]="beginDate"
+                         [text]="$any(text.calendarText)"
+                         [dateRange]="dateRange"
+                         (selected)="updateModel(true, $event)">
+      </particle-calendar>
+    </div>
+    <div>
+      <particle-calendar [value]="endDate"
+                         [text]="$any(text.calendarText)"
+                         [dateRange]="_endDateRange"
+                         (selected)="updateModel(false, $event)">
+      </particle-calendar>
+    </div>
+  </div>
+</particle-popover>
+

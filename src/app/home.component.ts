@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {PushContainerComponent} from './modules/push-container/push-container.component';
-import {endOfWeek, startOfWeek} from 'date-fns';
+import {endOfMonth, endOfWeek, startOfMonth, startOfWeek} from 'date-fns';
 import {ToggleOptions} from './modules/toggle-switch/models/toggle-options.model';
 import {Theme} from './modules/theming/models/theme.model';
 import {Observable} from 'rxjs';
@@ -100,7 +100,7 @@ export class HomeComponent {
 
   weekPickerValue = { start: startOfWeek(new Date()), end: endOfWeek(new Date()) };
 
-  dateRangePickerValue = { start: startOfWeek(new Date()), end: endOfWeek(new Date()) };
+  dateRangePickerValue = null; //{ start: startOfMonth(new Date()), end: endOfMonth(new Date()) };
 
   textEditorValue = '<h2 style="text-align: center">Beautiful <b>BOLD</b> <em>rich</em> text!</h2><p>Visit <a href="https://www.sdsolutions.io" target="_blank">sdsolutions.io</a> for more cool stuff!</p>';
 
