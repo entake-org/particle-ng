@@ -3,7 +3,8 @@
      class="ptl_input ptl_input_height  ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
 >
   <div class="col size_1 height100 width100">
-    <input [(ngModel)]="dateString"
+    <input #dateInput
+           [(ngModel)]="dateString"
            [id]="inputId"
            (keydown)="filterInput($event)"
            (input)="handleInput()"
@@ -69,21 +70,13 @@
 </div>
 -->
 
-<!-- TODO: convert to use popover component -->
 
 <!-- calendar widget -->
-<div *ngIf="render"
-     class="particle_datepicker_overlay">
-  <div #calendarDiv
-       [@openClose]="!!showCalendar ? 'open' : 'close'"
-       (@openClose.start)="onAnimationStart($event)"
-       (@openClose.done)="onAnimationDone($event)"
-       class="position_absolute">
-    <particle-calendar [value]="showCalendar ? showCalendar.currentValue : $any(null)"
-                       [text]="$any(text.calendarText)"
-                   [dateRange]="{ minDate: validSelectionInterval.start!, maxDate: validSelectionInterval.end! }"
-                   (selected)="updateModel($event)"
-                   (closed)="handleCalendarClose()">
-    </particle-calendar>
-  </div>
-</div>
+<particle-popover [targetOverride]="dateInput" #calendarPopover>
+  <particle-calendar [value]="showCalendar ? showCalendar.currentValue : $any(null)"
+                     [text]="$any(text.calendarText)"
+                     [dateRange]="{ minDate: validSelectionInterval.start!, maxDate: validSelectionInterval.end! }"
+                     (selected)="updateModel($event)"
+                     (closed)="handleCalendarClose()">
+  </particle-calendar>
+</particle-popover>

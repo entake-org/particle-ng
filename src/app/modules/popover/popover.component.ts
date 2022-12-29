@@ -2,7 +2,6 @@ import { animate, AnimationEvent, style, transition, trigger } from '@angular/an
 import { Component, EventEmitter, HostListener, Input, OnDestroy, Output, Renderer2 } from '@angular/core';
 
 /**
- * TODO: allow attachment of popover to another specified element
  * TODO: allow configuration of attachment corner (top left, bottom left, etc)
  */
 
@@ -71,6 +70,9 @@ export class PopoverComponent implements OnDestroy {
    */
   @Input()
   classList = 'content_color';
+
+  @Input()
+  targetOverride: EventTarget = null as any;
 
   /**
    * Event emitted on popover open
@@ -186,11 +188,15 @@ export class PopoverComponent implements OnDestroy {
    *              the popover will close
    */
   toggle(event?: Event): void {
-    if (event) {
-      this.target = event.currentTarget ?? event.target as EventTarget;
-      event.stopImmediatePropagation();
+    if (this.targetOverride) {
+      this.target = this.targetOverride;
     } else {
-      this.target = null as any;
+      if (event) {
+        this.target = event.currentTarget ?? event.target as EventTarget;
+        event.stopImmediatePropagation();
+      } else {
+        this.target = null as any;
+      }
     }
 
     if (!this.visible && this.target) {

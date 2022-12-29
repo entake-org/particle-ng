@@ -9,6 +9,7 @@ import { OrdinalNumberPipe } from '../ordinal-number-pipe/ordinal-number.pipe';
 import { ParticleOrdinalNumberPipeModule } from '../ordinal-number-pipe/ordinal-number-pipe.module';
 import {ParticleButtonModule} from "../button/button.module";
 import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
+import {ParticlePopoverModule} from '../popover/popover.module';
 
 @NgModule({
   declarations: [
@@ -16,14 +17,15 @@ import { DateRangePickerComponent } from './components/date-range-picker/date-ra
     CalendarComponent,
     DateRangePickerComponent
   ],
-  imports: [
-    A11yModule,
-    BrowserAnimationsModule,
-    CommonModule,
-    FormsModule,
-    ParticleOrdinalNumberPipeModule,
-    ParticleButtonModule
-  ],
+    imports: [
+        A11yModule,
+        BrowserAnimationsModule,
+        CommonModule,
+        FormsModule,
+        ParticleOrdinalNumberPipeModule,
+        ParticleButtonModule,
+        ParticlePopoverModule
+    ],
   exports: [
     DatePickerComponent,
     CalendarComponent,

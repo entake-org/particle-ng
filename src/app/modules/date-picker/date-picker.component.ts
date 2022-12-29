@@ -16,6 +16,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { format, isEqual, isValid, isWithinInterval, parse } from 'date-fns';
 import {DatePickerText} from '../../shared/models/particle-component-text.model';
+import {PopoverComponent} from '../popover/popover.component';
 
 /**
  * Component to allow a user to input/select a date
@@ -198,6 +199,9 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   @ViewChild('calendarDiv')
   calendarDiv: ElementRef<HTMLDivElement> = null as any;
 
+  @ViewChild('calendarPopover')
+  calendarPopover: PopoverComponent = null as any;
+
   /**
    * The current date
    */
@@ -224,12 +228,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   dateString = '';
 
   /**
-   * Whether or not the calendar should be rendered
-   */
-  render: boolean = false;
-
-  /**
-   * Whether or not to show the calendar
+   * Whether to show the calendar
    */
   showCalendar: { currentValue: Date } = null as any;
 
@@ -461,26 +460,6 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   }
 
   /**
-   * Set calendar position on animation start if toState is open
-   * @param event the Angular AnimationEvent
-   */
-  onAnimationStart(event: AnimationEvent): void {
-    if (event.toState === 'open') {
-      this.setCalendarPosition();
-    }
-  }
-
-  /**
-   * Flip render to false on animation done if toState is close
-   * @param event the Angular AnimationEvent
-   */
-  onAnimationDone(event: AnimationEvent): void {
-    if (event.toState === 'close') {
-      this.render = false;
-    }
-  }
-
-  /**
    * Open the calendar widget
    * @param event the click MouseEvent
    */
@@ -488,7 +467,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     event.stopImmediatePropagation();
 
     this.showCalendar = { currentValue: this.value };
-    this.render = true;
+    this.calendarPopover.toggle(event);
   }
 
   /**
@@ -496,6 +475,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   handleCalendarClose(): void {
     this.showCalendar = null as any;
+    this.calendarPopover.close();
   }
 
   /**
