@@ -69,9 +69,13 @@ export interface DatePickerText {
 }
 
 export interface DateRangePickerText {
-  datePickerText?: DatePickerText;
+  calendarText?: CalendarText;
   begin: string;
   end: string;
+  done: string;
+  clear: string;
+  openCalendar: string;
+  selectRange: string;
 }
 
 export interface DialogText {

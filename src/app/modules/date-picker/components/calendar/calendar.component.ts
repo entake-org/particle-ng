@@ -153,6 +153,9 @@ export class CalendarComponent implements OnDestroy, OnInit {
     return this._text;
   }
 
+  @Input()
+  showControls = true;
+
   private _text: CalendarText = {
     selectAYear: 'Select a Year',
     selectAMonth: 'Select a Month',
@@ -189,7 +192,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
     saveDate: 'Save date selection',
     done: 'Done',
     minGreaterThenMax: 'Min date must be less than max date'
-} as CalendarText;
+  } as CalendarText;
 
   /**
    * Event emitted on date select
@@ -605,5 +608,9 @@ export class CalendarComponent implements OnDestroy, OnInit {
     if ((foundIndex > -1) && ((foundIndex + 7) < (calendarDates.length))) {
       calendarDates[foundIndex + 7].nativeElement.focus();
     }
+  }
+
+  clear(): void {
+    this.selectedDate = null;
   }
 }

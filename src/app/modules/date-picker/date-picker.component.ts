@@ -138,7 +138,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * Optional class-list to add to the date picker input
    */
   @Input()
-  inputClassList = '';
+  inputClassList = null as any;
 
   /**
    * Optional class-list to add to the calendar button
@@ -157,6 +157,9 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   @Input()
   placeholder = 'mm/dd/yyyy';
+
+  @Input()
+  inputOnly = false;
 
   private _text: DatePickerText = {
     enterInFormat: 'enter in format',
