@@ -1,6 +1,6 @@
-<div #datePickerDiv [ngClass]="inputClassList ? inputClassList : ''"
+<div #datePickerDiv
      [style.filter]="disabled ? 'brightness(.95)' : ''"
-     class="ptl_input ptl_input_height  ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
+     [ngClass]="inputClassList ? '' : 'ptl_input ptl_input_height ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius'"
 >
   <div class="col size_1 height100 width100">
     <input #dateInput
@@ -14,62 +14,19 @@
            maxlength="10"
            [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
            [disabled]="disabled"
-           class="access height100 ptl_input_text ptl_input_padding border_none width100"/>
+           [ngClass]="inputClassList ? inputClassList : 'ptl_input_text ptl_input_padding border_none'"
+           class="access height100 width100"/>
   </div>
-  <div class="col center_center min_w50 height100 brdr border_left">
+  <div class="col center_center min_w50 height100 brdr border_left" *ngIf="!inputOnly">
     <button (click)="openCalendar($event)"
             [disabled]="disabled"
-            [ngClass]="calendarButtonClassList ? calendarButtonClassList : ''"
-            class="access btnset clear center_center height100 width100 ptl_input_text"
+            [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'clear'"
+            class="access btnset center_center height100 width100"
             [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
       <i class="fas fa-calendar-day"></i>
     </button>
   </div>
 </div>
-
-
-
-
-<!--
-<div #datePickerDiv [ngClass]="inputClassList ? inputClassList : 'input md bg_overlay content_color'"
-     class="particle_datepicker" [style.filter]="disabled ? 'brightness(.95)' : ''">
-  <ng-container *ngIf="!disabled else disabledDatePicker">
-    <input [(ngModel)]="dateString"
-           [id]="inputId"
-           (keydown)="filterInput($event)"
-           (input)="handleInput()"
-           (blur)="onTouched(); handleBlur()"
-           type="text"
-           [placeholder]="placeholder"
-           maxlength="10"
-           [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
-           class="access particle_datepicker_input" />
-
-    <button (click)="openCalendar($event)"
-            [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'bg_overlay brdr ok_button_color'"
-            class="access btn particle_datepicker_button"
-            [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
-      <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
-    </button>
-  </ng-container>
-
-  <ng-template #disabledDatePicker>
-    <input disabled
-           [ngModel]="dateString"
-           type="text"
-           [placeholder]="placeholder"
-           maxlength="10"
-           [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
-           class="access particle_datepicker_input" />
-    <button disabled class="access btn particle_datepicker_button"
-            [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'bg_overlay brdr ok_button_color'"
-            [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
-      <span class="icon grow"><i class="fas fa-calendar-day"></i></span>
-    </button>
-  </ng-template>
-</div>
--->
-
 
 <!-- calendar widget -->
 <particle-popover [targetOverride]="dateInput" #calendarPopover>

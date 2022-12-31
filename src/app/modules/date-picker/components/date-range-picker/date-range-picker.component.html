@@ -1,35 +1,3 @@
-
-<!--
-  <div class="row space_between wrap">
-    <div class="col size_1">
-      <particle-date-picker [(ngModel)]="beginDate"
-                            [inputId]="inputId + '.beginDate'"
-                            [dateRange]="dateRange"
-                            [disabled]="disabled"
-                            [inputClassList]="inputClassList"
-                            [placeholder]="text.begin + ' - mm/dd/yyyy'"
-                            [text]="$any(text.datePickerText)"
-                            [calendarButtonClassList]="calendarButtonClassList">
-      </particle-date-picker>
-    </div>
-    <div class="center_center hide_element">
-      <i class="fa-solid fa-arrows-left-right"></i>
-    </div>
-    <div class="col size_1">
-      <particle-date-picker [(ngModel)]="endDate"
-                            [inputId]="inputId + '.endDate'"
-                            [dateRange]="_endDateRange"
-                            [disabled]="disabled"
-                            [inputClassList]="inputClassList"
-                            [placeholder]="text.end + ' - mm/dd/yyyy'"
-                            [text]="$any(text.datePickerText)"
-                            [calendarButtonClassList]="calendarButtonClassList">
-      </particle-date-picker>
-    </div>
-  </div>
--->
-
-
 <div style="cursor:default;"
      class="ptl_input ptl_input_height ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
      [ngClass]="inputClassList"
@@ -42,8 +10,10 @@
           class="access btnset clear width100 height100 center_center"
   >
     <div class="col size_1 height100 width100 ptl_input_text ptl_input_padding v_center">
-      <ng-container *ngIf="_value.asObservable() | async as value else placeholderTemplate">
-        {{value.start | date: dateFormat}} - {{value.end | date: dateFormat}}
+      <ng-container *ngIf="_value.asObservable() | async as value">
+        <ng-container *ngIf="value.start && value.end else placeholderTemplate">
+          {{value.start | date: dateFormat}} - {{value.end | date: dateFormat}}
+        </ng-container>
       </ng-container>
       <ng-template #placeholderTemplate>
         {{text.selectRange}}...
@@ -57,22 +27,67 @@
   </button>
 </div>
 
-<particle-popover #calendarPopover>
+<particle-popover (closed)="checkState()" #calendarPopover>
   <div class="width100 space_between">
     <div>
+      <div class="pad_10 pad_bot0">
+        <div>{{text.begin}}:</div>
+        <div>
+          <particle-date-picker
+            inputClassList="access input sm content_color"
+            [inputOnly]="true"
+            [(ngModel)]="beginDate"
+            [dateRange]="dateRange">
+          </particle-date-picker>
+        </div>
+      </div>
       <particle-calendar [value]="beginDate"
                          [text]="$any(text.calendarText)"
                          [dateRange]="dateRange"
-                         (selected)="updateModel(true, $event)">
+                         [showControls]="false"
+                         class="hide_element"
+                         (selected)="updateModel(true, $event)"
+                         #beginCalendar>
       </particle-calendar>
     </div>
     <div>
+      <div class="pad_10 pad_bot0">
+        <div>{{text.end}}:</div>
+        <div>
+          <particle-date-picker
+            inputClassList="access input sm content_color"
+            [inputOnly]="true"
+            [dateRange]="endDateRange"
+            [(ngModel)]="endDate">
+          </particle-date-picker>
+        </div>
+      </div>
       <particle-calendar [value]="endDate"
                          [text]="$any(text.calendarText)"
-                         [dateRange]="_endDateRange"
-                         (selected)="updateModel(false, $event)">
+                         [dateRange]="endDateRange"
+                         [showControls]="false"
+                         class="hide_element"
+                         (selected)="updateModel(false, $event)"
+                         #endCalendar>
       </particle-calendar>
+      <div class="mobile_only pad_bot10"></div>
     </div>
+  </div>
+  <div class="bg_overlay brdr hr mar_5 mar_top0"></div>
+  <div class="row space_between">
+    <button (click)="clear()"
+            class="access btn sm bg_overlay_rev brdr mar_5 hov_bg"
+            [attr.aria-label]="text.clear">
+      <i class="fas fa-x mar_right5"></i><span class="text bold">{{text.clear}}</span>
+    </button>
+
+    <button (keyup.escape)="calendarPopover.close()"
+            (click)="calendarPopover.close()"
+            [attr.data-dialog-close-override]="true"
+            class="access btn sm bg_overlay_rev brdr mar_5 hov_bg"
+            [attr.aria-label]="text.done">
+      <i class="fas fa-check mar_right5"></i><span class="text bold">{{text.done}}</span>
+    </button>
   </div>
 </particle-popover>
 

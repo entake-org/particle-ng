@@ -72,6 +72,8 @@ export interface DateRangePickerText {
   calendarText?: CalendarText;
   begin: string;
   end: string;
+  done: string;
+  clear: string;
   openCalendar: string;
   selectRange: string;
 }

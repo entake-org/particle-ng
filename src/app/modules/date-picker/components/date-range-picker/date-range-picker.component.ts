@@ -3,6 +3,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BehaviorSubject} from 'rxjs';
 import {DateRangePickerText} from '../../../../shared/models/particle-component-text.model';
 import {PopoverComponent} from '../../../popover/popover.component';
+import {CalendarComponent} from '../calendar/calendar.component';
 
 @Component({
   selector: 'particle-date-range-picker',
@@ -36,6 +37,8 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   text: DateRangePickerText = {
     begin: 'Begin',
     end: 'End',
+    done: 'Done',
+    clear: 'Clear',
     openCalendar: 'Open Calendar',
     selectRange: 'Choose a Range'
   } as DateRangePickerText;
@@ -56,14 +59,18 @@ export class DateRangePickerComponent implements ControlValueAccessor {
 
   get dateRange(): {minDate: Date,  maxDate: Date} {
     return this._dateRange;
-}
+  }
 
-  _dateRange = {
+  get endDateRange(): {minDate: Date,  maxDate: Date} {
+    return this._endDateRange;
+  }
+
+  private _dateRange = {
     minDate: new Date(this.currentYear - 100, 0, 1),
     maxDate: new Date(this.currentYear + 100, 11, 31)
   };
 
-  _endDateRange = {
+  private _endDateRange = {
     minDate: new Date(this.currentYear - 100, 0, 1),
     maxDate: new Date(this.currentYear + 100, 11, 31)
   }
@@ -107,6 +114,12 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   @ViewChild('calendarPopover')
   calendarPopover: PopoverComponent = null as any;
 
+  @ViewChild('beginCalendar')
+  beginCalendar: CalendarComponent = null as any;
+
+  @ViewChild('endCalendar')
+  endCalendar: CalendarComponent = null as any;
+
   get beginDate(): Date {
     if (this._value.value) {
       return this._value.value.start;
@@ -118,6 +131,10 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   set beginDate(beginDate: Date) {
     let value = this._value.value;
     value.start = beginDate;
+
+    if (!beginDate && this.beginCalendar) {
+      this.beginCalendar.clear();
+    }
 
     this._value.next(value);
 
@@ -140,8 +157,17 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   }
 
   set endDate(endDate: Date) {
+    if (this._value.value && endDate < this._value.value.start) {
+      endDate = null as any;
+      this.endCalendar.clear();
+    }
+
     let value = this._value.value;
     value.end = endDate;
+
+    if (!endDate && this.endCalendar) {
+      this.endCalendar.clear();
+    }
 
     this._value.next(value);
   }
@@ -207,4 +233,16 @@ export class DateRangePickerComponent implements ControlValueAccessor {
       this.endDate = date;
     }
   }
+
+  checkState(): void {
+    const val = this._value.value;
+    if (val && ((val.start > val.end) || !(val.start && val.end))) {
+      this.clear();
+    }
+  }
+
+  clear(): void {
+    this.value = null as any;
+  }
+
 }

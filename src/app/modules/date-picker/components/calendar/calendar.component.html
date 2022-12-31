@@ -47,7 +47,7 @@
   <div class="content_color pad_5">
     <!-- weekdays -->
     <div class="mar_5 mar_bot10">
-      <div class="row wrap space_between body_color brad_3 mar_bot5">
+      <div class="row wrap space_between bg_grey brad_3 mar_bot5">
         <div class="particle_datepicker_weekday">{{text.sundayAbbr}}</div>
         <div class="particle_datepicker_weekday">{{text.mondayAbbr}}</div>
         <div class="particle_datepicker_weekday">{{text.tuesdayAbbr}}</div>
@@ -85,33 +85,35 @@
         </ng-container>
       </div>
     </div>
-    <div class="bg_overlay brdr hr mar_5"></div>
-    <div class="row space_between">
-      <ng-container *ngIf="currentDate.selectable">
-        <button *ngIf="(currentDate.date === selectedDate?.date && currentDate.month === selectedDate?.month && currentDate.year === selectedDate?.year) else selectTodayButton"
-                disabled
-                class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
-                [attr.aria-label]="text.resetDateToToday">
-            <span class="text bold">{{text.selectToday}}</span>
-          </button>
-        <ng-template #selectTodayButton>
-          <button (keyup.escape)="closed.emit()"
-                  (click)="selectToday()"
-                  [attr.data-dialog-close-override]="true"
+    <ng-container *ngIf="showControls">
+      <div class="bg_overlay brdr hr mar_5"></div>
+      <div class="row space_between">
+        <ng-container *ngIf="currentDate.selectable">
+          <button *ngIf="(currentDate.date === selectedDate?.date && currentDate.month === selectedDate?.month && currentDate.year === selectedDate?.year) else selectTodayButton"
+                  disabled
                   class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
                   [attr.aria-label]="text.resetDateToToday">
-            <span class="text bold">{{text.selectToday}}</span>
-          </button>
-        </ng-template>
-      </ng-container>
-      <button #doneButton
-              (keyup.escape)="closed.emit()"
-              (click)="closed.emit()"
-              [attr.data-dialog-close-override]="true"
-              class="access btn sm bg_overlay_rev brdr mar_5 hov_bg"
-              [attr.aria-label]="text.saveDate">
-        <i class="fas fa-check mar_right5"></i><span class="text bold">{{text.done}}</span>
-      </button>
-    </div>
+              <span class="text bold">{{text.selectToday}}</span>
+            </button>
+          <ng-template #selectTodayButton>
+            <button (keyup.escape)="closed.emit()"
+                    (click)="selectToday()"
+                    [attr.data-dialog-close-override]="true"
+                    class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
+                    [attr.aria-label]="text.resetDateToToday">
+              <span class="text bold">{{text.selectToday}}</span>
+            </button>
+          </ng-template>
+        </ng-container>
+        <button #doneButton
+                (keyup.escape)="closed.emit()"
+                (click)="closed.emit()"
+                [attr.data-dialog-close-override]="true"
+                class="access btn sm bg_overlay_rev brdr mar_5 hov_bg"
+                [attr.aria-label]="text.saveDate">
+          <i class="fas fa-check mar_right5"></i><span class="text bold">{{text.done}}</span>
+        </button>
+      </div>
+    </ng-container>
   </div>
 </div>
