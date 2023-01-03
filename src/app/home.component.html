@@ -1225,13 +1225,22 @@
               <div>
                 <div class="row_block bg_overlay brdr brad_3 pad_10">
                   <div class="text_center text sm bolder">
-                    Add basic controls here
+                    Current Theme
                   </div>
                   <div class="bg_overlay brdr hr mar_y10 mar_x5"></div>
                   <div class="mar_5 mar_y10 pad_bot10 pad_top10">
                     <particle-theming></particle-theming>
                   </div>
-                  <div class="mar_5 mar_y10 pad_5 brad_3 brdr test text_center text xsm">COOL COLOR VARIABLES</div>
+                  <div class="text_center text sm bolder">
+                    Current Font
+                  </div>
+                  <div class="bg_overlay brdr hr mar_y10 mar_x5"></div>
+                  <div class="mar_5 mar_y10 pad_bot10 pad_top10">
+                    <input
+                      class="access ptl_input ptl_input_height ptl_input_text ptl_input_padding ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
+                      [(ngModel)]="fontName" />
+                  </div>
+                  <button class="mar_5 mar_y10 pad_5 brad_3 brdr test text_center width100" style="cursor:pointer;" (click)="updateFont()">APPLY</button>
                 </div>
                 <div class="row_block mar_top5 bg_overlay brdr brad_3 pad_10">
                   <div class="text_center text sm bolder">

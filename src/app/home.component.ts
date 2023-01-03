@@ -100,7 +100,7 @@ export class HomeComponent {
 
   weekPickerValue = { start: startOfWeek(new Date()), end: endOfWeek(new Date()) };
 
-  dateRangePickerValue = null; //{ start: startOfMonth(new Date()), end: endOfMonth(new Date()) };
+  dateRangePickerValue = { start: startOfMonth(new Date()), end: endOfMonth(new Date()) };
 
   textEditorValue = '<h2 style="text-align: center">Beautiful <b>BOLD</b> <em>rich</em> text!</h2><p>Visit <a href="https://www.sdsolutions.io" target="_blank">sdsolutions.io</a> for more cool stuff!</p>';
 
@@ -140,6 +140,8 @@ export class HomeComponent {
 
   formGroup = new FormGroup({ dateTest: new FormControl(null, Validators.required)});
 
+  fontName = '';
+
   /**
    * Constructor
    */
@@ -147,6 +149,9 @@ export class HomeComponent {
     private notificationService: NotificationService,
     private themingService: ThemingService
   ) {
+    if (this.themingService.getTheme()) {
+      this.fontName = this.themingService.getTheme().fonts.filter(font => font.isDefault)[0].name;
+    }
   }
 
   /**
@@ -219,5 +224,16 @@ export class HomeComponent {
       summary: 'Timer Ended',
       detail: 'User logged out'
     });
+  }
+
+  updateFont(): void {
+    const theme = this.themingService.getTheme();
+    theme.fonts = [];
+    theme.fonts.push({
+      isDefault: true,
+      name: this.fontName
+    });
+
+    this.themingService.changeColors(theme);
   }
 }
