@@ -430,6 +430,7 @@
                         <div class="pad_10"></div>
                         <div class="form_label mar_bot3">Week Picker</div>
                         <particle-week-picker
+                          [calendarButtonClassList]="'bg_blue ptl_input_text'"
                           [(ngModel)]="weekPickerValue"
                           (ngModelChange)="console.log(weekPickerValue); console.log('Week picker model change')"
                           (weekSelected)="console.log($event); console.log('Week selected');"
@@ -447,7 +448,7 @@
                         <particle-date-range-picker
                           [(ngModel)]="dateRangePickerValue"
                           [inputClassList]="''"
-                          [calendarButtonClassList]="''"
+                          [calendarButtonClassList]="'bg_blue ptl_input_text'"
                           [disabled]="false">
                         </particle-date-range-picker>
                       </div>
@@ -496,6 +497,7 @@
                           (ngModelChange)="console.log(dropdownValue); console.log('dropdown model changed')"
                           (change)="console.log(dropdownValue); console.log('dropdown value changed')"
                           [text]="{placeholder: 'Select an option...'}"
+                          buttonClassList="bg_blue"
                           [options]="[
                            { value: 'red', label: 'Option A' },
                            { value: 'green', label: 'Disabled Option', disabled: true },
@@ -554,6 +556,7 @@
                       <div class="pad_15">
                         <div class="form_label mar_bot3">Basic MultiSelect</div>
                         <particle-multi-select
+                          buttonClassList="bg_blue"
                           [options]="[
                          { value: 'a', label: 'Option A' },
                          { value: 'b', label: 'Disabled Option', disabled: true },

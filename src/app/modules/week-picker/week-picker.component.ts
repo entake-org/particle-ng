@@ -152,7 +152,7 @@ export class WeekPickerComponent implements ControlValueAccessor {
    * Class list to apply to the date range input
    */
   @Input()
-  inputClassList = '';
+  inputClassList = null as any;
 
   /**
    * Class list to apply to the week picker button

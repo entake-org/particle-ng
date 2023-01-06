@@ -159,6 +159,9 @@ export class DropdownComponent implements ControlValueAccessor {
   @Input()
   classList: string = null as any;
 
+  @Input()
+  buttonClassList: string = null as any;
+
   /**
    * Event emitted on value change, emits the new value
    */
