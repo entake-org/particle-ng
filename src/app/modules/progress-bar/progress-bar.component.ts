@@ -36,6 +36,9 @@ export class ProgressBarComponent {
   @Input()
   showBorder: boolean = true;
 
+  @Input()
+  showMovement: boolean = false;
+
   constructor() { }
 
 }

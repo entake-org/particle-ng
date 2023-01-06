@@ -136,7 +136,7 @@ export class HomeComponent {
   buttonsDisabled = 'N';
   checkboxActive = true;
 
-  progressBarAmount = 69.69696969;
+  progressBarAmount = 0;
 
   formGroup = new FormGroup({ dateTest: new FormControl(null, Validators.required)});
 
@@ -152,6 +152,8 @@ export class HomeComponent {
     if (this.themingService.getTheme()) {
       this.fontName = this.themingService.getTheme().fonts.filter(font => font.isDefault)[0].name;
     }
+
+    setInterval(()=> this.progressBarAmount = (this.progressBarAmount + 1) % 100, 100);
   }
 
   /**

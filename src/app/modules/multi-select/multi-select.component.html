@@ -88,12 +88,12 @@
                         (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i + j)"
                         (keyup.escape)="onEscapeKeyUp($event)"
                         [id]="multiSelectId + '-' + groupOption.value"
-                        [ngClass]="{ 'unselected': !selectionValueMap['' + groupOption.value] }"
+                        [ngClass]="(!selectionValueMap['' + groupOption.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
                         [attr.aria-selected]="(_internalValue | async)?.includes(groupOption.value)"
                         [attr.data-value]="groupOption.value"
                         [attr.data-dialog-close-override]="true"
                         [disabled]="groupOption.disabled || disabled"
-                        class="particle_multiselect_option" role="option" tabindex="0">
+                        role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + groupOption.value] ? 'ok_button_color' : 'unselected'"
                        aria-hidden="true">
@@ -116,8 +116,8 @@
                         [attr.data-value]="option.value"
                         [attr.data-dialog-close-override]="true"
                         [disabled]="option.disabled || disabled"
-                        [ngClass]="{ 'unselected': !selectionValueMap['' + option.value] }"
-                        class="particle_multiselect_option" role="option" tabindex="0">
+                        [ngClass]="(!selectionValueMap['' + option.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
+                        role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + option.value] ? 'ok_button_color' : 'unselected'"
                        aria-hidden="true">
@@ -149,8 +149,7 @@
                         [attr.data-value]="groupOption.value"
                         [attr.data-dialog-close-override]="true"
                         [disabled]="groupOption.disabled || disabled"
-                        [ngClass]="{ 'unselected': !selectionValueMap['' + groupOption.value] }"
-                        class="particle_multiselect_option"
+                        [ngClass]="(!selectionValueMap['' + groupOption.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
                         role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + groupOption.value] ? 'ok_button_color' : 'unselected'"
@@ -174,8 +173,7 @@
                         [attr.data-value]="option.value"
                         [attr.data-dialog-close-override]="true"
                         [disabled]="option.disabled || disabled"
-                        [ngClass]="{ 'unselected': !selectionValueMap['' + option.value] }"
-                        class="particle_multiselect_option"
+                        [ngClass]="(!selectionValueMap['' + option.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
                         role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + option.value] ? 'ok_button_color' : 'unselected'"
