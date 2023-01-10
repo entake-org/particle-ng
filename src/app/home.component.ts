@@ -238,4 +238,8 @@ export class HomeComponent {
 
     this.themingService.changeColors(theme);
   }
+
+  logEvent(event: any): void {
+    console.log(event);
+  }
 }

@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, forwardRef, Input, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, tap} from 'rxjs';
 import {DateRangePickerText} from '../../../../shared/models/particle-component-text.model';
 import {PopoverComponent} from '../../../popover/popover.component';
 import {CalendarComponent} from '../calendar/calendar.component';
@@ -22,7 +22,29 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   currentYear = new Date().getFullYear();
   _disabled = false;
 
-  _value = new BehaviorSubject<any>(null);
+  private _value$ = new BehaviorSubject<any>(null);
+
+  private _lastValue: any = null as any;
+  private _init = false;
+
+  valueObs$ = this._value$.asObservable().pipe(tap(
+    value => {
+      if (this._init) {
+        this._init = false;
+        return;
+      }
+
+      let newValue = null;
+      if (value.start && value.end) {
+        newValue = {start: value.start, end: value.end};
+      }
+
+      if (newValue !== this._lastValue) {
+        this._lastValue = newValue;
+        this.onChange(this._lastValue);
+      }
+    }
+  ));
 
   @Input()
   inputId: string = null as any;
@@ -77,11 +99,12 @@ export class DateRangePickerComponent implements ControlValueAccessor {
 
   @Input()
   set value(value: { start: Date, end: Date }) {
+    this._init = true;
     if (!value) {
       value = {start: null as any, end: null as any};
     }
 
-    this._value.next(value);
+    this._value$.next(value);
 
     if (value) {
       this.beginDate = value.start;
@@ -89,7 +112,7 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   }
 
   get value(): {start: Date, end: Date} {
-    return this._value.value;
+    return this._value$.value;
   }
 
   @Input()
@@ -121,15 +144,15 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   endCalendar: CalendarComponent = null as any;
 
   get beginDate(): Date {
-    if (this._value.value) {
-      return this._value.value.start;
+    if (this._value$.value) {
+      return this._value$.value.start;
     }
 
     return null as any;
   }
 
   set beginDate(beginDate: Date) {
-    let value = this._value.value;
+    let value = this._value$.value;
     value.start = beginDate;
 
     if (!beginDate && this.beginCalendar) {
@@ -138,7 +161,7 @@ export class DateRangePickerComponent implements ControlValueAccessor {
       }
     }
 
-    this._value.next(value);
+    this._value$.next(value);
 
     if (!beginDate || beginDate > this.endDate) {
       this.endDate = null as any;
@@ -151,22 +174,22 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   }
 
   get endDate(): Date {
-    if (this._value.value) {
-      return this._value.value.end;
+    if (this._value$.value) {
+      return this._value$.value.end;
     }
 
     return null as any;
   }
 
   set endDate(endDate: Date) {
-    if (this._value.value && endDate < this._value.value.start) {
+    if (this._value$.value && endDate < this._value$.value.start) {
       endDate = null as any;
       if (this.endCalendar) {
         this.endCalendar.clear();
       }
     }
 
-    let value = this._value.value;
+    let value = this._value$.value;
     value.end = endDate;
 
     if (!endDate && this.endCalendar) {
@@ -175,7 +198,7 @@ export class DateRangePickerComponent implements ControlValueAccessor {
       }
     }
 
-    this._value.next(value);
+    this._value$.next(value);
   }
 
   /**
@@ -241,7 +264,7 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   }
 
   checkState(): void {
-    const val = this._value.value;
+    const val = this._value$.value;
     if (val && ((val.start > val.end) || !(val.start && val.end))) {
       this.clear();
     }

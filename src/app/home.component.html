@@ -427,6 +427,7 @@
                                                 (input)="console.log('Date picker input')"
                                                 [disabled]="false"
                                                 [closeOnSelect]="true"
+                                                (ngModelChange)="logEvent($event)"
                                                 [calendarButtonClassList]="'bg_blue ptl_input_text'">
                           </particle-date-picker>
                         </form>
@@ -450,6 +451,7 @@
                         <div class="form_label mar_bot3">Date Range Picker</div>
                         <particle-date-range-picker
                           [(ngModel)]="dateRangePickerValue"
+                          (ngModelChange)="logEvent($event)"
                           [inputClassList]="''"
                           [calendarButtonClassList]="'bg_blue ptl_input_text'"
                           [disabled]="false">

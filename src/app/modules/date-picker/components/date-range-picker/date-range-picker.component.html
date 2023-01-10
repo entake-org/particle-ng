@@ -11,7 +11,7 @@
           class="access btnset width100 height100 center_center"
   >
     <div class="col size_1 height100 width100 ptl_input_text ptl_input_padding v_center">
-      <ng-container *ngIf="_value.asObservable() | async as value">
+      <ng-container *ngIf="valueObs$ | async as value">
         <ng-container *ngIf="value.start && value.end else placeholderTemplate">
           {{value.start | date: dateFormat}} - {{value.end | date: dateFormat}}
         </ng-container>
