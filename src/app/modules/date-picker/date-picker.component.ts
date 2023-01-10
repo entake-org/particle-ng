@@ -407,6 +407,10 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     if (!DatePickerComponent.ALLOWED_KEYS.includes(key) && !event.ctrlKey) {
       event.preventDefault();
     }
+
+    if (key === 'Enter') {
+      setTimeout(() => this.openCalendar(), 0);
+    }
   }
 
   /**
@@ -466,8 +470,10 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * Open the calendar widget
    * @param event the click MouseEvent
    */
-  openCalendar(event: MouseEvent): void {
-    event.stopImmediatePropagation();
+  openCalendar(event?: MouseEvent): void {
+    if (event) {
+      event.stopImmediatePropagation();
+    }
 
     this.showCalendar = { currentValue: this.value };
     this.calendarPopover.toggle(event);

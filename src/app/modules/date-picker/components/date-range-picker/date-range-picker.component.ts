@@ -133,7 +133,9 @@ export class DateRangePickerComponent implements ControlValueAccessor {
     value.start = beginDate;
 
     if (!beginDate && this.beginCalendar) {
-      this.beginCalendar.clear();
+      if (this.beginCalendar) {
+        this.beginCalendar.clear();
+      }
     }
 
     this._value.next(value);
@@ -159,14 +161,18 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   set endDate(endDate: Date) {
     if (this._value.value && endDate < this._value.value.start) {
       endDate = null as any;
-      this.endCalendar.clear();
+      if (this.endCalendar) {
+        this.endCalendar.clear();
+      }
     }
 
     let value = this._value.value;
     value.end = endDate;
 
     if (!endDate && this.endCalendar) {
-      this.endCalendar.clear();
+      if (this.endCalendar) {
+        this.endCalendar.clear();
+      }
     }
 
     this._value.next(value);

@@ -7,6 +7,7 @@
   <button #dropdownButton
           role="combobox"
           aria-haspopup="listbox"
+          type="button"
           (click)="openDropdown($event)"
           (focus)="setSelectionIndex()"
           (keyup.escape)="onEscapeKeyUp($event)"
@@ -42,7 +43,7 @@
 </div>
 
 <div [style.display]="render ? '' : 'none'"
-     [attr.aria-hidden]="render"
+     [attr.aria-hidden]="!render"
      class="particle_dropdown_overlay">
   <div #dropdownList
        [@openClose]="opened ? 'open' : 'close'"
@@ -70,6 +71,7 @@
                           [attr.data-value]="groupOption.value"
                           [attr.data-dialog-close-override]="true"
                           [disabled]="groupOption.disabled"
+                          type="button"
                           class="particle_dropdown_option" role="option" tabindex="0">
                     <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext!"></ng-container>
                   </button>
@@ -89,6 +91,7 @@
                           [attr.data-value]="option.value"
                           [attr.data-dialog-close-override]="true"
                           [disabled]="option.disabled"
+                          type="button"
                           class="particle_dropdown_option" role="option" tabindex="0">
                     <ng-container *ngTemplateOutlet="template; context: option.dataContext!"></ng-container>
                   </button>
@@ -116,6 +119,7 @@
                           [attr.data-dialog-close-override]="true"
                           [disabled]="groupOption.disabled"
                           class="particle_dropdown_option"
+                          type="button"
                           role="option" tabindex="0">
                     {{groupOption.label}}
                   </button>
@@ -136,6 +140,7 @@
                           [attr.data-dialog-close-override]="true"
                           [disabled]="option.disabled"
                           class="particle_dropdown_option"
+                          type="button"
                           role="option" tabindex="0">
                     {{option.label}}
                   </button>

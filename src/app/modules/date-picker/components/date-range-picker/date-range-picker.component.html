@@ -2,6 +2,7 @@
      [ngClass]="inputClassList ? '' : 'ptl_input ptl_input_height ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius'"
      [style.filter]="disabled ? 'brightness(.95)' : ''">
   <button (click)="openCalendar($event)"
+          type="button"
           aria-haspopup="dialog"
           [disabled]="disabled"
           [attr.aria-label]="(ariaLabel ? ariaLabel + ', ' : '') + text.openCalendar"

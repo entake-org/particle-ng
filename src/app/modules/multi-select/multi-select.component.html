@@ -7,6 +7,7 @@
     <button #multiSelectButton
             role="combobox"
             aria-haspopup="listbox"
+            type="button"
             (click)="openMultiSelect($event)"
             (keyup.escape)="onEscapeKeyUp($event)"
             [id]="multiSelectId"
@@ -58,7 +59,7 @@
 </ng-container>
 
 <div [style.display]="render ? '' : 'none'"
-     [attr.aria-hidden]="render"
+     [attr.aria-hidden]="!render"
      class="particle_multiselect_overlay">
   <div #multiSelectList
        [@openClose]="opened ? 'open' : 'close'"
@@ -93,6 +94,7 @@
                         [attr.data-value]="groupOption.value"
                         [attr.data-dialog-close-override]="true"
                         [disabled]="groupOption.disabled || disabled"
+                        type="button"
                         role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + groupOption.value] ? 'ok_button_color' : 'unselected'"
@@ -117,7 +119,7 @@
                         [attr.data-dialog-close-override]="true"
                         [disabled]="option.disabled || disabled"
                         [ngClass]="(!selectionValueMap['' + option.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
-                        role="option" tabindex="0">
+                        role="option" type="button" tabindex="0">
                   <div class="particle_multiselect_checkbox bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + option.value] ? 'ok_button_color' : 'unselected'"
                        aria-hidden="true">
@@ -150,7 +152,7 @@
                         [attr.data-dialog-close-override]="true"
                         [disabled]="groupOption.disabled || disabled"
                         [ngClass]="(!selectionValueMap['' + groupOption.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
-                        role="option" tabindex="0">
+                        type="button" role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + groupOption.value] ? 'ok_button_color' : 'unselected'"
                        aria-hidden="true">
@@ -174,7 +176,7 @@
                         [attr.data-dialog-close-override]="true"
                         [disabled]="option.disabled || disabled"
                         [ngClass]="(!selectionValueMap['' + option.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
-                        role="option" tabindex="0">
+                        type="button" role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + option.value] ? 'ok_button_color' : 'unselected'"
                        aria-hidden="true">
