@@ -112,7 +112,7 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   }
 
   get value(): {start: Date, end: Date} {
-    return this._value$.value;
+    return this._lastValue;
   }
 
   @Input()
