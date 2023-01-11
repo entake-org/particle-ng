@@ -25,15 +25,10 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   private _value$ = new BehaviorSubject<any>(null);
 
   private _lastValue: any = null as any;
-  private _init = false;
+  private _init = true;
 
   valueObs$ = this._value$.asObservable().pipe(tap(
     value => {
-      if (this._init) {
-        this._init = false;
-        return;
-      }
-
       let newValue = null;
       if (value.start && value.end) {
         newValue = {start: value.start, end: value.end};
@@ -41,7 +36,13 @@ export class DateRangePickerComponent implements ControlValueAccessor {
 
       if (newValue !== this._lastValue) {
         this._lastValue = newValue;
-        this.onChange(this._lastValue);
+
+        if (!this._init) {
+          this.onChange(this._lastValue);
+        } else {
+          this._init = false;
+          return;
+        }
       }
     }
   ));
@@ -99,7 +100,6 @@ export class DateRangePickerComponent implements ControlValueAccessor {
 
   @Input()
   set value(value: { start: Date, end: Date }) {
-    this._init = true;
     if (!value) {
       value = {start: null as any, end: null as any};
     }
