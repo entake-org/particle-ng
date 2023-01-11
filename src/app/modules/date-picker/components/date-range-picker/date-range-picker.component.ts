@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, ViewChild} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BehaviorSubject, tap} from 'rxjs';
 import {DateRangePickerText} from '../../../../shared/models/particle-component-text.model';
@@ -17,7 +17,7 @@ import {CalendarComponent} from '../calendar/calendar.component';
     }
   ]
 })
-export class DateRangePickerComponent implements ControlValueAccessor {
+export class DateRangePickerComponent implements ControlValueAccessor, AfterViewInit {
 
   currentYear = new Date().getFullYear();
   _disabled = false;
@@ -25,7 +25,7 @@ export class DateRangePickerComponent implements ControlValueAccessor {
   private _value$ = new BehaviorSubject<any>(null);
 
   private _lastValue: any = null as any;
-  private _init = true;
+  private _init = false;
 
   valueObs$ = this._value$.asObservable().pipe(tap(
     value => {
@@ -37,11 +37,8 @@ export class DateRangePickerComponent implements ControlValueAccessor {
       if (newValue !== this._lastValue) {
         this._lastValue = newValue;
 
-        if (!this._init) {
+        if (this._init) {
           this.onChange(this._lastValue);
-        } else {
-          this._init = false;
-          return;
         }
       }
     }
@@ -142,6 +139,10 @@ export class DateRangePickerComponent implements ControlValueAccessor {
 
   @ViewChild('endCalendar')
   endCalendar: CalendarComponent = null as any;
+
+  ngAfterViewInit(): void {
+    this._init = true;
+  }
 
   get beginDate(): Date {
     if (this._value$.value) {
