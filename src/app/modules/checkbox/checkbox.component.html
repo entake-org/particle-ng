@@ -1,4 +1,7 @@
-<div class="access square_50px  ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius">
+<div
+  class="access ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
+  [style.height]="size + 'px'" [style.width]="size + 'px'" [style.min-width]="size + 'px'" [style.min-height]="size + 'px'"
+>
   <button
     class="access btn clear width100 height100"
     tabindex="0"
@@ -10,7 +13,7 @@
     <!-- show if checked state -->
 
     <div *ngIf="_value">
-      <i class="fas fa-check ptl_input_text"></i>
+      <i class="fas fa-check fa-fw" [style.font-size]="(size / 2) + 'px'"></i>
     </div>
   </button>
 

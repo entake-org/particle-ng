@@ -51,6 +51,9 @@ export class CheckboxComponent implements ControlValueAccessor {
   }
 
   @Input()
+  size: number = 30;
+
+  @Input()
   inputId: string = null as any;
 
   @Input()
