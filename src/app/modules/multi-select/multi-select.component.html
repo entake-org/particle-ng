@@ -96,7 +96,7 @@
                         [disabled]="groupOption.disabled || disabled"
                         type="button"
                         role="option" tabindex="0">
-                  <div class="particle_multiselect_checkbox bg_overlay brdr"
+                  <div class="particle_multiselect_checkbox ptl_input_brdr_radius bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + groupOption.value] ? 'ok_button_color' : 'unselected'"
                        aria-hidden="true">
                     <div *ngIf="selectionValueMap['' + groupOption.value]"><i class="fas fa-check"></i></div>
@@ -120,7 +120,7 @@
                         [disabled]="option.disabled || disabled"
                         [ngClass]="(!selectionValueMap['' + option.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
                         role="option" type="button" tabindex="0">
-                  <div class="particle_multiselect_checkbox bg_overlay brdr"
+                  <div class="particle_multiselect_checkbox ptl_input_brdr_radius bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + option.value] ? 'ok_button_color' : 'unselected'"
                        aria-hidden="true">
                     <div *ngIf="selectionValueMap['' + option.value]"><i class="fas fa-check"></i></div>
@@ -153,7 +153,7 @@
                         [disabled]="groupOption.disabled || disabled"
                         [ngClass]="(!selectionValueMap['' + groupOption.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
                         type="button" role="option" tabindex="0">
-                  <div class="particle_multiselect_checkbox bg_overlay brdr"
+                  <div class="particle_multiselect_checkbox ptl_input_brdr_radius bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + groupOption.value] ? 'ok_button_color' : 'unselected'"
                        aria-hidden="true">
                     <div *ngIf="selectionValueMap['' + groupOption.value]"><i class="fas fa-check"></i></div>
@@ -177,7 +177,7 @@
                         [disabled]="option.disabled || disabled"
                         [ngClass]="(!selectionValueMap['' + option.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
                         type="button" role="option" tabindex="0">
-                  <div class="particle_multiselect_checkbox bg_overlay brdr"
+                  <div class="particle_multiselect_checkbox ptl_input_brdr_radius bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + option.value] ? 'ok_button_color' : 'unselected'"
                        aria-hidden="true">
                     <div *ngIf="selectionValueMap['' + option.value]"><i class="fas fa-check"></i></div>

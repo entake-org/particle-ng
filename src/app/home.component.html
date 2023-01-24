@@ -472,6 +472,7 @@
                         <particle-rich-text
                           [placeholder]="'Some placeholder text...'"
                           [(ngModel)]="textEditorValue"
+                          [capabilities]="{heading: false, textDecoration: true, list: true, alignment: true, link: true}"
                           (ngModelChange)="console.log(textEditorValue); console.log('text editor model change')"
                           (textChanged)="handleEditorTextChange($event)">
                         </particle-rich-text>

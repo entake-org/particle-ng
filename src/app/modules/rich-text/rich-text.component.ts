@@ -6,6 +6,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {RichTextEditorText} from '../../shared/models/particle-component-text.model';
+import {RichTextCapabilities} from './rich-text-capabilities.model';
 
 export const RICH_TEXT_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -63,6 +64,15 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     update: 'Update',
     url: 'URL'
   } as RichTextEditorText;
+
+  @Input()
+  capabilities = {
+    heading: true,
+    textDecoration: true,
+    list: true,
+    alignment: true,
+    link: true
+  } as RichTextCapabilities;
 
   @Output()
   textChanged = new EventEmitter<{

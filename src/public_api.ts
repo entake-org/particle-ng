@@ -99,6 +99,7 @@ export * from './app/modules/notification/models/notification.model';
 export * from './app/modules/theming/models/theme.model';
 export * from './app/modules/toggle-switch/models/toggle-options.model';
 export * from './app/modules/button/button-state.model';
+export * from './app/modules/rich-text/rich-text-capabilities.model';
 
 /** ENUMS */
 export * from './app/shared/enums/endpoint-status.enum';

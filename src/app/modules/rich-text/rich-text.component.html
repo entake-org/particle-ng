@@ -1,5 +1,5 @@
 <div class="row bg_overlay brdr wrap hide_element"  style="border-width: 1px 1px 0 1px;" *ngIf="!this.hideControls && this.editor.isEditable">
-  <div class="col v_center bg_overlay brdr border_right pad_5">
+  <div class="col v_center bg_overlay brdr border_right pad_5" *ngIf="capabilities.heading">
     <button
       id="heading1"
       [attr.aria-label]="text.heading1"
@@ -21,7 +21,7 @@
       <i class="fas fa-header fa-fw"></i>2
     </button>
   </div>
-  <div class="col v_center bg_overlay brdr border_right pad_5">
+  <div class="col v_center bg_overlay brdr border_right pad_5" *ngIf="capabilities.textDecoration">
     <button
       id="bold"
       [attr.aria-label]="text.bold"
@@ -53,7 +53,7 @@
       <i class="fas fa-strikethrough fa-fw"></i>
     </button>
   </div>
-  <div class="col v_center bg_overlay brdr border_right pad_5">
+  <div class="col v_center bg_overlay brdr border_right pad_5" *ngIf="capabilities.list">
     <button
       id="bullet-list"
       [attr.aria-label]="text.bulletedList"
@@ -75,7 +75,7 @@
       <i class="fas fa-list-ol fa-fw"></i>
     </button>
   </div>
-  <div class="col v_center bg_overlay brdr border_right pad_5">
+  <div class="col v_center bg_overlay brdr border_right pad_5"  *ngIf="capabilities.alignment">
   <button
     id="left-align"
     [attr.aria-label]="text.leftAlign"
@@ -117,7 +117,7 @@
     <i class="fas fa-align-justify fa-fw"></i>
   </button>
   </div>
-  <div class="col v_center bg_overlay brdr border_right pad_5">
+  <div class="col v_center bg_overlay brdr border_right pad_5"  *ngIf="capabilities.link">
     <button
             id="link"
             [attr.aria-label]="text.setLink"
