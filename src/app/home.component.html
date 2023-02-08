@@ -55,7 +55,14 @@
                 <div class="col wrap">
                   <div class="col size_1 min_h200 pad_15 content_color box_shadow mar_10 scroll_none">
                     <div class="row_block width100">
-
+                      <div class="row_block width100 min_h400 center_center">
+                        <particle-endpoint-state
+                          [loadingOverlay]="false"
+                          [loading]="true"
+                          [text]="{loadingText: 'Please wait while we get things ready for you', loadingSubtext: 'This may take a few minutes'}"
+                          [loadingIcon]="'double_helix'">
+                        </particle-endpoint-state>
+                      </div>
 
 
                       <!-- DEFAULT -->
@@ -477,7 +484,7 @@
                           (textChanged)="handleEditorTextChange($event)">
                         </particle-rich-text>
                         <div class="form_label mar_bot3 pad_top5">Render the text from the editor</div>
-                        <div class="form_label mar_bot3">
+                        <div class="ptl_input_text mar_bot3">
                           <particle-render-rich-text [html]="textEditorValue"></particle-render-rich-text>
                         </div>
                       </div>
@@ -626,7 +633,7 @@
                       </div>
                       <particle-multi-select
                         type="expanded"
-                        [maxExpandedEntries]="10"
+                        [maxExpandedEntries]="5"
                         [options]="[
                          { value: 'a', label: 'Option A' },
                          { value: 'b', label: 'Disabled Option', disabled: true },
