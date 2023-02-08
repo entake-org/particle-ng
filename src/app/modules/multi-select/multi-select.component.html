@@ -1,4 +1,4 @@
-<ng-container *ngIf="type === 'input'">
+<ng-container *ngIf="type === 'input' || (type === 'expanded' && maxExpandedEntries > 0 && optionCount > maxExpandedEntries) else expanded">
   <div #multiSelect
        class="ptl_input ptl_input_height ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius"
        [style.filter]="disabled ? 'brightness(.95)' : ''"
@@ -54,9 +54,9 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="type === 'expanded'">
+<ng-template #expanded>
   <ng-container [ngTemplateOutlet]="multiSelectOptions"></ng-container>
-</ng-container>
+</ng-template>
 
 <div [style.display]="render ? '' : 'none'"
      [attr.aria-hidden]="!render"

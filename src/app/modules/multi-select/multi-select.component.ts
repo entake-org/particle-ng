@@ -90,6 +90,18 @@ export class MultiSelectComponent implements ControlValueAccessor {
    */
   @Input()
   set options(options: MultiSelectOptionInput) {
+    this.optionCount = 0;
+    if (options) {
+      for (const option of options) {
+        const suboptions = (option as MultiSelectOptionGroup).options;
+        if (suboptions) {
+          this.optionCount += suboptions.length;
+        } else {
+          this.optionCount++;
+        }
+      }
+    }
+
     this._options.next(MultiSelectComponent.sanitizeOptionInput(options));
   }
 
@@ -164,6 +176,9 @@ export class MultiSelectComponent implements ControlValueAccessor {
    */
   @Input()
   type: 'input' | 'expanded' = 'input';
+
+  @Input()
+  maxExpandedEntries: number = 0;
 
   /**
    * Event emitted on value change, emits the new value
@@ -250,6 +265,8 @@ export class MultiSelectComponent implements ControlValueAccessor {
    * The index of the focused option in the multiSelect list
    */
   selectionIndex: number = null as any;
+
+  optionCount: number = 0;
 
   /**
    * The current value of the multiSelect
