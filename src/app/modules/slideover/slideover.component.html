@@ -1,12 +1,12 @@
 <div #overlay (click)="close()"></div>
 <div
   [ngClass]="bgClass + ' ' + (slideoverOpen ? 'slideover_active_' + position : 'slideover_inactive_' + position) + ' slideover-panel ' + position"
-  [style.width]="position === 'right' || position === 'left' ? width : null"
-  [style.height]="position === 'top' || position === 'bottom' ? height : null"
-  [style.left]="position === 'left' && !slideoverOpen ? '-' + width : null"
-  [style.right]="position === 'right' && !slideoverOpen ? '-' + width : null"
-  [style.bottom]="position === 'bottom' && !slideoverOpen ? '-' + height : null"
-  [style.top]="position === 'top' && !slideoverOpen ? '-' + height : null"
+  [style.width]="position === 'right' || position === 'left' ? (breakpointExceeded ? '100%' : width) : null"
+  [style.height]="position === 'top' || position === 'bottom' ? (breakpointExceeded ? '100%' : height) : null"
+  [style.left]="position === 'left' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : width) : null"
+  [style.right]="position === 'right' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : width) : null"
+  [style.bottom]="position === 'bottom' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : height) : null"
+  [style.top]="position === 'top' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : height) : null"
 >
   <div class="push_close_bar">
     <particle-button

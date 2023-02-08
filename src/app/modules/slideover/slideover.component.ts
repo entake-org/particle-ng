@@ -1,4 +1,15 @@
-import {Component, ElementRef, EventEmitter, Input, OnDestroy, Output, Renderer2, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  Output,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 import {SlideoverText} from '../../shared/models/particle-component-text.model';
 
 @Component({
@@ -6,7 +17,7 @@ import {SlideoverText} from '../../shared/models/particle-component-text.model';
   templateUrl: './slideover.component.html',
   styleUrls: ['./slideover.component.css']
 })
-export class SlideoverComponent implements OnDestroy {
+export class SlideoverComponent implements AfterViewInit, OnDestroy {
 
   private _position = 'right';
 
@@ -42,6 +53,12 @@ export class SlideoverComponent implements OnDestroy {
     close: 'Close Slideover'
   } as SlideoverText;
 
+  /**
+   * Breakpoint that will make the container take over the screen when it's crossed.
+   */
+  @Input()
+  breakpoint = 769;
+
   @Output()
   opened = new EventEmitter<any>();
 
@@ -51,7 +68,18 @@ export class SlideoverComponent implements OnDestroy {
   @ViewChild('overlay')
   overlay: ElementRef = null as any;
 
-  constructor(public renderer: Renderer2) { }
+  breakpointExceeded = false;
+
+  constructor() {
+
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    if (this.breakpoint) {
+      this.breakpointExceeded = event.target.innerWidth < this.breakpoint;
+    }
+  }
 
   open(): void {
     this.addModalMask();
@@ -89,6 +117,14 @@ export class SlideoverComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.removeModalMask();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      if (this.breakpoint && (window.innerWidth <= this.breakpoint)) {
+        this.breakpointExceeded = true;
+      }
+    }, 100);
   }
 
 }

@@ -765,22 +765,22 @@
                           (clicked)="slideoverBottom.toggle()"
                         ></particle-button>
 
-                        <particle-slideover position="left" bgClass="bg_green" [modal]="false" #slideoverLeft
+                        <particle-slideover [breakpoint]="550" position="left" bgClass="bg_green" [modal]="false" #slideoverLeft
                                             (opened)="slideoverRight.close();slideoverBottom.close();slideoverTop.close()">
                           <div class="height100 center_center">Left Side</div>
                         </particle-slideover>
 
-                        <particle-slideover position="right" bgClass="bg_blue" #slideoverRight
+                        <particle-slideover [breakpoint]="550" position="right" bgClass="bg_blue" #slideoverRight
                                             (opened)="slideoverLeft.close();slideoverBottom.close();slideoverTop.close()">
                           <div class="height100 center_center">Right Side</div>
                         </particle-slideover>
 
-                        <particle-slideover position="top" bgClass="bg_red" [modal]="false" #slideoverTop
+                        <particle-slideover [breakpoint]="550" position="top" bgClass="bg_red" [modal]="false" #slideoverTop
                                             (opened)="slideoverRight.close();slideoverBottom.close();slideoverLeft.close()">
                           <div class="height100 center_center">Up Top</div>
                         </particle-slideover>
 
-                        <particle-slideover position="bottom" bgClass="bg_orange" [modal]="false" #slideoverBottom
+                        <particle-slideover [breakpoint]="550" position="bottom" bgClass="bg_orange" [modal]="false" #slideoverBottom
                                             (opened)="slideoverRight.close();slideoverLeft.close();slideoverTop.close()">
                           <div class="height100 center_center">Down Low</div>
                         </particle-slideover>
