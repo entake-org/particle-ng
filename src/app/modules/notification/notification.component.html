@@ -3,18 +3,28 @@
 <!-- toast -->
 <div class="particle_notification_overlay">
   <!-- spacer -->
-  <div class="col size_3 min_w0"></div>
   <!-- container -->
   <div class="row min_w280 pad_right5" style="max-width:400px;">
-    <div @list class="row_block width100">
+    <div @list class="row_block width100 ">
       <!-- item -->
+
       <div *ngFor="let notification of notifications$ | async"
            @items
-           [ngClass]="severityColorMap[notification.severity]"
-           class="particle_notification">
-        <div class="col mar_5"><i class="fas {{severityIconMap[notification.severity]}} fa-lg"></i></div>
-        <div class="col size_1 mar_5"><div class="text sm paragraph">{{notification.summary}}<br/>{{notification.detail}}</div></div>
-        <div class="col mar_y5">
+           class="row v_center content_color pad_10 mar_10 shadow ptl_input_brdr_radius">
+        <div class="col pad_5 mar_right5 brdr border_right">
+          <div class="circle_36px" [ngClass]="severityColorMap[notification.severity]">
+            <i class="fas {{severityIconMap[notification.severity]}} fa-lg"></i>
+          </div>
+        </div>
+        <div class="col size_1 pad_5">
+          <div class="row_block">
+            <div class="text lg bold">{{notification.summary}}</div>
+            <div class="text md">{{notification.detail}}</div>
+          </div>
+        </div>
+
+
+        <div class="col">
           <particle-button
             size="sm"
             iconSide="only"
@@ -24,6 +34,7 @@
           ></particle-button>
         </div>
       </div>
+
     </div>
   </div>
 </div>
