@@ -9,7 +9,7 @@
           <div class="bars_vertical">
             <div class="col endpoint_shape header_color bar1"></div>
             <div class="col endpoint_shape header_color bar2"></div>
-            <div class="col endpoint_shape header_color bar3"></div>
+            <div class="col endpoint_shape header_color_light_7 bar3"></div>
             <div class="col endpoint_shape header_color bar4"></div>
             <div class="col endpoint_shape header_color bar5"></div>
           </div>
@@ -18,18 +18,17 @@
           <div class="bars_vertical">
             <div class="col endpoint_shape header_color bar5"></div>
             <div class="col endpoint_shape header_color bar4"></div>
-            <div class="col endpoint_shape header_color bar3"></div>
+            <div class="col endpoint_shape header_color_light_7 bar3"></div>
             <div class="col endpoint_shape header_color bar2"></div>
             <div class="col endpoint_shape header_color bar1"></div>
           </div>
         </div>
         <div class="circle_30px ptl_input_brdr_color ptl_input_brdr_size" style="position: absolute"></div>
       </div>
-
-      <div *ngIf="text.loadingText" class="text md bold center mar_top5">{{text.loadingText}}<span class="one">.</span><span class="two">.</span><span class="three">.</span></div>
-      <div *ngIf="text.loadingSubtext" class="text sm center mar_top5">{{text.loadingSubtext}}</div>
+      <div *ngIf="text.loadingText" class="text md bold center mar_top15" style="user-select: none">{{text.loadingText}}<span class="one">.</span><span class="two">.</span><span class="three">.</span></div>
+      <div *ngIf="text.loadingSubtext" class="text sm center mar_top5" style="user-select: none">{{text.loadingSubtext}}</div>
     </ng-container>
-
+    
 
     <ng-container *ngSwitchCase="'double_helix_old'">
       <div class="bars_vertical">
