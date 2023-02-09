@@ -4,7 +4,7 @@
       <div class="row v_center ptl_input_brdr_size ptl_input_brdr_radius ptl_input_brdr_color content_color mar_right5 mar_left5 pad_3">
         <div class="col size_1 center_center pad_left5 pad_right5">
           <div class="text sm" style="user-select: none">
-            {{getStartingValueForPage(activePage)}} - {{getEndingValueForPage(activePage)}} of {{totalLength}} Results
+            {{getStartingValueForPage(activePage)}} - {{getEndingValueForPage(activePage)}} {{text.of}} {{totalLength}} {{text.results}}
           </div>
         </div>
         <div class="col ptl_input_brdr_color border_left">
@@ -155,7 +155,7 @@
     <div class="text sm center"><label for="pageJump">{{text.jumpToPage}} ({{text.outOf}} {{getNumberOfPages()}}):</label></div>
     <div class="center_center mar_top10">
       <input class="access fullwidth_input sm" style="width:50px;" maxlength="4" id="pageJump"
-             type="text" [attr.aria-label]="text.page" name="pagejump" placeholder="Page" [(ngModel)]="pageJumpInput" />
+             type="text" [attr.aria-label]="text.page" name="pagejump" [placeholder]="text.page" [(ngModel)]="pageJumpInput" />
       <button class="access btn_pulse xsm bg_overlay brdr" [attr.aria-label]="text.jumpToPage"
               (click)="jumpPage();op.close();config.close();">
         <i class="fas fa-chevron-right"></i>
