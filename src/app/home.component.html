@@ -55,13 +55,11 @@
                 <div class="col wrap">
                   <div class="col size_1 min_h200 pad_15 content_color box_shadow mar_10 scroll_none">
                     <div class="row_block width100">
-                      <div class="row_block width100 min_h400 center_center">
-                        <particle-endpoint-state
-                          [loadingOverlay]="false"
-                          [loading]="true"
-                          [text]="{loadingText: 'Please wait while we get things ready for you', loadingSubtext: 'This may take a few minutes'}"
-                          [loadingIcon]="'double_helix'">
-                        </particle-endpoint-state>
+                      <div class="row_block width100 pad_20 center_center">
+                        <particle-loader
+                          [text]="{loadingText: 'Please wait while we get things ready for you', loadingSubtext: 'This may take a moment'}"
+                        >
+                        </particle-loader>
                       </div>
 
 
@@ -435,7 +433,7 @@
                                                 [disabled]="false"
                                                 [closeOnSelect]="true"
                                                 (ngModelChange)="logEvent($event)"
-                                                [calendarButtonClassList]="'bg_blue ptl_input_text'">
+                                                [calendarButtonClassList]="'bg_orange ptl_input_text'">
                           </particle-date-picker>
                         </form>
                         <div class="pad_10"></div>
@@ -591,7 +589,7 @@
                           [(ngModel)]="multiSelectValue"
                           (ngModelChange)="console.log(multiSelectValue); console.log('Multi-select model change')"
                           (change)="console.log(multiSelectValue); console.log('Multi-select value change')"
-                          [text]="{placeholder: 'Select your favorite foods...'}"
+                          [text]="{placeholder: 'Select your favorite foods...', of: 'of', optionsSelected: 'foods selected'}"
                           [options]="[
                          { value: 'chicken', label: 'Chicken', dataContext: { 'iconClass': 'fas fa-drumstick-bite' } },
                          { value: 'apples', label: 'Apples', disabled: true, dataContext: { 'iconClass': 'fas fa-apple-alt' } },
@@ -1050,7 +1048,6 @@
                             </div>
                             <div class="col size_3 center_center mar_10">
                               <particle-paginator
-                                version="1"
                                 [totalLength]="100"
                                 [pageSizeOptions]="[10,25,50]"
                                 [pageSize]="10"
@@ -1064,7 +1061,7 @@
                             </div>
                             <div class="col size_3 center_center mar_10">
                               <particle-paginator
-                                version="2"
+                                [showPages]="true"
                                 [totalLength]="200"
                                 [pageSizeOptions]="[10,25,50]"
                                 [pageSize]="25"
@@ -1078,7 +1075,8 @@
                             </div>
                             <div class="col size_3 center_center mar_10">
                               <particle-paginator
-                                version="3"
+                                [showPages]="true"
+                                [showFirstLast]="true"
                                 [totalLength]="30000"
                                 [pageSizeOptions]="[10,25,50]"
                                 [pageSize]="50"
@@ -1092,7 +1090,9 @@
                             </div>
                             <div class="col size_3 center_center mar_10">
                               <particle-paginator
-                                version="4"
+                                [showPages]="true"
+                                [showFirstLast]="true"
+                                [showButtonLabels]="false"
                                 [totalLength]="30000"
                                 [pageSizeOptions]="[10,25,50]"
                                 [pageSize]="50"
@@ -1106,24 +1106,10 @@
                             </div>
                             <div class="col size_3 center_center mar_10">
                               <particle-paginator
-                                version="5"
+                                [showButtonLabels]="false"
                                 [totalLength]="30000"
                                 [pageSizeOptions]="[10,25,50]"
                                 [pageSize]="50"
-                              ></particle-paginator>
-                            </div>
-                          </div>
-                          <!-- version 6 -->
-                          <div class="row wrap brad_3 pad_x5 mar_y10">
-                            <div class="col size_1 mar_10 pad_y5">
-                              <div class="text md bolder">Version 6</div>
-                            </div>
-                            <div class="col size_3 center_center mar_10">
-                              <particle-paginator
-                                version="6"
-                                [totalLength]="300"
-                                [pageSizeOptions]="[10,25,50]"
-                                [pageSize]="10"
                               ></particle-paginator>
                             </div>
                           </div>

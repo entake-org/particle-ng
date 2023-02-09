@@ -34,6 +34,7 @@ import {ParticleProgressBarModule} from './modules/progress-bar/progress-bar.mod
 import {FormComponent} from './form.component';
 import {HomeComponent} from './home.component';
 import {RouterModule, Routes} from '@angular/router';
+import {ParticleLoaderModule} from './modules/loader/loader.module';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -79,6 +80,7 @@ const routes: Routes = [
     ParticleBackgroundCarouselModule,
     ParticleCheckboxModule,
     ParticleProgressBarModule,
+    ParticleLoaderModule,
     ReactiveFormsModule
   ],
   providers: [],

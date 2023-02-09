@@ -22,6 +22,7 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
   private _position = 'right';
 
   slideoverOpen = false;
+  visible = false;
 
   @Input()
   set position(position: string) {
@@ -84,6 +85,7 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
   open(): void {
     this.addModalMask();
     this.slideoverOpen = true;
+    this.visible = true;
     this.opened.emit();
   }
 
@@ -91,6 +93,8 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
     this.removeModalMask();
     this.slideoverOpen = false;
     this.closed.emit();
+
+    setTimeout(() => this.visible = false, 200);
   }
 
   toggle(): void {

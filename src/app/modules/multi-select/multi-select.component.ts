@@ -168,7 +168,9 @@ export class MultiSelectComponent implements ControlValueAccessor {
 
   @Input()
   text: MultiSelectText = {
-    placeholder: 'Make a Selection'
+    placeholder: 'Make a Selection',
+    of: 'of',
+    optionsSelected: 'options selected'
   } as MultiSelectText;
 
   /**

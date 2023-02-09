@@ -1,363 +1,180 @@
-<!---------------------------------------------------------------->
-<!-- PARTICLE PAGINATORS                                            -->
-<!-- VERSIONS: 4                                                -->
-<!---------------------------------------------------------------->
-
-<!-- VERSION 1 & 4 -->
-<div class="row_block" *ngIf="version === '1' || version === '4'">
-  <div class="center_center" style="flex-wrap: wrap-reverse;">
-    <!-- items per page -->
-    <div class="center_center mar_3" *ngIf="version === '1'">
-      <div class="text xsm center_right mar_right5" style="width:80px;">
-        <label for="pageSizeV1">{{text.itemsPerPage}}:</label>
+<div class="row wrap_reverse center_center">
+  <ng-container *ngIf="!showPages">
+    <div class="col min_w200">
+      <div class="row v_center ptl_input_brdr_size ptl_input_brdr_radius ptl_input_brdr_color content_color mar_right5 mar_left5 pad_3">
+        <div class="col size_1 center_center pad_left5 pad_right5">
+          <div class="text sm" style="user-select: none">
+            {{getStartingValueForPage(activePage)}} - {{getEndingValueForPage(activePage)}} of {{totalLength}} Results
+          </div>
+        </div>
+        <div class="col ptl_input_brdr_color border_left">
+          <div class="center_right pad_left5 pad_right5">
+            <button class="access btn clear circle_20px spinspin" tabindex="0" [attr.aria-label]="text.jumpToPage"
+                    (click)="config.toggle($event)">
+              <i class="fas fa-cog"></i>
+            </button>
+          </div>
+        </div>
       </div>
+    </div>
+  </ng-container>
+
+  <div class="col pad_5">
+    <div class="row">
+
+      <ng-container *ngIf="showFirstLast">
+        <div class="col pad_5">
+          <!-- first -->
+          <button class="access btnset md hov_glow previous_button_color_dark_1 ptl_input_brdr_radius"
+                  [attr.aria-label]="text.firstPage"
+                  [disabled]="activePage === 0"
+                  (click)="goToFirst()">
+            <div [ngClass]="showButtonLabels ? 'brdr border_right mar_right5 pad_right5' : ''">
+              <i class="fas fa-angle-double-left"></i>
+            </div>
+            <div *ngIf="showButtonLabels">{{text.firstPage}}</div>
+          </button>
+        </div>
+      </ng-container>
+
+      <div class="col pad_5">
+        <!-- previous -->
+        <button class="access btnset md hov_glow previous_button_color ptl_input_brdr_radius"
+                [attr.aria-label]="text.previousPage"
+                [disabled]="activePage === 0"
+                (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
+          <div [ngClass]="showButtonLabels ? 'brdr border_right mar_right5 pad_right5' : ''">
+            <i class="fas fa-chevron-left"></i>
+          </div>
+          <div *ngIf="showButtonLabels">{{text.previousPage}}</div>
+        </button>
+      </div>
+
+      <ng-container *ngIf="showPages">
+        <div class="col pad_5">
+          <!-- navigation -->
+          <div class="row v_center pad_left5 pad_right5 bg_overlay brdr content_color ptl_input_brdr_radius"
+               style="flex:1 1 auto;">
+            <!-- jump button -->
+            <div class="center_right" style="width:20px;min-width:20px;">
+              <button class="access btn underline_md pag_btn clear" tabindex="0"
+                      [attr.aria-label]="text.jumpToPage" *ngIf="activePage > 3"
+                      (click)="op.toggle($event)">...</button>
+            </div>
+            <!-- nav buttons -->
+            <div class="center_center" style="min-width:180px;">
+              <!-- first -->
+              <button class="access btn underline_md pag_btn clear"
+                      [attr.aria-label]="text.page + ' ' + (activePage - 1)"
+                      *ngIf="hasPage(activePage - 2)"
+                      (click)="goToPage(activePage - 2, true)">
+                {{activePage - 1}}
+              </button>
+              <!-- second -->
+              <button class="access btn underline_md pag_btn clear"
+                      [attr.aria-label]="text.page + ' ' + (activePage)"
+                      *ngIf="hasPage(activePage - 1)"
+                      (click)="goToPage(activePage - 1, true)">
+                {{activePage}}
+              </button>
+              <!-- active page -->
+              <div class="row pag_btn active brad_3 content_color">
+                <button class="access col size_1 btn center_center brad_3 bg_overlay_rev brdr" id="activePage"
+                        [attr.aria-label]="text.page + ' ' + (activePage + 1)" >
+                  {{activePage + 1}}
+                </button>
+              </div>
+              <!-- fourth -->
+              <button class="access btn underline_md pag_btn clear"
+                      [attr.aria-label]="text.page + ' ' + (activePage + 2)"
+                      *ngIf="hasPage(activePage + 1)"
+                      (click)="goToPage(activePage + 1, true)">
+                {{activePage + 2}}
+              </button>
+              <!-- fifth -->
+              <button class="access btn underline_md pag_btn clear"
+                      [attr.aria-label]="text.page + ' ' + (activePage + 3)"
+                      *ngIf="hasPage(activePage + 2)"
+                      (click)="goToPage(activePage + 2, true)">
+                {{activePage + 3}}
+              </button>
+            </div>
+            <!-- jump button -->
+            <div class="center_left" style="width:20px;min-width:20px;">
+              <button class="access btn underline_md pag_btn clear"
+                      [attr.aria-label]="text.jumpToPage" *ngIf="activePage < getNumberOfPages() - 4"
+                      (click)="op.toggle($event)" >...</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="col pad_5">
+        <!-- next -->
+        <button class="access btnset md hov_glow next_button_color ptl_input_brdr_radius"
+                [attr.aria-label]="text.nextPage"
+                [disabled]="activePage === numberOfPages - 1"
+                (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
+          <div *ngIf="showButtonLabels">{{text.nextPage}}</div>
+          <div [ngClass]="showButtonLabels ? 'brdr border_left mar_left5 pad_left5' : ''">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </button>
+      </div>
+
+      <ng-container *ngIf="showFirstLast">
+        <div class="col pad_5">
+          <!-- last -->
+          <button class="access btnset md hov_glow next_button_color_dark_1 ptl_input_brdr_radius"
+                  [attr.aria-label]="text.lastPage"
+                  [disabled]="activePage === numberOfPages - 1"
+                  (click)="goToLast()">
+            <div *ngIf="showButtonLabels">{{text.lastPage}}</div>
+            <div [ngClass]="showButtonLabels ? 'brdr border_left mar_left5 pad_left5': ''">
+              <i class="fas fa-angle-double-right"></i>
+            </div>
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- Jump to popover -->
+<particle-popover #op>
+  <ng-container *ngTemplateOutlet="jumpTo"></ng-container>
+</particle-popover>
+
+<particle-popover #config>
+  <ng-container *ngTemplateOutlet="jumpTo"></ng-container>
+  <ng-container *ngTemplateOutlet="pageSizeTemplate"></ng-container>
+</particle-popover>
+
+<ng-template #jumpTo>
+  <div class="row_block pad_10 center">
+    <div class="text sm center"><label for="pageJump">{{text.jumpToPage}} ({{text.outOf}} {{getNumberOfPages()}}):</label></div>
+    <div class="center_center mar_top10">
+      <input class="access fullwidth_input sm" style="width:50px;" maxlength="4" id="pageJump"
+             type="text" [attr.aria-label]="text.page" name="pagejump" placeholder="Page" [(ngModel)]="pageJumpInput" />
+      <button class="access btn_pulse xsm bg_overlay brdr" [attr.aria-label]="text.jumpToPage"
+              (click)="jumpPage();op.close();config.close();">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #pageSizeTemplate>
+  <div class="row_block pad_10 center">
+    <div class="text sm center"><label for="pageSize">{{text.itemsPerPage}}:</label></div>
+    <div class="center_center mar_top10">
       <select class="access fullwidth_input content_color text sm" style="width:50px;"
-              [(ngModel)]="pageSize" (change)="pageSizeChange()" [title]="text.choosePageSize" id="pageSizeV1">
+              [(ngModel)]="pageSize" (change)="pageSizeChange();config.close();" [title]="text.choosePageSize" id="pageSize">
         <option *ngFor="let option of pageSizeOptions" [value]="option" [attr.selected]="option === pageSize"
                 [attr.aria-label]="option">
           {{option}}
         </option>
       </select>
     </div>
-    <!-- current page -->
-    <div class="center_center mar_3">
-      <div class="center_center">
-        <div class="text sm min_w150 center_center bg_overlay brdr content_color"
-             style="padding: 1px 15px; height:20px; user-select:none; border-radius:20px;">
-          {{getStartingValueForPage(activePage)}} - {{getEndingValueForPage(activePage)}} of {{totalLength}}
-        </div>
-      </div>
-      <!-- previous button -->
-      <ng-container *ngIf="activePage !== 0 else disabledPrevious">
-        <button class="access btn circle_20px bg_overlay brdr cancel_button_color" style="margin:1px 3px;" [attr.aria-label]="text.previousPage"
-                (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
-          <span class="icon slide_left"><i class="fas fa-angle-left"></i></span>
-        </button>
-      </ng-container>
-      <!-- previous button disabled -->
-      <ng-template #disabledPrevious>
-        <button class="circle_20px bg_overlay brdr cancel_button_color btn" disabled style="margin:1px 3px;" [attr.aria-label]="text.disabled + ' ' + text.previousPage">
-          <i class="fas fa-angle-left"></i>
-        </button>
-      </ng-template>
-      <!-- next button -->
-      <ng-container *ngIf="activePage !== numberOfPages - 1 else disabledNext">
-        <button class="access btn circle_20px bg_overlay brdr cancel_button_color" style="margin:1px 3px;" [attr.aria-label]="text.nextPage"
-                (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
-          <span class="icon slide_right"><i class="fas fa-angle-right"></i></span>
-        </button>
-      </ng-container>
-      <!-- next button disabled -->
-      <ng-template #disabledNext>
-        <button class="circle_20px bg_overlay brdr cancel_button_color btn" disabled style="margin:1px 3px;" [attr.aria-label]="text.disabled + ' ' + text.nextPage">
-          <i class="fas fa-angle-right"></i>
-        </button>
-      </ng-template>
-    </div>
   </div>
-</div>
-
-<!-- VERSION 2 & 3 -->
-<div class="col center_center wrap_reverse" *ngIf="version === '2' || version === '3'">
-  <!-- items per page -->
-  <div class="col center_center mar_3 mar_left15 mar_right15" *ngIf="version === '2'">
-    <div class="text xsm center_right mar_right5" style="width:80px;">
-      <label for="pageSizeV2">{{text.itemsPerPage}}:</label>
-    </div>
-    <select class="access fullwidth_input content_color text sm" style="width:50px;"
-            [(ngModel)]="pageSize" (change)="pageSizeChange()" [title]="text.choosePageSize" id="pageSizeV2">
-      <option *ngFor="let option of pageSizeOptions" [value]="option" [attr.selected]="option === pageSize">{{option}}</option>
-    </select>
-  </div>
-  <!-- paginator -->
-  <div class="col center_center mar_3">
-    <!-- first -->
-    <button *ngIf="activePage !== 0 else disabledFirst"
-            class="access btn circle_20px bg_overlay brdr cancel_button_color hide_element" style="margin:1px 0 1px 3px;"
-            [attr.aria-label]="text.firstPage" (click)="goToFirst()">
-      <span class="icon slide_left"><i class="fas fa-angle-double-left"></i></span>
-    </button>
-    <!-- first button disabled -->
-    <ng-template #disabledFirst>
-      <button class="circle_20px bg_overlay brdr cancel_button_color btn" disabled style="margin:1px 0 1px 3px;" [attr.aria-label]="text.disabled + ' ' + text.firstPage">
-        <i class="fas fa-angle-double-left"></i>
-      </button>
-    </ng-template>
-    <!-- previous -->
-    <ng-container *ngIf="activePage !== 0 else disabledPrevious">
-      <button class="access btn circle_20px bg_overlay brdr cancel_button_color" style="margin:1px 3px;"
-              [attr.aria-label]="text.previousPage"
-              (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
-        <span class="icon slide_left"><i class="fas fa-angle-left"></i></span>
-      </button>
-    </ng-container>
-    <!-- previous button disabled -->
-    <ng-template #disabledPrevious>
-      <button class="circle_20px bg_overlay brdr cancel_button_color btn" disabled style="margin:1px 3px;" [attr.aria-label]="text.disabled + ' ' + text.previousPage">
-        <i class="fas fa-angle-left"></i>
-      </button>
-    </ng-template>
-    <!-- navigation -->
-    <div class="row v_center pad_left5 pad_right5 bg_overlay brdr content_color"
-         style="border-radius:100px; flex:1 1 auto;">
-      <!-- jump button -->
-      <div class="center_right" style="width:20px;min-width:20px;">
-        <button class="access btn underline_md pag_btn clear" tabindex="0" [attr.aria-label]="text.jumpToPage" *ngIf="activePage > 3"
-                (click)="op.toggle($event)">...</button>
-      </div>
-      <!-- nav buttons -->
-      <div class="center_center" style="min-width:180px;">
-        <!-- first -->
-        <button class="access btn underline_md pag_btn clear"
-                [attr.aria-label]="text.page + ' ' + (activePage - 1)"
-                *ngIf="hasPage(activePage - 2)"
-                (click)="goToPage(activePage - 2, true)">
-          {{activePage - 1}}
-        </button>
-        <!-- second -->
-        <button class="access btn underline_md pag_btn clear"
-                [attr.aria-label]="text.page + ' ' + (activePage)"
-                *ngIf="hasPage(activePage - 1)"
-                (click)="goToPage(activePage - 1, true)">
-          {{activePage}}
-        </button>
-        <!-- active page -->
-        <div class="row pag_btn active brad_3 content_color">
-          <button class="access col size_1 btn center_center brad_3 bg_overlay_rev brdr" id="activePage"
-                  [attr.aria-label]="text.page + ' ' + (activePage + 1)" >
-            {{activePage + 1}}
-          </button>
-        </div>
-        <!-- fourth -->
-        <button class="access btn underline_md pag_btn clear"
-                [attr.aria-label]="text.page + ' ' + (activePage + 2)"
-                *ngIf="hasPage(activePage + 1)"
-                (click)="goToPage(activePage + 1, true)">
-          {{activePage + 2}}
-        </button>
-        <!-- fifth -->
-        <button class="access btn underline_md pag_btn clear"
-                [attr.aria-label]="text.page + ' ' + (activePage + 3)"
-                *ngIf="hasPage(activePage + 2)"
-                (click)="goToPage(activePage + 2, true)">
-          {{activePage + 3}}
-        </button>
-      </div>
-      <!-- jump button -->
-      <div class="center_left" style="width:20px;min-width:20px;">
-        <button class="access btn underline_md pag_btn clear" [attr.aria-label]="text.jumpToPage" *ngIf="activePage < getNumberOfPages() - 4"
-                (click)="op.toggle($event)" >...</button>
-      </div>
-    </div>
-    <!-- next -->
-    <ng-container *ngIf="activePage !== numberOfPages - 1 else disabledNext">
-      <button class="access btn circle_20px bg_overlay brdr cancel_button_color" style="margin:1px 3px;"
-              [attr.aria-label]="text.nextPage"
-              (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
-        <span class="icon slide_right"><i class="fas fa-angle-right"></i></span>
-      </button>
-    </ng-container>
-    <!-- next button disabled -->
-    <ng-template #disabledNext>
-      <button class="circle_20px bg_overlay brdr cancel_button_color btn" disabled style="margin:1px 3px;" [attr.aria-label]="text.disabled + ' ' + text.nextPage">
-        <i class="fas fa-angle-right"></i>
-      </button>
-    </ng-template>
-    <!-- last -->
-    <button *ngIf="activePage !== numberOfPages - 1 else disabledLast"
-            class="access btn circle_20px bg_overlay brdr cancel_button_color hide_element" style="margin:1px 3px 1px 0;"
-            [attr.aria-label]="text.lastPage" (click)="goToLast()">
-      <span class="icon slide_right"><i class="fas fa-angle-double-right"></i></span>
-    </button>
-    <!-- last button disabled -->
-    <ng-template #disabledLast>
-      <button class="circle_20px bg_overlay brdr cancel_button_color btn" disabled style="margin:1px 3px 1px 0;" [attr.aria-label]="text.disabled + ' ' + text.lastPage">
-        <i class="fas fa-angle-double-right"></i>
-      </button>
-    </ng-template>
-    <!-- jump to page -->
-    <particle-popover #op>
-      <div class="row_block pad_10">
-        <div class="text sm">{{text.jumpToPage}} ({{text.outOf}} {{getNumberOfPages()}}):</div>
-        <div class="center_center mar_top10">
-          <input class="access fullwidth_input sm" style="width:50px;" maxlength="4"
-                 type="text" [attr.aria-label]="text.page" name="pagejump" placeholder="Page" [(ngModel)]="pageJumpInput" />
-          <button class="access btn_pulse xsm bg_overlay brdr" [attr.aria-label]="text.jumpToPage"
-                  (click)="jumpPage();op.toggle($event);">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
-      </div>
-    </particle-popover>
-  </div>
-</div>
-
-
-<!-- VERSION 5 -->
-<div class="row v_center" *ngIf="version === '5'">
-
-  <!-- paginator row setup-->
-  <div class="col">
-    <!-- previous -->
-    <ng-container *ngIf="activePage !== 0 else disabledPrevious">
-      <button class="access btnset md hov_glow previous_button_color ptl_input_brdr_radius" [attr.aria-label]="text.previousPage" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
-        <div class="brdr border_right mar_right5 pad_right5"><i class="fas fa-chevron-left"></i></div>
-        <div>Previous</div>
-      </button>
-    </ng-container>
-    <!-- previous button disabled -->
-    <ng-template #disabledPrevious>
-      <button class="access btnset md hov_glow previous_button_color ptl_input_brdr_radius" style="opacity: 0.5"  [attr.aria-label]="text.disabled + ' ' + text.previousPage">
-        <div class="brdr border_right mar_right5 pad_right5"><i class="fas fa-chevron-left"></i></div>
-        <div>Previous</div>
-      </button>
-    </ng-template>
-  </div>
-  <div class="col">
-    <!-- jump button -->
-    <div class="center_right">
-      <button class="access btn circle_22px clear" tabindex="0" [attr.aria-label]="text.jumpToPage"
-              (click)="op.toggle($event)">
-        <i class="fas fa-cog"></i>
-      </button>
-    </div>
-  </div>
-  <div class="col">
-    <!-- next -->
-    <ng-container *ngIf="activePage !== numberOfPages - 1 else disabledNext">
-      <button class="access btnset md hov_glow next_button_color ptl_input_brdr_radius" [attr.aria-label]="text.nextPage" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
-        <div>Next</div>
-        <div class="brdr border_left mar_left5 pad_left5"><i class="fas fa-chevron-right"></i></div>
-      </button>
-    </ng-container>
-      <!-- next button disabled -->
-    <ng-template #disabledNext>
-      <button class="access btnset md hov_glow next_button_color ptl_input_brdr_radius" style="opacity: 0.5" [attr.aria-label]="text.disabled + ' ' + text.nextPage">
-        <div>Next</div>
-        <div class="brdr border_left mar_left5 pad_left5"><i class="fas fa-chevron-right"></i></div>
-      </button>
-    </ng-template>
-  </div>
-  <!-- Jump to popover -->
-  <particle-popover #op>
-    <div class="row_block pad_10">
-      <div class="text sm">{{text.jumpToPage}} ({{text.outOf}} {{getNumberOfPages()}}):</div>
-      <div class="center_center mar_top10">
-        <input class="access fullwidth_input sm" style="width:50px;" maxlength="4"
-               type="text" [attr.aria-label]="text.page" name="pagejump" placeholder="Page" [(ngModel)]="pageJumpInput" />
-        <button class="access btn_pulse xsm bg_overlay brdr" [attr.aria-label]="text.jumpToPage"
-                (click)="jumpPage();op.toggle($event);">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-    </div>
-  </particle-popover>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- VERSION 6 -->
-<div class="row wrap_reverse center_center" *ngIf="version === '6'">
-
-  <div class="col min_w200">
-    <div class="row v_center ptl_input_brdr_size ptl_input_brdr_radius ptl_input_brdr_color content_color mar_right5 mar_left5 pad_3">
-      <div class="col size_1 center_center pad_left5 pad_right5">
-        <div class="text sm" style="user-select: none">
-          {{getStartingValueForPage(activePage)}} - {{getEndingValueForPage(activePage)}} of {{totalLength}} Results
-        </div>
-      </div>
-      <div class="col ptl_input_brdr_color border_left">
-        <div class="center_right pad_left5 pad_right5">
-          <button class="access btn clear circle_20px spinspin" tabindex="0" [attr.aria-label]="text.jumpToPage"
-                  (click)="op.toggle($event)">
-            <i class="fas fa-cog"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="col pad_5">
-    <div class="row">
-      <div class="col pad_5">
-        <!-- previous -->
-        <ng-container *ngIf="activePage !== 0 else disabledPrevious">
-          <button class="access btnset md hov_glow previous_button_color ptl_input_brdr_radius" [attr.aria-label]="text.previousPage" (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
-            <div class="brdr border_right mar_right5 pad_right5"><i class="fas fa-chevron-left"></i></div>
-            <div>Previous</div>
-          </button>
-        </ng-container>
-        <!-- previous button disabled -->
-        <ng-template #disabledPrevious>
-          <button class="access btnset md hov_glow previous_button_color ptl_input_brdr_radius" style="opacity: 0.5"  [attr.aria-label]="text.disabled + ' ' + text.previousPage">
-            <div class="brdr border_right mar_right5 pad_right5"><i class="fas fa-chevron-left"></i></div>
-            <div>Previous</div>
-          </button>
-        </ng-template>
-      </div>
-      <div class="col pad_5">
-        <!-- next -->
-        <ng-container *ngIf="activePage !== numberOfPages - 1 else disabledNext">
-          <button class="access btnset md hov_glow next_button_color ptl_input_brdr_radius" [attr.aria-label]="text.nextPage" (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
-            <div>Next</div>
-            <div class="brdr border_left mar_left5 pad_left5"><i class="fas fa-chevron-right"></i></div>
-          </button>
-        </ng-container>
-        <!-- next button disabled -->
-        <ng-template #disabledNext>
-          <button class="access btnset md hov_glow next_button_color ptl_input_brdr_radius" style="opacity: 0.5" [attr.aria-label]="text.disabled + ' ' + text.nextPage">
-            <div>Next</div>
-            <div class="brdr border_left mar_left5 pad_left5"><i class="fas fa-chevron-right"></i></div>
-          </button>
-        </ng-template>
-      </div>
-    </div>
-
-
-
-  </div>
-  <!-- Jump to popover -->
-  <particle-popover #op>
-    <div class="row_block pad_10">
-      <div class="text sm">{{text.jumpToPage}} ({{text.outOf}} {{getNumberOfPages()}}):</div>
-      <div class="center_center mar_top10">
-        <input class="access fullwidth_input sm" style="width:50px;" maxlength="4"
-               type="text" [attr.aria-label]="text.page" name="pagejump" placeholder="Page" [(ngModel)]="pageJumpInput" />
-        <button class="access btn_pulse xsm bg_overlay brdr" [attr.aria-label]="text.jumpToPage"
-                (click)="jumpPage();op.toggle($event);">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-    </div>
-  </particle-popover>
-</div>
-
-
-
-
-
-
-
-
-
-
-
+</ng-template>

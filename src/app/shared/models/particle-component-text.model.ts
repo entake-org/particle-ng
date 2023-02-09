@@ -127,8 +127,15 @@ export interface IdleTimeoutText {
   stayLoggedIn: string;
 }
 
+export interface LoaderText {
+  loadingText?: string;
+  loadingSubtext?: string;
+}
+
 export interface MultiSelectText {
   placeholder: string;
+  of: string;
+  optionsSelected: string;
 }
 
 export interface PaginatorText {
@@ -142,6 +149,8 @@ export interface PaginatorText {
   jumpToPage: string;
   page: string;
   outOf: string;
+  of: string;
+  results: string;
 }
 
 export interface PushContainerText {

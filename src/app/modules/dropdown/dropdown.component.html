@@ -17,6 +17,7 @@
           [attr.aria-expanded]="opened"
           [attr.data-dialog-close-override]="true"
           class="access btnset clear center_center height100 width100"
+          style="outline-offset: -2px;"
   >
     <div class="col size_1 height100 width100 v_center ptl_input_text ptl_input_padding border_none width100 overflow_hide">
         <ng-container *ngIf="selectedDataContext$ | async as dataContext else placeholderTemplate">

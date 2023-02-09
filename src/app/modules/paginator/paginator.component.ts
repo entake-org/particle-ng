@@ -13,12 +13,6 @@ import {PaginatorText} from '../../shared/models/particle-component-text.model';
 export class PaginatorComponent implements OnChanges {
 
   /**
-   * Paginator Version to use (1-4 available, 1 is default)
-   */
-  @Input()
-  version = '1';
-
-  /**
    * An array of potential page sizes.
    */
   @Input()
@@ -37,17 +31,28 @@ export class PaginatorComponent implements OnChanges {
   totalLength: number = null as any;
 
   @Input()
+  showPages = false;
+
+  @Input()
+  showFirstLast = false;
+
+  @Input()
+  showButtonLabels = true;
+
+  @Input()
   text: PaginatorText = {
     itemsPerPage: 'Items Per Page',
     choosePageSize: 'Choose Page Size',
-    previousPage: 'Previous Page',
-    nextPage: 'Next Page',
+    previousPage: 'Previous',
+    nextPage: 'Next',
     disabled: 'Disabled',
-    firstPage: 'First Page',
-    lastPage: 'Last Page',
+    firstPage: 'First',
+    lastPage: 'Last',
     jumpToPage: 'Jump to Page',
     page: 'Page',
-    outOf: 'out of'
+    outOf: 'out of',
+    of: 'of',
+    results: 'Results'
   } as PaginatorText;
 
   /**

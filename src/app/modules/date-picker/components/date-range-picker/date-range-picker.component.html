@@ -9,6 +9,7 @@
           [attr.aria-expanded]="calendarPopover.visible"
           [ngClass]="inputClassList ? inputClassList : 'clear'"
           class="access btnset width100 height100 center_center"
+          style="outline-offset: -2px;"
   >
     <div class="col size_1 height100 width100 ptl_input_text ptl_input_padding v_center">
       <ng-container *ngIf="valueObs$ | async as value">

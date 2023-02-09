@@ -48,9 +48,9 @@ export class AppComponent implements OnInit {
         closeButtonColor: '#444141',
         deleteButtonColor: '#944646',
         okButtonColor: '#0b799e',
-        nextButtonColor: '#a1660d',
-        openButtonColor: '#544310',
-        previousButtonColor: '#8a4878',
+        nextButtonColor: '#0187be',
+        openButtonColor: '#572e6c',
+        previousButtonColor: '#396b80',
         saveButtonColor: '#37852b'
       },
       layoutVariables: {
