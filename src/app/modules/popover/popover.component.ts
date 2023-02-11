@@ -87,12 +87,12 @@ export class PopoverComponent implements OnDestroy {
   closed = new EventEmitter<void>();
 
   /**
-   * Whether or not the popover should render
+   * Whether the popover should render
    */
   render: boolean = false;
 
   /**
-   * Whether or not the popover is visible
+   * Whether the popover is visible
    */
   visible: boolean = false;
 

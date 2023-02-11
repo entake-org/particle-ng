@@ -1,16 +1,28 @@
-import {Component, EventEmitter, Input, Output, OnChanges} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnChanges,
+  AfterViewInit,
+  ChangeDetectorRef,
+  ViewChild
+} from '@angular/core';
 import {PaginationEvent} from './pagination-event.model';
 import {PaginatorText} from '../../shared/models/particle-component-text.model';
+import {PopoverComponent} from '../popover/popover.component';
 
 /**
- * An Particle paginator, because we hated the other ones on the market.
+ * A Particle paginator, because we hated the other ones on the market.
  */
 @Component({
   selector: 'particle-paginator',
   templateUrl: 'paginator.component.html',
   styleUrls: ['./paginator.component.css']
 })
-export class PaginatorComponent implements OnChanges {
+export class PaginatorComponent implements OnChanges, AfterViewInit {
+
+  private _pageSize: number = null as any;
 
   /**
    * An array of potential page sizes.
@@ -22,7 +34,14 @@ export class PaginatorComponent implements OnChanges {
    * Current page size
    */
   @Input()
-  pageSize: number = null as any;
+  set pageSize(pageSize: number) {
+    this._pageSize = pageSize;
+    this.resetPageStartEndValues();
+  }
+
+  get pageSize(): number {
+    return this._pageSize;
+  }
 
   /**
    * Total number of items
@@ -76,10 +95,25 @@ export class PaginatorComponent implements OnChanges {
    */
   numberOfPages: number = null as any;
 
+  pageStartingValue: number = 0;
+  pageEndingValue: number = 0;
+
+  Math = Math;
+
   /**
    * Recalculate number of pages on input change
    */
   ngOnChanges(): void {
+    this.numberOfPages = this.getNumberOfPages();
+  }
+
+  ngAfterViewInit(): void {
+    this.resetPageStartEndValues();
+  }
+
+  private resetPageStartEndValues(): void {
+    this.pageStartingValue = 1;
+    this.pageEndingValue = this.pageSize;
     this.numberOfPages = this.getNumberOfPages();
   }
 
@@ -112,6 +146,8 @@ export class PaginatorComponent implements OnChanges {
    */
   goToPage(pageNumber: number, inputFocus?: boolean): void {
     this.activePage = pageNumber;
+    this.pageStartingValue = this.getStartingValueForPage(this.activePage);
+    this.pageEndingValue = this.getEndingValueForPage(this.activePage);
 
     if (inputFocus) {
       const element: HTMLElement = document.getElementById('activePage') as HTMLElement;
@@ -170,7 +206,8 @@ export class PaginatorComponent implements OnChanges {
    * When a page size is changed, go back to the first page and emit a pagination event
    */
   pageSizeChange(): void {
-    this.goToFirst();
+      this.goToFirst();
+      this.numberOfPages = this.getNumberOfPages();
   }
 
   /**
