@@ -4,7 +4,7 @@
       <button
         id="heading1"
         [attr.aria-label]="text.heading1"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.heading1" tooltipPosition="top"
         (click)="editor.chain().focus().toggleHeading({ level: 1 }).run()"
         [ngClass]="{ 'ok_button_color': this.editor.isActive('heading', { level: 1 }) }"
@@ -14,7 +14,7 @@
       <button
         id="heading2"
         [attr.aria-label]="text.heading2"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.heading2" tooltipPosition="top"
         (click)="editor.chain().focus().toggleHeading({ level: 2 }).run()"
         [ngClass]="{ 'ok_button_color': this.editor.isActive('heading', { level: 2 }) }"
@@ -26,7 +26,7 @@
       <button
         id="bold"
         [attr.aria-label]="text.bold"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.bold" tooltipPosition="top"
         (click)="editor.chain().focus().toggleBold().run()"
         [ngClass]="{ 'ok_button_color': this.editor.isActive('bold') }"
@@ -36,7 +36,7 @@
       <button
         id="italic"
         [attr.aria-label]="text.italic"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.italic" tooltipPosition="top"
         (click)="editor.chain().focus().toggleItalic().run()"
         [ngClass]="{ 'ok_button_color': this.editor.isActive('italic') }"
@@ -46,7 +46,7 @@
       <button
         id="strike"
         [attr.aria-label]="text.strike"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.strike" tooltipPosition="top"
         (click)="editor.chain().focus().toggleStrike().run()"
         [ngClass]="{ 'ok_button_color': this.editor.isActive('strike') }"
@@ -58,7 +58,7 @@
       <button
         id="bullet-list"
         [attr.aria-label]="text.bulletedList"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.bulletedList" tooltipPosition="top"
         (click)="editor.chain().focus().toggleBulletList().run()"
         [ngClass]="{ 'ok_button_color': this.editor.isActive('bullet-list') }"
@@ -68,7 +68,7 @@
       <button
         id="ordered-list"
         [attr.aria-label]="text.orderedList"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.orderedList" tooltipPosition="top"
         (click)="editor.chain().focus().toggleOrderedList().run()"
         [ngClass]="{ 'ok_button_color': this.editor.isActive('ordered-list') }"
@@ -80,7 +80,7 @@
       <button
         id="left-align"
         [attr.aria-label]="text.leftAlign"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.leftAlign" tooltipPosition="top"
         (click)="editor.chain().focus().setTextAlign('left').run()"
         [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'left' }) }"
@@ -90,7 +90,7 @@
       <button
         id="center-align"
         [attr.aria-label]="text.centerAlign"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.centerAlign" tooltipPosition="top"
         (click)="editor.chain().focus().setTextAlign('center').run()"
         [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'center' }) }"
@@ -100,7 +100,7 @@
       <button
         id="right-align"
         [attr.aria-label]="text.rightAlign"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.rightAlign" tooltipPosition="top"
         (click)="editor.chain().focus().setTextAlign('right').run()"
         [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'right' }) }"
@@ -110,7 +110,7 @@
       <button
         id="justify-align"
         [attr.aria-label]="text.justifyAlign"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.justifyAlign" tooltipPosition="top"
         (click)="editor.chain().focus().setTextAlign('justify').run()"
         [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'justify' }) }"
@@ -118,11 +118,11 @@
         <i class="fas fa-align-justify fa-fw"></i>
       </button>
     </div>
-    <div class="col v_center ptl_input_brdr_color ptl_input_brdr_size border_right pad_5"  *ngIf="capabilities.link">
+    <div class="col v_center pad_5"  *ngIf="capabilities.link">
       <button
         id="link"
         [attr.aria-label]="text.setLink"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.setLink" tooltipPosition="top"
         (click)="openLinkDialog()"
         [ngClass]="{ 'ok_button_color': this.editor.isActive('link') }"
@@ -132,19 +132,17 @@
       <button
         id="unlink"
         [attr.aria-label]="text.removeLink"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.removeLink" tooltipPosition="top"
         (click)="this.editor.isActive('link') ? changeEditorLink('remove') : null"
         [disabled]="!this.editor.isActive('link')"
       >
         <i class="fas fa-unlink fa-fw"></i>
       </button>
-    </div>
-    <div class="col size_1 v_center pad_5">
       <button
         id="clear-format"
         [attr.aria-label]="text.clearFormat"
-        class="access btnset square_26px content_color_dark_1 mar_right5 mar_left5 ptl_input_brdr_radius hov_darken"
+        class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_input_brdr_radius hov_darken"
         [particleTooltip]="text.clearFormat" tooltipPosition="top"
         (click)="editor.chain().focus().clearNodes().unsetAllMarks().run()"
       >
@@ -163,9 +161,9 @@
   [object]="showDialog"
   [allowClose]="false"
   width="400px"
-  height="120px"
+  height="150px"
 >
-  <div class="pad_10 text sm">
+  <div class="pad_15 ptl_input_text">
     <input class="access input md"
            [(ngModel)]="dialogLink"
            [attr.aria-label]="text.url"
