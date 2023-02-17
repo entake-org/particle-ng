@@ -5,7 +5,7 @@
         <div class="col size_1 center_center pad_left5 pad_right5">
           <ng-container *ngIf="totalLength > 0 else noResults">
             <div class="text sm" style="user-select: none">
-              {{pageStartingValue}} - {{pageEndingValue}} {{text.of}} {{totalLength}} {{text.results}}
+              {{pageStartingValue}} - {{pageEndingValue > totalLength ? totalLength : pageEndingValue}} {{text.of}} {{totalLength}} {{text.results}}
             </div>
           </ng-container>
           <ng-template #noResults>
