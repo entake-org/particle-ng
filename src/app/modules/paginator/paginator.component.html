@@ -159,17 +159,19 @@
 </particle-popover>
 
 <ng-template #jumpTo>
-  <div class="row_block pad_10 center">
-    <div class="text sm center"><label for="pageJump">{{text.jumpToPage}} ({{text.outOf}} {{getNumberOfPages()}}):</label></div>
-    <div class="center_center mar_top10">
-      <input class="access fullwidth_input sm" style="width:50px;" maxlength="4" id="pageJump"
-             type="text" [attr.aria-label]="text.page" name="pagejump" [placeholder]="text.page" [(ngModel)]="pageJumpInput" />
-      <button class="access btn_pulse xsm bg_overlay brdr" [attr.aria-label]="text.jumpToPage"
-              (click)="jumpPage();op.close();config.close();">
-        <i class="fas fa-chevron-right"></i>
-      </button>
+  <ng-container *ngIf="numberOfPages > 0">
+    <div class="row_block pad_10 center">
+      <div class="text sm center"><label for="pageJump">{{text.jumpToPage}} ({{text.outOf}} {{numberOfPages}}):</label></div>
+      <div class="center_center mar_top10">
+        <input class="access fullwidth_input sm" style="width:50px;" maxlength="4" id="pageJump"
+               type="text" [attr.aria-label]="text.page" name="pagejump" [placeholder]="text.page" [(ngModel)]="pageJumpInput" />
+        <button class="access btn_pulse xsm bg_overlay brdr" [attr.aria-label]="text.jumpToPage"
+                (click)="jumpPage();op.close();config.close();">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </ng-template>
 
 <ng-template #pageSizeTemplate>
