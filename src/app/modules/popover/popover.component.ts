@@ -327,7 +327,7 @@ export class PopoverComponent implements OnDestroy {
         const { tabIndex } = node as unknown as HTMLOrSVGElement;
 
         if (tabIndex >= 0) {
-          elements.push(<Element> node);
+          elements.push(node as any);
         }
       }
 
@@ -337,7 +337,7 @@ export class PopoverComponent implements OnDestroy {
         const { tabIndex } = node as unknown as HTMLOrSVGElement;
 
         if (tabIndex >= 0) {
-          elements.push(<Element> node);
+          elements.push(node as any);
         }
       }
 
