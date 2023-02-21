@@ -59,6 +59,9 @@ export class PaginatorComponent implements OnChanges, AfterViewInit {
   showButtonLabels = true;
 
   @Input()
+  showResultsPanel = true;
+
+  @Input()
   text: PaginatorText = {
     itemsPerPage: 'Items Per Page',
     choosePageSize: 'Choose Page Size',
