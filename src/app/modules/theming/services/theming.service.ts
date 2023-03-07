@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Theme, ThemeFont} from '../models/theme.model';
+import {Theme, ThemeFont, Z_INDEX_LAYERS} from '../models/theme.model';
 import {ThemeChangeDetectionService} from './theme-change-detection.service';
 import {LocalStorageService} from '../../../shared/services/local-storage.service';
 
@@ -8,6 +8,15 @@ import {LocalStorageService} from '../../../shared/services/local-storage.servic
   providedIn: 'root'
 })
 export class ThemingService {
+
+  // PSA: ORDER MATTERS, DO NOT MOVE ITEMS AROUND
+  private readonly defaultZIndexes: Array<string> = [
+    Z_INDEX_LAYERS.BASE,
+    Z_INDEX_LAYERS.FRAME,
+    Z_INDEX_LAYERS.OVERLAY,
+    Z_INDEX_LAYERS.DIALOG,
+    Z_INDEX_LAYERS.NOTIFICATION
+  ];
 
   /**
    * Prefix used to build the key for local storage of the theme
@@ -325,6 +334,7 @@ export class ThemingService {
     // Write the fonts to the header
     if (prefix === '') {
       this.addFonts(theme, head, style);
+      rootVars = this.createZIndexes(rootVars, theme.zIndexList as Array<string>);
     }
 
     rootVars += '}';
@@ -340,6 +350,10 @@ export class ThemingService {
   }
 
   private addFonts(theme: Theme, head: HTMLHeadElement, style: HTMLStyleElement): void {
+    if (!theme.fonts) {
+      return;
+    }
+
     let defaultFont: ThemeFont = null as any;
     for (const font of theme.fonts) {
       if (font.isDefault || theme.fonts.length === 1) {
@@ -485,6 +499,34 @@ export class ThemingService {
       style.appendChild(
         document.createTextNode(`.${className}_dark_${i}{background-color: ${newColor};color: ${textColor};fill: currentColor;}`));
     }
+  }
+
+  getDefaultZIndexes(): Array<string> {
+    return this.defaultZIndexes;
+  }
+
+  private createZIndexes(rootVars: string, zIndexes: Array<string>): string {
+    let zIndexesToCreate = this.defaultZIndexes;
+
+    if (zIndexes) {
+      if (zIndexes.includes(Z_INDEX_LAYERS.BASE)
+        && zIndexes.includes(Z_INDEX_LAYERS.FRAME)
+        && zIndexes.includes(Z_INDEX_LAYERS.OVERLAY)
+        && zIndexes.includes(Z_INDEX_LAYERS.DIALOG)
+        && zIndexes.includes(Z_INDEX_LAYERS.NOTIFICATION)
+      ) {
+        zIndexesToCreate = zIndexes;
+      } else {
+        console.warn('THEMING: Z Index List missing required layers, ignoring provided list.');
+      }
+    }
+
+    let i = 0;
+    for (const zIndex of zIndexesToCreate) {
+      rootVars += `--z-${zIndex}: ${i++};`;
+    }
+
+    return rootVars;
   }
 
 }

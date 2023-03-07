@@ -1,3 +1,12 @@
+// The order you see below are the layers ascending. Be mindful to maintain this order for expected outcomes.
+export const Z_INDEX_LAYERS = {
+  BASE: 'base',
+  FRAME: 'frame',
+  OVERLAY: 'overlay',
+  DIALOG: 'dialog',
+  NOTIFICATION: 'notification'
+};
+
 export interface Theme {
   themeId: string;
   isDefault: boolean;
@@ -9,6 +18,7 @@ export interface Theme {
   buttonColorPalette: ThemeButtonColorPalette;
   fonts: Array<ThemeFont>;
   accessibility: ThemeAccessibility;
+  zIndexList?: Array<string>;
 }
 
 export interface ThemeLayoutColors {

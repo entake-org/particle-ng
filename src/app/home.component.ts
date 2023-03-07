@@ -149,8 +149,9 @@ export class HomeComponent {
     private notificationService: NotificationService,
     private themingService: ThemingService
   ) {
-    if (this.themingService.getTheme()) {
-      this.fontName = this.themingService.getTheme().fonts.filter(font => font.isDefault)[0].name;
+    const theme = this.themingService.getTheme();
+    if (theme && theme.fonts) {
+      this.fontName = theme.fonts.filter(font => font.isDefault)[0].name;
     }
 
     setInterval(()=> this.progressBarAmount = (this.progressBarAmount + 1) % 100, 100);
