@@ -84,7 +84,7 @@ input[type=radio]{
   opacity: 1.0;
 }
 .drag_field{
-  z-index: var(--z-overlay);
+  z-index: var(--z-frame);
   cursor: move;
   border-radius: 3px;
   transition: all .3s ease-in-out;
@@ -110,7 +110,7 @@ input[type=radio]{
 }
 .rowgrow:hover{
   opacity: 1.0;
-  z-index: var(--z-overlay);
+  z-index: var(--z-frame);
   transform: scale(1.4);
   box-shadow: 0 0 0 5px rgba(255,255,255,1);
 }
