@@ -84,7 +84,6 @@ input[type=radio]{
   opacity: 1.0;
 }
 .drag_field{
-  z-index: var(--z-frame);
   cursor: move;
   border-radius: 3px;
   transition: all .3s ease-in-out;
