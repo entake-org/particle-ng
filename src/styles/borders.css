@@ -16,8 +16,8 @@ PARTICLE STYLES
 .input_border_color {
   border-color: var(--body-color);
 }
-.required_color {
-  color: var(--bg-red-color);
+.multi_L_color {
+  color: var(--bg-grey-color);
 }
 
 

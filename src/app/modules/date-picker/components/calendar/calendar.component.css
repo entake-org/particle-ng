@@ -6,7 +6,7 @@
   /* padding: 5px; */
   list-style-type: none;
   font-weight: normal;
-  z-index: 4;
+  z-index: var(--z-overlay);
   width: 300px;
   /*transform-origin: top left;*/
 }

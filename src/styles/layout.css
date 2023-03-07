@@ -266,7 +266,7 @@ PARTICLE STYLES
     font-size:12px;
     line-height:1.5;
     position: absolute;
-    z-index: 1000;
+    z-index: var(--z-notification);
     box-shadow: 0 3px 6px 0 rgba(0,0,0,0.2);
     animation-name: fadeInTooltip;
     animation-duration: 0.4s;

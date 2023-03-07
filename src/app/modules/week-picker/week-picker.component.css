@@ -51,7 +51,7 @@
   width:2.25em;
   top: 0;
   right: 0;
-  z-index: 1;
+  z-index: var(--z-frame);
   border-top-left-radius:0 !important;
   border-bottom-left-radius:0 !important;
   font-size:inherit;
@@ -85,7 +85,7 @@
   /*margin: 8px 0 0 1px;*/
   /* padding: 5px; */
   font-weight: normal;
-  z-index: 4;
+  z-index: var(--z-overlay);
   width: 300px;
   background: rgba(255,255,255,0);
   box-shadow:

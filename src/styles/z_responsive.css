@@ -170,18 +170,35 @@ PARTICLE STYLES
 /* Footer and Header Sticky */
 
 .footer_sticky {
-    position: sticky;bottom: 0;z-index: 999;
+  position: sticky;
+  bottom: 0;
+  z-index: var(--z-frame);
 }
+
 @media screen and (max-width: 768px) {
     .footer_sticky {
-        position: relative;z-index: 1;
+        position: relative;
+        z-index: var(--z-base);
     }
 }
+
 .header_sticky {
-    position: sticky;top: 0;z-index: 999;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-frame);
 }
 @media screen and (max-width: 768px) {
     .header_sticky {
-        position: relative;z-index: 1;
+        position: relative;
+        z-index: var(--z-base);
     }
+}
+
+.desktop_pad{
+  padding:20px;
+}
+@media screen and (max-width: 768px) {
+  .desktop_pad {
+    padding:0;
+  }
 }

@@ -3,7 +3,7 @@
   transition: transform .3s;
   display: flex;
   flex-direction: column;
-  z-index: 9999;
+  z-index: var(--z-overlay);
 }
 
 .slideover-panel.left {
@@ -68,7 +68,7 @@
   top:0;
   width:45px;
   height:45px;
-  z-index: 9999;
+  z-index: var(--z-overlay);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -110,5 +110,5 @@
   right: 0;
   bottom: 0;
   background-color: rgba(120,120,120,0.4); /* black background with opacity */
-  z-index: 9998; /* Specify a stack order in case of using a different order for other elements */
+  z-index: var(--z-overlay); /* Specify a stack order in case of using a different order for other elements */
 }

@@ -235,6 +235,7 @@ PARTICLE STYLES
 }
 
 /* SQUARE CLASSES */
+.square_12px,
 .square_16px,
 .square_18px,
 .square_20px,
@@ -254,6 +255,14 @@ PARTICLE STYLES
     justify-content:center;
     align-items:center;
     user-select:none;
+}
+
+.square_12px {
+  width: 12px;
+  min-width: 12px;
+  height: 12px;
+  min-height: 12px;
+  font-size: 6px;
 }
 
 .square_16px {

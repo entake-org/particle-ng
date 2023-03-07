@@ -22,9 +22,8 @@
 
 .endpoint_spin {
   animation:spin 3s linear infinite;
-
   opacity: 1;
-  z-index: 999;
+  z-index: var(--z-frame);
 }
 @keyframes spin {
   100% {
@@ -34,7 +33,7 @@
 .endpoint_spin_rev {
   animation:spin_rev 3s linear infinite;
   opacity: 1;
-  z-index: 999;
+  z-index: var(--z-frame);
 }
 @keyframes spin_rev {
   100% {

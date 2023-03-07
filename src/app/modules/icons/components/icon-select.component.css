@@ -40,7 +40,7 @@
   position:absolute;
   right:0;
   top:0;
-  z-index:1;
+  z-index: var(--z-frame);
   border-top-left-radius:0;
   border-bottom-left-radius:0;
   height:100%;
@@ -50,7 +50,7 @@
   position:absolute;
   right:40px;
   top:7px;
-  z-index:1;
+  z-index: var(--z-frame);
 }
 
 .wis_filter_btn {
@@ -87,7 +87,7 @@
 }
 
 .wis_selection_bar {
-  z-index:2;
+  z-index: var(--z-frame);
   box-shadow: 0 -6px 10px -8px rgba(0,0,0,0.25);
   animation-name: slideUpSelectionBar;
   animation-duration: 0.2s;

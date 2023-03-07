@@ -1,6 +1,6 @@
 .layout_sidebar {
   position: fixed;
-  z-index: 3;
+  z-index: var(--z-overlay);
   user-select: none;
 }
 
@@ -10,7 +10,7 @@
   top:0;
   width:45px;
   height:45px;
-  z-index: 999;
+  z-index: var(--z-overlay);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -44,7 +44,7 @@
 
 .side_panel_tab {
   position: fixed;
-  z-index: 3;
+  z-index: var(--z-overlay);
   user-select: none;
   width: 15px;
   overflow: hidden;

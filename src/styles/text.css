@@ -3,7 +3,9 @@
 PARTICLE STYLES
 .......
 */
-
+.rich_text_formatting{
+  line-height: 1.4
+}
 
 /* BASIC TEXT ALIGNMENTS */
 .text_center {

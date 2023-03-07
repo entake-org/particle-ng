@@ -34,7 +34,6 @@ input[type=radio]{
 }
 .ptl_input_bg_color{
   background-color: #ffffff;
-  color: #333;
 }
 .ptl_input_brdr_color{
   border-color: #e7e7e7;
@@ -85,7 +84,7 @@ input[type=radio]{
   opacity: 1.0;
 }
 .drag_field{
-  z-index: 900;
+  z-index: var(--z-overlay);
   cursor: move;
   border-radius: 3px;
   transition: all .3s ease-in-out;
@@ -111,7 +110,7 @@ input[type=radio]{
 }
 .rowgrow:hover{
   opacity: 1.0;
-  z-index: 900;
+  z-index: var(--z-overlay);
   transform: scale(1.4);
   box-shadow: 0 0 0 5px rgba(255,255,255,1);
 }
@@ -405,7 +404,7 @@ select:not(:disabled) {
     margin-top:-0.5em;
     opacity:0.8;
     font-size:inherit;
-    z-index:2;
+    z-index: var(--z-frame);
 }
 
 /* left icon; add border and padding to input */
@@ -432,7 +431,7 @@ select:not(:disabled) {
     right:0.6em;
     opacity:0.8;
     font-size:inherit;
-    z-index:2;
+    z-index: var(--z-frame);
 }
 
 /* right icon; add border and padding to input */

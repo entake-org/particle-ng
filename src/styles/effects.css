@@ -123,6 +123,7 @@ PARTICLE STYLES
 /******************* END ANIMATIONS ***********************/
 
 /* OPACITY CLASSES */
+.opacity_0 { opacity:0; }
 .opacity_10 { opacity:0.1; }
 .opacity_20 { opacity:0.2; }
 .opacity_30 { opacity:0.3; }
@@ -138,9 +139,9 @@ PARTICLE STYLES
 /* LINK STYLES FOR 'richtext' COMPONENT */
 
 .rich-text-link {
-  font-weight: 700;
-  color: var(--bg-blue-color);
-  text-decoration: underline;
+    font-weight:700;
+    text-decoration:underline;
+    color: inherit;
 }
 
 .test {

@@ -56,7 +56,7 @@
   position: absolute;
   top: 0.5em;
   right: 1em;
-  z-index: 2;
+  z-index: var(--z-frame);
   background: transparent;
   pointer-events:none;
 }
@@ -84,7 +84,7 @@
   bottom:0;
   left:0;
   right:0;
-  z-index:1000;
+  z-index: var(--z-overlay);
 }
 
 /* options panel */
@@ -97,7 +97,7 @@
   list-style-type: none;
   font-weight: normal;
   /*cursor: pointer;*/
-  z-index: 4;
+  z-index: var(--z-overlay);
   /*position: absolute;*/
   max-height:250px;
   width:100%;

@@ -139,7 +139,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
 
   containerState: BehaviorSubject<PushContainerState> = new BehaviorSubject<PushContainerState>({} as PushContainerState);
 
-  zIndex: number = null as any;
+  zIndex: string = null as any;
   private _height: string = null as any;
 
   private _lastWidth = 0;
@@ -267,7 +267,7 @@ export class PushContainerComponent implements OnInit, AfterViewInit, OnDestroy 
       this._topOffset = this._originalTopOffset;
     } else {
       this._topOffset = '0';
-      this.zIndex = 1000;
+      this.zIndex = 'var(--z-overlay)';
       this.hideCloseButton = false;
       this._height = '100%';
     }

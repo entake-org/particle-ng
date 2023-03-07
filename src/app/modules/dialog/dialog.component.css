@@ -9,7 +9,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(120,120,120,0.4); /* black background with opacity */
-  z-index: 1000; /* Specify a stack order in case of using a different order for other elements */
+  z-index: var(--z-dialog); /* Specify a stack order in case of using a different order for other elements */
 }
 /* invisible container over the overlay that fills screen and then centers dialog within it */
 .particle_dialog_container {
@@ -20,11 +20,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  flex-direction:column; /* so that height is scaleable automatically */
+  flex-direction:column; /* so that height is scalable automatically */
   display:flex;
   align-items:center; /* center the inner dialog container */
   justify-content:center;
-  z-index: 1001; /* Specify a stack order in case of using a different order for other elements */
+  z-index: var(--z-notification); /* Specify a stack order in case of using a different order for other elements */
 }
 /* inner dialog container that is visible */
 .particle_dialog_box {
