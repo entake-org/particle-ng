@@ -1,4 +1,28 @@
+<particle-layout-full-framing
+  [mainContent]="mainContent"
+  mainContentContainerClassList="bg_overlay"
+  [rightSidebar]="rightSidebar"
+  [header]="header"
+  [footer]="footer"
+  rightSidebarContainerClassList="bg_grey space_between pad_5"
+  [rightSidebarSticky]="true"
+  [headerHeight]="'100px'"
+  [footerHeight]="'60px'"
+>
 
+</particle-layout-full-framing>
+
+<ng-template #rightSidebar></ng-template>
+
+<ng-template #header>
+  <div>SOME STUFF HERE FOR HEADER</div>
+</ng-template>
+
+<ng-template #footer>
+  <div>My footer</div>
+</ng-template>
+
+<ng-template #mainContent>
 <div class="site scroll_y">
   <div class="row top_center mar_top20">
     <div class="row_block content_color width100 pad_20 min_h200 brad_5" style="max-width: 1000px;">
@@ -253,5 +277,4 @@
     </div>
   </div>
 </div>
-
-
+</ng-template>

@@ -1,17 +1,23 @@
 import {Component, Input, TemplateRef} from '@angular/core';
 
 @Component({
-  selector: 'particle-layout-fullwidth-sidebar',
-  templateUrl: './layout-fullwidth-sidebar.component.html',
+  selector: 'particle-layout-full-framing',
+  templateUrl: './layout-full-framing.component.html',
   styleUrls: ['../../layout.module.css']
 })
-export class LayoutFullwidthSidebarComponent {
+export class LayoutFullFramingComponent {
 
   @Input()
   mainContent: TemplateRef<any> = null as any;
 
   @Input()
   rightSidebar: TemplateRef<any> = null as any;
+
+  @Input()
+  header: TemplateRef<any> = null as any;
+
+  @Input()
+  footer: TemplateRef<any> = null as any;
 
   @Input()
   mainContentContainerClassList = '';

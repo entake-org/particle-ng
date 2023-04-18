@@ -64,6 +64,7 @@ export * from './app/modules/slideover/slideover.component';
 export * from './app/modules/idle-timeout/idle-timeout.component';
 export * from './app/modules/scroll-to-top/scroll-to-top.component';
 export * from './app/modules/layout/components/layout-fullwidth-sidebar/layout-fullwidth-sidebar.component';
+export * from './app/modules/layout/components/layout-full-framing/layout-full-framing.component';
 export * from './app/modules/toggle-switch/toggle-switch.component';
 export * from './app/modules/button/particle-button.component';
 export * from './app/modules/checkbox/checkbox.component';
