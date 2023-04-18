@@ -3,7 +3,7 @@ import {Component, Input, TemplateRef} from '@angular/core';
 @Component({
   selector: 'particle-layout-full-framing',
   templateUrl: './layout-full-framing.component.html',
-  styleUrls: ['../../layout.module.css']
+  styleUrls: ['../../layout.css']
 })
 export class LayoutFullFramingComponent {
 
