@@ -1,13 +1,18 @@
 <div class="site scroll_y">
   <particle-layout-full-framing
-    [mainContent]="mainContent"
-    mainContentContainerClassList="menu_color"
-    [rightSidebar]="rightSidebar"
     [header]="header"
-    [footer]="footer"
-    rightSidebarContainerClassList=""
     [headerHeight]="'100px'"
+    [headerClassList]="'bg_purple'"
+
+    [footer]="footer"
+    [footerClassList]="'footer_color'"
     [footerHeight]="'60px'"
+
+    [mainContent]="mainContent"
+    [mainContentContainerClassList]="'content_color'"
+
+    [rightSidebar]="rightSidebar"
+    [rightSidebarContainerClassList]="'menu_color'"
   >
 
   </particle-layout-full-framing>

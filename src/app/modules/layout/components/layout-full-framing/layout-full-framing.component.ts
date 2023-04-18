@@ -26,6 +26,12 @@ export class LayoutFullFramingComponent {
   rightSidebarContainerClassList = '';
 
   @Input()
+  headerClassList = '';
+
+  @Input()
+  footerClassList = '';
+
+  @Input()
   headerHeight: string = '0';
 
   @Input()
