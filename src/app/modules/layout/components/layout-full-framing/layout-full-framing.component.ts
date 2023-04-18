@@ -40,12 +40,14 @@ export class LayoutFullFramingComponent {
 
     return `calc(100vh - ${offset}px)`;
   }
+
   get contentSidebarHeight(): string {
     const offset: number = +this.headerHeight.replace(/\D/g, "") +
       +this.footerHeight.replace(/\D/g, "");
 
     return `calc(100% - ${offset}px)`;
   }
+
   constructor() { }
 
 }
