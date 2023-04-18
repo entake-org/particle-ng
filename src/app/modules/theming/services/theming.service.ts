@@ -65,6 +65,10 @@ export class ThemingService {
     return prop.split(/(?=[A-Z])/).join('-').toLowerCase();
   }
 
+  private convertUnderscoreToDash(prop: string): string {
+    return prop.split('_').join('-').toLowerCase();
+  }
+
   /**
    * For the given color, it'll lighten or darken the color by the percentage supplied. Positive percent will lighten, negative to darken.
    *
@@ -242,7 +246,7 @@ export class ThemingService {
         if (prop !== 'extension') {
           const value = (theme.colorPalette as any)[prop] as string;
 
-          const color = value.startsWith('#') ? value : '#' + value;
+          const color = this.addHashmark(value);
           this.generateColors(style, color, prefix + this.toSnakeCase(prop));
 
           rootVars += `--${prefix}${this.toKebabCase(prop)}-color: ${color};`;
@@ -250,7 +254,8 @@ export class ThemingService {
       }
 
       for (const extension of theme.colorPalette.extension) {
-        this.generateColors(style, extension.color.startsWith('#') ? extension.color : '#' + extension.color, prefix + extension.className);
+        this.generateColors(style, this.addHashmark(extension.color), prefix + extension.className);
+        rootVars += `--${prefix}${this.convertUnderscoreToDash(extension.className)}: ${this.addHashmark(extension.color)};`;
       }
     }
 

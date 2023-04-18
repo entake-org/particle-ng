@@ -26,9 +26,6 @@ export class LayoutFullFramingComponent {
   rightSidebarContainerClassList = '';
 
   @Input()
-  rightSidebarSticky = false;
-
-  @Input()
   headerHeight: string = '0';
 
   @Input()
