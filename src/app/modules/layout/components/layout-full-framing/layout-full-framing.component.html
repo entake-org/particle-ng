@@ -28,7 +28,7 @@
     <ng-template [ngTemplateOutlet]="header"></ng-template>
   </div>
 
-  <div class="row" style="height: calc(100% - 160px);">
+  <div class="row" [style.height]="contentSidebarHeight">
     <div class="row column content_color space_between height100"
          [ngClass]="mainContentContainerClassList">
       <ng-template [ngTemplateOutlet]="mainContent"></ng-template>
