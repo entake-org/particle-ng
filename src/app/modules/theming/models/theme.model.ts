@@ -54,6 +54,7 @@ export interface ThemeButtonColorPalette {
 }
 
 export interface ThemeLayoutVariables {
+  disableGlobalHeaderFooter: boolean;
   headerHeight: string;
   footerHeight: string;
   menuWidth?: string;

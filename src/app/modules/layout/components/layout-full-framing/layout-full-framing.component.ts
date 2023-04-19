@@ -38,7 +38,7 @@ export class LayoutFullFramingComponent {
   footerHeight: string = '0';
 
   @Input()
-  width: string = '250px';
+  rightSidebarWidth: string = '250px';
 
   get stickySidebarHeight(): string {
     const offset: number = +this.headerHeight.replace(/\D/g, "") +
