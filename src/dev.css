@@ -12,3 +12,7 @@ a:link, a:visited {
 a:hover, a:active {
   color: var(--bg-purple-color) 1px solid !important;
 }
+
+.opacity_test {
+  background-color: rgba(100, 100, 100, .5);
+}

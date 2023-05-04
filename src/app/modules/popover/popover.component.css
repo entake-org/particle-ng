@@ -18,6 +18,9 @@
   min-width:10px;
   height:auto; /* set as an input, default auto */
   min-height:10px;
+}
+
+.particle_popover_shadow {
   box-shadow:
     0 2px 4px -1px rgba(0, 0, 0, 0.2),
     0 4px 5px 0 rgba(0, 0, 0, 0.14),

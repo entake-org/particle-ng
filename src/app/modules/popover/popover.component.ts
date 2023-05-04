@@ -69,10 +69,16 @@ export class PopoverComponent implements OnDestroy {
    * A class-list to apply to the popover content
    */
   @Input()
-  classList = 'content_color';
+  classList = 'content_color particle_popover_shadow';
 
   @Input()
   targetOverride: EventTarget = null as any;
+
+  @Input()
+  openDirection: 'above' | 'below' = 'above';
+
+  @Input()
+  alignment: 'left' | 'center' = 'left';
 
   /**
    * Event emitted on popover open
@@ -252,34 +258,59 @@ export class PopoverComponent implements OnDestroy {
    * @private
    */
   private positionPopover(): void {
-    const {left, top, bottom} = (this.target as HTMLElement).getBoundingClientRect();
+    const {left, top, bottom, width} = (this.target as HTMLElement).getBoundingClientRect();
     const {offsetHeight, offsetWidth} = this.container;
     const popoverBottomLeftAnchor = bottom;
     const availableBottomSpace = window.innerHeight - popoverBottomLeftAnchor;
     const availableTopSpace = top;
     const offsetListHeight = offsetHeight + this.offset;
-    let transformOrigin: string, positionTop: string;
+    let transformOrigin: string = null as any;
+    let positionTop: string = null as any;
 
-    if (availableBottomSpace > offsetListHeight) {
-      transformOrigin = 'top left';
-      positionTop = `${popoverBottomLeftAnchor + this.offset}px`;
-    } else if (availableTopSpace > offsetListHeight) {
+    const canOpenAbove = availableTopSpace > offsetListHeight;
+    const canOpenBelow = availableBottomSpace > offsetListHeight;
+
+    if (canOpenAbove && this.openDirection === 'above') {
       transformOrigin = 'bottom left';
       positionTop = `${top - offsetListHeight}px`;
-    } else {
-      if (offsetHeight > window.innerHeight) {
-        positionTop = '0px';
-      } else {
-        const availableSpace = window.innerHeight - offsetHeight;
-        positionTop = `${String(availableSpace / 2)}px`;
-      }
+    }
 
+    if (canOpenBelow && this.openDirection === 'below') {
       transformOrigin = 'top left';
+      positionTop = `${popoverBottomLeftAnchor + this.offset}px`;
+    }
+
+    if (!transformOrigin) {
+      if (availableTopSpace > offsetListHeight) {
+        transformOrigin = 'bottom left';
+        positionTop = `${top - offsetListHeight}px`;
+      } else if (availableBottomSpace > offsetListHeight) {
+        transformOrigin = 'top left';
+        positionTop = `${popoverBottomLeftAnchor + this.offset}px`;
+      } else {
+        if (offsetHeight > window.innerHeight) {
+          positionTop = '0px';
+        } else {
+          const availableSpace = window.innerHeight - offsetHeight;
+          positionTop = `${String(availableSpace / 2)}px`;
+        }
+
+        transformOrigin = 'top left';
+      }
     }
 
     let leftPosition = left;
+
+    if (this.alignment === 'center') {
+      leftPosition = (leftPosition - (offsetWidth/2)) + (width/2);
+    }
+
     if ((left + offsetWidth) > window.innerWidth) {
       leftPosition = left - ((left + offsetWidth) - window.innerWidth) - 10;
+    }
+
+    if (leftPosition < 0) {
+      leftPosition = 0;
     }
 
     this.renderer.setStyle(this.container, 'transform-origin', transformOrigin);
