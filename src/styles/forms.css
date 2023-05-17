@@ -29,20 +29,23 @@ input[type=radio]{
   margin: 0;
   outline: none;
 }
-.ptl_input_text {
+.ptl_input_text_size {
   font-size: 14pt;
+}
+.ptl_input_label_size {
+  font-size: 12pt;
 }
 .ptl_input_bg_color{
   background-color: #ffffff;
 }
-.ptl_input_brdr_color{
+.ptl_brdr_color{
   border-color: #e7e7e7;
   border-style: solid;
 }
-.ptl_input_brdr_size{
+.ptl_brdr_size{
   border-width: 1px;
 }
-.ptl_input_brdr_radius{
+.ptl_brdr_radius{
   border-radius: 5px;
 }
 .ptl_input_height{

@@ -302,33 +302,37 @@ export class ThemingService {
       }
     }
 
-    if (theme.inputVariables) {
-      if (theme.inputVariables.inputText) {
-        style.appendChild(document.createTextNode(`.${prefix}ptl_input_text{font-size: ${theme.inputVariables.inputText};}`));
+    if (theme.stylingVariables) {
+      if (theme.stylingVariables.inputTextSize) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_input_text_size{font-size: ${theme.stylingVariables.inputTextSize};}`));
       }
 
-      if (theme.inputVariables.inputBgColor) {
-        style.appendChild(document.createTextNode(`.${prefix}ptl_input_bg_color{background-color: ${this.addHashmark(theme.inputVariables.inputBgColor)};color: ${this.getTextColor(theme.inputVariables.inputBgColor)}}`));
+      if (theme.stylingVariables.inputLabelSize) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_input_label_size{font-size: ${theme.stylingVariables.inputLabelSize};}`));
       }
 
-      if (theme.inputVariables.inputBorderColor) {
-        style.appendChild(document.createTextNode(`.${prefix}ptl_input_brdr_color{border-color: ${this.addHashmark(theme.inputVariables.inputBorderColor)};}`));
+      if (theme.stylingVariables.inputBgColor) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_input_bg_color{background-color: ${this.addHashmark(theme.stylingVariables.inputBgColor)};color: ${this.getTextColor(theme.stylingVariables.inputBgColor)}}`));
       }
 
-      if (theme.inputVariables.inputBorderSize) {
-        style.appendChild(document.createTextNode(`.${prefix}ptl_input_brdr_size{border-width: ${theme.inputVariables.inputBorderSize};border-style:solid;}`));
+      if (theme.stylingVariables.borderColor) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_brdr_color{border-color: ${this.addHashmark(theme.stylingVariables.borderColor)};}`));
       }
 
-      if (theme.inputVariables.inputBorderRadius) {
-        style.appendChild(document.createTextNode(`.${prefix}ptl_input_brdr_radius{border-radius: ${theme.inputVariables.inputBorderRadius};}`));
+      if (theme.stylingVariables.borderSize) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_brdr_size{border-width: ${theme.stylingVariables.borderSize};border-style:solid;}`));
       }
 
-      if (theme.inputVariables.inputHeight) {
-        style.appendChild(document.createTextNode(`.${prefix}ptl_input_height{height: ${theme.inputVariables.inputHeight};}`));
+      if (theme.stylingVariables.borderRadius) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_brdr_radius{border-radius: ${theme.stylingVariables.borderRadius};}`));
       }
 
-      if (theme.inputVariables.inputPadding) {
-        style.appendChild(document.createTextNode(`.${prefix}ptl_input_padding{padding: ${theme.inputVariables.inputPadding};}`));
+      if (theme.stylingVariables.inputHeight) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_input_height{height: ${theme.stylingVariables.inputHeight};}`));
+      }
+
+      if (theme.stylingVariables.inputPadding) {
+        style.appendChild(document.createTextNode(`.${prefix}ptl_input_padding{padding: ${theme.stylingVariables.inputPadding};}`));
       }
     }
 

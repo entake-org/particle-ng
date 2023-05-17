@@ -13,7 +13,7 @@ export interface Theme {
   name: string;
   layoutColors: ThemeLayoutColors;
   layoutVariables: ThemeLayoutVariables;
-  inputVariables: ThemeInputVariables;
+  stylingVariables: ThemeStylingVariables;
   colorPalette: ThemeColorPalette;
   buttonColorPalette: ThemeButtonColorPalette;
   fonts: Array<ThemeFont>;
@@ -60,14 +60,16 @@ export interface ThemeLayoutVariables {
   menuWidth?: string;
 }
 
-export interface ThemeInputVariables {
-  inputText: string;
+export interface ThemeStylingVariables {
+  inputTextSize: string;
+  inputLabelSize: string;
   inputHeight: string;
   inputBgColor: string;
-  inputBorderColor: string;
-  inputBorderSize: string;
-  inputBorderRadius: string;
   inputPadding: string;
+
+  borderColor: string;
+  borderSize: string;
+  borderRadius: string;
 }
 
 export interface ThemeColorPaletteExtension {
