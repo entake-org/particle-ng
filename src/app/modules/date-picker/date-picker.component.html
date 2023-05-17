@@ -1,7 +1,7 @@
 <div #datePickerDiv
      style="overflow: hidden;"
      [style.filter]="disabled ? 'brightness(.95)' : ''"
-     [ngClass]="inputClassList ? '' : 'ptl_input ptl_input_height ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius'"
+     [ngClass]="inputClassList ? '' : 'ptl_input ptl_input_height ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius'"
 >
   <div class="col size_1 height100 width100">
     <input #dateInput
@@ -15,11 +15,11 @@
            maxlength="10"
            [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
            [disabled]="disabled"
-           [ngClass]="inputClassList ? inputClassList : 'ptl_input_text ptl_input_padding border_none'"
+           [ngClass]="inputClassList ? inputClassList : 'ptl_input_text_size ptl_input_padding border_none'"
            style="outline-offset: -2px;"
            class="access height100 width100"/>
   </div>
-  <div class="col center_center min_w50 height100 ptl_input_brdr_color border_left" *ngIf="!inputOnly">
+  <div class="col center_center min_w50 height100 ptl_brdr_color border_left" *ngIf="!inputOnly">
     <button type="button"
             (click)="openCalendar($event)"
             [disabled]="disabled"

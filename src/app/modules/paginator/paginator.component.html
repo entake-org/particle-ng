@@ -1,7 +1,7 @@
 <div class="row wrap_reverse center_center">
   <ng-container *ngIf="!showPages && showResultsPanel">
     <div class="col min_w200">
-      <div class="row v_center ptl_input_brdr_size ptl_input_brdr_radius ptl_input_brdr_color content_color mar_right5 mar_left5 pad_3">
+      <div class="row v_center ptl_brdr_size ptl_brdr_radius ptl_brdr_color content_color mar_right5 mar_left5 pad_3">
         <div class="col size_1 center_center pad_left5 pad_right5">
           <ng-container *ngIf="totalLength > 0 else noResults">
             <div class="text sm" style="user-select: none">
@@ -14,7 +14,7 @@
             </div>
           </ng-template>
         </div>
-        <div class="col ptl_input_brdr_color border_left">
+        <div class="col ptl_brdr_color border_left">
           <div class="center_right pad_left5 pad_right5">
             <button class="access btn clear circle_20px spinspin" tabindex="0" [attr.aria-label]="text.jumpToPage"
                     (click)="config.toggle($event)">
@@ -32,7 +32,7 @@
       <ng-container *ngIf="showFirstLast">
         <div class="col pad_5">
           <!-- first -->
-          <button class="access btnset md hov_glow previous_button_color_dark_1 ptl_input_brdr_radius"
+          <button class="access btnset md hov_glow previous_button_color_dark_1 ptl_brdr_radius"
                   [attr.aria-label]="text.firstPage"
                   [disabled]="activePage === 0"
                   (click)="goToFirst()">
@@ -46,7 +46,7 @@
 
       <div class="col pad_5">
         <!-- previous -->
-        <button class="access btnset md hov_glow previous_button_color ptl_input_brdr_radius"
+        <button class="access btnset md hov_glow previous_button_color ptl_brdr_radius"
                 [attr.aria-label]="text.previousPage"
                 [disabled]="activePage === 0"
                 (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
@@ -60,7 +60,7 @@
       <ng-container *ngIf="showPages">
         <div class="col pad_5">
           <!-- navigation -->
-          <div class="row v_center pad_left5 pad_right5 bg_overlay brdr content_color ptl_input_brdr_radius"
+          <div class="row v_center pad_left5 pad_right5 bg_overlay brdr content_color ptl_brdr_radius"
                style="flex:1 1 auto;">
             <!-- jump button -->
             <div class="center_right" style="width:20px;min-width:20px;">
@@ -119,7 +119,7 @@
 
       <div class="col pad_5">
         <!-- next -->
-        <button class="access btnset md hov_glow next_button_color ptl_input_brdr_radius"
+        <button class="access btnset md hov_glow next_button_color ptl_brdr_radius"
                 [attr.aria-label]="text.nextPage"
                 [disabled]="activePage === numberOfPages - 1 || totalLength === 0"
                 (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
@@ -133,7 +133,7 @@
       <ng-container *ngIf="showFirstLast">
         <div class="col pad_5">
           <!-- last -->
-          <button class="access btnset md hov_glow next_button_color_dark_1 ptl_input_brdr_radius"
+          <button class="access btnset md hov_glow next_button_color_dark_1 ptl_brdr_radius"
                   [attr.aria-label]="text.lastPage"
                   [disabled]="activePage === numberOfPages - 1"
                   (click)="goToLast()">

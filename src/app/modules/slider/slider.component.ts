@@ -133,7 +133,7 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
   /**
    * The class list to apply to the number input
    */
-  _inputClassList = 'access ptl_input ptl_input_height ptl_input_text ptl_input_padding ptl_input_bg_color ptl_input_brdr_color ptl_input_brdr_size ptl_input_brdr_radius';
+  _inputClassList = 'access ptl_input ptl_input_height ptl_input_text_size ptl_input_padding ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius';
 
   /**
    * The width of the colored section of the slider bar
