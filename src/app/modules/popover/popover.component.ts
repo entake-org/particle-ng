@@ -2,10 +2,6 @@ import { animate, AnimationEvent, style, transition, trigger } from '@angular/an
 import { Component, EventEmitter, HostListener, Input, OnDestroy, Output, Renderer2 } from '@angular/core';
 
 /**
- * TODO: allow configuration of attachment corner (top left, bottom left, etc)
- */
-
-/**
  * Component to display a popover with custom content
  */
 @Component({
@@ -28,12 +24,6 @@ import { Component, EventEmitter, HostListener, Input, OnDestroy, Output, Render
   ]
 })
 export class PopoverComponent implements OnDestroy {
-
-  /**
-   * The keyboard arrow keys
-   * @private
-   */
-  private static ARROW_KEYS = ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'];
 
   /**
    * The offset of the popover from its target (in pixels)
@@ -162,18 +152,6 @@ export class PopoverComponent implements OnDestroy {
           this.close();
         }
       }
-    }
-  }
-
-  /**
-   * Prevent arrow key scrolling while popover is open
-   */
-  @HostListener('window:keydown', ['$event'])
-  onKeyDown(event: KeyboardEvent): void {
-    const { key } = event;
-
-    if (this.visible && PopoverComponent.ARROW_KEYS.includes(key)) {
-      event.preventDefault();
     }
   }
 
