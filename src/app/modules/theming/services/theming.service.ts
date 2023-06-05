@@ -334,6 +334,47 @@ export class ThemingService {
       if (theme.stylingVariables.inputPadding) {
         style.appendChild(document.createTextNode(`.${prefix}ptl_input_padding{padding: ${theme.stylingVariables.inputPadding};}`));
       }
+
+      if (theme.stylingVariables.tooltipTextSize || theme.stylingVariables.tooltipBackgroundColor) {
+        const bgColor = theme.stylingVariables.tooltipBackgroundColor;
+        const textSize = theme.stylingVariables.tooltipTextSize;
+        const borderSize = theme.stylingVariables.tooltipBorderSize;
+        const borderColor = theme.stylingVariables.tooltipBorderColor;
+        const caretSize = theme.stylingVariables.tooltipCaretSize ?? '6px';
+
+        let tooltipStyle = '.particle_tooltip{';
+
+        if (bgColor) {
+          const textColor = this.getTextColor(bgColor);
+          tooltipStyle += `color: ${textColor};`;
+          tooltipStyle += `background-color: ${bgColor};`;
+        }
+
+        if (borderColor && borderSize) {
+          tooltipStyle += `border: ${borderSize} solid ${borderColor};`;
+        }
+
+        if (textSize) {
+          tooltipStyle += 'font-size: ' + textSize + ';';
+        }
+
+        tooltipStyle += '}';
+        style.appendChild(document.createTextNode(tooltipStyle));
+
+        let caretStyleColor: string = null as any;
+        if (borderColor && borderSize) {
+          caretStyleColor = borderColor;
+        } else if (bgColor) {
+          caretStyleColor = bgColor;
+        }
+
+        if (caretStyleColor) {
+          style.appendChild(document.createTextNode(`.particle_tooltip.right::after{border-color: transparent ${caretStyleColor} transparent transparent;margin-top: -${caretSize};border-width: ${caretSize};}`));
+          style.appendChild(document.createTextNode(`.particle_tooltip.left::after{border-color: transparent transparent transparent ${caretStyleColor};margin-top: -${caretSize};border-width: ${caretSize};}`));
+          style.appendChild(document.createTextNode(`.particle_tooltip.top::after{border-color: ${caretStyleColor} transparent transparent transparent;margin-left: -${caretSize};border-width: ${caretSize};}`));
+          style.appendChild(document.createTextNode(`.particle_tooltip.bottom::after{border-color: transparent transparent ${caretStyleColor} transparent;margin-left: -${caretSize};border-width: ${caretSize};}`));
+        }
+      }
     }
 
     const head = document.head || document.getElementsByTagName('head')[0];

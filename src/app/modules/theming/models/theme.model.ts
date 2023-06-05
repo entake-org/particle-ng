@@ -70,6 +70,12 @@ export interface ThemeStylingVariables {
   borderColor: string;
   borderSize: string;
   borderRadius: string;
+
+  tooltipBackgroundColor: string;
+  tooltipTextSize: string;
+  tooltipBorderSize: string;
+  tooltipBorderColor: string;
+  tooltipCaretSize?: string;
 }
 
 export interface ThemeColorPaletteExtension {

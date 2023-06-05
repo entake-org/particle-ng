@@ -76,7 +76,12 @@ export class AppComponent implements OnInit {
         borderRadius: '5px',
         borderColor: '#e7e7e7',
         inputBgColor: '#ffffff',
-        inputPadding: '0 10px'
+        inputPadding: '0 10px',
+        tooltipBackgroundColor: '#eeeeee',
+        tooltipTextSize: '16px',
+        tooltipBorderColor: '#555555',
+        tooltipBorderSize: '2px',
+        tooltipCaretSize: '8px'
       }
     } as Theme,
     {

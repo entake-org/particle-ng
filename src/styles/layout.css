@@ -254,7 +254,7 @@ PARTICLE STYLES
 }
 
 
-/* TOOLTIP STYLES FOR 'particle_toolip' COMPONENT */
+/* TOOLTIP STYLES FOR 'particle_tooltip' COMPONENT */
 .particle_tooltip {
     min-width: 75px;
     max-width: 200px;
@@ -287,8 +287,8 @@ PARTICLE STYLES
     position: absolute;
     top: 100%;
     left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
+    margin-left: -6px;
+    border-width: 6px;
     border-style: solid;
     border-color: #2f2f2f transparent transparent transparent;
 }
@@ -300,8 +300,8 @@ PARTICLE STYLES
     position: absolute;
     bottom: 100%;
     left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
+    margin-left: -6px;
+    border-width: 6px;
     border-style: solid;
     border-color: transparent transparent #2f2f2f transparent;
 }
@@ -313,8 +313,8 @@ PARTICLE STYLES
     position: absolute;
     top: 50%;
     left: 100%;
-    margin-top: -5px;
-    border-width: 5px;
+    margin-top: -6px;
+    border-width: 6px;
     border-style: solid;
     border-color: transparent transparent transparent #2f2f2f;
 }
@@ -326,8 +326,8 @@ PARTICLE STYLES
   position: absolute;
   top: 50%;
   right: 100%;
-  margin-top: -5px;
-  border-width: 5px;
+  margin-top: -6px;
+  border-width: 6px;
   border-style: solid;
   border-color: transparent #2f2f2f transparent transparent;
 }
