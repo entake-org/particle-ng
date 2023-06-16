@@ -254,8 +254,19 @@ export class ThemingService {
       }
 
       for (const extension of theme.colorPalette.extension) {
-        this.generateColors(style, this.addHashmark(extension.color), prefix + extension.className);
-        rootVars += `--${prefix}${this.convertUnderscoreToDash(extension.className)}: ${this.addHashmark(extension.color)};`;
+        if (extension.textColor && !extension.color) {
+          style.appendChild(document.createTextNode(`.${prefix}${extension.className}{color: ${this.addHashmark(extension.textColor)};}`));
+        }
+
+        if (extension.color) {
+          if (!extension.textColor) {
+            this.generateColors(style, this.addHashmark(extension.color as string), prefix + extension.className);
+          } else {
+            style.appendChild(document.createTextNode(`.${prefix}${extension.className}{background-color: ${this.addHashmark(extension.color)};color: ${this.addHashmark(extension.textColor)};fill: currentColor;}`));
+          }
+
+          rootVars += `--${prefix}${this.convertUnderscoreToDash(extension.className)}: ${this.addHashmark(extension.color as string)};`;
+        }
       }
     }
 

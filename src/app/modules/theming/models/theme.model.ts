@@ -80,7 +80,8 @@ export interface ThemeStylingVariables {
 
 export interface ThemeColorPaletteExtension {
   className: string;
-  color: string;
+  color?: string;
+  textColor?: string;
 }
 
 export interface ThemeFont {

@@ -41,6 +41,8 @@ export class AppComponent implements OnInit {
           {className: 'bg_purple_alt', color: '#8a4878'},
           {className: 'bg_brown_alt', color: '#6b6032'},
           {className: 'bg_grey_alt', color: '#616161'},
+          {className: 'test_combo', color: '#333333', textColor: '#ad9103'},
+          {className: 'bg_empty', textColor: '#333333'}
         ],
       },
       buttonColorPalette: {
