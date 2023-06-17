@@ -407,8 +407,10 @@ export class DropdownComponent implements ControlValueAccessor {
   /**
    * Reposition and resize the dropdown on window resize
    */
-  @HostListener('window:resize')
-  onWindowResize(): void {
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: any): void {
+    this.isMobile = event.target.innerWidth <= 768;
+
     if (this.opened) {
       this.positionDropdownList();
       this.resizeDropdownList();
@@ -483,11 +485,6 @@ export class DropdownComponent implements ControlValueAccessor {
         }
       }
     }
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any): void {
-    this.isMobile = event.target.innerWidth <= 768;
   }
 
   /**
