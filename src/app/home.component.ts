@@ -107,6 +107,7 @@ export class HomeComponent {
   colorPickerValue = '#44ff55';
 
   sliderValue = 69;
+  mbSliderValue = 3;
 
   toggleValue = true;
 

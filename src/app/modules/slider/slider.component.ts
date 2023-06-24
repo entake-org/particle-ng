@@ -243,6 +243,6 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
    * @private
    */
   private setSliderWidth(): void {
-    this.sliderWidth = Math.min(100, this.value / this._max * 100);
+    this.sliderWidth = Math.min(100, (this.value - this._min)/(this._max - this._min) * 100);
   }
 }
