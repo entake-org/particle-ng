@@ -1,3 +1,32 @@
+.ptl_loader {
+  height:2px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.ptl_loader__progress {
+  background: linear-gradient(to right, rgba(0,0,0,0) 0%,  var(--bg-purple-color) 33%, var(--bg-blue-color) 50% , var(--bg-green-color) 66%, rgba(0,0,0,0) 100%);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-name: ptl_loader;
+}
+
+@keyframes ptl_loader {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+
+
 .endpoint_fadein {
   animation: fadeInAnimation ease 1s;
   animation-iteration-count: 1;
