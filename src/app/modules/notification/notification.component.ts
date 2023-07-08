@@ -60,6 +60,11 @@ import { NotificationService } from './services/notification.service';
   ]
 })
 export class NotificationComponent {
+  /**
+   * Dependency injection site
+   * @param service the NotificationService
+   */
+  constructor(private service: NotificationService) { }
 
   /**
    * Array of notifications as an Observable
@@ -85,12 +90,6 @@ export class NotificationComponent {
     'error': 'fa-circle-xmark',
     'info': 'fa-info-circle'
   };
-
-  /**
-   * Dependency injection site
-   * @param service the NotificationService
-   */
-  constructor(private service: NotificationService) { }
 
   /**
    * Delete a notification

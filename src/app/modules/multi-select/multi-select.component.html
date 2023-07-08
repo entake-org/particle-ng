@@ -34,7 +34,7 @@
                   <div class="mar_tb5 pad_tb2"
                        *ngFor="let value of _internalValue | async">
                     <div class="ptl_input_text_size">
-                      <ng-container *ngTemplateOutlet="template; context: dataContextMap['' + value]"></ng-container>
+                      <ng-container *ngTemplateOutlet="template; context: $any(dataContextMap['' + value])"></ng-container>
                     </div>
                   </div>
                 </ng-container>
@@ -109,7 +109,7 @@
                        aria-hidden="true">
                     <div *ngIf="selectionValueMap['' + groupOption.value]"><i class="fas fa-check"></i></div>
                   </div>
-                  <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext!"></ng-container>
+                  <ng-container *ngTemplateOutlet="template; context: $any(groupOption.dataContext!)"></ng-container>
                 </button>
               </ng-container>
             </ng-container>
@@ -133,7 +133,7 @@
                        aria-hidden="true">
                     <div *ngIf="selectionValueMap['' + option.value]"><i class="fas fa-check"></i></div>
                   </div>
-                  <ng-container *ngTemplateOutlet="template; context: option.dataContext!"></ng-container>
+                  <ng-container *ngTemplateOutlet="template; context: $any(option.dataContext!)"></ng-container>
                 </button>
               </ng-container>
             </ng-template>

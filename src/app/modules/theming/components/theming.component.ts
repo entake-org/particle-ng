@@ -15,6 +15,15 @@ import {ThemingText} from '../../../shared/models/particle-component-text.model'
 export class ThemingComponent implements OnInit {
 
   /**
+   * Constructor
+   *
+   * @param themingService
+   */
+  constructor(
+    private themingService: ThemingService
+  ) {}
+
+  /**
    * Override class for the embedded dropdown
    */
   @Input()
@@ -61,15 +70,6 @@ export class ThemingComponent implements OnInit {
   themes$ = this.themingService.getThemes();
 
   selectedTheme$ = this.themingService.selectedTheme;
-
-  /**
-   * Constructor
-   *
-   * @param themingService
-   */
-  constructor(
-    private themingService: ThemingService
-  ) {}
 
   ngOnInit(): void {
     this.themeId = this.themingService.getTheme().themeId;

@@ -289,7 +289,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
       if (('groupLabel' in option) && ('options' in option)) {
         const validOptions: Array<MultiSelectOption> = [];
         for (const groupOption of (option.options ?? [])) {
-          if (!!groupOption.label && (!!groupOption.value || (groupOption.value >= 0))) {
+          if (!!groupOption.label && (!!groupOption.value || (+groupOption.value >= 0))) {
             const groupOptionCopy = JSON.parse(JSON.stringify(groupOption));
             groupOptionCopy.dataContext = this.addLabelToDataContext(groupOptionCopy.label, groupOptionCopy.dataContext);
             groupOptionCopy.type = 'group';
@@ -302,7 +302,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
           sanitizedOptions.push({ groupLabel: option.groupLabel, options: validOptions, type: 'group' });
         }
       } else if (('label' in option) && ('value' in option)) {
-        if (!!option.label && (!!option.value || (option.value >= 0))) {
+        if (!!option.label && (!!option.value || (+option.value >= 0))) {
           const optionCopy = JSON.parse(JSON.stringify(option));
           optionCopy.dataContext = this.addLabelToDataContext(optionCopy.label, optionCopy.dataContext);
           optionCopy.type = 'option';

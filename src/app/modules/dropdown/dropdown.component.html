@@ -23,7 +23,7 @@
         <ng-container *ngIf="selectedDataContext$ | async as dataContext else placeholderTemplate">
           <ng-container *ngIf="!!template else noCustomTemplate">
             <div class="row v_center text_ellipsis min_w0">
-              <ng-container *ngTemplateOutlet="template; context: dataContext"></ng-container>
+              <ng-container *ngTemplateOutlet="template; context: $any(dataContext)"></ng-container>
             </div>
           </ng-container>
           <ng-template #noCustomTemplate>
@@ -74,7 +74,7 @@
                           [disabled]="groupOption.disabled"
                           type="button"
                           class="particle_dropdown_option" role="option" tabindex="0">
-                    <ng-container *ngTemplateOutlet="template; context: groupOption.dataContext!"></ng-container>
+                    <ng-container *ngTemplateOutlet="template; context: $any(groupOption.dataContext!)"></ng-container>
                   </button>
                 </ng-container>
               </ng-container>
@@ -94,7 +94,7 @@
                           [disabled]="option.disabled"
                           type="button"
                           class="particle_dropdown_option" role="option" tabindex="0">
-                    <ng-container *ngTemplateOutlet="template; context: option.dataContext!"></ng-container>
+                    <ng-container *ngTemplateOutlet="template; context: $any(option.dataContext!)"></ng-container>
                   </button>
                 </ng-container>
               </ng-template>
