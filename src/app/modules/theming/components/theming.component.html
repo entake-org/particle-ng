@@ -8,7 +8,7 @@
         [value]="selectedTheme.themeId"
         (change)="changeTheme($event, themes)">
         <ng-template let-colorValue="colorValue" let-label>
-          <div class="circle_14px mar_right5" [style.backgroundColor]="colorValue"></div> {{label}}
+          <div class="circle_14px mar_right5" [style.background-color]="colorValue"></div> {{label}}
         </ng-template>
       </particle-dropdown>
     </ng-container>

@@ -64,12 +64,16 @@ export class NotificationComponent {
    * Dependency injection site
    * @param service the NotificationService
    */
-  constructor(private service: NotificationService) { }
+  constructor(
+    private service: NotificationService
+  ) {
+    this.notifications$ = service.getNotifications();
+  }
 
   /**
    * Array of notifications as an Observable
    */
-  readonly notifications$: Observable<Array<Notification>> = this.service.getNotifications();
+  readonly notifications$: Observable<Array<Notification>>;
 
   /**
    * Map of notification severity to color class

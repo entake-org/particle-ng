@@ -1,9 +1,10 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {ThemingService} from '../services/theming.service';
 import {Theme} from '../models/theme.model';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {DropdownOption} from '../../dropdown/models/dropdown-option.model';
 import {ThemingText} from '../../../shared/models/particle-component-text.model';
+import {Observable} from 'rxjs';
 
 /**
  * This will produce a dropdown that can be embedded to allow a user to choose their theme.
@@ -12,7 +13,7 @@ import {ThemingText} from '../../../shared/models/particle-component-text.model'
   selector: 'particle-theming',
   templateUrl: './theming.component.html'
 })
-export class ThemingComponent implements OnInit {
+export class ThemingComponent {
 
   /**
    * Constructor
@@ -21,7 +22,28 @@ export class ThemingComponent implements OnInit {
    */
   constructor(
     private themingService: ThemingService
-  ) {}
+  ) {
+    this.themes$ = this.themingService.getThemes();
+    this.selectedTheme$ = this.themingService.selectedTheme.pipe(tap(theme => this._themeId = theme.themeId));
+    this.options$ = this.themingService.getThemes().pipe(
+      map(
+        themes => {
+          const options: Array<DropdownOption> = [];
+          for (const theme of themes) {
+            options.push({
+              label: theme.name,
+              value: theme.themeId,
+              disabled: false,
+              dataContext: {
+                'colorValue': theme.layoutColors ? theme.layoutColors.headerColor : '#FFFFFF'
+              }
+            } as DropdownOption);
+          }
+
+          return options;
+        }
+      ));
+  }
 
   /**
    * Override class for the embedded dropdown
@@ -43,37 +65,16 @@ export class ThemingComponent implements OnInit {
   /**
    * Selected Theme ID
    */
-  themeId: string = null as any;
+  private _themeId: string = null as any;
 
   /**
    * List of available themes
    */
-  options$ = this.themingService.getThemes().pipe(
-    map(
-    themes => {
-      const options: Array<DropdownOption> = [];
-      for (const theme of themes) {
-        options.push({
-          label: theme.name,
-          value: theme.themeId,
-          disabled: false,
-          dataContext: {
-            'colorValue': theme.layoutColors ? theme.layoutColors.headerColor : '#FFFFFF'
-          }
-        } as DropdownOption);
-      }
+  readonly options$: Observable<Array<DropdownOption>>;
 
-      return options;
-    }
-  ));
+  readonly themes$: Observable<Array<Theme>>;
 
-  themes$ = this.themingService.getThemes();
-
-  selectedTheme$ = this.themingService.selectedTheme;
-
-  ngOnInit(): void {
-    this.themeId = this.themingService.getTheme().themeId;
-  }
+  readonly selectedTheme$: Observable<Theme>;
 
   /**
    * Update the user's selected theme
