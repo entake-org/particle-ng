@@ -197,4 +197,12 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     this.showDialog = null as any;
   }
 
+  focus(position?: any): void {
+    if (!position) {
+      position = 'start';
+    }
+
+    this.editor.commands.focus(position);
+  }
+
 }
