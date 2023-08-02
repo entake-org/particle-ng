@@ -182,6 +182,9 @@ export class MultiSelectComponent implements ControlValueAccessor {
   @Input()
   maxExpandedEntries: number = 0;
 
+  @Input()
+  collapsedButtonTemplate: TemplateRef<any> = null as any;
+
   /**
    * Event emitted on value change, emits the new value
    */
