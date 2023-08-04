@@ -38,8 +38,10 @@ PARTICLE STYLES
 
 /* CIRCLE CLASSES */
 .circle_8px,
+.circle_10px,
 .circle_12px,
 .circle_14px,
+.circle_15px,
 .circle_16px,
 .circle_18px,
 .circle_20px,
@@ -50,21 +52,26 @@ PARTICLE STYLES
 .circle_28px,
 .circle_30px,
 .circle_32px,
+.circle_35px,
 .circle_36px,
 .circle_40px,
+.circle_45px,
 .circle_46px,
 .circle_50px,
+.circle_55px,
 .circle_60px,
 .circle_70px,
 .circle_80px,
 .circle_90px,
 .circle_100px {
-    padding: 0;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  line-height: 1;
 }
 
 .circle_8px {
@@ -72,15 +79,21 @@ PARTICLE STYLES
     min-width: 8px;
     height: 8px;
     min-height: 8px;
-    font-size: 4px;
+    font-size: 3px;
 }
-
+.circle_10px {
+  width: 10px;
+  min-width: 10px;
+  height: 10px;
+  min-height: 10px;
+  font-size: 3px;
+}
 .circle_12px {
     width: 12px;
     min-width: 12px;
     height: 12px;
     min-height: 12px;
-    font-size: 8px;
+    font-size: 5px;
 }
 
 .circle_14px {
@@ -88,15 +101,21 @@ PARTICLE STYLES
     min-width: 14px;
     height: 14px;
     min-height: 14px;
-    font-size: 8px;
+    font-size: 7px;
 }
-
+.circle_15px {
+  width: 15px;
+  min-width: 15px;
+  height: 15px;
+  min-height: 15px;
+  font-size: 8px;
+}
 .circle_16px {
     width: 16px;
     min-width: 16px;
     height: 16px;
     min-height: 16px;
-    font-size: 10px;
+    font-size: 9px;
 }
 
 .circle_18px {
@@ -104,7 +123,7 @@ PARTICLE STYLES
     min-width: 18px;
     height: 18px;
     min-height: 18px;
-    font-size: 12px;
+    font-size: 9px;
 }
 
 .circle_20px {
@@ -112,7 +131,7 @@ PARTICLE STYLES
     min-width: 20px;
     height: 20px;
     min-height: 20px;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .circle_22px {
@@ -120,7 +139,7 @@ PARTICLE STYLES
     min-width: 22px;
     height: 22px;
     min-height: 22px;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .circle_24px {
@@ -128,7 +147,7 @@ PARTICLE STYLES
     min-width: 24px;
     height: 24px;
     min-height: 24px;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .circle_25px {
@@ -136,7 +155,7 @@ PARTICLE STYLES
   min-width: 25px;
   height: 25px;
   min-height: 25px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .circle_26px {
@@ -144,7 +163,7 @@ PARTICLE STYLES
     min-width: 26px;
     height: 26px;
     min-height: 26px;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .circle_28px {
@@ -152,7 +171,7 @@ PARTICLE STYLES
     min-width: 28px;
     height: 28px;
     min-height: 28px;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .circle_30px {
@@ -160,7 +179,7 @@ PARTICLE STYLES
     min-width: 30px;
     height: 30px;
     min-height: 30px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .circle_32px {
@@ -168,15 +187,21 @@ PARTICLE STYLES
     min-width: 32px;
     height: 32px;
     min-height: 32px;
-    font-size: 16px;
+    font-size: 15px;
 }
-
+.circle_35px {
+  width: 35px;
+  min-width: 35px;
+  height: 35px;
+  min-height: 35px;
+  font-size: 16px;
+}
 .circle_36px {
     width: 36px;
     min-width: 36px;
     height: 36px;
     min-height: 36px;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .circle_40px {
@@ -184,15 +209,22 @@ PARTICLE STYLES
     min-width: 40px;
     height: 40px;
     min-height: 40px;
-    font-size: 20px;
+    font-size: 19px;
 }
 
+.circle_45px {
+  width: 45px;
+  min-width: 45px;
+  height: 45px;
+  min-height: 45px;
+  font-size: 22px;
+}
 .circle_46px {
     width: 46px;
     min-width: 46px;
     height: 46px;
     min-height: 46px;
-    font-size: 24px;
+    font-size: 25px;
 }
 
 .circle_50px {
@@ -200,7 +232,7 @@ PARTICLE STYLES
     min-width: 50px;
     height: 50px;
     min-height: 50px;
-    font-size: 28px;
+    font-size: 27px;
 }
 
 .circle_60px {
@@ -244,42 +276,61 @@ PARTICLE STYLES
 }
 
 /* SQUARE CLASSES */
+.square_10px,
 .square_12px,
+.square_15px,
 .square_16px,
 .square_18px,
 .square_20px,
 .square_22px,
 .square_24px,
+.square_25px,
 .square_26px,
 .square_28px,
 .square_30px,
+.square_35px,
 .square_36px,
 .square_40px,
 .square_42px,
+.square_45px,
 .square_46px,
 .square_50px,
 .square_60px {
-    padding:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    user-select:none;
+  padding:0;
+  display:flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  line-height: 1;
 }
-
+.square_10px {
+  width: 10px;
+  min-width: 10px;
+  height: 10px;
+  min-height: 10px;
+  font-size: 5px;
+}
 .square_12px {
   width: 12px;
   min-width: 12px;
   height: 12px;
   min-height: 12px;
-  font-size: 6px;
+  font-size: 7px;
 }
-
+.square_15px {
+  width: 15px;
+  min-width: 15px;
+  height: 15px;
+  min-height: 15px;
+  font-size: 8px;
+}
 .square_16px {
     width: 16px;
     min-width: 16px;
     height: 16px;
     min-height: 16px;
-    font-size: 8px;
+    font-size: 9px;
 }
 
 .square_18px {
@@ -287,7 +338,7 @@ PARTICLE STYLES
     min-width: 18px;
     height: 18px;
     min-height: 18px;
-    font-size: 10px;
+    font-size: 9px;
 }
 
 .square_20px {
@@ -295,7 +346,7 @@ PARTICLE STYLES
     width: 20px;
     min-height: 20px;
     height: 20px;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .square_22px {
@@ -311,15 +362,21 @@ PARTICLE STYLES
     min-width: 24px;
     height: 24px;
     min-height: 24px;
-    font-size: 14px;
+    font-size: 13px;
 }
-
+.square_25px {
+  width: 25px;
+  min-width: 25px;
+  height: 25px;
+  min-height: 25px;
+  font-size: 14px;
+}
 .square_26px {
     width: 26px;
     min-width: 26px;
     height: 26px;
     min-height: 26px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .square_28px {
@@ -327,7 +384,7 @@ PARTICLE STYLES
     min-width: 28px;
     height: 28px;
     min-height: 28px;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .square_30px {
@@ -335,15 +392,21 @@ PARTICLE STYLES
     min-width: 30px;
     height: 30px;
     min-height: 30px;
-    font-size: 16px;
+    font-size: 17px;
 }
-
+.square_35px {
+  width: 35px;
+  min-width: 35px;
+  height: 35px;
+  min-height: 35px;
+  font-size: 18px;
+}
 .square_36px {
     width: 36px;
     min-width: 36px;
     height: 36px;
     min-height: 36px;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .square_40px {
@@ -361,13 +424,19 @@ PARTICLE STYLES
     min-height: 42px;
     font-size: 22px;
 }
-
+.square_45px {
+  width: 45px;
+  min-width: 45px;
+  height: 45px;
+  min-height: 45px;
+  font-size: 22px;
+}
 .square_46px {
     width: 46px;
     min-width: 46px;
     height: 46px;
     min-height: 46px;
-    font-size: 22px;
+    font-size: 23px;
 }
 
 .square_50px {
@@ -375,7 +444,7 @@ PARTICLE STYLES
     min-width: 50px;
     height: 50px;
     min-height: 50px;
-    font-size: 24px;
+    font-size: 23px;
 }
 
 .square_60px {
@@ -383,5 +452,5 @@ PARTICLE STYLES
     min-width: 60px;
     height:60px;
     min-height: 60px;
-    font-size: 30px;
+    font-size: 29px;
 }

@@ -80,7 +80,22 @@ PARTICLE STYLES
 .col.size_10 {
     flex: 10;
 }
+/* ROW / COLUMN GAPS */
+.rc_gap {
+  column-gap: 10px;
+  row-gap: 10px
+}
+.r_gap {
+  row-gap: 10px
+}
+.c_gap {
+  column-gap: 10px;
+}
 
+.rc_meta_gap {
+  column-gap: 5px;
+  row-gap: 5px
+}
 
 
 /* LIST ITEMS WITH ALTERNATING BACKGROUND COLORS - ODD */

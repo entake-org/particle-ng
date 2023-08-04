@@ -36,7 +36,12 @@ PARTICLE STYLES
 .card_shadow {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.12);
 }
-
+.menu_shadow {
+  box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.4);
+}
+.dash_shadow {
+  box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.4);
+}
 /* INTAKE CONTAINER SHADOW */
 .intake_shadow {
   box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5);
@@ -51,6 +56,10 @@ PARTICLE STYLES
     box-shadow: 0 2px 5px 1px rgba(0,0,0,0.07);
 }
 
+/* IMAGE EFFECTS */
+.dash_blur {
+  backdrop-filter: blur(10px);
+}
 
 /******************* ANIMATIONS ********************/
 .hov_sm_grow:hover {
@@ -95,6 +104,22 @@ PARTICLE STYLES
 .hov_slide_down:hover {
     transform: translateY(5px);
 }
+.hov_highlight {
+  transition: 0.3s;
+}
+.hov_highlight:hover {
+  background-color: var(--menu-color);
+}
+
+.hov_dash_slideshade {
+  transition: 0.3s;
+  box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.4);
+}
+.hov_dash_slideshade:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 15px -15px rgba(0, 0, 0, 0.8);
+}
+
 
 /* .HOV_BG - show background only on hover */
 .hov_bg {
@@ -135,6 +160,13 @@ PARTICLE STYLES
 .opacity_90 { opacity:0.9; }
 .opacity_100 { opacity:1.0; }
 
+.caret_opacity_on {
+  opacity: 1;
+}
+.caret_opacity_off {
+  opacity: 0.3;
+}
+
 
 /* LINK STYLES FOR 'richtext' COMPONENT */
 
@@ -163,3 +195,47 @@ PARTICLE STYLES
 .menu_sidebar_gradient{
   background: linear-gradient(to bottom, var(--header-color) , var(--menu-color) );
 }
+
+/* ANIMATIONS */
+.rotate_me {
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* LOADING ANIMATION */
+.cell_loader {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(270deg, var(--content-color)0% , var(--body-color) 26%,var(--body-color) 86%, var(--content-color) 100%);
+}
+
+.cell_loader__progress {
+  background: linear-gradient(to right,  rgba(0,0,0,0) 10%, var(--content-color) 45% , var(--content-color) 55% , rgba(0,0,0,0) 90%);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  min-width: 300px;
+  height:100vh;
+  margin-top:-20vh;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-name: cell_loader;
+  transform: rotate(15deg);
+  transition: ease-in-out;
+}
+
+@keyframes cell_loader {
+  from {
+    left: -80%;
+  }
+  to {
+    left: 120%;
+  }
+}
+
+

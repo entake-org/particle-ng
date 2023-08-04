@@ -678,13 +678,37 @@ PARTICLE STYLES
     min-width: 35px;
 }
 .min_w40 {
-    min-width: 40px;
+   min-width: 40px;
+ }
+.min_w45 {
+  min-width: 45px;
 }
 .min_w50 {
     min-width: 50px;
 }
+.min_w55 {
+  min-width: 55px;
+}
+.min_w60 {
+  min-width: 65px;
+}
+.min_w70 {
+  min-width: 70px;
+}
 .min_w75 {
-    min-width: 75px;
+  min-width: 75px;
+}
+.min_w80 {
+  min-width: 80px;
+}
+.min_w85 {
+  min-width: 85px;
+}
+.min_w90 {
+  min-width: 90px;
+}
+.min_w95 {
+  min-width: 95px;
 }
 .min_w100 {
     min-width: 100px;
@@ -742,6 +766,9 @@ PARTICLE STYLES
 .min_h15 {
     min-height: 15px;
 }
+.min_h20 {
+  min-height: 20px;
+}
 .min_h25 {
     min-height: 25px;
 }
@@ -760,8 +787,32 @@ PARTICLE STYLES
 .min_h50 {
     min-height: 50px;
 }
+.min_h55 {
+  min-height: 55px;
+}
+.min_h60 {
+  min-height: 60px;
+}
+.min_h65 {
+  min-height: 65px;
+}
+.min_h70 {
+  min-height: 70px;
+}
 .min_h75 {
     min-height: 75px;
+}
+.min_h80 {
+  min-height: 80px;
+}
+.min_h85 {
+  min-height: 85px;
+}
+.min_h90 {
+  min-height: 90px;
+}
+.min_h95 {
+  min-height: 95px;
 }
 .min_h100 {
     min-height: 100px;
