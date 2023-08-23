@@ -35,9 +35,6 @@
             "style": "camelCase",
             "type": "attribute"
           }
-        ],
-        "@typescript-eslint/explicit-function-return-type": [
-          "error"
         ]
       }
     },

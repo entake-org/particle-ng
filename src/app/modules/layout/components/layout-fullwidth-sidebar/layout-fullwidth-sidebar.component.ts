@@ -2,8 +2,7 @@ import {Component, Input, TemplateRef} from '@angular/core';
 
 @Component({
   selector: 'particle-layout-fullwidth-sidebar',
-  templateUrl: './layout-fullwidth-sidebar.component.html',
-  styleUrls: ['../../layout.css']
+  templateUrl: './layout-fullwidth-sidebar.component.html'
 })
 export class LayoutFullwidthSidebarComponent {
 
@@ -29,7 +28,12 @@ export class LayoutFullwidthSidebarComponent {
   footerHeight: string = '0';
 
   @Input()
-  width: string = '250px';
+  rightSidebarWidth: string = '250px';
+
+  @Input()
+  breakpoint: number = 1024;
+
+  protected readonly window = window;
 
   get stickySidebarHeight(): string {
     const offset: number = +this.headerHeight.replace(/\D/g, "") +
