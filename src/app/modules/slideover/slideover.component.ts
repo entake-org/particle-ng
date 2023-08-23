@@ -72,13 +72,16 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
   breakpointExceeded = false;
 
   constructor() {
-
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
+    this._determineBreakpointExceeded(event.target.innerWidth);
+  }
+
+  private _determineBreakpointExceeded(innerWidth: number): void {
     if (this.breakpoint) {
-      this.breakpointExceeded = event.target.innerWidth < this.breakpoint;
+      this.breakpointExceeded = innerWidth < this.breakpoint || innerWidth < +this.width.substring(0, this.width.length - 2);
     }
   }
 
@@ -125,9 +128,7 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      if (this.breakpoint && (window.innerWidth <= this.breakpoint)) {
-        this.breakpointExceeded = true;
-      }
+      this._determineBreakpointExceeded(window.innerWidth)
     }, 100);
   }
 

@@ -29,7 +29,8 @@
 
 <div [style.visibility]="window.innerWidth <= breakpoint ? 'visible' : 'hidden'"
      [style.opacity]="window.innerWidth <= breakpoint ? '1' : '0'"
-     [style.top]="150 + 'px'"
+     [style.top]="rightSidebarCollapsedTabOffset + 'px'"
+     style="z-index: var(--z-frame);"
      class="particle_scroll_button mar_right10 mar_bot15">
   <button
     (click)="slideover.open()"
@@ -42,10 +43,11 @@
 <particle-slideover
   position="right"
   [width]="rightSidebarWidth"
+  [breakpoint]="1"
   #slideover
 >
   <div class="particle_layout_sidebar height100 pad_top40"
-       [ngClass]="rightSidebarContainerClassList">
+       [ngClass]="rightSidebarContainerClassList + ' ' + collapsedClassList">
     <ng-template [ngTemplateOutlet]="rightSidebar"></ng-template>
   </div>
 </particle-slideover>

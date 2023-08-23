@@ -33,6 +33,12 @@ export class LayoutFullwidthSidebarComponent {
   @Input()
   breakpoint: number = 1024;
 
+  @Input()
+  rightSidebarCollapsedTabOffset = 150;
+
+  @Input()
+  collapsedClassList = '';
+
   protected readonly window = window;
 
   get stickySidebarHeight(): string {
