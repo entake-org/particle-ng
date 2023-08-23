@@ -2,8 +2,7 @@ import {Component, Input, TemplateRef} from '@angular/core';
 
 @Component({
   selector: 'particle-layout-full-framing',
-  templateUrl: './layout-full-framing.component.html',
-  styleUrls: ['../../layout.css']
+  templateUrl: './layout-full-framing.component.html'
 })
 export class LayoutFullFramingComponent {
 
@@ -39,6 +38,11 @@ export class LayoutFullFramingComponent {
 
   @Input()
   rightSidebarWidth: string = '250px';
+
+  @Input()
+  breakpoint: number = 1024;
+
+  protected readonly window = window;
 
   get stickySidebarHeight(): string {
     const offset: number = +this.headerHeight.replace(/\D/g, "") +

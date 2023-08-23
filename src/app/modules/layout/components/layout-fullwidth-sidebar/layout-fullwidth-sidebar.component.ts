@@ -2,8 +2,7 @@ import {Component, Input, TemplateRef} from '@angular/core';
 
 @Component({
   selector: 'particle-layout-fullwidth-sidebar',
-  templateUrl: './layout-fullwidth-sidebar.component.html',
-  styleUrls: ['../../layout.css']
+  templateUrl: './layout-fullwidth-sidebar.component.html'
 })
 export class LayoutFullwidthSidebarComponent {
 
