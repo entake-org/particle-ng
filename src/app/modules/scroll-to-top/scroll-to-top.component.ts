@@ -4,8 +4,7 @@ import {ScrollToTopText} from '../../shared/models/particle-component-text.model
 
 @Component({
   selector: 'particle-scroll-to-top',
-  templateUrl: './scroll-to-top.component.html',
-  styleUrls: ['./scroll-to-top.component.css']
+  templateUrl: './scroll-to-top.component.html'
 })
 export class ScrollToTopComponent implements OnDestroy, AfterViewInit {
 

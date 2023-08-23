@@ -6,15 +6,18 @@
   </div>
 
   <ng-container *ngIf="!rightSidebarSticky">
-    <div class="particle_layout_sidebar height100 hide_element"
+    <div class="particle_layout_sidebar height100"
          [ngClass]="rightSidebarContainerClassList"
-         [style.width]="width">
+         [style.display]="window.innerWidth <= breakpoint ? 'none' : ''"
+         [style.width]="rightSidebarWidth">
       <ng-template [ngTemplateOutlet]="rightSidebar"></ng-template>
     </div>
   </ng-container>
 
   <ng-container *ngIf="rightSidebarSticky">
-    <div class="particle_layout_sidebar height100 hide_element" [style.width]="width">
+    <div class="particle_layout_sidebar height100"
+         [style.display]="window.innerWidth <= breakpoint ? 'none' : ''"
+         [style.width]="rightSidebarWidth">
       <div class="row column sticky_sidebar"
            [ngClass]="rightSidebarContainerClassList"
            [style.height]="stickySidebarHeight">
@@ -24,3 +27,25 @@
   </ng-container>
 </div>
 
+<div [style.visibility]="window.innerWidth <= breakpoint ? 'visible' : 'hidden'"
+     [style.opacity]="window.innerWidth <= breakpoint ? '1' : '0'"
+     [style.top]="150 + 'px'"
+     class="particle_scroll_button mar_right10 mar_bot15">
+  <button
+    (click)="slideover.open()"
+    class="access btn pad_10 brad_3 brdr content_color"
+    type="button">
+    <span class="icon slide_left"><i class="fas fa-chevron-left"></i></span>
+  </button>
+</div>
+
+<particle-slideover
+  position="right"
+  [width]="rightSidebarWidth"
+  #slideover
+>
+  <div class="particle_layout_sidebar height100 pad_top40"
+       [ngClass]="rightSidebarContainerClassList">
+    <ng-template [ngTemplateOutlet]="rightSidebar"></ng-template>
+  </div>
+</particle-slideover>

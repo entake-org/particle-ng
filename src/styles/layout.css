@@ -347,6 +347,13 @@ PARTICLE STYLES
   border-color: transparent #2f2f2f transparent transparent;
 }
 
+.particle_scroll_button {
+  position: fixed;
+  right: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+
 /* LINES with ELLIPSIS */
 
 .line_item {
