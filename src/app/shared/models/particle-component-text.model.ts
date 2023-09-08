@@ -118,6 +118,7 @@ export interface IconSelectText {
   selection: string;
   confirm: string;
   select: string;
+  close: string;
 }
 
 export interface IdleTimeoutText {
@@ -136,6 +137,10 @@ export interface MultiSelectText {
   placeholder: string;
   of: string;
   optionsSelected: string;
+}
+
+export interface NotificationText {
+  dismiss: string;
 }
 
 export interface PaginatorText {

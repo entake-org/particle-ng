@@ -164,7 +164,6 @@
       }
     }
   },
-  "defaultProject": "particle-ng",
   "cli": {
     "analytics": false
   }

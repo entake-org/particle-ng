@@ -7,6 +7,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {RichTextEditorText} from '../../shared/models/particle-component-text.model';
 import {RichTextCapabilities} from './rich-text-capabilities.model';
+import {ThemingService} from '../theming/services/theming.service';
 
 export const RICH_TEXT_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -23,6 +24,10 @@ export const RICH_TEXT_VALUE_ACCESSOR: any = {
 
 })
 export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
+
+  constructor(
+    private themingService: ThemingService
+  ) {}
 
   @Input()
   placeholder = '';
@@ -80,6 +85,8 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     textValue: string
   }>();
 
+  currentTheme$ = this.themingService.selectedTheme;
+
   showDialog: any = null;
   dialogLink: string = null as any;
 
@@ -95,6 +102,8 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
   private _value: string = null as any;
   private _editable = true;
+
+  protected readonly window = window;
 
   editor = new Editor({
     extensions: [

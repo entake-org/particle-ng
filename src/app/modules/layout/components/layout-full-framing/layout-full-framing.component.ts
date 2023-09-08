@@ -1,4 +1,5 @@
-import {Component, Input, TemplateRef} from '@angular/core';
+import {Component, HostListener, Input, TemplateRef, ViewChild} from '@angular/core';
+import {SlideoverComponent} from '../../../slideover/slideover.component';
 
 @Component({
   selector: 'particle-layout-full-framing',
@@ -47,6 +48,16 @@ export class LayoutFullFramingComponent {
 
   @Input()
   collapsedClassList = '';
+
+  @ViewChild('slideover')
+  slideover: SlideoverComponent = null as any;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    if (event.target.innerWidth > 768 && this.slideover.slideoverOpen) {
+      this.slideover.close();
+    }
+  }
 
   protected readonly window = window;
 

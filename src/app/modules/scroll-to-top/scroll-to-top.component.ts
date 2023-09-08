@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Input, OnDestroy, Renderer2} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject} from 'rxjs';
 import {ScrollToTopText} from '../../shared/models/particle-component-text.model';
 
 @Component({

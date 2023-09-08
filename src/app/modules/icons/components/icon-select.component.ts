@@ -94,7 +94,8 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
     modifySearchCriteria: 'Please try modifying your search criteria',
     selection: 'Selection',
     confirm: 'Confirm',
-    select: 'Select'
+    select: 'Select',
+    close: 'Close'
   } as IconSelectText;
 
   /**

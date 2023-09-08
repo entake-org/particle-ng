@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {DialogComponent} from "../dialog/dialog.component";
-import {IdleTimer} from "./idle-timer";
+import {DialogComponent} from '../dialog/dialog.component';
+import {IdleTimer} from './idle-timer';
 import {IdleTimeoutText} from '../../shared/models/particle-component-text.model';
 
 @Component({

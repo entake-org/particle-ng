@@ -9,7 +9,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ParticleDialogModule} from '../dialog/dialog.module';
 import {IconsService} from './services/icons.service';
 import {ParticleEndpointStateModule} from '../endpoint-state/endpoint-state.module';
-import {ParticleButtonModule} from "../button/button.module";
 
 /**
  * Reference to the Font Awesome variable to add icons
@@ -20,15 +19,14 @@ const FontAwesome = window['FontAwesome' as any] as any;
   declarations: [
     IconSelectComponent
   ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        ParticleTooltipModule,
-        ParticleDialogModule,
-        ParticleEndpointStateModule,
-        ParticleButtonModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ParticleTooltipModule,
+    ParticleDialogModule,
+    ParticleEndpointStateModule
+  ],
   exports: [
     IconSelectComponent
   ],

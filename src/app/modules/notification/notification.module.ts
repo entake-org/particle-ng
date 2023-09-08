@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NotificationComponent } from './notification.component';
-import {ParticleButtonModule} from "../button/button.module";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NotificationComponent} from './notification.component';
 
 @NgModule({
   declarations: [NotificationComponent],
-    imports: [CommonModule, ParticleButtonModule],
+  imports: [CommonModule],
   exports: [NotificationComponent]
 })
-export class ParticleNotificationModule { }
+export class ParticleNotificationModule {
+}

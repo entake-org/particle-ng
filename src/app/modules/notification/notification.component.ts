@@ -7,10 +7,11 @@ import {
   transition,
   trigger
 } from '@angular/animations';
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Notification } from './models/notification.model';
 import { NotificationService } from './services/notification.service';
+import {NotificationText, SlideoverText} from '../../shared/models/particle-component-text.model';
 
 /**
  * Component for displaying notifications
@@ -60,6 +61,7 @@ import { NotificationService } from './services/notification.service';
   ]
 })
 export class NotificationComponent {
+
   /**
    * Dependency injection site
    * @param service the NotificationService
@@ -69,6 +71,11 @@ export class NotificationComponent {
   ) {
     this.notifications$ = service.getNotifications();
   }
+
+  @Input()
+  text: NotificationText = {
+    dismiss: 'Dismiss'
+  } as NotificationText;
 
   /**
    * Array of notifications as an Observable

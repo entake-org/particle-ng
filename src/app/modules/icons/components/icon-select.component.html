@@ -268,12 +268,13 @@
                 [emptyIcon]="'fas fa-search fa-3x mar_bot5'"
                 [text]="{emptyText: text.couldntFindAnything, emptySubtext: text.modifySearchCriteria}">
               </particle-endpoint-state>
-              <particle-button
-                type="cancel"
-                margin="10px"
-                [label]="text.clearResults"
-                (clicked)="clearSearch()"
-              ></particle-button>
+              <button class="access btnset clear mar_10"
+                      [attr.aria-label]="text.close"
+                      (click)="clearSearch()">
+                <div class="circle_20px ptl_brdr_color ptl_brdr_size ptl_input_bg_color">
+                  <i class="fas fa-times"></i>
+                </div>
+              </button>
             </div>
           </ng-template>
         </div>
@@ -287,9 +288,14 @@
             </div>
           </div>
           <div class="col v_center mar_10">
-            <button (click)="handleIconSelectConfirm()"
-                    class="access btn md icon_right bg_overlay brdr save_button_color">
-              {{text.confirm}}<span class="icon grow"><i class="fas fa-check"></i></span>
+            <button
+              type="button"
+              class="access btnset spaced md hov_glow save_button_color ptl_brdr_radius"
+              [attr.aria-label]="text.confirm"
+              (click)="handleIconSelectConfirm()"
+            >
+              <div>{{text.confirm}}</div>
+              <div class="brdr border_left mar_left10 pad_left10"><i class="fas fa-check"></i></div>
             </button>
           </div>
         </div>

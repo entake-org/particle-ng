@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {ToggleOptions} from "./models/toggle-options.model";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ToggleOptions} from './models/toggle-options.model';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({

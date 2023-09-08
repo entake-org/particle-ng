@@ -22,13 +22,12 @@ import {ParticleNotificationModule} from './modules/notification/notification.mo
 import {ParticlePopoverModule} from './modules/popover/popover.module';
 import {ParticleAccordionModule} from './modules/accordion/accordion.module';
 import {ParticleThemingModule} from './modules/theming/theming.module';
-import {ParticleSlideoverModule} from "./modules/slideover/particle-slideover.module";
-import {ParticleIdleTimeoutModule} from "./modules/idle-timeout/particle-idle-timeout.module";
-import {ParticleScrollToTopModule} from "./modules/scroll-to-top/particle-scroll-to-top.module";
-import {ParticleLayoutModule} from "./modules/layout/layout.module";
-import {ParticleToggleSwitchModule} from "./modules/toggle-switch/toggle-switch.module";
-import {ParticleButtonModule} from "./modules/button/button.module";
-import {ParticleBackgroundCarouselModule} from "./modules/background-carousel/particle-background-carousel.module";
+import {ParticleSlideoverModule} from './modules/slideover/particle-slideover.module';
+import {ParticleIdleTimeoutModule} from './modules/idle-timeout/particle-idle-timeout.module';
+import {ParticleScrollToTopModule} from './modules/scroll-to-top/particle-scroll-to-top.module';
+import {ParticleLayoutModule} from './modules/layout/layout.module';
+import {ParticleToggleSwitchModule} from './modules/toggle-switch/toggle-switch.module';
+import {ParticleBackgroundCarouselModule} from './modules/background-carousel/particle-background-carousel.module';
 import {ParticleCheckboxModule} from './modules/checkbox/checkbox.module';
 import {ParticleProgressBarModule} from './modules/progress-bar/progress-bar.module';
 import {FormComponent} from './form.component';
@@ -76,7 +75,6 @@ const routes: Routes = [
     ParticleScrollToTopModule,
     ParticleLayoutModule,
     ParticleToggleSwitchModule,
-    ParticleButtonModule,
     ParticleBackgroundCarouselModule,
     ParticleCheckboxModule,
     ParticleProgressBarModule,

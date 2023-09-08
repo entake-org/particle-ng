@@ -1,14 +1,13 @@
-import { A11yModule } from '@angular/cdk/a11y';
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { DatePickerComponent } from './date-picker.component';
-import { OrdinalNumberPipe } from '../ordinal-number-pipe/ordinal-number.pipe';
-import { ParticleOrdinalNumberPipeModule } from '../ordinal-number-pipe/ordinal-number-pipe.module';
-import {ParticleButtonModule} from "../button/button.module";
-import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
+import {A11yModule} from '@angular/cdk/a11y';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CalendarComponent} from './components/calendar/calendar.component';
+import {DatePickerComponent} from './date-picker.component';
+import {OrdinalNumberPipe} from '../ordinal-number-pipe/ordinal-number.pipe';
+import {ParticleOrdinalNumberPipeModule} from '../ordinal-number-pipe/ordinal-number-pipe.module';
+import {DateRangePickerComponent} from './components/date-range-picker/date-range-picker.component';
 import {ParticlePopoverModule} from '../popover/popover.module';
 
 @NgModule({
@@ -17,15 +16,14 @@ import {ParticlePopoverModule} from '../popover/popover.module';
     CalendarComponent,
     DateRangePickerComponent
   ],
-    imports: [
-        A11yModule,
-        BrowserAnimationsModule,
-        CommonModule,
-        FormsModule,
-        ParticleOrdinalNumberPipeModule,
-        ParticleButtonModule,
-        ParticlePopoverModule
-    ],
+  imports: [
+    A11yModule,
+    BrowserAnimationsModule,
+    CommonModule,
+    FormsModule,
+    ParticleOrdinalNumberPipeModule,
+    ParticlePopoverModule
+  ],
   exports: [
     DatePickerComponent,
     CalendarComponent,
@@ -33,4 +31,5 @@ import {ParticlePopoverModule} from '../popover/popover.module';
   ],
   providers: [OrdinalNumberPipe]
 })
-export class ParticleDatePickerModule { }
+export class ParticleDatePickerModule {
+}

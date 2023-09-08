@@ -25,13 +25,13 @@
 
 
         <div class="col" style="pointer-events: all;">
-          <particle-button
-            size="sm"
-            iconSide="only"
-            icon="fas fa-times"
-            rounded="circle"
-            (clicked)="deleteNotification($any(notification.id))"
-          ></particle-button>
+          <button class="access btnset clear"
+                  [attr.aria-label]="text.dismiss"
+                  (click)="deleteNotification($any(notification.id))">
+            <div class="circle_20px ptl_brdr_color ptl_brdr_size ptl_input_bg_color">
+              <i class="fas fa-times"></i>
+            </div>
+          </button>
         </div>
       </div>
 

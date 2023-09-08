@@ -25,7 +25,6 @@ export * from './app/modules/slideover/particle-slideover.module';
 export * from './app/modules/scroll-to-top/particle-scroll-to-top.module';
 export * from './app/modules/layout/layout.module';
 export * from './app/modules/toggle-switch/toggle-switch.module';
-export * from './app/modules/button/button.module';
 export * from './app/modules/checkbox/checkbox.module';
 export * from './app/modules/input-mask/input-mask.module';
 export * from './app/modules/progress-bar/progress-bar.module';
@@ -66,7 +65,6 @@ export * from './app/modules/scroll-to-top/scroll-to-top.component';
 export * from './app/modules/layout/components/layout-fullwidth-sidebar/layout-fullwidth-sidebar.component';
 export * from './app/modules/layout/components/layout-full-framing/layout-full-framing.component';
 export * from './app/modules/toggle-switch/toggle-switch.component';
-export * from './app/modules/button/particle-button.component';
 export * from './app/modules/checkbox/checkbox.component';
 export * from './app/modules/input-mask/input-mask.component';
 export * from './app/modules/progress-bar/progress-bar.component';
@@ -101,7 +99,6 @@ export * from './app/modules/multi-select/models/multi-select-option-group.model
 export * from './app/modules/notification/models/notification.model';
 export * from './app/modules/theming/models/theme.model';
 export * from './app/modules/toggle-switch/models/toggle-options.model';
-export * from './app/modules/button/button-state.model';
 export * from './app/modules/rich-text/rich-text-capabilities.model';
 
 /** ENUMS */
