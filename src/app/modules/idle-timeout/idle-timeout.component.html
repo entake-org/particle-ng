@@ -1,6 +1,7 @@
 <!-- timeout dialog -->
 <particle-dialog [title]="text.sessionExpiring"
                  [object]="showDialog"
+                 [borderRadius]="borderRadius"
                  (closed)="resetTimer()"
                  width="350px" height="150px"
                  #timeoutDialog>

@@ -396,4 +396,6 @@ PARTICLE STYLES
     white-space:nowrap;
 }
 
-
+.overflow_hidden {
+  overflow: hidden;
+}

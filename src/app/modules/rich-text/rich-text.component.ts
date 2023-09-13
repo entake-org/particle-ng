@@ -25,10 +25,6 @@ export const RICH_TEXT_VALUE_ACCESSOR: any = {
 })
 export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
-  constructor(
-    private themingService: ThemingService
-  ) {}
-
   @Input()
   placeholder = '';
 
@@ -79,13 +75,14 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     link: true
   } as RichTextCapabilities;
 
+  @Input()
+  borderRadius = '0px';
+
   @Output()
   textChanged = new EventEmitter<{
     htmlValue: string,
     textValue: string
   }>();
-
-  currentTheme$ = this.themingService.selectedTheme;
 
   showDialog: any = null;
   dialogLink: string = null as any;

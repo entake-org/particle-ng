@@ -10,6 +10,9 @@ import {IdleTimeoutText} from '../../shared/models/particle-component-text.model
 export class IdleTimeoutComponent implements OnInit {
 
   @Input()
+  borderRadius: string = '0px';
+
+  @Input()
   timeoutInSeconds = 600;
 
   @Input()
