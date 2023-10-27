@@ -88,7 +88,12 @@
 
 <ng-template #multiSelectOptions>
   <ng-container *ngIf="_options | async as options">
-    <div class="particle_multiselect_list" role="listbox" tabindex="-1" [attr.aria-label]="text.placeholder">
+    <div class="particle_multiselect_list"
+         role="listbox"
+         tabindex="-1"
+         [attr.aria-label]="text.placeholder"
+         [ngClass]="type === 'expanded' && expandedAsGrid ? 'particle_multi_select_grid' : ''"
+    >
       <!-- CUSTOM TEMPLATE -->
       <ng-container *ngIf="!!template else defaultOptionTemplate">
         <ng-container *ngIf="selectionValueMap$ | async as selectionValueMap">

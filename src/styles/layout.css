@@ -399,3 +399,9 @@ PARTICLE STYLES
 .overflow_hidden {
   overflow: hidden;
 }
+
+.particle_multi_select_grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}

@@ -183,6 +183,9 @@ export class MultiSelectComponent implements ControlValueAccessor {
   maxExpandedEntries: number = 0;
 
   @Input()
+  expandedAsGrid: boolean = false;
+
+  @Input()
   collapsedButtonTemplate: TemplateRef<any> = null as any;
 
   /**
