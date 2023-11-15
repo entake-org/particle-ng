@@ -624,6 +624,11 @@ export class DropdownComponent implements ControlValueAccessor {
     }
   }
 
+  onModelChangeMobile(value: any): void {
+    this.onChange(value);
+    this.change.emit(value);
+  }
+
   /**
    * Align the dropdown list with the dropdown
    * @private

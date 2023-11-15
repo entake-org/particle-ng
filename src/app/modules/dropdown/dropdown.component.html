@@ -163,6 +163,7 @@
     class="access ptl_input ptl_input_height ptl_input_text_size ptl_input_padding ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius"
     [id]="dropdownId"
     [disabled]="disabled"
+    (ngModelChange)="onModelChangeMobile($event)"
     [(ngModel)]="value">
     <ng-container *ngIf="_options | async as options">
       <ng-container *ngFor="let option of options">

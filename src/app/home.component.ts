@@ -92,7 +92,7 @@ export class HomeComponent {
 
   icon = 'fas fa-car';
 
-  dropdownValue = 'lightPurple';
+  dropdownValue = 'opt-$';
 
   multiSelectValue = ['chicken', 'cheese', 'fish'];
 
