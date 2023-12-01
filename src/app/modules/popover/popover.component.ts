@@ -25,6 +25,8 @@ import { Component, EventEmitter, HostListener, Input, OnDestroy, Output, Render
 })
 export class PopoverComponent implements OnDestroy {
 
+  protected readonly window = window;
+
   /**
    * The offset of the popover from its target (in pixels)
    */
@@ -69,6 +71,9 @@ export class PopoverComponent implements OnDestroy {
 
   @Input()
   alignment: 'left' | 'center' = 'left';
+
+  @Input()
+  scaleForMobile = '1';
 
   /**
    * Event emitted on popover open
@@ -365,4 +370,5 @@ export class PopoverComponent implements OnDestroy {
 
     this.escapeKeyUpUnlisteners = [];
   }
+
 }
