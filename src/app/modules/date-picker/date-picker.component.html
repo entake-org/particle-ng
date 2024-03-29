@@ -1,43 +1,66 @@
-<div #datePickerDiv
-     style="overflow: hidden;"
-     [style.filter]="disabled ? 'brightness(.95)' : ''"
-     [ngClass]="inputClassList ? '' : 'ptl_input ptl_input_height ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius'"
->
-  <div class="col size_1 height100 width100">
-    <input #dateInput
-           [(ngModel)]="dateString"
-           [id]="inputId"
-           (keydown)="filterInput($event)"
-           (input)="handleInput()"
-           (blur)="onTouched(); handleBlur()"
-           type="text"
-           [placeholder]="placeholder"
-           maxlength="10"
-           [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
-           [disabled]="disabled"
-           [ngClass]="inputClassList ? inputClassList : 'ptl_input_text_size ptl_input_padding border_none'"
-           style="outline-offset: -2px;"
-           class="access height100 width100"/>
+<ng-container *ngIf="!isMobile else mobile">
+  <div #datePickerDiv
+       style="overflow: hidden;"
+       [style.filter]="disabled ? 'brightness(.95)' : ''"
+       [ngClass]="inputClassList ? '' : 'row ptl_input ptl_input_height ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius ent_r2l_dir'"
+  >
+    <div class="col size_1 height100 width100">
+      <input #dateInput
+             [(ngModel)]="dateString"
+             [id]="inputId"
+             (keydown)="filterInput($event)"
+             (input)="handleInput()"
+             (blur)="onTouched(); handleBlur()"
+             type="text"
+             [placeholder]="placeholder"
+             maxlength="10"
+             [attr.aria-label]="ariaLabel + ', ' + text.enterInFormat + ' mm/dd/yyyy'"
+             [disabled]="disabled"
+             [ngClass]="inputClassList ? inputClassList : 'ptl_input_text_size ptl_input_padding border_none'"
+             style="outline-offset: -2px;"
+             class="access height100 width100"/>
+    </div>
+    <div class="col center_center min_w50 height100 ptl_brdr_color border_left" *ngIf="!inputOnly">
+      <button type="button"
+              (click)="openCalendar($event)"
+              [disabled]="disabled"
+              [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'clear'"
+              class="access btnset center_center height100 width100"
+              style="outline-offset: -2px;"
+              [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
+        <i class="fas fa-calendar-day"></i>
+      </button>
+    </div>
   </div>
-  <div class="col center_center min_w50 height100 ptl_brdr_color border_left" *ngIf="!inputOnly">
-    <button type="button"
-            (click)="openCalendar($event)"
-            [disabled]="disabled"
-            [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'clear'"
-            class="access btnset center_center height100 width100"
-            style="outline-offset: -2px;"
-            [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">
-      <i class="fas fa-calendar-day"></i>
-    </button>
-  </div>
-</div>
 
-<!-- calendar widget -->
-<particle-popover [targetOverride]="dateInput" #calendarPopover>
-  <particle-calendar [value]="showCalendar ? showCalendar.currentValue : $any(null)"
-                     [text]="$any(text.calendarText)"
-                     [dateRange]="{ minDate: validSelectionInterval.start!, maxDate: validSelectionInterval.end! }"
-                     (selected)="updateModel($event)"
-                     (closed)="handleCalendarClose()">
-  </particle-calendar>
-</particle-popover>
+  <!-- calendar widget -->
+  <particle-popover [targetOverride]="dateInput" #calendarPopover>
+    <particle-calendar [value]="showCalendar ? showCalendar.currentValue : $any(null)"
+                       [text]="$any(text.calendarText)"
+                       [dateRange]="{ minDate: validSelectionInterval.start!, maxDate: validSelectionInterval.end! }"
+                       (selected)="updateModel($event)"
+                       (closed)="handleCalendarClose()">
+    </particle-calendar>
+  </particle-popover>
+</ng-container>
+
+<ng-template #mobile>
+  <div style="overflow: hidden;"
+       [style.filter]="disabled ? 'brightness(.95)' : ''"
+       [ngClass]="inputClassList ? '' : 'ptl_input ptl_input_height ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius'"
+  >
+    <div class="col size_1 height100 width100">
+  <input [(ngModel)]="mobileDateString"
+         [id]="inputId"
+         (input)="handleMobileInput()"
+         (blur)="onTouched()"
+         type="date"
+         [placeholder]="placeholder"
+         [attr.aria-label]="ariaLabel"
+         [disabled]="disabled"
+         [ngClass]="inputClassList ? inputClassList : 'ptl_input_text_size ptl_input_padding border_none'"
+         style="outline-offset: -2px;"
+         class="access height100 width100"/>
+    </div>
+  </div>
+</ng-template>
