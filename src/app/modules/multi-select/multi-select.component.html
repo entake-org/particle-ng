@@ -27,7 +27,7 @@
 
           <ng-container *ngIf="selectionCount$ | async as selectionCount else placeholderTemplate">
             <ng-container *ngIf="selectionCount > 1 else singleEntry">
-              <div class="ptl_input_text_size">
+              <div class="ptl_input_text_size ent_r2l_txt">
                 <span class="text bold">{{selectionCount}}</span> {{text.of}} {{optionCount}} {{text.optionsSelected}}
               </div>
             </ng-container>
@@ -38,13 +38,13 @@
                   <ng-container *ngIf="!!template else noCustomTemplate">
                     <div class="mar_tb5 pad_tb2"
                          *ngFor="let value of _internalValue | async">
-                      <div class="ptl_input_text_size">
+                      <div class="ptl_input_text_size ent_r2l_txt">
                         <ng-container *ngTemplateOutlet="template; context: $any(dataContextMap['' + value])"></ng-container>
                       </div>
                     </div>
                   </ng-container>
                   <ng-template #noCustomTemplate>
-                    <div class="ptl_input_text_size mar_tb5 pad_tb2"
+                    <div class="ptl_input_text_size mar_tb5 pad_tb2 ent_r2l_txt"
                          *ngFor="let value of _internalValue | async">
                       {{dataContextMap['' + value]['$implicit'] || dataContextMap['' + value]['label']}}
                     </div>
@@ -88,7 +88,7 @@
 
 <ng-template #multiSelectOptions>
   <ng-container *ngIf="_options | async as options">
-    <div class="particle_multiselect_list"
+    <div class="particle_multiselect_list ent_r2l_dir"
          role="listbox"
          tabindex="-1"
          [attr.aria-label]="text.placeholder"
@@ -118,7 +118,7 @@
                   <div class="particle_multiselect_checkbox ptl_brdr_radius bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + groupOption.value] ? 'ok_button_color' : 'unselected'"
                        aria-hidden="true">
-                    <div *ngIf="selectionValueMap['' + groupOption.value]"><i class="fas fa-check"></i></div>
+                    <div *ngIf="selectionValueMap['' + groupOption.value]"><i class="fas fa-check ent_r2l_ico"></i></div>
                   </div>
                   <ng-container *ngTemplateOutlet="template; context: $any(groupOption.dataContext!)"></ng-container>
                 </button>

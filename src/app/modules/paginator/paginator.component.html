@@ -1,66 +1,68 @@
 <div class="row wrap_reverse center_center">
   <ng-container *ngIf="!showPages && showResultsPanel">
     <div class="col min_w200">
-      <div class="row v_center ptl_brdr_size ptl_brdr_radius ptl_brdr_color content_color mar_right5 mar_left5 pad_3">
+      <div class="row v_center ptl_brdr_size ptl_brdr_radius ptl_brdr_color content_color mar_right5 mar_left5 pad_3 ent_r2l_row">
         <div class="col size_1 center_center pad_left5 pad_right5">
           <ng-container *ngIf="totalLength > 0 else noResults">
-            <div class="text sm" style="user-select: none">
+            <div class="text sm ent_r2l_txt" style="user-select: none">
               {{pageStartingValue}} - {{pageEndingValue > totalLength ? totalLength : pageEndingValue}} {{text.of}} {{totalLength}} {{text.results}}
             </div>
           </ng-container>
           <ng-template #noResults>
-            <div class="text sm" style="user-select: none">
+            <div class="text sm ent_r2l_txt" style="user-select: none">
               0 - 0 {{text.of}} 0 {{text.results}}
             </div>
           </ng-template>
         </div>
-        <div class="col ptl_brdr_color border_left">
-          <div class="center_right pad_left5 pad_right5">
-            <button class="access btn clear circle_20px spinspin" tabindex="0" [attr.aria-label]="text.jumpToPage"
-                    (click)="config.toggle($event)">
-              <i class="fas fa-cog"></i>
-            </button>
-          </div>
+        <div class="col center_center pad_lr5">
+          <button class="access btn clear circle_20px " tabindex="0" [attr.aria-label]="text.jumpToPage"
+                  (click)="config.toggle($event)">
+            <i class="fas fa-cog"></i>
+          </button>
         </div>
       </div>
     </div>
   </ng-container>
 
   <div class="col pad_5">
-    <div class="row wrap_reverse center_center">
+    <div class="row wrap_reverse center_center ent_r2l_row">
 
       <ng-container *ngIf="showFirstLast">
         <div class="col pad_5">
           <!-- first -->
-          <button class="access btnset md hov_glow previous_button_color_dark_1 ptl_brdr_radius"
+          <button class="access btnset clear"
                   [attr.aria-label]="text.firstPage"
                   [disabled]="activePage === 0"
                   (click)="goToFirst()">
-            <div [ngClass]="showButtonLabels ? 'brdr border_right mar_right5 pad_right5' : ''">
-              <i class="fas fa-angle-double-left"></i>
+            <div class="col pad_tb5 pad_lr10 hov_glow previous_button_color ptl_brdr_radius ent_r2l_dir rc_gap">
+              <div [ngClass]="showButtonLabels ? '' : ''">
+                <i class="fas fa-angle-double-left ent_r2l_ico"></i>
+              </div>
+              <div class="text ent_r2l_txt" *ngIf="showButtonLabels">{{text.firstPage}}</div>
             </div>
-            <div *ngIf="showButtonLabels">{{text.firstPage}}</div>
           </button>
         </div>
       </ng-container>
 
       <div class="col pad_5">
         <!-- previous -->
-        <button class="access btnset md hov_glow previous_button_color ptl_brdr_radius"
+        <button class="access btnset clear"
                 [attr.aria-label]="text.previousPage"
                 [disabled]="activePage === 0"
                 (click)="hasPage(activePage - 1) ? goToPage(activePage - 1) : goToPage(activePage)">
-          <div [ngClass]="showButtonLabels ? 'brdr border_right mar_right5 pad_right5' : ''">
-            <i class="fas fa-chevron-left"></i>
+          <div class="col pad_tb5 pad_lr10 hov_glow previous_button_color ptl_brdr_radius ent_r2l_dir rc_gap">
+            <div [ngClass]="showButtonLabels ? '' : ''">
+              <i class="fas fa-chevron-left ent_r2l_ico"></i>
+            </div>
+            <div class="text ent_r2l_txt" *ngIf="showButtonLabels">{{text.previousPage}}</div>
           </div>
-          <div *ngIf="showButtonLabels">{{text.previousPage}}</div>
         </button>
       </div>
 
       <ng-container *ngIf="showPages">
         <div class="col pad_5">
           <!-- navigation -->
-          <div class="row v_center pad_left5 pad_right5 bg_overlay brdr content_color ptl_brdr_radius"
+          <div class="row v_center pad_left5 pad_right5 bg_overlay brdr content_color ptl_brdr_radius ent_r2l_dir"
                style="flex:1 1 auto;">
             <!-- jump button -->
             <div class="center_right" style="width:20px;min-width:20px;">
@@ -119,13 +121,15 @@
 
       <div class="col pad_5">
         <!-- next -->
-        <button class="access btnset md hov_glow next_button_color ptl_brdr_radius"
+        <button class="access btnset clear"
                 [attr.aria-label]="text.nextPage"
                 [disabled]="activePage === numberOfPages - 1 || totalLength === 0"
                 (click)="hasPage(activePage + 1) ? goToPage(activePage + 1) : goToPage(activePage)">
-          <div *ngIf="showButtonLabels">{{text.nextPage}}</div>
-          <div [ngClass]="showButtonLabels ? 'brdr border_left mar_left5 pad_left5' : ''">
-            <i class="fas fa-chevron-right"></i>
+          <div class="col pad_tb5 pad_lr10 hov_glow next_button_color ptl_brdr_radius ent_r2l_dir rc_gap">
+            <div class="text ent_r2l_txt" *ngIf="showButtonLabels">{{text.nextPage}}</div>
+            <div [ngClass]="showButtonLabels ? '' : ''">
+              <i class="fas fa-chevron-right ent_r2l_ico"></i>
+            </div>
           </div>
         </button>
       </div>
@@ -133,13 +137,15 @@
       <ng-container *ngIf="showFirstLast">
         <div class="col pad_5">
           <!-- last -->
-          <button class="access btnset md hov_glow next_button_color_dark_1 ptl_brdr_radius"
+          <button class="access btnset clear"
                   [attr.aria-label]="text.lastPage"
                   [disabled]="activePage === numberOfPages - 1"
                   (click)="goToLast()">
-            <div *ngIf="showButtonLabels">{{text.lastPage}}</div>
-            <div [ngClass]="showButtonLabels ? 'brdr border_left mar_left5 pad_left5': ''">
-              <i class="fas fa-angle-double-right"></i>
+            <div class="col pad_tb5 pad_lr10 hov_glow next_button_color ptl_brdr_radius ent_r2l_dir rc_gap">
+              <div class="text ent_r2l_txt" *ngIf="showButtonLabels">{{text.lastPage}}</div>
+              <div [ngClass]="showButtonLabels ? '' : ''">
+                <i class="fas fa-angle-double-right ent_r2l_ico"></i>
+              </div>
             </div>
           </button>
         </div>
@@ -161,14 +167,18 @@
 <ng-template #jumpTo>
   <ng-container *ngIf="numberOfPages > 0">
     <div class="row_block pad_10 center">
-      <div class="text sm center"><label for="pageJump">{{text.jumpToPage}} ({{text.outOf}} {{numberOfPages}}):</label></div>
-      <div class="center_center mar_top10">
-        <input class="access fullwidth_input sm" style="width:50px;" maxlength="4" id="pageJump"
-               type="text" [attr.aria-label]="text.page" name="pagejump" [placeholder]="text.page" [(ngModel)]="pageJumpInput" />
-        <button class="access btn_pulse xsm bg_overlay brdr" [attr.aria-label]="text.jumpToPage"
-                (click)="jumpPage();op.close();config.close();">
-          <i class="fas fa-chevron-right"></i>
-        </button>
+      <div class="text sm text_center ent_r2l_txt" style="text-align: center !important;"><label for="pageJump">{{text.jumpToPage}} ({{text.outOf}} {{numberOfPages}}):</label></div>
+      <div class="row rc_gap center_center mar_top10 ent_r2l_dir">
+        <div class="col">
+          <input class="access fullwidth_input sm" style="width:50px;" maxlength="4" id="pageJump"
+                 type="text" [attr.aria-label]="text.page" name="pagejump" [placeholder]="text.page" [(ngModel)]="pageJumpInput" />
+        </div>
+        <div class="col">
+          <button class="access btn clear" [attr.aria-label]="text.jumpToPage"
+                  (click)="jumpPage();op.close();config.close();">
+            <i class="fas fa-chevron-right ent_r2l_ico"></i>
+          </button>
+        </div>
       </div>
     </div>
   </ng-container>
@@ -176,14 +186,16 @@
 
 <ng-template #pageSizeTemplate>
   <div class="row_block pad_10 center">
-    <div class="text sm center"><label for="pageSize">{{text.itemsPerPage}}:</label></div>
-    <div class="center_center mar_top10">
-      <select class="access fullwidth_input content_color text sm" style="width:50px;"
-              [(ngModel)]="pageSize" (ngModelChange)="pageSizeChange();config.close();" [title]="text.choosePageSize" id="pageSize">
-        <option *ngFor="let option of pageSizeOptions" [value]="option" [attr.aria-label]="option">
-          {{option}}
-        </option>
-      </select>
+    <div class="text sm text_center ent_r2l_txt" style="text-align: center !important;"><label for="pageSize">{{text.itemsPerPage}}:</label></div>
+    <div class="row rc_gap center_center mar_top10 ent_r2l_dir">
+      <div class="col">
+        <select class="access fullwidth_input content_color text sm" style="width:50px;"
+                [(ngModel)]="pageSize" (ngModelChange)="pageSizeChange();config.close();" [title]="text.choosePageSize" id="pageSize">
+          <option *ngFor="let option of pageSizeOptions" [value]="option" [attr.aria-label]="option">
+            {{option}}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
 </ng-template>
