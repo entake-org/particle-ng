@@ -30,21 +30,18 @@ import {ParticleToggleSwitchModule} from './modules/toggle-switch/toggle-switch.
 import {ParticleBackgroundCarouselModule} from './modules/background-carousel/particle-background-carousel.module';
 import {ParticleCheckboxModule} from './modules/checkbox/checkbox.module';
 import {ParticleProgressBarModule} from './modules/progress-bar/progress-bar.module';
-import {FormComponent} from './form.component';
-import {HomeComponent} from './home.component';
 import {RouterModule, Routes} from '@angular/router';
 import {ParticleLoaderModule} from './modules/loader/loader.module';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'form', component: FormComponent}
+  {path: '', component: HomeComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
