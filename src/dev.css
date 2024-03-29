@@ -16,6 +16,8 @@ a:hover, a:active {
 .opacity_test {
   background-color: rgba(100, 100, 100, .5);
 }
+
+/**
 .ent_r2l_row{
   flex-direction: row-reverse;
 }
@@ -30,3 +32,4 @@ a:hover, a:active {
 .ent_r2l_ico{
   transform: scaleX(-1);
 }
+*/
