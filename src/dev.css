@@ -16,3 +16,17 @@ a:hover, a:active {
 .opacity_test {
   background-color: rgba(100, 100, 100, .5);
 }
+.ent_r2l_row{
+  flex-direction: row-reverse;
+}
+.ent_r2l_dir{
+  direction: rtl;
+}
+.ent_r2l_txt{
+  direction: rtl;
+  unicode-bidi: bidi-override;
+  text-align: right !important;
+}
+.ent_r2l_ico{
+  transform: scaleX(-1);
+}

@@ -14,45 +14,45 @@
   >
     <ng-template #header>HEADER</ng-template>
     <ng-template #mainContent>
+<div >
+  <div class="row width100">
+    <particle-date-picker
+      [disabled]="false"
+      [closeOnSelect]="true"
+      [calendarButtonClassList]="'bg_orange ptl_input_text_size'"
+    ></particle-date-picker>
+  </div>
 
-      <div class="row width100">
-        <particle-date-picker
-          [disabled]="false"
-          [closeOnSelect]="true"
-          [calendarButtonClassList]="'bg_orange ptl_input_text_size'"
-        ></particle-date-picker>
-      </div>
+  <div class="row width100" >
+    <particle-week-picker
+      [calendarButtonClassList]="'bg_blue ptl_input_text_size'"
+      [dateRange]="dateRange"
+      [closeOnSelect]="true"
+      [disabled]="false"
+    ></particle-week-picker>
+  </div>
 
-      <div class="row width100" >
-        <particle-week-picker
-          [calendarButtonClassList]="'bg_blue ptl_input_text_size'"
-          [dateRange]="dateRange"
-          [closeOnSelect]="true"
-          [disabled]="false"
-        ></particle-week-picker>
-      </div>
+  <div class="row width100">
+    <particle-date-range-picker
+      [inputClassList]="''"
+      [calendarButtonClassList]="'bg_blue ptl_input_text_size'"
+      [disabled]="false"
+    ></particle-date-range-picker>
+  </div>
 
-      <div class="row width100">
-        <particle-date-range-picker
-          [inputClassList]="''"
-          [calendarButtonClassList]="'bg_blue ptl_input_text_size'"
-          [disabled]="false"
-        ></particle-date-range-picker>
-      </div>
+  <div class="row width100">
+    <particle-loader
+      [text]="{loadingText: 'Please wait while we get things ready for you', loadingSubtext: 'This may take a moment'}"
+      [colors]="['var(--bg-red-color)', 'var(--bg-orange-color)', '#00FF00']"
+    >
+    </particle-loader>
+  </div>
 
-      <div class="row width100">
-        <particle-loader
-          [text]="{loadingText: 'Please wait while we get things ready for you', loadingSubtext: 'This may take a moment'}"
-          [colors]="['var(--bg-red-color)', 'var(--bg-orange-color)', '#00FF00']"
-        >
-        </particle-loader>
-      </div>
-
-      <div class="row width100">
-        <particle-dropdown
-          [text]="{placeholder: 'Select an option...'}"
-          buttonClassList="bg_blue"
-          [options]="[
+  <div class="row width100">
+    <particle-dropdown
+      [text]="{placeholder: 'Select an option...'}"
+      buttonClassList="bg_blue"
+      [options]="[
                        { value: 'a', label: 'Option A' },
                        { value: 'b', label: 'Disabled Option', disabled: true },
                        { value: 'c', label: 'Option C' },
@@ -65,14 +65,14 @@
                          ]
                        }
                      ]"
-          [disabled]="false">
-        </particle-dropdown>
-      </div>
+      [disabled]="false">
+    </particle-dropdown>
+  </div>
 
-      <div class="row width100">
-        <particle-multi-select
-          buttonClassList="bg_blue"
-          [options]="[
+  <div class="row width100">
+    <particle-multi-select
+      buttonClassList="bg_blue"
+      [options]="[
                            { value: 'a', label: 'Option A' },
                            { value: 'b', label: 'Disabled Option', disabled: true },
                            { value: 'c', label: 'Option C' },
@@ -85,15 +85,15 @@
                              ]
                            }
                          ]"
-          [classList]="''" [disabled]="false">
-        </particle-multi-select>
-      </div>
+      [classList]="''" [disabled]="false">
+    </particle-multi-select>
+  </div>
 
-      <div class="row width100">
-        <particle-multi-select
-          type="expanded"
-          [maxExpandedEntries]="7"
-          [options]="[
+  <div class="row width100">
+    <particle-multi-select
+      type="expanded"
+      [maxExpandedEntries]="7"
+      [options]="[
                            { value: 'a', label: 'Option A' },
                            { value: 'b', label: 'Disabled Option', disabled: true },
                            { value: 'c', label: 'Option C' },
@@ -106,93 +106,95 @@
                              ]
                            }
                          ]"
-          [classList]="''" [disabled]="false">
-        </particle-multi-select>
-      </div>
+      [classList]="''" [disabled]="false">
+    </particle-multi-select>
+  </div>
 
-      <div class="row width100">
-        <particle-slider [(ngModel)]="sliderValue" unit="%"></particle-slider>
-      </div>
+  <div class="row width100">
+    <particle-slider [(ngModel)]="sliderValue" unit="%"></particle-slider>
+  </div>
 
-      <div class="row width100">
-        <particle-render-rich-text [html]="textEditorValue"></particle-render-rich-text>
-      </div>
+  <div class="row width100">
+    <particle-render-rich-text [html]="textEditorValue"></particle-render-rich-text>
+  </div>
 
-      <div class="row width100">
-        <!-- version 1 -->
-        <div class="row wrap brad_3 pad_x5 mar_y10">
-          <div class="col size_1 mar_10 pad_y5">
-            <div class="text md bolder">Version 1</div>
-          </div>
-          <div class="col size_3 center_center mar_10">
-            <particle-paginator
-              [totalLength]="100"
-              [pageSizeOptions]="[10,25,50]"
-              [pageSize]="10"
-              [showResultsPanel]="false"
-            ></particle-paginator>
-          </div>
-        </div>
-        <!-- version 2 -->
-        <div class="row wrap brad_3 pad_x5 mar_y10">
-          <div class="col size_1 mar_10 pad_y5">
-            <div class="text md bolder">Version 2</div>
-          </div>
-          <div class="col size_3 center_center mar_10">
-            <particle-paginator
-              [showPages]="true"
-              [totalLength]="200"
-              [pageSizeOptions]="[10,25,50]"
-              [pageSize]="25"
-            ></particle-paginator>
-          </div>
-        </div>
-        <!-- version 3 -->
-        <div class="row wrap brad_3 pad_x5 mar_y10">
-          <div class="col size_1 mar_10 pad_y5">
-            <div class="text md bolder">Version 3</div>
-          </div>
-          <div class="col size_3 center_center mar_10">
-            <particle-paginator
-              [showPages]="true"
-              [showFirstLast]="true"
-              [totalLength]="30000"
-              [pageSizeOptions]="[10,25,50]"
-              [pageSize]="50"
-            ></particle-paginator>
-          </div>
-        </div>
-        <!-- version 4 -->
-        <div class="row wrap brad_3 pad_x5 mar_y10">
-          <div class="col size_1 mar_10 pad_y5">
-            <div class="text md bolder">Version 4</div>
-          </div>
-          <div class="col size_3 center_center mar_10">
-            <particle-paginator
-              [showPages]="true"
-              [showFirstLast]="true"
-              [showButtonLabels]="false"
-              [totalLength]="30000"
-              [pageSizeOptions]="[10,25,50]"
-              [pageSize]="50"
-            ></particle-paginator>
-          </div>
-        </div>
-        <!-- version 5 -->
-        <div class="row wrap brad_3 pad_x5 mar_y10">
-          <div class="col size_1 mar_10 pad_y5">
-            <div class="text md bolder">Version 5</div>
-          </div>
-          <div class="col size_3 center_center mar_10">
-            <particle-paginator
-              [showButtonLabels]="false"
-              [totalLength]="30000"
-              [pageSizeOptions]="[10,25,50]"
-              [pageSize]="50"
-            ></particle-paginator>
-          </div>
-        </div>
+  <div class="row width100">
+    <!-- version 1 -->
+    <div class="row wrap brad_3 pad_x5 mar_y10">
+      <div class="col size_1 mar_10 pad_y5">
+        <div class="text md bolder">Version 1</div>
       </div>
+      <div class="col size_3 center_center mar_10">
+        <particle-paginator
+          [totalLength]="100"
+          [pageSizeOptions]="[10,25,50]"
+          [pageSize]="10"
+          [showResultsPanel]="false"
+        ></particle-paginator>
+      </div>
+    </div>
+    <!-- version 2 -->
+    <div class="row wrap brad_3 pad_x5 mar_y10">
+      <div class="col size_1 mar_10 pad_y5">
+        <div class="text md bolder">Version 2</div>
+      </div>
+      <div class="col size_3 center_center mar_10">
+        <particle-paginator
+          [showPages]="true"
+          [totalLength]="200"
+          [pageSizeOptions]="[10,25,50]"
+          [pageSize]="25"
+        ></particle-paginator>
+      </div>
+    </div>
+    <!-- version 3 -->
+    <div class="row wrap brad_3 pad_x5 mar_y10">
+      <div class="col size_1 mar_10 pad_y5">
+        <div class="text md bolder">Version 3</div>
+      </div>
+      <div class="col size_3 center_center mar_10">
+        <particle-paginator
+          [showPages]="true"
+          [showFirstLast]="true"
+          [totalLength]="30000"
+          [pageSizeOptions]="[10,25,50]"
+          [pageSize]="50"
+        ></particle-paginator>
+      </div>
+    </div>
+    <!-- version 4 -->
+    <div class="row wrap brad_3 pad_x5 mar_y10">
+      <div class="col size_1 mar_10 pad_y5">
+        <div class="text md bolder">Version 4</div>
+      </div>
+      <div class="col size_3 center_center mar_10">
+        <particle-paginator
+          [showPages]="true"
+          [showFirstLast]="true"
+          [showButtonLabels]="false"
+          [totalLength]="30000"
+          [pageSizeOptions]="[10,25,50]"
+          [pageSize]="50"
+        ></particle-paginator>
+      </div>
+    </div>
+    <!-- version 5 -->
+    <div class="row wrap brad_3 pad_x5 mar_y10">
+      <div class="col size_1 mar_10 pad_y5">
+        <div class="text md bolder">Version 5</div>
+      </div>
+      <div class="col size_3 center_center mar_10">
+        <particle-paginator
+          [showButtonLabels]="false"
+          [totalLength]="30000"
+          [pageSizeOptions]="[10,25,50]"
+          [pageSize]="50"
+        ></particle-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     </ng-template>
     <ng-template #sidebar>SIDEBAR</ng-template>

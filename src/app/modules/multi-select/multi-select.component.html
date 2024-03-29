@@ -1,6 +1,6 @@
 <ng-container *ngIf="type === 'input' || (type === 'expanded' && maxExpandedEntries > 0 && optionCount > maxExpandedEntries) else expanded">
   <div #multiSelect
-       class="ptl_input ptl_input_height ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius"
+       class="row ptl_input ptl_input_height ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius ent_r2l_dir"
        [style.filter]="disabled ? 'brightness(.95)' : ''"
        style="cursor:default;overflow:hidden;"
        [ngClass]="classList ? classList : ''">
@@ -54,7 +54,7 @@
             </ng-template>
           </ng-container>
           <ng-template #placeholderTemplate>
-            <div class="ptl_placeholder">{{text.placeholder + '...'}}</div>
+            <div class="ptl_placeholder ent_r2l_txt">{{text.placeholder + '...'}}</div>
           </ng-template>
         </div>
         <div class="col min_w50 height100 center_center border_left"
@@ -80,7 +80,7 @@
        (@openClose.start)="onAnimationStart($event)"
        (@openClose.done)="onAnimationDone($event)"
        class="position_absolute">
-    <div class="particle_multiselect_options content_color">
+    <div class="particle_multiselect_options content_color ent_r2l_dir">
       <ng-container [ngTemplateOutlet]="multiSelectOptions"></ng-container>
     </div>
   </div>
@@ -100,7 +100,7 @@
           <ng-container *ngFor="let option of options; index as i">
             <!-- OPTION GROUP -->
             <ng-container *ngIf="option.type === 'group' else nonGroupOption">
-              <div class="particle_multiselect_heading" aria-hidden="true">{{option.groupLabel}}</div>
+              <div class="particle_multiselect_heading ent_r2l_txt" aria-hidden="true">{{option.groupLabel}}</div>
               <ng-container *ngFor="let groupOption of option.options; index as j">
                 <button #multiSelectOption
                         (click)="onMultiSelectOptionSelect(groupOption.value, groupOption.disabled!)"
@@ -157,7 +157,7 @@
           <ng-container *ngFor="let option of options; index as i">
             <!-- OPTION GROUP -->
             <ng-container *ngIf="option.type === 'group' else nonGroupOption">
-              <div class="particle_multiselect_heading" aria-hidden="true">{{option.groupLabel}}</div>
+              <div class="particle_multiselect_heading ent_r2l_txt" aria-hidden="true">{{option.groupLabel}}</div>
               <ng-container *ngFor="let groupOption of option.options; index as j">
                 <button #multiSelectOption
                         (click)="onMultiSelectOptionSelect(groupOption.value, groupOption.disabled!)"
@@ -177,7 +177,7 @@
                        aria-hidden="true">
                     <div *ngIf="selectionValueMap['' + groupOption.value]"><i class="fas fa-check"></i></div>
                   </div>
-                  {{groupOption.label}}
+                  <div class="ent_r2l_txt mar_lr5">{{groupOption.label}}</div>
                 </button>
               </ng-container>
             </ng-container>
@@ -201,7 +201,7 @@
                        aria-hidden="true">
                     <div *ngIf="selectionValueMap['' + option.value]"><i class="fas fa-check"></i></div>
                   </div>
-                  {{option.label}}
+                  <div class="ent_r2l_txt mar_lr5">{{option.label}}</div>
                 </button>
               </ng-container>
             </ng-template>
