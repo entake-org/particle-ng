@@ -1,29 +1,29 @@
 <!-- TODO: figure out why closing toast that is between others causes jumpy animation -->
 
 <!-- toast -->
-<div class="particle_notification_overlay">
+<div class="particle_notification_overlay ent_r2l_row">
   <!-- spacer -->
   <!-- container -->
   <div class="row min_w280 pad_right5" style="max-width:400px;">
     <div @list class="row_block width100 ">
       <!-- item -->
-
       <div *ngFor="let notification of notifications$ | async"
            @items
-           class="row v_center content_color pad_10 mar_10 shadow ptl_brdr_radius">
-        <div class="col pad_5 mar_right5 brdr border_right">
+           class="row ent_r2l_row v_center content_color pad_10 mar_10 shadow ptl_brdr_radius">
+        <div class="col pad_5">
           <div class="circle_36px" [ngClass]="severityColorMap[notification.severity]">
-            <i class="fas {{severityIconMap[notification.severity]}} fa-lg"></i>
+            <i class="fas {{severityIconMap[notification.severity]}} fa-lg ent_r2l_ico"></i>
           </div>
         </div>
-        <div class="col size_1 pad_5">
-          <div class="row_block">
-            <div class="text lg bold">{{notification.summary}}</div>
-            <div class="text md">{{notification.detail}}</div>
+        <div class="col size_1 pad_5 ent_r2l_dir rc_gap">
+          <div class="col ptl_brdr_color border_right"></div>
+          <div class="col">
+            <div class="row_block width100">
+              <div class="text lg text_left text_wrap bold ent_r2l_txt">{{notification.summary}}</div>
+              <div class="text md text_left text_wrap ent_r2l_txt">{{notification.detail}}</div>
+            </div>
           </div>
         </div>
-
-
         <div class="col" style="pointer-events: all;">
           <button class="access btnset clear"
                   [attr.aria-label]="text.dismiss"
@@ -34,7 +34,6 @@
           </button>
         </div>
       </div>
-
     </div>
   </div>
 </div>

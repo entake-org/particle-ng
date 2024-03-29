@@ -4,7 +4,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  forwardRef,
+  forwardRef, HostListener,
   Input,
   OnDestroy,
   OnInit,
@@ -59,6 +59,12 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     'ShiftLeft', 'ShiftRight', 'Backspace',
     'Delete'
   ];
+
+  /**
+   * Matches YYYY-MM-DD
+   * @private
+   */
+  private static readonly BROWSER_DATE_PICKER_FORMAT = new RegExp('^\\d\\d\\d\\d-\\d\\d-\\d\\d$');
 
   /**
    * Matches MM/DD/YYYY
@@ -230,10 +236,17 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   dateString = '';
 
+  mobileDateString = '';
+
   /**
    * Whether to show the calendar
    */
   showCalendar: { currentValue: Date } = null as any;
+
+  /**
+   * In mobile (screen width is less than 768), swap to a native input
+   */
+  isMobile = window.innerWidth <= 768;
 
   /**
    * The valid selection interval
@@ -296,6 +309,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     this.SHORT_MONTH_DATE_FORMAT.lastIndex = 0;
     this.SHORT_DAY_DATE_FORMAT.lastIndex = 0;
     this.SHORT_DATE_FORMAT.lastIndex = 0;
+    this.BROWSER_DATE_PICKER_FORMAT.lastIndex = 0;
 
     let dateFormat: string = null as any;
     if (this.FULL_DATE_FORMAT.test(dateString)) {
@@ -306,6 +320,8 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
       dateFormat = 'MM/d/yyyy';
     } else if (this.SHORT_DATE_FORMAT.test(dateString)) {
       dateFormat = 'M/d/yyyy';
+    } else if (this.BROWSER_DATE_PICKER_FORMAT.test(dateString)) {
+      dateFormat ='yyyy-MM-dd';
     }
 
     return dateFormat;
@@ -339,6 +355,11 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * Disabled getter
    */
   get disabled(): boolean { return this._disabled; }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: any): void {
+    this.isMobile = event.target.innerWidth <= 768;
+  }
 
   /**
    * Init component, set up window resize listener
@@ -438,6 +459,19 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     this.input.emit();
   }
 
+  handleMobileInput(): void {
+    this.dateString = this.mobileDateString;
+    this.handleInput();
+  }
+
+  setMobileValue(): void {
+    if (this.value) {
+      const offset = this.value.getTimezoneOffset();
+      const dateForFormatting = new Date(this.value.getTime() - (offset * 60 * 1000));
+      this.mobileDateString = dateForFormatting.toISOString().split('T')[0];
+    }
+  }
+
   /**
    * Update the model value
    * @param value the value to update the model to
@@ -462,6 +496,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
 
       if (!isEqual(this.value, valueBeforeUpdate)) {
         this.onChange(this.value);
+        this.setMobileValue();
       }
     }
   }
@@ -484,7 +519,9 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    */
   handleCalendarClose(): void {
     this.showCalendar = null as any;
-    this.calendarPopover.close();
+    if (this.calendarPopover) {
+      this.calendarPopover.close();
+    }
   }
 
   /**

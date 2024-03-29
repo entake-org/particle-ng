@@ -1,3 +1,15 @@
-<router-outlet></router-outlet>
+<div class="height100 width100 row column scroll_y" #contentDiv>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
 <!-- NOTIFICATION CONTAINER -->
 <particle-notification></particle-notification>
+
+<particle-scroll-to-top
+  [bottomOffset]="120"
+  [scrollDistance]="300"
+  [content]="contentDiv"
+  #scrollToTop
+></particle-scroll-to-top>
