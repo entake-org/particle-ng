@@ -465,9 +465,11 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   }
 
   setMobileValue(): void {
-    const offset = this.value.getTimezoneOffset();
-    const dateForFormatting = new Date(this.value.getTime() - (offset*60*1000));
-    this.mobileDateString = dateForFormatting.toISOString().split('T')[0];
+    if (this.value) {
+      const offset = this.value.getTimezoneOffset();
+      const dateForFormatting = new Date(this.value.getTime() - (offset * 60 * 1000));
+      this.mobileDateString = dateForFormatting.toISOString().split('T')[0];
+    }
   }
 
   /**
