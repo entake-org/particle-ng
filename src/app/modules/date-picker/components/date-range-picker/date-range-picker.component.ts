@@ -29,8 +29,8 @@ export class DateRangePickerComponent implements ControlValueAccessor, AfterView
 
   valueObs$ = this._value$.asObservable().pipe(tap(
     value => {
-      let newValue = null;
-      if (value.start && value.end) {
+      let newValue = {start: null, end: null};
+      if (value && value.start && value.end) {
         newValue = {start: value.start, end: value.end};
       }
 
