@@ -104,9 +104,11 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
     if (!value) {
       this._value = null as any;
       this.dateString = null as any;
+      this.mobileDateString = null as any;
     } else if (!isEqual(value, this._value)) {
       this._value = value;
       this.dateString = this.dateString = DatePickerComponent.parseDate(value);
+      this.setMobileValue();
     }
   }
 

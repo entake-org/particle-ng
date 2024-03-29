@@ -16,6 +16,7 @@
     <ng-template #mainContent>
       <div class="row width100">
         <particle-date-picker
+          [(ngModel)]="date"
           [disabled]="false"
           [closeOnSelect]="true"
           [calendarButtonClassList]="'bg_orange ptl_input_text_size'"
