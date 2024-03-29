@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
+import {ThemingService} from './modules/theming/services/theming.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
+
+  constructor(
+    private themingService: ThemingService
+  ) {
+  }
+
+  currentTheme$ = this.themingService.selectedTheme;
 
   dateRange: any = {
     start: new Date(new Date().setDate(new Date().getDate() - 14)),
