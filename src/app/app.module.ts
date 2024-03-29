@@ -32,7 +32,7 @@ import {ParticleCheckboxModule} from './modules/checkbox/checkbox.module';
 import {ParticleProgressBarModule} from './modules/progress-bar/progress-bar.module';
 import {RouterModule, Routes} from '@angular/router';
 import {ParticleLoaderModule} from './modules/loader/loader.module';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './home.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent}
