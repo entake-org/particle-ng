@@ -3,7 +3,7 @@
     <ng-template [ngTemplateOutlet]="header"></ng-template>
   </div>
 
-  <div class="row" [style.height]="contentSidebarHeight">
+  <div class="row ent_r2l_row" [style.height]="contentSidebarHeight">
     <div class="row column space_between height100"
          [ngClass]="mainContentContainerClassList">
       <ng-template [ngTemplateOutlet]="mainContent"></ng-template>
@@ -27,18 +27,20 @@
   </div>
 </div>
 
-<div [style.visibility]="window.innerWidth <= breakpoint ? 'visible' : 'hidden'"
-     [style.opacity]="window.innerWidth <= breakpoint ? '1' : '0'"
-     [style.top]="rightSidebarCollapsedTabOffset + 'px'"
-     style="z-index: var(--z-frame);"
-     class="particle_scroll_button mar_right10 mar_bot15">
-  <button
-    (click)="slideover.open()"
-    class="access btn pad_10 brad_3 brdr content_color"
-    type="button">
-    <span class="icon slide_left"><i class="fas fa-chevron-left"></i></span>
-  </button>
-</div>
+<ng-container *ngIf="rightSidebarCollapsedTabOffset >= 0">
+  <div [style.visibility]="window.innerWidth <= breakpoint ? 'visible' : 'hidden'"
+       [style.opacity]="window.innerWidth <= breakpoint ? '1' : '0'"
+       [style.top]="rightSidebarCollapsedTabOffset + 'px'"
+       style="z-index: var(--z-frame);"
+       class="particle_scroll_button mar_right10 mar_bot15">
+    <button
+      (click)="slideover.open()"
+      class="access btn pad_10 brad_3 brdr content_color"
+      type="button">
+      <span class="icon slide_left"><i class="fas fa-chevron-left"></i></span>
+    </button>
+  </div>
+</ng-container>
 
 <particle-slideover
   position="right"

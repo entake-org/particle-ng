@@ -173,7 +173,26 @@
       </div>
 
     </ng-template>
-    <ng-template #sidebar>SIDEBAR</ng-template>
+    <ng-template #sidebar>
+      <div class="row wrap v_center">
+        <button (click)="addNotification('success')"
+                class="access btn sm bg_overlay brdr bg_green_alt mar_5">
+          Show Success
+        </button>
+        <button (click)="addNotification('warn')"
+                class="access btn sm bg_overlay brdr bg_orange_alt mar_5">
+          Show Warning
+        </button>
+        <button (click)="addNotification('error')"
+                class="access btn sm bg_overlay brdr bg_red_alt mar_5">
+          Show Error
+        </button>
+        <button (click)="addNotification('info')"
+                class="access btn sm bg_overlay brdr bg_purple_alt mar_5">
+          Show Info
+        </button>
+      </div>
+    </ng-template>
     <ng-template #footer></ng-template>
   </particle-layout-full-framing>
 </ng-container>
