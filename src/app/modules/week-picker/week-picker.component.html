@@ -1,5 +1,5 @@
 <div style="cursor:default;overflow: hidden;"
-     [ngClass]="inputClassList ? '' : 'ptl_input ptl_input_height ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius'"
+     [ngClass]="inputClassList ? '' : 'row ptl_input ptl_input_height ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius ent_r2l_dir'"
      [style.filter]="disabled ? 'brightness(.95)' : ''">
   <button (click)="openCalendar($event)"
           aria-haspopup="dialog"
@@ -16,7 +16,7 @@
         {{internalValue.start | date: dateFormat}} - {{internalValue.end | date: dateFormat}}
       </ng-container>
       <ng-template #placeholderTemplate>
-        {{text.selectWeek}}...
+        <div class="ent_r2l_txt">{{text.selectWeek}}...</div>
       </ng-template>
     </div>
     <div class="col min_w50 height100 center_center border_left"
