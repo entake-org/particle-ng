@@ -1,6 +1,5 @@
 .layout_sidebar {
   position: fixed;
-  z-index: var(--z-overlay);
   user-select: none;
 }
 
@@ -10,7 +9,6 @@
   top:0;
   width:45px;
   height:45px;
-  z-index: var(--z-overlay);
   display:flex;
   justify-content:center;
   align-items:center;
