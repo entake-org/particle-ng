@@ -17,6 +17,8 @@ export class HomeComponent {
 
   currentTheme$ = this.themingService.selectedTheme;
 
+  date = 862891200000;
+
   dateRange: any = {
     start: new Date(new Date().setDate(new Date().getDate() - 14)),
     end: new Date(new Date().setDate(new Date().getDate() + 14))
