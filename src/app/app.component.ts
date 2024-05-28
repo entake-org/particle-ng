@@ -76,6 +76,7 @@ export class AppComponent implements OnInit {
         inputTextSize: '14pt',
         inputLabelSize: '12pt',
         borderRadius: '5px',
+        borderSize: '1px',
         borderColor: '#e7e7e7',
         inputBgColor: '#ffffff',
         inputPadding: '0 10px',

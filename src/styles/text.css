@@ -4,7 +4,17 @@ PARTICLE STYLES
 .......
 */
 .rich_text_formatting{
-  line-height: 1.4
+  line-height: 1.4;
+}
+
+.rich_text_formatting img {
+  max-width: calc(100% - 20px);
+  margin: 10px auto;
+  display: block;
+  border-radius: var(--ptl-brdr-radius);
+  border-width: var(--ptl-brdr-size);
+  border-style: solid;
+  border-color: var(--ptl-brdr-color);
 }
 
 /* BASIC TEXT ALIGNMENTS */

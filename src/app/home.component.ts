@@ -26,7 +26,7 @@ export class HomeComponent {
 
   sliderValue = 50;
 
-  textEditorValue = '<h2 style="text-align: center">Beautiful <b>BOLD</b> <em>rich</em> text!</h2><p>Visit <a href="https://www.sdsolutions.io" target="_blank">sdsolutions.io</a> for more cool stuff!</p>';
+  textEditorValue = '<h2 style="text-align: center">Beautiful <b>BOLD</b> <em>rich</em> text!</h2><p>Visit <a href="https://www.sdsolutions.io" target="_blank">sdsolutions.io</a> for more cool stuff!</p><img src="https://media.entake.io/images/masthead/57d44b23-b872-4f29-a2b5-dc39551d2bec.jpg"/>';
 
   pickerRange: any = {};
 

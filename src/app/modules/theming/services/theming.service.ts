@@ -328,14 +328,17 @@ export class ThemingService {
 
       if (theme.stylingVariables.borderColor) {
         style.appendChild(document.createTextNode(`.${prefix}ptl_brdr_color{border-color: ${this.addHashmark(theme.stylingVariables.borderColor)};}`));
+        rootVars += `--${prefix}ptl-brdr-color: ${this.addHashmark(theme.stylingVariables.borderColor)};`;
       }
 
       if (theme.stylingVariables.borderSize) {
         style.appendChild(document.createTextNode(`.${prefix}ptl_brdr_size{border-width: ${theme.stylingVariables.borderSize};border-style:solid;}`));
+        rootVars += `--${prefix}ptl-brdr-size: ${theme.stylingVariables.borderSize};`;
       }
 
       if (theme.stylingVariables.borderRadius) {
         style.appendChild(document.createTextNode(`.${prefix}ptl_brdr_radius{border-radius: ${theme.stylingVariables.borderRadius};}`));
+        rootVars += `--${prefix}ptl-brdr-radius: ${theme.stylingVariables.borderRadius};`;
       }
 
       if (theme.stylingVariables.inputHeight) {

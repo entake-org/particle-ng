@@ -179,6 +179,8 @@ export interface RichTextEditorText {
   removeLink: string;
   clearFormat: string;
   modifyLink: string;
+  addImage: string;
+  modifyImage: string;
   cancel: string;
   update: string;
   url: string;

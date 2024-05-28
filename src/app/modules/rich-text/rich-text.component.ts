@@ -4,10 +4,10 @@ import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
+import Image from '@tiptap/extension-image';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {RichTextEditorText} from '../../shared/models/particle-component-text.model';
 import {RichTextCapabilities} from './rich-text-capabilities.model';
-import {ThemingService} from '../theming/services/theming.service';
 
 export const RICH_TEXT_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -63,7 +63,9 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     modifyLink: 'Modify Link',
     cancel: 'Cancel',
     update: 'Update',
-    url: 'URL'
+    url: 'URL',
+    addImage: 'Add Image',
+    modifyImage: 'Modify Image'
   } as RichTextEditorText;
 
   @Input()
@@ -72,7 +74,8 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     textDecoration: true,
     list: true,
     alignment: true,
-    link: true
+    link: true,
+    images: false
   } as RichTextCapabilities;
 
   @Input()
@@ -86,6 +89,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
   showDialog: any = null;
   dialogLink: string = null as any;
+  dialogType: string = null as any;
 
   /**
    * Function called on change
@@ -118,7 +122,8 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
       }),
       Placeholder.configure({
         placeholder: () => this.placeholder
-      })
+      }),
+      Image
     ],
     editorProps: {
       attributes: {
@@ -185,6 +190,14 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     const previousUrl = this.editor.getAttributes('link').href;
     this.showDialog = {};
     this.dialogLink = previousUrl;
+    this.dialogType = 'link';
+  }
+
+  openImageDialog(): void {
+    const previousUrl = this.editor.getAttributes('image').src;
+    this.showDialog = {};
+    this.dialogLink = previousUrl;
+    this.dialogType = 'image';
   }
 
   changeEditorLink(action: string): void {
@@ -193,13 +206,18 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
         this.editor.chain().focus().extendMarkRange('link').unsetLink().run();
         break;
       case 'save':
-        this.editor.chain().focus().extendMarkRange('link').setLink({ href: this.dialogLink, target: '_blank' }).run();
+        if (this.dialogType === 'link') {
+          this.editor.chain().focus().extendMarkRange('link').setLink({ href: this.dialogLink, target: '_blank' }).run();
+        } else if (this.dialogType === 'image') {
+          this.editor.chain().focus().setImage({ src: this.dialogLink }).run()
+        }
         break;
       default:
         console.log(action);
     }
 
     this.dialogLink = null as any;
+    this.dialogType = null as any;
     this.showDialog = null as any;
   }
 

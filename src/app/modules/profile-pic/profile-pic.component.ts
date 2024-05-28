@@ -8,12 +8,13 @@ import {Md5} from 'md5-typescript';
   selector: 'particle-profile-pic',
   styleUrls: ['./profile-pic.component.css'],
   template: `
-    <div class="wac_photo_id_round"
+    <div class="ptl_profile_pic"
          [style.height]="size"
          [style.width]="size"
          [style.margin]="margin"
-         [style.backgroundImage]="getUrl()"
+         [style.background-image]="url"
          [particleTooltip]="toolTip"
+         [tooltipDisabled]="tooltipDisabled"
          tooltipPosition="top">
     </div>`
 })
@@ -32,36 +33,33 @@ export class ProfilePicComponent {
   margin = '0';
 
   /**
-   * Image URL of the profile pic
-   */
-  @Input()
-  imageUrl: string = null as any;
-
-  /**
    * Tooltip to explain what the picture is
    */
   @Input()
   toolTip: string = null as any;
 
   /**
+   * Disable the tooltip
+   */
+  @Input()
+  tooltipDisabled: boolean = false;
+
+  /**
    * Use gravatar instead of a custom image
    */
   @Input()
-  gravatarEmail: string = null as any;
+  set gravatarEmail(gravatarEmail: string) {
+    this.url = `url(https://www.gravatar.com/avatar/${Md5.init(gravatarEmail.trim().toLowerCase())}?d=retro&s=${this.size.substring(0, this.size.length - 2)})`;
+  }
 
   /**
-   * Returns a CSS URL of the Image URL.
+   * Image URL of the profile pic
    */
-  getUrl(): string {
-    if (this.gravatarEmail) {
-       return `url(https://www.gravatar.com/avatar/${Md5.init(this.gravatarEmail.trim().toLowerCase())}?d=retro&s=${this.size.substring(0, this.size.length - 2)})`;
-    }
-
-    if (this.imageUrl) {
-      return `url(${this.imageUrl})`;
-    }
-
-    return null as any;
+  @Input()
+  set imageUrl(imageUrl: string) {
+    this.url = `url(${imageUrl})`;
   }
+
+  url: string = null as any;
 
 }

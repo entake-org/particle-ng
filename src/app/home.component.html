@@ -116,7 +116,26 @@
         <particle-slider [(ngModel)]="sliderValue" unit="%"></particle-slider>
       </div>
 
+      <!--
       <div class="row width100">
+        <div class="row_block width100">
+        <particle-rich-text
+          [(ngModel)]="textEditorValue"
+          height="400px"
+          [capabilities]="{
+            heading: true,
+            textDecoration: true,
+            list: true,
+            alignment: true,
+            link: true,
+            images: true
+          }"
+        ></particle-rich-text>
+        </div>
+      </div>
+      -->
+
+      <div class="row width100 rich_text_formatting">
         <particle-render-rich-text class="width100" [html]="textEditorValue"></particle-render-rich-text>
       </div>
 
