@@ -79,21 +79,21 @@ PARTICLE STYLES
     min-width: 8px;
     height: 8px;
     min-height: 8px;
-    font-size: 3px;
+    font-size: 3pt;
 }
 .circle_10px {
   width: 10px;
   min-width: 10px;
   height: 10px;
   min-height: 10px;
-  font-size: 3px;
+  font-size: 3pt;
 }
 .circle_12px {
     width: 12px;
     min-width: 12px;
     height: 12px;
     min-height: 12px;
-    font-size: 5px;
+    font-size: 4pt;
 }
 
 .circle_14px {
@@ -101,21 +101,21 @@ PARTICLE STYLES
     min-width: 14px;
     height: 14px;
     min-height: 14px;
-    font-size: 7px;
+    font-size: 4pt;
 }
 .circle_15px {
   width: 15px;
   min-width: 15px;
   height: 15px;
   min-height: 15px;
-  font-size: 8px;
+  font-size: 5pt;
 }
 .circle_16px {
     width: 16px;
     min-width: 16px;
     height: 16px;
     min-height: 16px;
-    font-size: 9px;
+    font-size: 6pt;
 }
 
 .circle_18px {
@@ -123,7 +123,7 @@ PARTICLE STYLES
     min-width: 18px;
     height: 18px;
     min-height: 18px;
-    font-size: 9px;
+    font-size: 9pt;
 }
 
 .circle_20px {
@@ -131,7 +131,7 @@ PARTICLE STYLES
     min-width: 20px;
     height: 20px;
     min-height: 20px;
-    font-size: 11px;
+    font-size: 9pt;
 }
 
 .circle_22px {
@@ -139,7 +139,7 @@ PARTICLE STYLES
     min-width: 22px;
     height: 22px;
     min-height: 22px;
-    font-size: 11px;
+    font-size: 10pt;
 }
 
 .circle_24px {
@@ -147,7 +147,7 @@ PARTICLE STYLES
     min-width: 24px;
     height: 24px;
     min-height: 24px;
-    font-size: 13px;
+    font-size: 12pt;
 }
 
 .circle_25px {
@@ -155,7 +155,7 @@ PARTICLE STYLES
   min-width: 25px;
   height: 25px;
   min-height: 25px;
-  font-size: 13px;
+  font-size: 11pt;
 }
 
 .circle_26px {
@@ -163,7 +163,7 @@ PARTICLE STYLES
     min-width: 26px;
     height: 26px;
     min-height: 26px;
-    font-size: 15px;
+    font-size: 12pt;
 }
 
 .circle_28px {
@@ -171,7 +171,7 @@ PARTICLE STYLES
     min-width: 28px;
     height: 28px;
     min-height: 28px;
-    font-size: 15px;
+    font-size: 12pt;
 }
 
 .circle_30px {
@@ -179,7 +179,7 @@ PARTICLE STYLES
     min-width: 30px;
     height: 30px;
     min-height: 30px;
-    font-size: 15px;
+    font-size: 15pt;
 }
 
 .circle_32px {
@@ -187,21 +187,21 @@ PARTICLE STYLES
     min-width: 32px;
     height: 32px;
     min-height: 32px;
-    font-size: 15px;
+    font-size: 16pt;
 }
 .circle_35px {
   width: 35px;
   min-width: 35px;
   height: 35px;
   min-height: 35px;
-  font-size: 16px;
+  font-size: 17pt;
 }
 .circle_36px {
     width: 36px;
     min-width: 36px;
     height: 36px;
     min-height: 36px;
-    font-size: 17px;
+    font-size: 18pt;
 }
 
 .circle_40px {
@@ -209,7 +209,7 @@ PARTICLE STYLES
     min-width: 40px;
     height: 40px;
     min-height: 40px;
-    font-size: 19px;
+    font-size: 20pt;
 }
 
 .circle_45px {
@@ -217,14 +217,14 @@ PARTICLE STYLES
   min-width: 45px;
   height: 45px;
   min-height: 45px;
-  font-size: 22px;
+  font-size: 21pt;
 }
 .circle_46px {
     width: 46px;
     min-width: 46px;
     height: 46px;
     min-height: 46px;
-    font-size: 25px;
+    font-size: 22pt;
 }
 
 .circle_50px {
@@ -232,7 +232,7 @@ PARTICLE STYLES
     min-width: 50px;
     height: 50px;
     min-height: 50px;
-    font-size: 27px;
+    font-size: 25pt;
 }
 
 .circle_60px {
@@ -240,7 +240,7 @@ PARTICLE STYLES
     min-width: 60px;
     height: 60px;
     min-height: 60px;
-    font-size: 30px;
+    font-size: 30pt;
 }
 
 .circle_70px {
@@ -248,7 +248,7 @@ PARTICLE STYLES
     min-width: 70px;
     height: 70px;
     min-height: 70px;
-    font-size: 40px;
+    font-size: 40pt;
 }
 
 .circle_80px {
@@ -256,7 +256,7 @@ PARTICLE STYLES
     min-width: 80px;
     height: 80px;
     min-height: 80px;
-    font-size: 44px;
+    font-size: 44pt;
 }
 
 .circle_90px {
@@ -264,7 +264,7 @@ PARTICLE STYLES
     min-width: 90px;
     height: 90px;
     min-height: 90px;
-    font-size: 44px;
+    font-size: 46pt;
 }
 
 .circle_100px {
@@ -272,7 +272,7 @@ PARTICLE STYLES
     min-width: 100px;
     height: 100px;
     min-height: 100px;
-    font-size: 50px;
+    font-size: 50pt;
 }
 
 /* SQUARE CLASSES */
@@ -309,28 +309,28 @@ PARTICLE STYLES
   min-width: 10px;
   height: 10px;
   min-height: 10px;
-  font-size: 5px;
+  font-size: 5pt;
 }
 .square_12px {
   width: 12px;
   min-width: 12px;
   height: 12px;
   min-height: 12px;
-  font-size: 7px;
+  font-size: 6pt;
 }
 .square_15px {
   width: 15px;
   min-width: 15px;
   height: 15px;
   min-height: 15px;
-  font-size: 8px;
+  font-size: 8pt;
 }
 .square_16px {
     width: 16px;
     min-width: 16px;
     height: 16px;
     min-height: 16px;
-    font-size: 9px;
+    font-size: 8pt;
 }
 
 .square_18px {
@@ -338,7 +338,7 @@ PARTICLE STYLES
     min-width: 18px;
     height: 18px;
     min-height: 18px;
-    font-size: 9px;
+    font-size: 9pt;
 }
 
 .square_20px {
@@ -346,7 +346,7 @@ PARTICLE STYLES
     width: 20px;
     min-height: 20px;
     height: 20px;
-    font-size: 11px;
+    font-size: 10pt;
 }
 
 .square_22px {
@@ -354,7 +354,7 @@ PARTICLE STYLES
     width: 22px;
     min-height: 22px;
     height: 22px;
-    font-size: 13px;
+    font-size: 10pt;
 }
 
 .square_24px {
@@ -362,21 +362,21 @@ PARTICLE STYLES
     min-width: 24px;
     height: 24px;
     min-height: 24px;
-    font-size: 13px;
+    font-size: 12pt;
 }
 .square_25px {
   width: 25px;
   min-width: 25px;
   height: 25px;
   min-height: 25px;
-  font-size: 14px;
+  font-size: 14pt;
 }
 .square_26px {
     width: 26px;
     min-width: 26px;
     height: 26px;
     min-height: 26px;
-    font-size: 15px;
+    font-size: 15pt;
 }
 
 .square_28px {
@@ -384,7 +384,7 @@ PARTICLE STYLES
     min-width: 28px;
     height: 28px;
     min-height: 28px;
-    font-size: 17px;
+    font-size: 16pt;
 }
 
 .square_30px {
@@ -392,21 +392,21 @@ PARTICLE STYLES
     min-width: 30px;
     height: 30px;
     min-height: 30px;
-    font-size: 17px;
+    font-size: 16pt;
 }
 .square_35px {
   width: 35px;
   min-width: 35px;
   height: 35px;
   min-height: 35px;
-  font-size: 18px;
+  font-size: 18pt;
 }
 .square_36px {
     width: 36px;
     min-width: 36px;
     height: 36px;
     min-height: 36px;
-    font-size: 20px;
+    font-size: 18pt;
 }
 
 .square_40px {
@@ -414,7 +414,7 @@ PARTICLE STYLES
     min-width: 40px;
     height: 40px;
     min-height: 40px;
-    font-size: 22px;
+    font-size: 22pt;
 }
 
 .square_42px {
@@ -422,21 +422,21 @@ PARTICLE STYLES
     min-width: 42px;
     height: 42px;
     min-height: 42px;
-    font-size: 22px;
+    font-size: 24pt;
 }
 .square_45px {
   width: 45px;
   min-width: 45px;
   height: 45px;
   min-height: 45px;
-  font-size: 22px;
+  font-size: 25pt;
 }
 .square_46px {
     width: 46px;
     min-width: 46px;
     height: 46px;
     min-height: 46px;
-    font-size: 23px;
+    font-size: 26pt;
 }
 
 .square_50px {
@@ -444,7 +444,7 @@ PARTICLE STYLES
     min-width: 50px;
     height: 50px;
     min-height: 50px;
-    font-size: 23px;
+    font-size: 28pt;
 }
 
 .square_60px {
@@ -452,5 +452,5 @@ PARTICLE STYLES
     min-width: 60px;
     height:60px;
     min-height: 60px;
-    font-size: 29px;
+    font-size: 30pt;
 }
