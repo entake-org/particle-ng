@@ -98,7 +98,7 @@
 
 /* heading for groups */
 .particle_dropdown_heading {
-  font-size:12px;
+  font-size:14pt;
   font-weight:600;
   opacity:0.8;
   padding: 10px 12px 4px 12px;
@@ -111,7 +111,7 @@
 }
 
 .particle_dropdown_option {
-  font-size:13px;
+  font-size:14pt;
   padding: 7px 12px;
   cursor:pointer;
   border:none;
