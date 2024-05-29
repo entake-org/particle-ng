@@ -376,7 +376,7 @@ PARTICLE STYLES
     min-width: 26px;
     height: 26px;
     min-height: 26px;
-    font-size: 13pt;
+    font-size: 12pt;
 }
 
 .square_28px {
@@ -399,7 +399,7 @@ PARTICLE STYLES
   min-width: 35px;
   height: 35px;
   min-height: 35px;
-  font-size: 16pt;
+  font-size: 15pt;
 }
 .square_36px {
     width: 36px;
@@ -429,7 +429,7 @@ PARTICLE STYLES
   min-width: 45px;
   height: 45px;
   min-height: 45px;
-  font-size: 20pt;
+  font-size: 18pt;
 }
 .square_46px {
     width: 46px;
@@ -452,5 +452,5 @@ PARTICLE STYLES
     min-width: 60px;
     height:60px;
     min-height: 60px;
-    font-size: 30pt;
+    font-size: 28pt;
 }
