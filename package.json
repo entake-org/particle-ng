@@ -1,6 +1,6 @@
 {
   "name": "@entake/particle",
-  "version": "17.0.2",
+  "version": "17.0.3",
   "license": "MIT",
   "description": "Reusable Angular components to use in lieu of Material or PrimeNG",
   "repository": {
