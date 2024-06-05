@@ -100,7 +100,7 @@
           <ng-container *ngFor="let option of options; index as i">
             <!-- OPTION GROUP -->
             <ng-container *ngIf="option.type === 'group' else nonGroupOption">
-              <div class="particle_multiselect_heading ent_r2l_txt" aria-hidden="true">{{option.groupLabel}}</div>
+              <div class="particle_multiselect_heading ptl_input_text_size ent_r2l_txt" aria-hidden="true">{{option.groupLabel}}</div>
               <ng-container *ngFor="let groupOption of option.options; index as j">
                 <button #multiSelectOption
                         (click)="onMultiSelectOptionSelect(groupOption.value, groupOption.disabled!)"
@@ -113,6 +113,7 @@
                         [attr.data-value]="groupOption.value"
                         [attr.data-dialog-close-override]="true"
                         [disabled]="groupOption.disabled || disabled"
+                        class="ptl_input_text_size"
                         type="button"
                         role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox ptl_brdr_radius bg_overlay brdr"
@@ -138,6 +139,7 @@
                         [attr.data-dialog-close-override]="true"
                         [disabled]="option.disabled || disabled"
                         [ngClass]="(!selectionValueMap['' + option.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
+                        class="ptl_input_text_size"
                         role="option" type="button" tabindex="0">
                   <div class="particle_multiselect_checkbox ptl_brdr_radius bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + option.value] ? 'ok_button_color' : 'unselected'"
@@ -157,7 +159,7 @@
           <ng-container *ngFor="let option of options; index as i">
             <!-- OPTION GROUP -->
             <ng-container *ngIf="option.type === 'group' else nonGroupOption">
-              <div class="particle_multiselect_heading ent_r2l_txt" aria-hidden="true">{{option.groupLabel}}</div>
+              <div class="particle_multiselect_heading ptl_input_text_size ent_r2l_txt" aria-hidden="true">{{option.groupLabel}}</div>
               <ng-container *ngFor="let groupOption of option.options; index as j">
                 <button #multiSelectOption
                         (click)="onMultiSelectOptionSelect(groupOption.value, groupOption.disabled!)"
@@ -171,6 +173,7 @@
                         [attr.data-dialog-close-override]="true"
                         [disabled]="groupOption.disabled || disabled"
                         [ngClass]="(!selectionValueMap['' + groupOption.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
+                        class="ptl_input_text_size"
                         type="button" role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox ptl_brdr_radius bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + groupOption.value] ? 'ok_button_color' : 'unselected'"
@@ -195,6 +198,7 @@
                         [attr.data-dialog-close-override]="true"
                         [disabled]="option.disabled || disabled"
                         [ngClass]="(!selectionValueMap['' + option.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
+                        class="ptl_input_text_size"
                         type="button" role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox ptl_brdr_radius bg_overlay brdr"
                        [ngClass]="selectionValueMap['' + option.value] ? 'ok_button_color' : 'unselected'"

@@ -59,7 +59,7 @@
             <ng-container *ngFor="let option of options; index as i">
               <!-- OPTION GROUP -->
               <ng-container *ngIf="option.type === 'group' else nonGroupOption">
-                <div class="particle_dropdown_heading ent_r2l_txt" aria-hidden="true">{{option.groupLabel}}</div>
+                <div class="particle_dropdown_heading ptl_input_text_size ent_r2l_txt" aria-hidden="true">{{option.groupLabel}}</div>
                 <ng-container *ngFor="let groupOption of option.options; index as j">
                   <button #dropdownOption
                           (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled!)"
@@ -73,7 +73,7 @@
                           [attr.data-dialog-close-override]="true"
                           [disabled]="groupOption.disabled"
                           type="button"
-                          class="particle_dropdown_option ent_r2l_txt" role="option" tabindex="0">
+                          class="particle_dropdown_option ptl_input_text_size ent_r2l_txt" role="option" tabindex="0">
                     <ng-container *ngTemplateOutlet="template; context: $any(groupOption.dataContext!)"></ng-container>
                   </button>
                 </ng-container>
@@ -93,7 +93,7 @@
                           [attr.data-dialog-close-override]="true"
                           [disabled]="option.disabled"
                           type="button"
-                          class="particle_dropdown_option ent_r2l_txt" role="option" tabindex="0">
+                          class="particle_dropdown_option ptl_input_text_size ent_r2l_txt" role="option" tabindex="0">
                     <ng-container *ngTemplateOutlet="template; context: $any(option.dataContext!)"></ng-container>
                   </button>
                 </ng-container>
@@ -105,7 +105,7 @@
             <ng-container *ngFor="let option of options; index as i">
               <!-- OPTION GROUP -->
               <ng-container *ngIf="option.type === 'group' else nonGroupOption">
-                <div class="particle_dropdown_heading ent_r2l_txt" aria-hidden="true">{{option.groupLabel}}</div>
+                <div class="particle_dropdown_heading ptl_input_text_size ent_r2l_txt" aria-hidden="true">{{option.groupLabel}}</div>
                 <ng-container *ngFor="let groupOption of option.options; index as j">
                   <button #dropdownOption
                           (click)="onDropdownOptionSelect(groupOption.value, groupOption.disabled!)"
@@ -119,7 +119,7 @@
                           [attr.data-value]="groupOption.value"
                           [attr.data-dialog-close-override]="true"
                           [disabled]="groupOption.disabled"
-                          class="particle_dropdown_option ent_r2l_txt"
+                          class="particle_dropdown_option ptl_input_text_size ent_r2l_txt"
                           type="button"
                           role="option" tabindex="0">
                     {{groupOption.label}}
@@ -140,7 +140,7 @@
                           [attr.data-value]="option.value"
                           [attr.data-dialog-close-override]="true"
                           [disabled]="option.disabled"
-                          class="particle_dropdown_option ent_r2l_txt"
+                          class="particle_dropdown_option ptl_input_text_size ent_r2l_txt"
                           type="button"
                           role="option" tabindex="0">
                     {{option.label}}
