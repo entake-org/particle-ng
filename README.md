@@ -1,4 +1,4 @@
-# Particle NG by SD Solutions
+# Particle NG by Entake
 
 This package offers a small selection of reusable components that are meant to replace usage of other Angular component libraries, like Angular Material and PrimeNG. If you're looking for a themeable alternative that gives you unprecedented control of your Angular components, give Particle a try! If you're interested in contributing or find any bugs, feel free to catch us on GitHub.
 
