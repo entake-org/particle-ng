@@ -1,4 +1,4 @@
-# Particle NG by Entake
+# Particle for Angular by Entake
 
 This package offers a small selection of reusable components that are meant to replace usage of other Angular component libraries, like Angular Material and PrimeNG. If you're looking for a themeable alternative that gives you unprecedented control of your Angular components, give Particle a try! If you're interested in contributing or find any bugs, feel free to catch us on GitHub.
 
@@ -363,34 +363,10 @@ This selector is a parent wrapper of the following selector which contains each 
 - `disabled` whether the accordion item is disabled
 
 ## Usage
-`npm install particle-angular-commons`
+`npm install @entake/particle`
 
 Component listing and usage coming soon.
 
-## Build and Release Instructions
-
-### Package
-
-Run the following:
-
-`npm run package`
-
-`cd dist`
-
-`npm pack`
-
-`cd ..`
-
-### Test
-
-After packaging, you can install a local build for testing with the following:
-
-`npm install ../particle-angular-commons/dist/particle-angular-commons-1.1.1.tgz`
-
-### Release
-
-`npm publish`
-
 ## Further Help
 
-For more help, please reach out to `nick@sdsolutions.io`.
+For more help, please reach out to `nick@entake.io`.

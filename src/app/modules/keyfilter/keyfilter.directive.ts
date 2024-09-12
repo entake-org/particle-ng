@@ -29,13 +29,24 @@ export class KeyfilterDirective {
   ];
 
   /**
+   * Array of keyboard alpha key names
+   * @private
+   */
+  private static readonly URL_TOKEN_KEYS = [
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+    'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+    'u', 'v', 'w', 'x', 'y', 'z', '-', '0', '1', '2',
+    '3', '4', '5', '6', '7', '8', '9'
+  ];
+
+  /**
    * The type of filtering to apply
    */
   @Input('particleKeyfilter')
-  filterType: 'alpha' | 'numeric' | 'alphanumeric' | 'digits' = null as any;
+  filterType: 'alpha' | 'numeric' | 'alphanumeric' | 'digits' | 'url-token' = null as any;
 
   /**
-   * Whether or not to allow spaces (default false)
+   * Whether spaces should be allowed (default false)
    */
   @Input()
   allowSpaces = false;
@@ -46,7 +57,7 @@ export class KeyfilterDirective {
    * @private
    */
   private static keyIsNumeric(key: string): boolean {
-    return new RegExp('^\\d|[\.-]$', 'g').test(key);
+    return new RegExp('^\\d|[.-]$', 'g').test(key);
   }
 
   private static keyIsDigit(key: string): boolean {
@@ -65,6 +76,10 @@ export class KeyfilterDirective {
    */
   private static keyIsAlpha(key: string): boolean {
     return KeyfilterDirective.ALPHA_KEYS.includes(key.toLowerCase());
+  }
+
+  private static keyIsUrlToken(key: string): boolean {
+    return KeyfilterDirective.URL_TOKEN_KEYS.includes(key.toLowerCase());
   }
 
   /**
@@ -93,6 +108,8 @@ export class KeyfilterDirective {
         preventDefault = !event.ctrlKey && !KeyfilterDirective.keyIsNumeric(key);
       } else if (this.filterType === 'digits') {
         preventDefault = !KeyfilterDirective.keyIsDigit(key);
+      } else if (this.filterType === 'url-token') {
+        preventDefault = !KeyfilterDirective.keyIsUrlToken(key);
       } else if (this.filterType === 'alphanumeric') {
         const isNumeric = KeyfilterDirective.keyIsDigit(key);
         const isAlpha = KeyfilterDirective.keyIsAlpha(key);

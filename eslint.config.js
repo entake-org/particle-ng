@@ -30,6 +30,9 @@ module.exports = tseslint.config(
           style: "kebab-case",
         },
       ],
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/array-type": "off",
+      "@typescript-eslint/no-inferrable-types": "off"
     },
   },
   {
