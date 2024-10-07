@@ -27,30 +27,32 @@
   </ng-container>
 </div>
 
-<div [style.visibility]="window.innerWidth <= breakpoint ? 'visible' : 'hidden'"
-     [style.opacity]="window.innerWidth <= breakpoint ? '1' : '0'"
-     [style.top]="rightSidebarCollapsedTabOffset + 'px'"
-     style="z-index: var(--z-frame);"
-     class="particle_scroll_button mar_right10 mar_bot15">
-  <button
-    (click)="slideover.open()"
-    class="access btn pad_10 brad_3 brdr content_color"
-    type="button">
-    <span class="icon slide_left"><i class="fas fa-chevron-left"></i></span>
-  </button>
-</div>
-
-<particle-slideover
-  position="right"
-  [width]="rightSidebarWidth"
-  [breakpoint]="1"
-  #slideover
->
-  <div class="min_h40 header_color">
-
+<ng-container *ngIf="mobileSidebarEnabled && rightSidebarCollapsedTabOffset >= 0">
+  <div [style.visibility]="window.innerWidth <= breakpoint ? 'visible' : 'hidden'"
+       [style.opacity]="window.innerWidth <= breakpoint ? '1' : '0'"
+       [style.top]="rightSidebarCollapsedTabOffset + 'px'"
+       style="z-index: var(--z-frame);"
+       class="particle_scroll_button mar_right10 mar_bot15">
+    <button
+      (click)="slideover.open()"
+      class="access btn pad_10 brad_3 brdr content_color"
+      type="button">
+      <span class="icon slide_left"><i class="fas fa-chevron-left"></i></span>
+    </button>
   </div>
-  <div class="particle_layout_sidebar height100"
-       [ngClass]="rightSidebarContainerClassList + ' ' + collapsedClassList">
-    <ng-template [ngTemplateOutlet]="rightSidebar"></ng-template>
-  </div>
-</particle-slideover>
+
+  <particle-slideover
+    position="right"
+    [width]="rightSidebarWidth"
+    [breakpoint]="1"
+    #slideover
+  >
+    <div class="min_h40 header_color">
+
+    </div>
+    <div class="particle_layout_sidebar height100"
+         [ngClass]="rightSidebarContainerClassList + ' ' + collapsedClassList">
+      <ng-template [ngTemplateOutlet]="rightSidebar"></ng-template>
+    </div>
+  </particle-slideover>
+</ng-container>

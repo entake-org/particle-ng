@@ -1,11 +1,11 @@
 {
   "name": "@entake/particle",
-  "version": "18.0.2",
+  "version": "18.0.3",
   "license": "MIT",
-  "description": "Reusable Angular components to use in lieu of Material or PrimeNG",
+  "description": "Reusable Angular components from the team at Entake",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sdsolutionsio/particle-ng"
+    "url": "git+https://github.com/entake-org/particle-ng"
   },
   "keywords": [
     "angular",
@@ -15,9 +15,9 @@
   ],
   "author": "nick@entake.io",
   "bugs": {
-    "url": "https://github.com/sdsolutionsio/particle-ng/issues"
+    "url": "https://github.com/entake-org/particle-ng/issues"
   },
-  "homepage": "https://github.com/sdsolutionsio/particle-ng#readme",
+  "homepage": "https://github.com/entake-org/particle-ng#readme",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

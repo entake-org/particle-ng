@@ -11,7 +11,7 @@ import {Component, Input} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Notification } from './models/notification.model';
 import { NotificationService } from './services/notification.service';
-import {NotificationText, SlideoverText} from '../../shared/models/particle-component-text.model';
+import {NotificationText} from '../../shared/models/particle-component-text.model';
 
 /**
  * Component for displaying notifications

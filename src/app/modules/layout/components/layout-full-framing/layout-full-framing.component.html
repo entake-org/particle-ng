@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<ng-container *ngIf="rightSidebarCollapsedTabOffset >= 0">
+<ng-container *ngIf="mobileSidebarEnabled && rightSidebarCollapsedTabOffset >= 0">
   <div [style.visibility]="window.innerWidth <= breakpoint ? 'visible' : 'hidden'"
        [style.opacity]="window.innerWidth <= breakpoint ? '1' : '0'"
        [style.top]="rightSidebarCollapsedTabOffset + 'px'"
@@ -40,19 +40,19 @@
       <span class="icon slide_left"><i class="fas fa-chevron-left"></i></span>
     </button>
   </div>
+
+  <particle-slideover
+    position="right"
+    [width]="rightSidebarWidth"
+    [breakpoint]="1"
+    #slideover
+  >
+    <div class="min_h40 header_color">
+
+    </div>
+    <div class="particle_layout_sidebar height100"
+         [ngClass]="rightSidebarContainerClassList + ' ' + collapsedClassList">
+      <ng-template [ngTemplateOutlet]="rightSidebar"></ng-template>
+    </div>
+  </particle-slideover>
 </ng-container>
-
-<particle-slideover
-  position="right"
-  [width]="rightSidebarWidth"
-  [breakpoint]="1"
-  #slideover
->
-  <div class="min_h40 header_color">
-
-  </div>
-  <div class="particle_layout_sidebar height100"
-       [ngClass]="rightSidebarContainerClassList + ' ' + collapsedClassList">
-    <ng-template [ngTemplateOutlet]="rightSidebar"></ng-template>
-  </div>
-</particle-slideover>

@@ -40,12 +40,15 @@ export class LayoutFullwidthSidebarComponent {
   @Input()
   collapsedClassList = '';
 
+  @Input()
+  mobileSidebarEnabled = true;
+
   @ViewChild('slideover')
   slideover: SlideoverComponent = null as any;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
-    if (event.target.innerWidth > 768 && this.slideover.slideoverOpen) {
+    if (this.mobileSidebarEnabled && event.target.innerWidth > 768 && this.slideover.slideoverOpen) {
       this.slideover.close();
     }
   }
@@ -58,7 +61,5 @@ export class LayoutFullwidthSidebarComponent {
 
     return `calc(100vh - ${offset}px)`;
   }
-
-  constructor() { }
 
 }
