@@ -48,7 +48,7 @@ export class LayoutFullwidthSidebarComponent {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
-    if (this.mobileSidebarEnabled && event.target.innerWidth > 768 && this.slideover.slideoverOpen) {
+    if (this.mobileSidebarEnabled && event.target.innerWidth > 768 && this.slideover && this.slideover.slideoverOpen) {
       this.slideover.close();
     }
   }

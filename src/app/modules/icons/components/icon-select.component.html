@@ -142,7 +142,7 @@
                     <div class="circle_16px bg_overlay_rev brdr mar_right10">
                       <div *ngIf="filter.type === 'particle' && filter.style === 'solid'" class="circle_8px ok_button_color"></div>
                     </div>
-                    <div class="text md">Solid</div>
+                    <div class="text md">{{text.solid}}</div>
                   </div>
                   <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
                 </button>
@@ -156,21 +156,21 @@
                     <div class="circle_16px bg_overlay_rev brdr mar_right10">
                       <div *ngIf="filter.type === 'particle' && filter.style === 'regular'" class="circle_8px ok_button_color"></div>
                     </div>
-                    <div class="text md">Regular</div>
+                    <div class="text md">{{text.regular}}</div>
                   </div>
                   <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
                 </button>
               </div>
               <div class="mar_5">
-                <button (click)="handleFilterSelect({ style: 'light', type: 'particle' })"
-                        [ngClass]="{ 'selected': filter.type === 'particle' && filter.style === 'light' }"
+                <button (click)="handleFilterSelect({ style: 'brands', type: 'particle' })"
+                        [ngClass]="{ 'selected': filter.type === 'particle' && filter.style === 'brands' }"
                         class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
-                        [attr.aria-label]="text.filterBy + ' ' + text.light + ' ' + text.customIcons">
+                        [attr.aria-label]="text.filterBy + ' ' + text.brands + ' ' + text.customIcons">
                   <div class="v_center">
                     <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                      <div *ngIf="filter.type === 'particle' && filter.style === 'light'" class="circle_8px ok_button_color"></div>
+                      <div *ngIf="filter.type === 'particle' && filter.style === 'brands'" class="circle_8px ok_button_color"></div>
                     </div>
-                    <div class="text md">{{text.light}}</div>
+                    <div class="text md">{{text.brands}}</div>
                   </div>
                   <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
                 </button>

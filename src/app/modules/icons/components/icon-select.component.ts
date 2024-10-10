@@ -83,7 +83,6 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
     solid: 'Solid',
     regular: 'Regular',
     brands: 'Brands',
-    light: 'Light',
     customIcons: 'Custom Icons',
     previousPage: 'Previous Page',
     nextPage: 'Next Page',
@@ -131,7 +130,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * BehaviorSubject tracking the current filter value selection for icons
    */
   readonly _filter = new BehaviorSubject< {
-    style: 'all' | 'solid' | 'regular' | 'light' | 'brands',
+    style: 'all' | 'solid' | 'regular' | 'brands',
     type: 'all' | 'particle' | 'fontawesome'
   }>({ style: 'all', type: 'all' });
 
@@ -365,7 +364,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * @param filter the selected filter
    */
   handleFilterSelect(
-    filter: { style: 'all' | 'solid' | 'regular' | 'light' | 'brands',
+    filter: { style: 'all' | 'solid' | 'regular' | 'brands',
     type: 'all' | 'particle' | 'fontawesome' }
   ): void {
     this._filter.next(filter);

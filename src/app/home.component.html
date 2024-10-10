@@ -8,7 +8,7 @@
     [rightSidebar]="sidebar"
     rightSidebarContainerClassList="row column scroll_yauto content_color ptl_brdr_color border_left"
     rightSidebarWidth="200px"
-    [rightSidebarCollapsedTabOffset]="-100"
+    [mobileSidebarEnabled]="false"
     [footer]="footer"
     footerHeight="0"
   >
@@ -445,8 +445,10 @@
                 class="access btn sm bg_overlay brdr bg_purple_alt mar_5">
           Show Info
         </button>
+        <particle-icon-select #iconSelect></particle-icon-select>
       </div>
     </ng-template>
     <ng-template #footer></ng-template>
   </particle-layout-full-framing>
 </ng-container>
+

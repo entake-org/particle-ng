@@ -14,7 +14,7 @@ export class TooltipDirective implements OnDestroy {
    * The number of pixels from the host to offset the tooltip
    * @private
    */
-  private readonly TOOLTIP_OFFSET = 10;
+  private readonly TOOLTIP_OFFSET = 15;
 
   /**
    * Tooltip text input

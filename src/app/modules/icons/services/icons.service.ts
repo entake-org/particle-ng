@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { FontawesomeIconsBrands } from '../models/fontawesome-icons-brands.model';
 import { FontawesomeIconsRegular } from '../models/fontawesome-icons-regular.model';
 import { FontawesomeIconsSolid } from '../models/fontawesome-icons-solid.model';
-import { ParticleIconsLight } from '../models/particle-icons-light.model';
+import { ParticleIconsBrand } from '../models/particle-icons-brands.model';
 import { ParticleIconsRegular } from '../models/particle-icons-regular.model';
 import { ParticleIconsSolid } from '../models/particle-icons-solid.model';
 
 /**
  * Type representing the available Particle icon filter options
  */
-declare type ParticleIconFilterOption = 'all' | 'solid' | 'regular' | 'light';
+declare type ParticleIconFilterOption = 'all' | 'solid' | 'regular' | 'brands';
 
 /**
  * Type representing the available Fontawesome icon filter options
@@ -61,17 +61,12 @@ export class IconsService {
       icons.push(...ParticleIconsRegular.icons.map(icon => ({ prefix: icon.prefix, name: `fa-${icon.iconName}` })));
     }
 
-    if (filter === 'all' || filter === 'light') {
-      icons.push(...ParticleIconsLight.icons.map(icon => ({ prefix: icon.prefix, name: `fa-${icon.iconName}` })));
+    if (filter === 'all' || filter === 'brands') {
+      icons.push(...ParticleIconsBrand.icons.map(icon => ({ prefix: icon.prefix, name: `fa-${icon.iconName}` })));
     }
 
     return icons;
   }
-
-  /**
-   * Constructor
-   */
-  constructor() { }
 
   /**
    * Get a list of icons (as strings) containing both Particle icons

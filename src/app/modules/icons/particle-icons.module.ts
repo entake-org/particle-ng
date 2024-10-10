@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ParticleTooltipModule} from '../tooltip/tooltip.module';
 import {ParticleIconsRegular} from './models/particle-icons-regular.model';
-import {ParticleIconsLight} from './models/particle-icons-light.model';
+import {ParticleIconsBrand} from './models/particle-icons-brands.model';
 import {ParticleIconsSolid} from './models/particle-icons-solid.model';
 import {IconSelectComponent} from './components/icon-select.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -39,7 +39,7 @@ export class ParticleIconsModule {
       return;
     }
 
-    for (const icon of ParticleIconsLight.icons) {
+    for (const icon of ParticleIconsBrand.icons) {
       FontAwesome.library.add(icon);
     }
 
