@@ -207,7 +207,10 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
         break;
       case 'save':
         if (this.dialogType === 'link') {
-          this.editor.chain().focus().extendMarkRange('link').setLink({ href: this.dialogLink, target: '_blank' }).run();
+          this.editor.chain().focus().extendMarkRange('link').setLink({
+            href: this.dialogLink,
+            target: this.dialogLink && !this.dialogLink.startsWith('/') ? '_blank' : '_self'
+          }).run();
         } else if (this.dialogType === 'image') {
           this.editor.chain().focus().setImage({ src: this.dialogLink }).run()
         }
