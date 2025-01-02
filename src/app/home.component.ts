@@ -1,11 +1,26 @@
-import { Component } from '@angular/core';
-import {ThemingService} from './modules/theming/services/theming.service';
-import {NotificationService} from './modules/notification/services/notification.service';
-import {Notification} from './modules/notification/models/notification.model';
+import {Component} from '@angular/core';
+
+import { AsyncPipe } from '@angular/common';
+import {LayoutFullFramingComponent} from './shared/components/layout-full-framing/layout-full-framing.component';
+import {DatePickerComponent} from './shared/components/date-picker/date-picker.component';
+import {FormsModule} from '@angular/forms';
+import {WeekPickerComponent} from './shared/components/week-picker/week-picker.component';
+import {DateRangePickerComponent} from './shared/components/date-range-picker/date-range-picker.component';
+import {DropdownComponent} from './shared/components/dropdown/dropdown.component';
+import {MultiSelectComponent} from './shared/components/multi-select/multi-select.component';
+import {SliderComponent} from './shared/components/slider/slider.component';
+import {RenderRichTextComponent} from './shared/components/render-rich-text/render-rich-text.component';
+import {PaginatorComponent} from './shared/components/paginator/paginator.component';
+import {IconSelectComponent} from './shared/components/icon-select/icon-select.component';
+import {ThemingService} from './shared/services/theming.service';
+import {NotificationService} from './shared/services/notification.service';
+import {Notification} from './shared/models/notification.model';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html'
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    standalone: true,
+    imports: [LayoutFullFramingComponent, DatePickerComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, RenderRichTextComponent, PaginatorComponent, IconSelectComponent, AsyncPipe]
 })
 export class HomeComponent {
 

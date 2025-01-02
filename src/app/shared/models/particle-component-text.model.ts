@@ -3,17 +3,6 @@ export interface AccordionText {
   collapse: string;
 }
 
-export interface ButtonText {
-  ok: string;
-  save: string;
-  cancel: string;
-  delete: string;
-  next: string;
-  previous: string;
-  open: string;
-  close: string;
-}
-
 export interface CalendarText {
   selectAYear: string;
   selectAMonth: string;
@@ -86,17 +75,6 @@ export interface DropdownText {
   placeholder: string;
 }
 
-export interface EndpointStateText {
-  loadingText?: string;
-  loadingSubtext?: string;
-  loadingOverlayText?: string;
-  loadingOverlaySubtext?: string;
-  emptyText?: string;
-  emptySubtext?: string;
-  errorText?: string;
-  errorSubtext?: string;
-}
-
 export interface IconSelectText {
   selectAnIcon: string;
   seeAllIcons: string;
@@ -156,11 +134,6 @@ export interface PaginatorText {
   outOf: string;
   of: string;
   results: string;
-}
-
-export interface PushContainerText {
-  close: string;
-  expand: string;
 }
 
 export interface RichTextEditorText {

@@ -1,0 +1,35 @@
+@for (item of items; track item; let i = $index) {
+  <div class="particle_accordion_item" [class.disabled]="item.disabled" [class.active]="expanded.has(i)">
+    <button type="button" class="particle_accordion_header width100"
+      [ngClass]="(item.headerClass ? item.headerClass : headerClass) + (!item.disabled ? ' access' : '')"
+      [style.height]="height"
+      (click)="!item.disabled ? toggleState(i) : {}"
+      [attr.aria-label]="!expanded.has(i) ? text.expand : text.collapse"
+      >
+      @if (item.headerTemplate) {
+        <ng-container *ngTemplateOutlet="item.headerTemplate.templateRef"></ng-container>
+      }
+      @if (!item.headerTemplate) {
+        @if (showIcon) {
+          <div class="text" [ngClass]="textClass">
+            @if (!expanded.has(i)) {
+              <span><i [ngClass]="iconCollapsed + ' fa-fw'"></i></span>
+            }
+            @if (expanded.has(i)) {
+              <span><i [ngClass]="iconExpanded + ' fa-fw'"></i></span>
+            }
+            {{item?.header}}
+          </div>
+        }
+        @if (!showIcon) {
+          <div class="text" [ngClass]="textClass">
+            <span>{{item?.header}}</span>
+          </div>
+        }
+      }
+    </button>
+    <div class="particle_accordion_content" #ref>
+      <ng-container *ngTemplateOutlet="$any(item?.content?.templateRef)"></ng-container>
+    </div>
+  </div>
+}

@@ -1,0 +1,38 @@
+@if (render) {
+  <div [style.filter]="_disabled ? 'brightness(.95)' : ''"
+    class="cp_container"
+    [ngClass]="classList ? classList : 'input md bg_overlay brdr content_color'"
+    >
+    @if (colorPickerSupported) {
+      <input #colorPicker
+        type="color"
+        class="access cp_color"
+        [value]="'#' + _value"
+        [disabled]="_disabled"
+        [attr.aria-label]="text.chooseColor"
+        (input)="updateModel(colorPicker.value)"
+        (change)="updateModel(colorPicker.value); colorSelected.emit(colorPicker.value)"/>
+        <i class="fas fa-caret-down cp_caret"></i>
+      } @else {
+        <div class="cp_swatch">
+          <div class="width100 height100 bg_overlay brdr" style="border-radius:inherit;"
+          [style.background-color]="'#' + (_value || '000000')"></div>
+        </div>
+      }
+      <div class="bg_overlay brdr vr cp_divider"></div>
+      <div class="cp_hashtag">#</div>
+      <input #colorInput
+        type="text"
+        class="access cp_input"
+        placeholder="000000"
+        maxlength="6"
+        [attr.aria-label]="text.enterHexCode"
+        [ngModel]="_value"
+        [disabled]="_disabled"
+        (input)="input.emit(colorInput.value)"
+        (paste)="handlePaste($event)"
+        (keydown)="handleKeyDown($event)"
+        (ngModelChange)="updateModel($event, true)"
+        (blur)="handleBlur(colorInput.value)"/>
+      </div>
+    }

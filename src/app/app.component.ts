@@ -1,14 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {ThemingService} from './modules/theming/services/theming.service';
-import {Theme} from './modules/theming/models/theme.model';
+import {Theme} from './shared/models/theme.model';
+import {ThemingService} from './shared/services/theming.service';
+import {RouterOutlet} from '@angular/router';
+import {ScrollToTopComponent} from './shared/components/scroll-to-top/scroll-to-top.component';
+import {NotificationComponent} from './shared/components/notification/notification.component';
 
 /**
  * App Component to test out stuff built here. Not useful for anything else. Should not be exported by this package.
  */
 @Component({
-  selector: 'particle-app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'particle-app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: true,
+  imports: [RouterOutlet, ScrollToTopComponent, NotificationComponent]
 })
 export class AppComponent implements OnInit {
   themes: Array<Theme> = [

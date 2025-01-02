@@ -4,7 +4,9 @@ import {Injectable} from '@angular/core';
  * Wrapper around interactions with Local Storage. Handles serializing things to JSON to make it easier to push more complex data into
  * local storage.
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LocalStorageService {
 
   /**
@@ -15,7 +17,7 @@ export class LocalStorageService {
   getObject<T>(key: string): T | null {
     const obj: any = localStorage.getItem(key);
     if (obj) {
-      return <T> JSON.parse(obj);
+      return JSON.parse(obj) as T;
     }
 
     return null;

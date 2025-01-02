@@ -1,0 +1,14 @@
+@if (render) {
+  <div class="particle_popover_overlay" [style.scale]="window.innerWidth > 768 ? 1 : scaleForMobile">
+    <div [cdkTrapFocus]="render && visible"
+      [cdkTrapFocusAutoCapture]="true"
+      [@openClose]="visible ? 'open' : 'close'"
+      [ngStyle]="{ 'width': width, 'height': height }"
+      [ngClass]="classList"
+      (@openClose.start)="onAnimationStart($event)"
+      (@openClose.done)="onAnimationDone($event)"
+      class="position_absolute particle_popover">
+      <ng-content></ng-content>
+    </div>
+  </div>
+}

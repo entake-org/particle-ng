@@ -1,0 +1,17 @@
+<div class="row column center_center height100" style="max-width: 250px;">
+  <div class="ptl_loader">
+    <div class="ptl_loader__progress" [style.background]="backgroundStyle ?? ''"></div>
+  </div>
+  @if (!disableText) {
+    @if (text.loadingText) {
+      <div class="text md bold text_center mar_top15 ent_r2l_txt" style="user-select: none;text-align: center !important;">
+        {{text.loadingText}}<span class="one">.</span><span class="two">.</span><span class="three">.</span>
+      </div>
+    }
+    @if (text.loadingSubtext) {
+      <div class="text sm text_center mar_top5 ent_r2l_txt" style="user-select: none;text-align: center !important;">
+        {{text.loadingSubtext}}
+      </div>
+    }
+  }
+</div>

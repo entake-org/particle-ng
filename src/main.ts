@@ -1,12 +1,26 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import {enableProdMode, importProvidersFrom} from '@angular/core';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+import {environment} from './environments/environment';
+import {AppComponent} from './app/app.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {bootstrapApplication, BrowserModule} from '@angular/platform-browser';
+import {HomeComponent} from './app/home.component';
+import {provideRouter, Routes} from '@angular/router';
+import {provideAnimations} from '@angular/platform-browser/animations';
+import {ParticleIconsModule} from './app/shared/modules/icons/particle-icons.module';
+
+const routes: Routes = [
+  {path: '', component: HomeComponent}
+];
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.log(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(BrowserModule, FormsModule, ReactiveFormsModule, ParticleIconsModule),
+    provideRouter(routes),
+    provideAnimations()
+  ]
+}).catch(err => console.log(err));

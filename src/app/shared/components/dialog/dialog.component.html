@@ -1,0 +1,44 @@
+<div [ngClass]="{'particle_dialog_overlay' : object}">
+  @if (object) {
+    <div
+      [@dialog] class="particle_dialog_container"
+      (@dialog.done)="onAnimationDone($event)"
+      [cdkTrapFocus]="true"
+      [cdkTrapFocusAutoCapture]="true">
+      @if (effectiveWidth$ | async; as effectiveWidth) {
+        <div class="col shadow particle_dialog_box" [style.border-radius]="borderRadius"
+          [ngStyle]="{'width': effectiveWidth, 'height': height}">
+          <!-- dialog header -->
+          @if (showTitle) {
+            <div class="col" [ngClass]="titleClass">
+              <div class="row v_center pad_5 space_between">
+                <div class="text lg bold paragraph">
+                  {{title}}
+                </div>
+                <div>
+                  @if (allowClose) {
+                    <button class="access btnset clear"
+                      [attr.aria-label]="text.close"
+                      (click)="close()">
+                      <div class="circle_20px ptl_brdr_color ptl_brdr_size ptl_input_bg_color">
+                        <i class="fas fa-times"></i>
+                      </div>
+                    </button>
+                  }
+                </div>
+              </div>
+            </div>
+          }
+          <!-- dialog container -->
+          <div class="row scroll_yauto center_center" [ngClass]="bodyClass">
+            <div class="row_block width100 height100">
+              <!-- content -->
+              <ng-content></ng-content>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
+

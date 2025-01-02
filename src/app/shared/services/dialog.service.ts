@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {DialogComponent} from '../../modules/dialog/dialog.component';
+import {DialogComponent} from '../components/dialog/dialog.component';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,5 @@
-import {catchError, map} from 'rxjs';
+import {catchError, map, Observable, of, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
-import {Observable, of, throwError} from 'rxjs';
 
 /**
  * This class provides some foundational REST endpoint call capabilities. It will do things like unpack lists into native objects and
@@ -64,7 +63,7 @@ export class BaseDataService {
   handleGetList(url: string): Observable<any> {
     return this.handleGet(url).pipe(
       map(d => d.data),
-      catchError(error => this.handleError(error, this.ignoreNoResultsError()))
+      catchError(error => this.handleError(error, this.ignoreNoResultsError(), []))
     );
   }
 
@@ -198,9 +197,9 @@ export class BaseDataService {
    * @param error
    * @param ignoreNoResultsError
    */
-  handleError(error: HttpErrorResponse, ignoreNoResultsError: boolean): Observable<any> {
+  handleError(error: HttpErrorResponse, ignoreNoResultsError: boolean, noResultsResponse?: any): Observable<any> {
     if (ignoreNoResultsError && error.status === 404) {
-      return of({});
+      return of(noResultsResponse ?? {});
     }
 
     console.error(error);
