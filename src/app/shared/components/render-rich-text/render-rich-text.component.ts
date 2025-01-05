@@ -1,21 +1,16 @@
-import {Component, Input} from '@angular/core';
-import {DOMPURIFY_CONFIG, NgDompurifyModule} from '@tinkoff/ng-dompurify';
-
-export const DOM_PURIFY_PROVIDER = {
-  provide: DOMPURIFY_CONFIG,
-  useValue: {ADD_ATTR: ['target']}
-};
+import {Component, Input, SecurityContext} from '@angular/core';
+import {NgDompurifyPipe} from '@taiga-ui/dompurify';
 
 @Component({
     selector: 'particle-render-rich-text',
-    template: `<div class="ent_r2l_txt" [innerHTML]="html | dompurify"></div>`,
+    template: `<div class="ent_r2l_txt" [innerHTML]="html | dompurify: SecurityContext.HTML:{ADD_ATTR: ['target']}"></div>`,
     standalone: true,
-    imports: [NgDompurifyModule],
-    providers: [DOM_PURIFY_PROVIDER]
+    imports: [NgDompurifyPipe]
 })
 export class RenderRichTextComponent {
 
   @Input()
   html = '';
 
+  protected readonly SecurityContext = SecurityContext;
 }

@@ -6,12 +6,12 @@
                      'height': buttonSizing,
                      'min-height': buttonSizing
                    }"
-  (click)="openDialog()"
-  [particleTooltip]="(_internalValue | async)?.prefix + ' ' + (_internalValue | async)?.name"
-  [tooltipDisabled]="(_internalValue | async) === undefined"
-  [disabled]="disabled"
-  class="btnset access wis_button bg_overlay brdr brad_3"
-  [attr.aria-label]="text.selectAnIcon">
+        (click)="openDialog()"
+        [particleTooltip]="(_internalValue | async)?.prefix + ' ' + (_internalValue | async)?.name"
+        [tooltipDisabled]="(_internalValue | async) === null"
+        [disabled]="disabled"
+        class="btnset access wis_button bg_overlay brdr brad_3"
+        [attr.aria-label]="text.selectAnIcon">
   @if (!showDialog) {
     @if (_internalValue | async; as selectedIcon) {
       <div>
@@ -29,10 +29,10 @@
 
 <!-- picker dialog -->
 <particle-dialog [title]="text.selectAnIcon"
-  [object]="showDialog"
-  [width]="'850px'"
-  [height]="'500px'"
-  (closed)="closeDialog()">
+                 [object]="showDialog"
+                 [width]="'850px'"
+                 [height]="'500px'"
+                 (closed)="closeDialog()">
   <div class="row height100">
 
     <!-- FILTERS -->
@@ -42,16 +42,16 @@
           <!-- all icons -->
           <div class="mar_5 pad_5">
             <button (click)="handleFilterSelect({ style: 'all', type: 'all' })"
-              [ngClass]="{ 'selected': filter.type === 'all' && filter.style === 'all' }"
-              class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
-              [attr.aria-label]="text.seeAllIcons">
+                    [ngClass]="{ 'selected': filter.type === 'all' && filter.style === 'all' }"
+                    class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
+                    [attr.aria-label]="text.seeAllIcons">
               <div class="v_center">
                 <div class="circle_16px bg_overlay_rev brdr mar_right10">
                   @if (filter.type === 'all' && filter.style === 'all') {
                     <div class="circle_8px ok_button_color"></div>
                   }
                 </div>
-                <div class="text md">{{text.seeAllIcons}}</div>
+                <div class="text md">{{ text.seeAllIcons }}</div>
               </div>
               <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
             </button>
@@ -59,67 +59,67 @@
           <div class="bg_overlay brdr hr mar_10"></div>
           <!-- fontawesome icons -->
           <div class="mar_5">
-            <div class="text md bolder" style="padding:10px 10px 5px 15px;">{{text.fontAwesomeIcons}}</div>
+            <div class="text md bolder" style="padding:10px 10px 5px 15px;">{{ text.fontAwesomeIcons }}</div>
             <div class="mar_5">
               <button (click)="handleFilterSelect({ style: 'all', type: 'fontawesome' })"
-                [ngClass]="{ 'selected': filter.type === 'fontawesome' && filter.style === 'all' }"
-                class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
-                [attr.aria-label]="text.filterBy + ' ' + text.fontAwesomeIcons">
+                      [ngClass]="{ 'selected': filter.type === 'fontawesome' && filter.style === 'all' }"
+                      class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
+                      [attr.aria-label]="text.filterBy + ' ' + text.fontAwesomeIcons">
                 <div class="v_center">
                   <div class="circle_16px bg_overlay_rev brdr mar_right10">
                     @if (filter.type === 'fontawesome' && filter.style === 'all') {
                       <div class="circle_8px ok_button_color"></div>
                     }
                   </div>
-                  <div class="text md">{{text.all}}</div>
+                  <div class="text md">{{ text.all }}</div>
                 </div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
             </div>
             <div class="mar_5">
               <button (click)="handleFilterSelect({ style: 'solid', type: 'fontawesome' })"
-                [ngClass]="{ 'selected': filter.type === 'fontawesome' &&  filter.style === 'solid' }"
-                class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
-                [attr.aria-label]="text.filterBy + ' ' + text.solid + ' ' + text.fontAwesomeIcons">
+                      [ngClass]="{ 'selected': filter.type === 'fontawesome' &&  filter.style === 'solid' }"
+                      class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
+                      [attr.aria-label]="text.filterBy + ' ' + text.solid + ' ' + text.fontAwesomeIcons">
                 <div class="v_center">
                   <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                    @if (filter.type === 'fontawesome' &&  filter.style === 'solid') {
+                    @if (filter.type === 'fontawesome' && filter.style === 'solid') {
                       <div class="circle_8px ok_button_color"></div>
                     }
                   </div>
-                  <div class="text md">{{text.solid}}</div>
+                  <div class="text md">{{ text.solid }}</div>
                 </div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
             </div>
             <div class="mar_5">
               <button (click)="handleFilterSelect({ style: 'regular', type: 'fontawesome' })"
-                [ngClass]="{ 'selected': filter.type === 'fontawesome' &&  filter.style === 'regular' }"
-                class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
-                [attr.aria-label]="text.filterBy + ' ' + text.regular + ' ' + text.fontAwesomeIcons">
+                      [ngClass]="{ 'selected': filter.type === 'fontawesome' &&  filter.style === 'regular' }"
+                      class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
+                      [attr.aria-label]="text.filterBy + ' ' + text.regular + ' ' + text.fontAwesomeIcons">
                 <div class="v_center">
                   <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                    @if (filter.type === 'fontawesome' &&  filter.style === 'regular') {
+                    @if (filter.type === 'fontawesome' && filter.style === 'regular') {
                       <div class="circle_8px ok_button_color"></div>
                     }
                   </div>
-                  <div class="text md">{{text.regular}}</div>
+                  <div class="text md">{{ text.regular }}</div>
                 </div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
             </div>
             <div class="mar_5">
               <button (click)="handleFilterSelect({ style: 'brands', type: 'fontawesome' })"
-                [ngClass]="{ 'selected': filter.type === 'fontawesome' &&  filter.style === 'brands' }"
-                class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
-                [attr.aria-label]="text.filterBy + ' ' + text.brands + ' ' + text.fontAwesomeIcons">
+                      [ngClass]="{ 'selected': filter.type === 'fontawesome' &&  filter.style === 'brands' }"
+                      class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
+                      [attr.aria-label]="text.filterBy + ' ' + text.brands + ' ' + text.fontAwesomeIcons">
                 <div class="v_center">
                   <div class="circle_16px bg_overlay_rev brdr mar_right10">
-                    @if (filter.type === 'fontawesome' &&  filter.style === 'brands') {
+                    @if (filter.type === 'fontawesome' && filter.style === 'brands') {
                       <div class="circle_8px ok_button_color"></div>
                     }
                   </div>
-                  <div class="text md">{{text.brands}}</div>
+                  <div class="text md">{{ text.brands }}</div>
                 </div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
@@ -128,12 +128,12 @@
           <div class="bg_overlay brdr hr mar_10"></div>
           <!-- custom icons -->
           <div class="mar_5">
-            <div class="text md bolder" style="padding:10px 10px 5px 15px;">{{text.customIcons}}</div>
+            <div class="text md bolder" style="padding:10px 10px 5px 15px;">{{ text.customIcons }}</div>
             <div class="mar_5">
               <button (click)="handleFilterSelect({ style: 'all', type: 'particle' })"
-                [ngClass]="{ 'selected': filter.type === 'particle' && filter.style === 'all' }"
-                class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
-                [attr.aria-label]="text.filterBy + ' ' + text.customIcons">
+                      [ngClass]="{ 'selected': filter.type === 'particle' && filter.style === 'all' }"
+                      class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
+                      [attr.aria-label]="text.filterBy + ' ' + text.customIcons">
                 <div class="v_center">
                   <div class="circle_16px bg_overlay_rev brdr mar_right10">
                     @if (filter.type === 'particle' && filter.style === 'all') {
@@ -147,48 +147,48 @@
             </div>
             <div class="mar_5">
               <button (click)="handleFilterSelect({ style: 'solid', type: 'particle' })"
-                [ngClass]="{ 'selected': filter.type === 'particle' && filter.style === 'solid' }"
-                class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
-                [attr.aria-label]="text.filterBy + ' ' + text.solid + ' ' + text.customIcons">
+                      [ngClass]="{ 'selected': filter.type === 'particle' && filter.style === 'solid' }"
+                      class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
+                      [attr.aria-label]="text.filterBy + ' ' + text.solid + ' ' + text.customIcons">
                 <div class="v_center">
                   <div class="circle_16px bg_overlay_rev brdr mar_right10">
                     @if (filter.type === 'particle' && filter.style === 'solid') {
                       <div class="circle_8px ok_button_color"></div>
                     }
                   </div>
-                  <div class="text md">{{text.solid}}</div>
+                  <div class="text md">{{ text.solid }}</div>
                 </div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
             </div>
             <div class="mar_5">
               <button (click)="handleFilterSelect({ style: 'regular', type: 'particle' })"
-                [ngClass]="{ 'selected': filter.type === 'particle' && filter.style === 'regular' }"
-                class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
-                [attr.aria-label]="text.filterBy + ' ' + text.regular + ' ' + text.customIcons">
+                      [ngClass]="{ 'selected': filter.type === 'particle' && filter.style === 'regular' }"
+                      class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
+                      [attr.aria-label]="text.filterBy + ' ' + text.regular + ' ' + text.customIcons">
                 <div class="v_center">
                   <div class="circle_16px bg_overlay_rev brdr mar_right10">
                     @if (filter.type === 'particle' && filter.style === 'regular') {
                       <div class="circle_8px ok_button_color"></div>
                     }
                   </div>
-                  <div class="text md">{{text.regular}}</div>
+                  <div class="text md">{{ text.regular }}</div>
                 </div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
             </div>
             <div class="mar_5">
               <button (click)="handleFilterSelect({ style: 'brands', type: 'particle' })"
-                [ngClass]="{ 'selected': filter.type === 'particle' && filter.style === 'brands' }"
-                class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
-                [attr.aria-label]="text.filterBy + ' ' + text.brands + ' ' + text.customIcons">
+                      [ngClass]="{ 'selected': filter.type === 'particle' && filter.style === 'brands' }"
+                      class="access list_btn row space_between wis_filter_btn bg_overlay_rev brdr"
+                      [attr.aria-label]="text.filterBy + ' ' + text.brands + ' ' + text.customIcons">
                 <div class="v_center">
                   <div class="circle_16px bg_overlay_rev brdr mar_right10">
                     @if (filter.type === 'particle' && filter.style === 'brands') {
                       <div class="circle_8px ok_button_color"></div>
                     }
                   </div>
-                  <div class="text md">{{text.brands}}</div>
+                  <div class="text md">{{ text.brands }}</div>
                 </div>
                 <div class="go_icon"><i class="fas fa-chevron-right fa-fw fa-sm opacity_60"></i></div>
               </button>
@@ -214,14 +214,14 @@
               </button>
             } @else {
               <button disabled class="access btn square_24px bg_overlay brdr ok_button_color"
-                [attr.aria-label]="text.previousPage">
+                      [attr.aria-label]="text.previousPage">
                 <span class="icon slide_left"><i class="fas fa-arrow-left"></i></span>
               </button>
             }
             <div
               class="text sm bolder center"
               style="min-width:65px;">
-              {{(_activePage | async)! + 1}} / {{totalPages}}
+              {{ (_activePage | async)! + 1 }} / {{ totalPages }}
             </div>
             @if (canPaginateNext$ | async) {
               <button
@@ -232,7 +232,7 @@
               </button>
             } @else {
               <button disabled class="access btn square_24px bg_overlay brdr ok_button_color"
-                [attr.aria-label]="text.nextPage">
+                      [attr.aria-label]="text.nextPage">
                 <span class="icon slide_right"><i class="fas fa-arrow-right"></i></span>
               </button>
             }
@@ -241,60 +241,60 @@
         <!-- search -->
         <div class="col size_1 wis_search mar_10">
           <input #iconSearchInput
-            [ngModel]="_searchText | async"
-            (input)="_searchText.next(iconSearchInput.value)"
-            (keyup.enter)="_searchInputEnterKeyup.next($any(null))"
-            class="access input md bg_overlay brdr content_color"
-            [attr.aria-label]="text.searchIcons" [placeholder]="text.searchIcons + '...'" />
-            @if ((canSearch$ | async) && (_searchClick | async)) {
-              <button
-                (click)="clearSearch()" aria-label="Clear search"
-                class="access btn circle_18px overlay wis_clear_btn">
-                <span class="icon grow"><i class="fas fa-times fa-sm"></i></span>
-              </button>
-            }
-            @if (canSearch$ | async) {
-              <button
-                (click)="_searchClick.next(iconSearchInput.value); _activePage.next(0)"
-                class="access btn square_28px bg_overlay brdr ok_button_color brad_3 wis_search_btn"
-                [attr.aria-label]="text.submitSearch" type="submit">
-                <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
-              </button>
-            } @else {
-              <button disabled
-                class="access btn square_28px bg_overlay brdr ok_button_color brad_3 wis_search_btn"
-                [attr.aria-label]="text.submitSearch" type="submit">
-                <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
-              </button>
+                 [ngModel]="_searchText | async"
+                 (input)="_searchText.next(iconSearchInput.value)"
+                 (keyup.enter)="_searchInputEnterKeyup.next($any(null))"
+                 class="access input md bg_overlay brdr content_color"
+                 [attr.aria-label]="text.searchIcons" [placeholder]="text.searchIcons + '...'"
+          />
+          @if ((canSearch$ | async) && (_searchClick | async)) {
+            <button
+              (click)="clearSearch()" aria-label="Clear search"
+              class="access btn circle_18px overlay wis_clear_btn">
+              <span class="icon grow"><i class="fas fa-times fa-sm"></i></span>
+            </button>
+          }
+          @if (canSearch$ | async) {
+            <button
+              (click)="_searchClick.next(iconSearchInput.value); _activePage.next(0)"
+              class="access btn square_28px bg_overlay brdr ok_button_color brad_3 wis_search_btn"
+              [attr.aria-label]="text.submitSearch" type="submit">
+              <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
+            </button>
+          } @else {
+            <button disabled
+                    class="access btn square_28px bg_overlay brdr ok_button_color brad_3 wis_search_btn"
+                    [attr.aria-label]="text.submitSearch" type="submit">
+              <span class="icon grow"><i class="fas fa-search fa-sm"></i></span>
+            </button>
+          }
+        </div>
+      </div>
+      <!-- icons -->
+      <div #iconScrollContainer class="col size_1 top_left scroll_y pad_5" style="scroll-behavior: smooth">
+        @if (paginatedIcons$ | async; as icons) {
+          <div class="row wrap top_left" style="align-items:stretch;">
+            @for (icon of paginatedIcons$ | async; track icon) {
+              <div class="col size_1 min_w75 mar_5">
+                <button class="access wis_icon_btn" (click)="handleIconSelect(icon)"
+                        [attr.aria-label]="text.select + ' ' + icon.name">
+                  <div
+                    [ngClass]="((_internalValue | async)?.prefix === icon.prefix) && ((_internalValue | async)?.name === icon.name) ? 'ok_button_color' : 'content_color'"
+                    class="wis_icon_btn_preview square_50px brad_3 bg_overlay brdr mar_bot5">
+                    <i class="{{icon.prefix}} {{icon.name}}"></i>
+                  </div>
+                  <div class="text sm center faded">{{ icon.name }}</div>
+                </button>
+              </div>
             }
           </div>
-        </div>
-        <!-- icons -->
-        <div #iconScrollContainer class="col size_1 top_left scroll_y pad_5" style="scroll-behavior: smooth">
-          @if (paginatedIcons$ | async; as icons) {
-            <div class="row wrap top_left" style="align-items:stretch;">
-              @for (icon of paginatedIcons$ | async; track icon) {
-                <div class="col size_1 min_w75 mar_5">
-                  <button class="access wis_icon_btn" (click)="handleIconSelect(icon)" [attr.aria-label]="text.select + ' ' + icon.name">
-                    <div [ngClass]="((_internalValue | async)?.prefix === icon.prefix) && ((_internalValue | async)?.name === icon.name) ? 'ok_button_color' : 'content_color'"
-                      class="wis_icon_btn_preview square_50px brad_3 bg_overlay brdr mar_bot5">
-                      <i class="{{icon.prefix}} {{icon.name}}"></i>
-                    </div>
-                    <div class="text sm center faded">{{icon.name}}</div>
-                  </button>
-                </div>
-              }
-            </div>
-          } @else {
-            <div class="row column min_h300 center_center">
-              <!--particle-endpoint-state
-              [empty]="true"
-              [emptyIcon]="'fas fa-search fa-3x mar_bot5'"
-              [text]="{emptyText: text.couldntFindAnything, emptySubtext: text.modifySearchCriteria}">
-            </particle-endpoint-state-->
+        } @else {
+          <div class="row column min_h300 center_center">
+            <div class="text md">{{ text.couldntFindAnything }}</div>
+            <div class="text sm">{{ text.modifySearchCriteria }}</div>
             <button class="access btnset clear mar_10"
-              [attr.aria-label]="text.close"
-              (click)="clearSearch()">
+                    [attr.aria-label]="text.close"
+                    (click)="clearSearch()">
               <div class="circle_20px ptl_brdr_color ptl_brdr_size ptl_input_bg_color">
                 <i class="fas fa-times"></i>
               </div>
@@ -306,11 +306,11 @@
         <div
           class="col space_between bg_overlay brdr border_top pad_x5 wis_selection_bar">
           <div class="col v_center mar_10">
-            <div class="text md faded mar_right10 mobile_hide">{{text.selection}}:</div>
+            <div class="text md faded mar_right10 mobile_hide">{{ text.selection }}:</div>
             @if (showIconSelectionPreview) {
               <div class="v_center">
                 <i class="{{selectedIcon.prefix}} {{selectedIcon.name}} fa-fw mar_right5" style="font-size:16px;"></i>
-                <div class="text md bold">{{selectedIcon.prefix}} {{selectedIcon.name}}</div>
+                <div class="text md bold">{{ selectedIcon.prefix }} {{ selectedIcon.name }}</div>
               </div>
             }
           </div>
@@ -320,8 +320,8 @@
               class="access btnset spaced md hov_glow save_button_color ptl_brdr_radius"
               [attr.aria-label]="text.confirm"
               (click)="handleIconSelectConfirm()"
-              >
-              <div>{{text.confirm}}</div>
+            >
+              <div>{{ text.confirm }}</div>
               <div class="brdr border_left mar_left10 pad_left10"><i class="fas fa-check"></i></div>
             </button>
           </div>
