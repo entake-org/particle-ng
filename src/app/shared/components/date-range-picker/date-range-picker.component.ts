@@ -8,18 +8,17 @@ import {DatePickerComponent} from '../date-picker/date-picker.component';
 import {DateRangePickerText} from '../../models/particle-component-text.model';
 
 @Component({
-  selector: 'particle-date-range-picker',
-  templateUrl: './date-range-picker.component.html',
-  styleUrls: ['./date-range-picker.component.css'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DateRangePickerComponent),
-      multi: true
-    }
-  ],
-  standalone: true,
-  imports: [NgClass, PopoverComponent, DatePickerComponent, FormsModule, CalendarComponent, AsyncPipe, DatePipe]
+    selector: 'particle-date-range-picker',
+    templateUrl: './date-range-picker.component.html',
+    styleUrls: ['./date-range-picker.component.css'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => DateRangePickerComponent),
+            multi: true
+        }
+    ],
+    imports: [NgClass, PopoverComponent, DatePickerComponent, FormsModule, CalendarComponent, AsyncPipe, DatePipe]
 })
 export class DateRangePickerComponent implements ControlValueAccessor, AfterViewInit {
 

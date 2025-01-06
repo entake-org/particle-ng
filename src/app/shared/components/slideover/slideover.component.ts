@@ -16,7 +16,6 @@ import { NgClass } from '@angular/common';
     selector: 'particle-slideover',
     templateUrl: './slideover.component.html',
     styleUrls: ['./slideover.component.css'],
-    standalone: true,
     imports: [NgClass]
 })
 export class SlideoverComponent implements AfterViewInit, OnDestroy {

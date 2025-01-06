@@ -14,7 +14,6 @@ export * from './app/shared/components/icon-select/icon-select.component';
 export * from './app/shared/components/paginator/paginator.component';
 export * from './app/shared/components/profile-pic/profile-pic.component';
 export * from './app/shared/components/rich-text/rich-text.component';
-export * from './app/shared/components/render-rich-text/render-rich-text.component';
 export * from './app/shared/components/dialog/dialog.component';
 export * from './app/shared/components/date-picker/date-picker.component';
 export * from './app/shared/components/calendar/calendar.component';

@@ -21,11 +21,11 @@
         class="access height100 width100"/>
       </div>
       @if (!inputOnly) {
-        <div class="col center_center min_w50 height100 ptl_brdr_color border_left">
+        <div class="col center_center min_w50 height100">
           <button type="button"
             (click)="openCalendar($event)"
             [disabled]="disabled"
-            [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'clear'"
+            [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'bg_blue'"
             class="access btnset center_center height100 width100"
             style="outline-offset: -2px;"
             [attr.aria-label]="text.openCalendar" aria-haspopup="dialog">

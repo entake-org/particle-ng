@@ -13,7 +13,6 @@ import {AsyncPipe, NgClass, NgTemplateOutlet} from '@angular/common';
             useExisting: forwardRef(() => ToggleSwitchComponent),
             multi: true
         }],
-    standalone: true,
     imports: [NgClass, NgTemplateOutlet, AsyncPipe]
 })
 export class ToggleSwitchComponent implements ControlValueAccessor {

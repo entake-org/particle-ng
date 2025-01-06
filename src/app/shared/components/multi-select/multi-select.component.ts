@@ -31,30 +31,29 @@ declare type MultiSelectOptionInput = Array<MultiSelectOption | MultiSelectOptio
  * Multi-select component
  */
 @Component({
-  selector: 'particle-multi-select',
-  templateUrl: './multi-select.component.html',
-  styleUrls: ['./multi-select.component.css'],
-  animations: [
-    trigger('openClose', [
-      transition('close => open', [
-        style({transform: 'scaleY(0.5)', opacity: 0}),
-        animate('200ms ease', style({transform: 'scaleY(1)', opacity: 1}))
-      ]),
-      transition('open => close', [
-        style({transform: 'scaleY(1)', opacity: 1}),
-        animate('200ms ease', style({transform: 'scaleY(0.5)', opacity: 0}))
-      ]),
-    ])
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MultiSelectComponent),
-      multi: true
-    }
-  ],
-  standalone: true,
-  imports: [NgIf, NgClass, NgTemplateOutlet, NgFor, AsyncPipe]
+    selector: 'particle-multi-select',
+    templateUrl: './multi-select.component.html',
+    styleUrls: ['./multi-select.component.css'],
+    animations: [
+        trigger('openClose', [
+            transition('close => open', [
+                style({ transform: 'scaleY(0.5)', opacity: 0 }),
+                animate('200ms ease', style({ transform: 'scaleY(1)', opacity: 1 }))
+            ]),
+            transition('open => close', [
+                style({ transform: 'scaleY(1)', opacity: 1 }),
+                animate('200ms ease', style({ transform: 'scaleY(0.5)', opacity: 0 }))
+            ]),
+        ])
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => MultiSelectComponent),
+            multi: true
+        }
+    ],
+    imports: [NgIf, NgClass, NgTemplateOutlet, NgFor, AsyncPipe]
 })
 export class MultiSelectComponent implements ControlValueAccessor {
 

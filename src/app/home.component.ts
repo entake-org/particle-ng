@@ -9,18 +9,17 @@ import {DateRangePickerComponent} from './shared/components/date-range-picker/da
 import {DropdownComponent} from './shared/components/dropdown/dropdown.component';
 import {MultiSelectComponent} from './shared/components/multi-select/multi-select.component';
 import {SliderComponent} from './shared/components/slider/slider.component';
-import {RenderRichTextComponent} from './shared/components/render-rich-text/render-rich-text.component';
 import {PaginatorComponent} from './shared/components/paginator/paginator.component';
 import {IconSelectComponent} from './shared/components/icon-select/icon-select.component';
 import {ThemingService} from './shared/services/theming.service';
 import {NotificationService} from './shared/services/notification.service';
 import {Notification} from './shared/models/notification.model';
+import {RichTextComponent} from './shared/components/rich-text/rich-text.component';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    standalone: true,
-    imports: [LayoutFullFramingComponent, DatePickerComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, RenderRichTextComponent, PaginatorComponent, IconSelectComponent, AsyncPipe]
+    imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe]
 })
 export class HomeComponent {
 

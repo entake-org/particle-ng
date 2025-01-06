@@ -95,7 +95,6 @@ declare interface MetaWeek {
             multi: true
         }
     ],
-    standalone: true,
     imports: [NgClass, PopoverComponent, FormsModule, TooltipDirective, AsyncPipe, DatePipe]
 })
 export class WeekPickerComponent implements ControlValueAccessor {

@@ -5,7 +5,6 @@ import { NgClass } from '@angular/common';
     selector: 'particle-progress-bar',
     templateUrl: './progress-bar.component.html',
     styleUrls: ['./progress-bar.component.css'],
-    standalone: true,
     imports: [NgClass]
 })
 export class ProgressBarComponent {

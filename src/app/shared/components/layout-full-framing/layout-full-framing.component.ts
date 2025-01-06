@@ -5,7 +5,6 @@ import {SlideoverComponent} from '../slideover/slideover.component';
 @Component({
     selector: 'particle-layout-full-framing',
     templateUrl: './layout-full-framing.component.html',
-    standalone: true,
     imports: [NgClass, NgTemplateOutlet, SlideoverComponent]
 })
 export class LayoutFullFramingComponent {

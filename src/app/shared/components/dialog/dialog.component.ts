@@ -26,7 +26,6 @@ import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
             ]),
         ])
     ],
-    standalone: true,
     imports: [NgClass, CdkTrapFocus, NgStyle, AsyncPipe]
 })
 export class DialogComponent {

@@ -1,11 +1,10 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 /**
  * Pipe to transform an input number into its ordinal format
  */
 @Pipe({
-    name: 'ordinalNumber',
-    standalone: true
+    name: 'ordinalNumber'
 })
 export class OrdinalNumberPipe implements PipeTransform {
 

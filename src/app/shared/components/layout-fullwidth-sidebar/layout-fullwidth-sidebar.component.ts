@@ -5,7 +5,6 @@ import {SlideoverComponent} from '../slideover/slideover.component';
 @Component({
     selector: 'particle-layout-fullwidth-sidebar',
     templateUrl: './layout-fullwidth-sidebar.component.html',
-    standalone: true,
     imports: [NgClass, NgTemplateOutlet, SlideoverComponent]
 })
 export class LayoutFullwidthSidebarComponent {

@@ -6,7 +6,6 @@ import { AsyncPipe } from '@angular/common';
 @Component({
     selector: 'particle-scroll-to-top',
     templateUrl: './scroll-to-top.component.html',
-    standalone: true,
     imports: [AsyncPipe]
 })
 export class ScrollToTopComponent implements OnDestroy, AfterViewInit {

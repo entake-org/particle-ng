@@ -12,7 +12,6 @@ import {PaginationEvent} from '../../models/pagination-event.model';
     selector: 'particle-paginator',
     templateUrl: 'paginator.component.html',
     styleUrls: ['./paginator.component.css'],
-    standalone: true,
     imports: [NgClass, PopoverComponent, NgTemplateOutlet, FormsModule]
 })
 export class PaginatorComponent implements OnChanges, AfterViewInit {

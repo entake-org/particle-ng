@@ -22,18 +22,17 @@ import {IconsService} from '../../services/icons.service';
  * Particle Icon Select component provides a button and an icon picker that includes all of the Particle Icons as well as the FAS icons.
  */
 @Component({
-  selector: 'particle-icon-select',
-  templateUrl: 'icon-select.component.html',
-  styleUrls: ['./icon-select.component.css'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => IconSelectComponent),
-      multi: true
-    }
-  ],
-  standalone: true,
-  imports: [NgClass, NgStyle, TooltipDirective, DialogComponent, FormsModule, AsyncPipe]
+    selector: 'particle-icon-select',
+    templateUrl: 'icon-select.component.html',
+    styleUrls: ['./icon-select.component.css'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => IconSelectComponent),
+            multi: true
+        }
+    ],
+    imports: [NgClass, NgStyle, TooltipDirective, DialogComponent, FormsModule, AsyncPipe]
 })
 export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
 

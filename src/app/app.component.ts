@@ -12,8 +12,7 @@ import {NotificationComponent} from './shared/components/notification/notificati
     selector: 'particle-app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    standalone: true,
-  imports: [RouterOutlet, ScrollToTopComponent, NotificationComponent]
+    imports: [RouterOutlet, ScrollToTopComponent, NotificationComponent]
 })
 export class AppComponent implements OnInit {
   themes: Array<Theme> = [

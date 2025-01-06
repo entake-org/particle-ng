@@ -67,7 +67,6 @@ declare interface MetaDate {
     selector: 'particle-calendar',
     templateUrl: './calendar.component.html',
     styleUrls: ['./calendar.component.css'],
-    standalone: true,
     imports: [CdkTrapFocus, FormsModule, NgClass, AsyncPipe, OrdinalNumberPipe]
 })
 export class CalendarComponent implements OnDestroy, OnInit {

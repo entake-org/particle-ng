@@ -17,18 +17,17 @@ import {NgClass} from '@angular/common';
  * Component that wraps the native HTML5 slider
  */
 @Component({
-  selector: 'particle-slider',
-  templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.css'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SliderComponent),
-      multi: true
-    }
-  ],
-  standalone: true,
-  imports: [FormsModule, NgClass]
+    selector: 'particle-slider',
+    templateUrl: './slider.component.html',
+    styleUrls: ['./slider.component.css'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => SliderComponent),
+            multi: true
+        }
+    ],
+    imports: [FormsModule, NgClass]
 })
 export class SliderComponent implements ControlValueAccessor, OnInit {
 

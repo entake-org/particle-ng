@@ -7,23 +7,22 @@ import { NgClass, NgStyle } from '@angular/common';
  * Component to display a popover with custom content
  */
 @Component({
-  selector: 'particle-popover',
-  templateUrl: './popover.component.html',
-  styleUrls: ['./popover.component.css'],
-  animations: [
-    trigger('openClose', [
-      transition('void => open', [
-        style({transform: 'scaleY(0.5)', opacity: 0}),
-        animate('200ms ease', style({transform: 'scaleY(1)', opacity: 1}))
-      ]),
-      transition('open => close', [
-        style({transform: 'scaleY(1)', opacity: 1}),
-        animate('200ms ease', style({transform: 'scaleY(0.5)', opacity: 0}))
-      ]),
-    ])
-  ],
-  standalone: true,
-  imports: [CdkTrapFocus, NgStyle, NgClass]
+    selector: 'particle-popover',
+    templateUrl: './popover.component.html',
+    styleUrls: ['./popover.component.css'],
+    animations: [
+        trigger('openClose', [
+            transition('void => open', [
+                style({ transform: 'scaleY(0.5)', opacity: 0 }),
+                animate('200ms ease', style({ transform: 'scaleY(1)', opacity: 1 }))
+            ]),
+            transition('open => close', [
+                style({ transform: 'scaleY(1)', opacity: 1 }),
+                animate('200ms ease', style({ transform: 'scaleY(0.5)', opacity: 0 }))
+            ]),
+        ])
+    ],
+    imports: [CdkTrapFocus, NgStyle, NgClass]
 })
 export class PopoverComponent implements OnDestroy {
 

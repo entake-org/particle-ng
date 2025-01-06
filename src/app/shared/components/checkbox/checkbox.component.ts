@@ -5,18 +5,17 @@ import {coerceBooleanProperty} from '@angular/cdk/coercion';
 import {CheckboxText} from '../../models/particle-component-text.model';
 
 @Component({
-  selector: 'particle-checkbox',
-  templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.css'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CheckboxComponent),
-      multi: true
-    }
-  ],
-  standalone: true,
-  imports: []
+    selector: 'particle-checkbox',
+    templateUrl: './checkbox.component.html',
+    styleUrls: ['./checkbox.component.css'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => CheckboxComponent),
+            multi: true
+        }
+    ],
+    imports: []
 })
 export class CheckboxComponent implements ControlValueAccessor {
 

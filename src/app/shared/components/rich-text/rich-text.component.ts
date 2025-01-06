@@ -8,9 +8,9 @@ import Image from '@tiptap/extension-image';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {RichTextEditorText} from '../../models/particle-component-text.model';
 import {DialogComponent} from '../dialog/dialog.component';
-import {NgxTiptapModule} from 'ngx-tiptap';
+import {TiptapEditorDirective} from 'ngx-tiptap';
 import {TooltipDirective} from '../../directives/tooltip.directive';
-import { NgClass } from '@angular/common';
+import {NgClass} from '@angular/common';
 import {RichTextCapabilities} from '../../models/rich-text-capabilities.model';
 
 export const RICH_TEXT_VALUE_ACCESSOR: any = {
@@ -25,8 +25,7 @@ export const RICH_TEXT_VALUE_ACCESSOR: any = {
     styleUrls: ['./rich-text.component.css'],
     providers: [RICH_TEXT_VALUE_ACCESSOR],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
-    imports: [TooltipDirective, NgClass, NgxTiptapModule, FormsModule, DialogComponent]
+    imports: [TooltipDirective, NgClass, TiptapEditorDirective, FormsModule, DialogComponent]
 })
 export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
@@ -118,7 +117,8 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
         openOnClick: false,
         HTMLAttributes: {
           class: 'rich-text-link',
-          target: '_blank'
+          target: '_blank',
+          ref: 'noopener'
         },
       }),
       TextAlign.configure({
@@ -137,7 +137,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
       },
     },
     enablePasteRules: [Link, StarterKit, TextAlign]
-  });
+  } as any);
 
   get value(): any {
     return this._value;
