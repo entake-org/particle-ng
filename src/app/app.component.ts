@@ -1,16 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {ThemingService} from './modules/theming/services/theming.service';
-import {Theme} from './modules/theming/models/theme.model';
+import { Component, OnInit, inject } from '@angular/core';
+import {Theme} from './shared/models/theme.model';
+import {ThemingService} from './shared/services/theming.service';
+import {RouterOutlet} from '@angular/router';
+import {ScrollToTopComponent} from './shared/components/scroll-to-top/scroll-to-top.component';
+import {NotificationComponent} from './shared/components/notification/notification.component';
 
 /**
  * App Component to test out stuff built here. Not useful for anything else. Should not be exported by this package.
  */
 @Component({
-  selector: 'particle-app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'particle-app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    imports: [RouterOutlet, ScrollToTopComponent, NotificationComponent]
 })
 export class AppComponent implements OnInit {
+  private themingService = inject(ThemingService);
+
   themes: Array<Theme> = [
     {
       themeId: 'b170c2d1-5ce4-449b-9519-0b7082be9200',
@@ -146,14 +152,6 @@ export class AppComponent implements OnInit {
       }
     } as Theme
   ];
-
-  /**
-   * Constructor
-   */
-  constructor(
-    private themingService: ThemingService
-  ) {
-  }
 
   ngOnInit(): void {
     this.themingService.appInit('particle_ng', this.themes);

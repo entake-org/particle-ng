@@ -1,4 +1,4 @@
-<ng-container *ngIf="currentTheme$ | async as theme">
+@if (currentTheme$ | async; as theme) {
   <particle-layout-full-framing
     [header]="header"
     headerHeight="75px"
@@ -11,8 +11,15 @@
     [mobileSidebarEnabled]="false"
     [footer]="footer"
     footerHeight="0"
-  >
-    <ng-template #header>HEADER</ng-template>
+    >
+    <ng-template #header>
+      <div class="row rc_gap v_center height100">
+        <div class="square_40px">
+          <i class="fab fa-entake fa-xl"></i>
+        </div>
+        <div class="text xlg">Particle by Entake</div>
+      </div>
+    </ng-template>
     <ng-template #mainContent>
       <div class="row rc_gap center_center min_h100">
         <div class="col">
@@ -256,7 +263,6 @@
           [calendarButtonClassList]="'bg_orange ptl_input_text_size'"
         ></particle-date-picker>
       </div>
-
       <div class="row width100">
         <particle-week-picker
           [calendarButtonClassList]="'bg_blue ptl_input_text_size'"
@@ -265,7 +271,6 @@
           [disabled]="false"
         ></particle-week-picker>
       </div>
-
       <div class="row width100">
         <particle-week-picker
           [calendarButtonClassList]="'bg_blue ptl_input_text_size'"
@@ -274,7 +279,6 @@
           [disabled]="false"
         ></particle-week-picker>
       </div>
-
       <div class="row width100">
         <particle-date-range-picker
           [inputClassList]="''"
@@ -283,7 +287,6 @@
           [disabled]="false"
         ></particle-date-range-picker>
       </div>
-
       <div class="row width100">
         <particle-dropdown
           [text]="{placeholder: 'Select an option...'}"
@@ -301,13 +304,12 @@
                          ]
                        }
                      ]"
-          [disabled]="false">
-        </particle-dropdown>
-      </div>
-
-      <div class="row width100">
-        <particle-multi-select
-          buttonClassList="bg_blue"
+        [disabled]="false">
+      </particle-dropdown>
+    </div>
+    <div class="row width100">
+      <particle-multi-select
+        buttonClassList="bg_blue"
           [options]="[
                            { value: 'a', label: 'Option A' },
                            { value: 'b', label: 'Disabled Option', disabled: true },
@@ -321,14 +323,13 @@
                              ]
                            }
                          ]"
-          [classList]="''" [disabled]="false">
-        </particle-multi-select>
-      </div>
-
-      <div class="row width100">
-        <particle-multi-select
-          type="expanded"
-          [maxExpandedEntries]="7"
+      [classList]="''" [disabled]="false">
+    </particle-multi-select>
+  </div>
+  <div class="row width100">
+    <particle-multi-select
+      type="expanded"
+      [maxExpandedEntries]="7"
           [options]="[
                        { value: 'a', label: 'Option A' },
                        { value: 'b', label: 'Disabled Option', disabled: true },
@@ -342,20 +343,18 @@
                          ]
                        }
                      ]"
-          [classList]="''" [disabled]="false">
-        </particle-multi-select>
-      </div>
+    [classList]="''" [disabled]="false">
+  </particle-multi-select>
+</div>
+<div class="row width100">
+  <particle-slider [(ngModel)]="sliderValue" unit="%"></particle-slider>
+</div>
 
-      <div class="row width100">
-        <particle-slider [(ngModel)]="sliderValue" unit="%"></particle-slider>
-      </div>
-
-      <!--
-      <div class="row width100">
-        <div class="row_block width100">
-        <particle-rich-text
-          [(ngModel)]="textEditorValue"
-          height="400px"
+<div class="row width100">
+  <div class="row_block width100">
+    <particle-rich-text
+      [(ngModel)]="textEditorValue"
+      height="400px"
           [capabilities]="{
             heading: true,
             textDecoration: true,
@@ -364,91 +363,80 @@
             link: true,
             images: true
           }"
-        ></particle-rich-text>
-        </div>
-      </div>
-      -->
-
-      <div class="row width100 rich_text_formatting">
-        <particle-render-rich-text class="width100" [html]="textEditorValue"></particle-render-rich-text>
-      </div>
-
-      <div class="row width100">
-        <div class="text md bolder">Version 1</div>
-        <particle-paginator
-          [totalLength]="100"
-          [pageSizeOptions]="[10,25,50]"
-          [pageSize]="10"
-          [showResultsPanel]="false"
-        ></particle-paginator>
-      </div>
-
-      <div class="row width100">
-        <div class="text md bolder">Version 2</div>
-        <particle-paginator
-          [showPages]="true"
-          [totalLength]="200"
-          [pageSizeOptions]="[10,25,50]"
-          [pageSize]="25"
-        ></particle-paginator>
-      </div>
-
-      <div class="row width100">
-        <div class="text md bolder">Version 3</div>
-        <particle-paginator
-          [showPages]="true"
-          [showFirstLast]="true"
-          [totalLength]="30000"
-          [pageSizeOptions]="[10,25,50]"
-          [pageSize]="50"
-        ></particle-paginator>
-      </div>
-
-      <div class="row width100">
-        <div class="text md bolder">Version 4</div>
-        <particle-paginator
-          [showPages]="true"
-          [showFirstLast]="true"
-          [showButtonLabels]="false"
-          [totalLength]="30000"
-          [pageSizeOptions]="[10,25,50]"
-          [pageSize]="50"
-        ></particle-paginator>
-      </div>
-
-      <div class="row width100">
-        <div class="text md bolder">Version 5</div>
-        <particle-paginator
-          [showButtonLabels]="false"
-          [totalLength]="30000"
-          [pageSizeOptions]="[10,25,50]"
-          [pageSize]="50"
-        ></particle-paginator>
-      </div>
-
-    </ng-template>
-    <ng-template #sidebar>
-      <div class="row wrap v_center">
-        <button (click)="addNotification('success')"
-                class="access btn sm bg_overlay brdr bg_green_alt mar_5">
-          Show Success
-        </button>
-        <button (click)="addNotification('warn')"
-                class="access btn sm bg_overlay brdr bg_orange_alt mar_5">
-          Show Warning
-        </button>
-        <button (click)="addNotification('error')"
-                class="access btn sm bg_overlay brdr bg_red_alt mar_5">
-          Show Error
-        </button>
-        <button (click)="addNotification('info')"
-                class="access btn sm bg_overlay brdr bg_purple_alt mar_5">
-          Show Info
-        </button>
-        <particle-icon-select #iconSelect></particle-icon-select>
-      </div>
-    </ng-template>
-    <ng-template #footer></ng-template>
-  </particle-layout-full-framing>
-</ng-container>
+    ></particle-rich-text>
+  </div>
+</div>
+<div class="row width100">
+  <div class="text md bolder">Version 1</div>
+  <particle-paginator
+    [totalLength]="100"
+    [pageSizeOptions]="[10,25,50]"
+    [pageSize]="10"
+    [showResultsPanel]="false"
+  ></particle-paginator>
+</div>
+<div class="row width100">
+  <div class="text md bolder">Version 2</div>
+  <particle-paginator
+    [showPages]="true"
+    [totalLength]="200"
+    [pageSizeOptions]="[10,25,50]"
+    [pageSize]="25"
+  ></particle-paginator>
+</div>
+<div class="row width100">
+  <div class="text md bolder">Version 3</div>
+  <particle-paginator
+    [showPages]="true"
+    [showFirstLast]="true"
+    [totalLength]="30000"
+    [pageSizeOptions]="[10,25,50]"
+    [pageSize]="50"
+  ></particle-paginator>
+</div>
+<div class="row width100">
+  <div class="text md bolder">Version 4</div>
+  <particle-paginator
+    [showPages]="true"
+    [showFirstLast]="true"
+    [showButtonLabels]="false"
+    [totalLength]="30000"
+    [pageSizeOptions]="[10,25,50]"
+    [pageSize]="50"
+  ></particle-paginator>
+</div>
+<div class="row width100">
+  <div class="text md bolder">Version 5</div>
+  <particle-paginator
+    [showButtonLabels]="false"
+    [totalLength]="30000"
+    [pageSizeOptions]="[10,25,50]"
+    [pageSize]="50"
+  ></particle-paginator>
+</div>
+</ng-template>
+<ng-template #sidebar>
+  <div class="row wrap v_center">
+    <button (click)="addNotification('success')"
+      class="access btn sm bg_overlay brdr bg_green_alt mar_5">
+      Show Success
+    </button>
+    <button (click)="addNotification('warn')"
+      class="access btn sm bg_overlay brdr bg_orange_alt mar_5">
+      Show Warning
+    </button>
+    <button (click)="addNotification('error')"
+      class="access btn sm bg_overlay brdr bg_red_alt mar_5">
+      Show Error
+    </button>
+    <button (click)="addNotification('info')"
+      class="access btn sm bg_overlay brdr bg_purple_alt mar_5">
+      Show Info
+    </button>
+    <particle-icon-select #iconSelect></particle-icon-select>
+  </div>
+</ng-template>
+<ng-template #footer></ng-template>
+</particle-layout-full-framing>
+}
 

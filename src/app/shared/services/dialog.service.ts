@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {DialogComponent} from '../../modules/dialog/dialog.component';
+import {DialogComponent} from '../components/dialog/dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class DialogService {
         if (closeOverride === null || closeOverride === '') {
           const topDialog = this.dialogs[this.dialogs.length - 1];
 
-          if (topDialog.allowClose) {
+          if (topDialog.allowClose()) {
             this.dialogs.pop();
             topDialog.close();
             event.stopPropagation();
