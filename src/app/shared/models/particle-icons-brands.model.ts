@@ -7,7 +7,7 @@ export class ParticleIconsBrand {
    * ptl fa-entake
    */
   static ptbEntake = {
-    prefix: 'ptb',
+    prefix: 'fab',
     iconName: 'entake',
     icon: [
       1024, 1024,

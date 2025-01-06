@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, forwardRef, Input, inject, input, output } from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, inject, Input, model, output} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ToggleOptions} from '../../models/toggle-options.model';
 import {BehaviorSubject} from 'rxjs';
@@ -44,7 +44,7 @@ export class ToggleSwitchComponent implements ControlValueAccessor {
     this._options$.next(options);
   }
 
-  readonly disabled = input<boolean>(false);
+  readonly disabled = model<boolean>(false);
 
   readonly changed = output<boolean>();
 
@@ -99,7 +99,7 @@ export class ToggleSwitchComponent implements ControlValueAccessor {
    * @param isDisabled disabled or not
    */
   setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled.set(isDisabled);
     this.changeDetectorRef.markForCheck();
   }
 

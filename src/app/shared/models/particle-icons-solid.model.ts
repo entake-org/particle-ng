@@ -7,7 +7,7 @@ export class ParticleIconsSolid {
    * pts fa-divider
    */
   static ptsDivider = {
-    prefix: 'pts',
+    prefix: 'fas',
     iconName: 'divider',
     icon: [
       512, 512,
@@ -20,7 +20,7 @@ export class ParticleIconsSolid {
    * pts fa-multi-select
    */
   static ptsMultiSelect = {
-    prefix: 'pts',
+    prefix: 'fas',
     iconName: 'multi-select',
     icon: [
       24, 24,
@@ -33,8 +33,8 @@ export class ParticleIconsSolid {
    * pts fa-phone
    */
   static ptsPhone = {
-    prefix: 'pts',
-    iconName: 'phone',
+    prefix: 'fas',
+    iconName: 'desk-phone',
     icon: [
       512, 512,
       [],
@@ -46,7 +46,7 @@ export class ParticleIconsSolid {
    * pts fa-physical-address
    */
   static ptsPhysicalAddress = {
-    prefix: 'pts',
+    prefix: 'fas',
     iconName: 'physical-address',
     icon: [
       512, 512,
@@ -59,7 +59,7 @@ export class ParticleIconsSolid {
    * pts fa-radio-buttons
    */
   static ptsRadioButtons = {
-    prefix: 'pts',
+    prefix: 'fas',
     iconName: 'radio-buttons',
     icon: [
       24, 24,
@@ -72,7 +72,7 @@ export class ParticleIconsSolid {
    * pts fa-routing-number
    */
   static ptsRoutingNumber = {
-    prefix: 'pts',
+    prefix: 'fas',
     iconName: 'routing-number',
     icon: [
       512, 512,

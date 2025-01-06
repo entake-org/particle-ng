@@ -7,7 +7,7 @@ export class ParticleIconsRegular {
    * ptr fa-multi-select
    */
   static ptrMultiSelect = {
-    prefix: 'ptr',
+    prefix: 'far',
     iconName: 'multi-select',
     icon: [
       24, 24,
@@ -20,8 +20,8 @@ export class ParticleIconsRegular {
    * ptr fa-phone
    */
   static ptrPhone = {
-    prefix: 'ptr',
-    iconName: 'phone',
+    prefix: 'far',
+    iconName: 'desk-phone',
     icon: [
       24, 24,
       [],
@@ -33,7 +33,7 @@ export class ParticleIconsRegular {
    * ptr fa-radio-buttons
    */
   static ptrRadioButtons = {
-    prefix: 'ptr',
+    prefix: 'far',
     iconName: 'radio-buttons',
     icon: [
       24, 24,
