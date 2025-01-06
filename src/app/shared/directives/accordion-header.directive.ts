@@ -1,9 +1,9 @@
-import {Directive, TemplateRef} from '@angular/core';
+import { Directive, TemplateRef, inject } from '@angular/core';
 
 @Directive({
     selector: '[particleAccordionHeader]',
     standalone: true
 })
-export class AccordionHeaderDirective {
-  constructor(public templateRef: TemplateRef<any>) {}
+export class AccordionHeaderDirective {  templateRef = inject<TemplateRef<any>>(TemplateRef);
+
 }

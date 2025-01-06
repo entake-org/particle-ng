@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, ViewChild} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, Input, ViewChild, inject, input } from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BehaviorSubject, tap} from 'rxjs';
 import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
@@ -21,6 +21,8 @@ import {DateRangePickerText} from '../../models/particle-component-text.model';
     imports: [NgClass, PopoverComponent, DatePickerComponent, FormsModule, CalendarComponent, AsyncPipe, DatePipe]
 })
 export class DateRangePickerComponent implements ControlValueAccessor, AfterViewInit {
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
 
   currentYear = new Date().getFullYear();
   _disabled = false;
@@ -47,24 +49,20 @@ export class DateRangePickerComponent implements ControlValueAccessor, AfterView
     }
   ));
 
-  @Input()
-  inputId: string = null as any;
+  readonly inputId = input<string>(null as any);
 
-  @Input()
-  inputClassList = '';
+  readonly inputClassList = input('');
 
-  @Input()
-  calendarButtonClassList = '';
+  readonly calendarButtonClassList = input('');
 
-  @Input()
-  text = {
+  readonly text = input({
     begin: 'Begin',
     end: 'End',
     done: 'Done',
     clear: 'Clear',
     openCalendar: 'Open Calendar',
     selectRange: 'Choose a Range'
-  } as DateRangePickerText;
+} as DateRangePickerText);
 
   @Input()
   set dateRange(value: { minDate: Date, maxDate: Date }) {
@@ -124,15 +122,13 @@ export class DateRangePickerComponent implements ControlValueAccessor, AfterView
     return this._disabled;
   }
 
-  @Input()
-  ariaLabel: string = null as any;
+  readonly ariaLabel = input<string>(null as any);
 
   /**
    * Format for the selected date range in the selection preview. Must
    * be a valid Angular DatePipe format
    */
-  @Input()
-  dateFormat = 'MM/dd/y';
+  readonly dateFormat = input('MM/dd/y');
 
   @ViewChild('calendarPopover')
   calendarPopover: PopoverComponent = null as any;
@@ -218,10 +214,6 @@ export class DateRangePickerComponent implements ControlValueAccessor, AfterView
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouched: () => any = () => {
   };
-
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
-
-  }
 
   /**
    * Write value

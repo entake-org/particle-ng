@@ -1,9 +1,9 @@
-<ng-container *ngIf="type === 'input' || (type === 'expanded' && maxExpandedEntries > 0 && optionCount > maxExpandedEntries) else expanded">
+<ng-container *ngIf="type() === 'input' || (type() === 'expanded' && maxExpandedEntries() > 0 && optionCount > maxExpandedEntries()) else expanded">
   <div #multiSelect
        class="row ptl_input ptl_input_height ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius ent_r2l_dir"
-       [style.filter]="disabled ? 'brightness(.95)' : ''"
+       [style.filter]="disabled() ? 'brightness(.95)' : ''"
        style="cursor:default;overflow:hidden;"
-       [ngClass]="classList ? classList : ''">
+       [ngClass]="classList() ? classList() : ''">
     <button #multiSelectButton
             role="combobox"
             aria-haspopup="listbox"
@@ -11,24 +11,24 @@
             (click)="openMultiSelect($event)"
             (keyup.escape)="onEscapeKeyUp($event)"
             [id]="multiSelectId"
-            [disabled]="disabled"
-            [attr.aria-label]="text.placeholder"
+            [disabled]="disabled()"
+            [attr.aria-label]="text().placeholder"
             [attr.aria-expanded]="opened"
             [attr.data-dialog-close-override]="true"
             class="access btnset clear center_center height100 width100"
             style="outline-offset: -2px;"
     >
-      <ng-container *ngIf="collapsedButtonTemplate">
-        <ng-container *ngTemplateOutlet="collapsedButtonTemplate"></ng-container>
+      <ng-container *ngIf="collapsedButtonTemplate()">
+        <ng-container *ngTemplateOutlet="collapsedButtonTemplate()"></ng-container>
       </ng-container>
 
-      <ng-container *ngIf="!collapsedButtonTemplate">
+      <ng-container *ngIf="!collapsedButtonTemplate()">
         <div class="col size_1 height100 width100 v_center ptl_input_text_size ptl_input_padding border_none width100 overflow_hide">
 
           <ng-container *ngIf="selectionCount$ | async as selectionCount else placeholderTemplate">
             <ng-container *ngIf="selectionCount > 1 else singleEntry">
               <div class="ptl_input_text_size ent_r2l_txt">
-                <span class="text bold">{{selectionCount}}</span> {{text.of}} {{optionCount}} {{text.optionsSelected}}
+                <span class="text bold">{{selectionCount}}</span> {{text().of}} {{optionCount}} {{text().optionsSelected}}
               </div>
             </ng-container>
 
@@ -54,11 +54,11 @@
             </ng-template>
           </ng-container>
           <ng-template #placeholderTemplate>
-            <div class="ptl_placeholder ent_r2l_txt">{{text.placeholder + '...'}}</div>
+            <div class="ptl_placeholder ent_r2l_txt">{{text().placeholder + '...'}}</div>
           </ng-template>
         </div>
         <div class="col min_w50 height100 center_center"
-             [ngClass]="buttonClassList ? buttonClassList : 'bg_overlay'">
+             [ngClass]="buttonClassList() ? buttonClassList() : 'bg_overlay'">
           <div class="center_center height100 width100">
             <i class="fas fa-caret-down ptl_input_text_size"></i>
           </div>
@@ -91,8 +91,8 @@
     <div class="particle_multiselect_list ent_r2l_dir"
          role="listbox"
          tabindex="-1"
-         [attr.aria-label]="text.placeholder"
-         [ngClass]="type === 'expanded' && expandedAsGrid ? 'particle_multi_select_grid' : ''"
+         [attr.aria-label]="text().placeholder"
+         [ngClass]="type() === 'expanded' && expandedAsGrid() ? 'particle_multi_select_grid' : ''"
     >
       <!-- CUSTOM TEMPLATE -->
       <ng-container *ngIf="!!template else defaultOptionTemplate">
@@ -108,11 +108,11 @@
                         (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i + j)"
                         (keyup.escape)="onEscapeKeyUp($event)"
                         [id]="multiSelectId + '-' + groupOption.value"
-                        [ngClass]="(!selectionValueMap['' + groupOption.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
+                        [ngClass]="(!selectionValueMap['' + groupOption.value] ? 'unselected' : '') + (entryClassList() ? ' ' + entryClassList() : ' particle_multiselect_option')"
                         [attr.aria-selected]="(_internalValue | async)?.includes(groupOption.value)"
                         [attr.data-value]="groupOption.value"
                         [attr.data-dialog-close-override]="true"
-                        [disabled]="groupOption.disabled || disabled"
+                        [disabled]="groupOption.disabled || disabled()"
                         class="ptl_input_text_size"
                         type="button"
                         role="option" tabindex="0">
@@ -137,8 +137,8 @@
                         [attr.aria-selected]="(_internalValue | async)?.includes(option.value)"
                         [attr.data-value]="option.value"
                         [attr.data-dialog-close-override]="true"
-                        [disabled]="option.disabled || disabled"
-                        [ngClass]="(!selectionValueMap['' + option.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
+                        [disabled]="option.disabled || disabled()"
+                        [ngClass]="(!selectionValueMap['' + option.value] ? 'unselected' : '') + (entryClassList() ? ' ' + entryClassList() : ' particle_multiselect_option')"
                         class="ptl_input_text_size"
                         role="option" type="button" tabindex="0">
                   <div class="particle_multiselect_checkbox ptl_brdr_radius bg_overlay brdr"
@@ -171,8 +171,8 @@
                         [attr.aria-selected]="(_internalValue | async)?.includes(groupOption.value)"
                         [attr.data-value]="groupOption.value"
                         [attr.data-dialog-close-override]="true"
-                        [disabled]="groupOption.disabled || disabled"
-                        [ngClass]="(!selectionValueMap['' + groupOption.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
+                        [disabled]="groupOption.disabled || disabled()"
+                        [ngClass]="(!selectionValueMap['' + groupOption.value] ? 'unselected' : '') + (entryClassList() ? ' ' + entryClassList() : ' particle_multiselect_option')"
                         class="ptl_input_text_size"
                         type="button" role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox ptl_brdr_radius bg_overlay brdr"
@@ -196,8 +196,8 @@
                         [attr.aria-selected]="(_internalValue | async)?.includes(option.value)"
                         [attr.data-value]="option.value"
                         [attr.data-dialog-close-override]="true"
-                        [disabled]="option.disabled || disabled"
-                        [ngClass]="(!selectionValueMap['' + option.value] ? 'unselected' : '') + (entryClassList ? ' ' + entryClassList : ' particle_multiselect_option')"
+                        [disabled]="option.disabled || disabled()"
+                        [ngClass]="(!selectionValueMap['' + option.value] ? 'unselected' : '') + (entryClassList() ? ' ' + entryClassList() : ' particle_multiselect_option')"
                         class="ptl_input_text_size"
                         type="button" role="option" tabindex="0">
                   <div class="particle_multiselect_checkbox ptl_brdr_radius bg_overlay brdr"

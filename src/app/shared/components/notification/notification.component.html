@@ -25,7 +25,7 @@
           </div>
           <div class="col" style="pointer-events: all;">
             <button class="access btnset clear"
-              [attr.aria-label]="text.dismiss"
+              [attr.aria-label]="text().dismiss"
               (click)="deleteNotification($any(notification.id))">
               <div class="circle_20px ptl_brdr_color ptl_brdr_size ptl_input_bg_color">
                 <i class="fas fa-times"></i>

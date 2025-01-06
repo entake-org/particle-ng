@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, input} from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -20,25 +20,18 @@ export class ProgressBarComponent {
     return this._percentComplete;
   }
 
-  @Input()
-  backgroundColorClass: string = 'content_color_dark_1';
+  readonly backgroundColorClass = input<string>('content_color_dark_1');
 
-  @Input()
-  progressColorClass: string = 'bg_blue';
+  readonly progressColorClass = input<string>('bg_blue');
 
-  @Input()
-  showPercentComplete: boolean = true;
+  readonly showPercentComplete = input<boolean>(true);
 
-  @Input()
-  borderRadius: number = 9999;
+  readonly borderRadius = input<number>(9999);
 
-  @Input()
-  height: number = 20;
+  readonly height = input<number>(20);
 
-  @Input()
-  showBorder: boolean = true;
+  readonly showBorder = input<boolean>(true);
 
-  @Input()
-  showMovement: boolean = false;
+  readonly showMovement = input<boolean>(false);
 
 }

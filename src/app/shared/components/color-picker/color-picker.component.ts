@@ -1,15 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  EventEmitter,
-  forwardRef,
-  Input,
-  OnInit,
-  Output,
-  Renderer2,
-  ViewChild
-} from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, Renderer2, ViewChild, inject } from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ColorPickerText} from '../../models/particle-component-text.model';
 import { NgClass } from '@angular/common';
@@ -32,6 +21,9 @@ import { NgClass } from '@angular/common';
   imports: [NgClass, FormsModule]
 })
 export class ColorPickerComponent implements ControlValueAccessor, OnInit {
+  private renderer = inject(Renderer2);
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
 
   /**
    * Regex to match a hexadecimal string (000000)
@@ -181,14 +173,6 @@ export class ColorPickerComponent implements ControlValueAccessor, OnInit {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouched: () => any = () => {
   };
-
-  /**
-   * Dependency injection site
-   * @param renderer the Angular renderer
-   * @param changeDetectorRef the Angular ChangeDetectorRef
-   */
-  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {
-  }
 
   /**
    * Init component, check for color picker browser support

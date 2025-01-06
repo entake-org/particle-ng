@@ -21,7 +21,7 @@ export class DialogService {
         if (closeOverride === null || closeOverride === '') {
           const topDialog = this.dialogs[this.dialogs.length - 1];
 
-          if (topDialog.allowClose) {
+          if (topDialog.allowClose()) {
             this.dialogs.pop();
             topDialog.close();
             event.stopPropagation();

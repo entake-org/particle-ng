@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import {AsyncPipe} from '@angular/common';
 import {LayoutFullFramingComponent} from './shared/components/layout-full-framing/layout-full-framing.component';
@@ -22,12 +22,9 @@ import {RichTextComponent} from './shared/components/rich-text/rich-text.compone
     imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe]
 })
 export class HomeComponent {
+  private themingService = inject(ThemingService);
+  private notificationService = inject(NotificationService);
 
-  constructor(
-    private themingService: ThemingService,
-    private notificationService: NotificationService
-  ) {
-  }
 
   currentTheme$ = this.themingService.selectedTheme;
 

@@ -1,24 +1,24 @@
 <div class="access ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius"
-  [style.height]="size + 'px'"
-  [style.width]="size + 'px'"
-  [style.min-width]="size + 'px'"
-  [style.min-height]="size + 'px'"
+  [style.height]="size() + 'px'"
+  [style.width]="size() + 'px'"
+  [style.min-width]="size() + 'px'"
+  [style.min-height]="size() + 'px'"
   >
   <button class="access btn clear width100 height100"
     tabindex="0"
     role="checkbox"
     type="button"
     [disabled]="disabled"
-    [attr.aria-label]="_value ? text.uncheck : text.check"
+    [attr.aria-label]="_value ? text().uncheck : text().check"
     [attr.aria-checked]="_value"
     (click)="click()"
     >
     <!-- show if checked state -->
     @if (_value) {
-      <div><i class="fas fa-check fa-fw" [style.font-size]="(size / 2) + 'px'"></i></div>
+      <div><i class="fas fa-check fa-fw" [style.font-size]="(size() / 2) + 'px'"></i></div>
     }
   </button>
 
-  <input type="hidden" [id]="inputId" [value]="value" #hiddenInput/>
+  <input type="hidden" [id]="inputId()" [value]="value" #hiddenInput/>
 </div>
 

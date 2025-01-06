@@ -1,15 +1,15 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
   HostListener,
   Input,
   OnDestroy,
   OnInit,
-  Output,
   QueryList,
   ViewChild,
-  ViewChildren
+  ViewChildren,
+  input,
+  output
 } from '@angular/core';
 import {addDays, endOfMonth, isWithinInterval, subDays} from 'date-fns';
 import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
@@ -157,8 +157,7 @@ export class CalendarComponent implements OnDestroy, OnInit {
     return this._text;
   }
 
-  @Input()
-  showControls = true;
+  readonly showControls = input(true);
 
   private _text = {
     selectAYear: 'Select a Year',
@@ -201,16 +200,14 @@ export class CalendarComponent implements OnDestroy, OnInit {
   /**
    * Event emitted on date select
    */
-  @Output()
-  selected = new EventEmitter<Date>();
+  readonly selected = output<Date>();
 
   /**
    * Event emitted on close (either through the button, escape keyup or click off of widget).
    * Note: it is the parent component's job to actually hide the calendar, this event
    *       acts as a signal that that action should be taken
    */
-  @Output()
-  closed = new EventEmitter<void>();
+  readonly closed = output<void>();
 
   /**
    * The current Date broken down by day/month/year

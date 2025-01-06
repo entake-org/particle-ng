@@ -1,28 +1,28 @@
 <div style="cursor:default;overflow: hidden;"
-  [ngClass]="inputClassList ? '' : 'row ptl_input ptl_input_height ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius ent_r2l_dir'"
+  [ngClass]="inputClassList() ? '' : 'row ptl_input ptl_input_height ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius ent_r2l_dir'"
   [style.filter]="disabled ? 'brightness(.95)' : ''">
   <button (click)="openCalendar($event)"
     aria-haspopup="dialog"
     [disabled]="disabled"
-    [attr.aria-label]="ariaLabel + ', ' + text.openCalendar"
+    [attr.aria-label]="ariaLabel() + ', ' + text().openCalendar"
     [attr.aria-expanded]="calendarPopover.visible"
-    [ngClass]="inputClassList ? inputClassList : 'clear'"
+    [ngClass]="inputClassList() ? inputClassList() : 'clear'"
     type="button"
     class="access btnset width100 height100 center_center"
     style="outline-offset: -2px;"
     >
     <div class="col size_1 height100 width100 ptl_input_text_size ptl_input_padding v_center">
       @if (_internalValue | async; as internalValue) {
-        {{internalValue.start | date: dateFormat}} - {{internalValue.end | date: dateFormat}}
+        {{internalValue.start | date: dateFormat()}} - {{internalValue.end | date: dateFormat()}}
       } @else {
-        <div class="ent_r2l_txt">{{text.selectWeek}}...</div>
+        <div class="ent_r2l_txt">{{text().selectWeek}}...</div>
       }
       <ng-template #placeholderTemplate>
-        <div class="ent_r2l_txt">{{text.selectWeek}}...</div>
+        <div class="ent_r2l_txt">{{text().selectWeek}}...</div>
       </ng-template>
     </div>
     <div class="col min_w50 height100 center_center"
-      [ngClass]="calendarButtonClassList ? calendarButtonClassList : 'bg_blue'">
+      [ngClass]="calendarButtonClassList() ? calendarButtonClassList() : 'bg_blue'">
       <div class="width100 height100 center_center">
         <i class="fas fa-calendar-week ptl_input_text_size"></i>
       </div>
@@ -67,7 +67,7 @@
             [attr.data-dialog-close-override]="true"
             (change)="_selectedYear.next(+yearSelect.value)"
             class="access input sm content_color"
-            [attr.aria-label]="text.selectYear">
+            [attr.aria-label]="text().selectYear">
             @for (year of validYearRange$ | async; track year) {
               <option
                 [value]="year">
@@ -81,19 +81,19 @@
             [ngModel]="_selectedMonth | async"
             (change)="_selectedMonth.next(+monthSelect.value)"
             class="access input sm content_color"
-            [attr.aria-label]="text.selectMonth">
-            <option value="0">{{text.january}}</option>
-            <option value="1">{{text.february}}</option>
-            <option value="2">{{text.march}}</option>
-            <option value="3">{{text.april}}</option>
-            <option value="4">{{text.may}}</option>
-            <option value="5">{{text.june}}</option>
-            <option value="6">{{text.july}}</option>
-            <option value="7">{{text.august}}</option>
-            <option value="8">{{text.september}}</option>
-            <option value="9">{{text.october}}</option>
-            <option value="10">{{text.november}}</option>
-            <option value="11">{{text.december}}</option>
+            [attr.aria-label]="text().selectMonth">
+            <option value="0">{{text().january}}</option>
+            <option value="1">{{text().february}}</option>
+            <option value="2">{{text().march}}</option>
+            <option value="3">{{text().april}}</option>
+            <option value="4">{{text().may}}</option>
+            <option value="5">{{text().june}}</option>
+            <option value="6">{{text().july}}</option>
+            <option value="7">{{text().august}}</option>
+            <option value="8">{{text().september}}</option>
+            <option value="9">{{text().october}}</option>
+            <option value="10">{{text().november}}</option>
+            <option value="11">{{text().december}}</option>
           </select>
         </div>
       </div>
@@ -102,13 +102,13 @@
       <!-- weekdays -->
       <div class="mar_5 mar_bot10">
         <div class="row wrap space_between ptl_input_bg_color ptl_brdr_color border_bottom brad_3 mar_bot5">
-          <div class="wwp_weekday">{{text.sundayAbbr}}</div>
-          <div class="wwp_weekday">{{text.mondayAbbr}}</div>
-          <div class="wwp_weekday">{{text.tuesdayAbbr}}</div>
-          <div class="wwp_weekday">{{text.wednesdayAbbr}}</div>
-          <div class="wwp_weekday">{{text.thursdayAbbr}}</div>
-          <div class="wwp_weekday">{{text.fridayAbbr}}</div>
-          <div class="wwp_weekday">{{text.saturdayAbbr}}</div>
+          <div class="wwp_weekday">{{text().sundayAbbr}}</div>
+          <div class="wwp_weekday">{{text().mondayAbbr}}</div>
+          <div class="wwp_weekday">{{text().tuesdayAbbr}}</div>
+          <div class="wwp_weekday">{{text().wednesdayAbbr}}</div>
+          <div class="wwp_weekday">{{text().thursdayAbbr}}</div>
+          <div class="wwp_weekday">{{text().fridayAbbr}}</div>
+          <div class="wwp_weekday">{{text().saturdayAbbr}}</div>
         </div>
         <!-- days -->
         @if (fullMonth$ | async; as fullMonth) {
@@ -137,14 +137,14 @@
           <button
             (click)="selectLastWeek()"
             class="access btn sm bg_overlay_rev brdr mar_5 hov_bg"
-            [attr.aria-label]="text.selectLastWeek">
-            <i class="fas fa-chevron-left mar_right5"></i><span class="text bold">{{text.lastWeek}}</span>
+            [attr.aria-label]="text().selectLastWeek">
+            <i class="fas fa-chevron-left mar_right5"></i><span class="text bold">{{text().lastWeek}}</span>
           </button>
         } @else {
           <button disabled
             class="access btn sm mar_5"
-            [attr.aria-label]="text.selectLastWeek">
-            <i class="fas fa-chevron-left mar_right5"></i><span class="text bold">{{text.lastWeek}}</span>
+            [attr.aria-label]="text().selectLastWeek">
+            <i class="fas fa-chevron-left mar_right5"></i><span class="text bold">{{text().lastWeek}}</span>
           </button>
         }
         @if (currentDate.selectable) {
@@ -152,14 +152,14 @@
             <button
               disabled
               class="access btn sm mar_5"
-              [attr.aria-label]="text.resetWeekSelection">
+              [attr.aria-label]="text().resetWeekSelection">
               <i class="fas fa-undo-alt"></i>
             </button>
           } @else {
             <button (click)="selectCurrentWeek()"
               particleTooltip="Reset to Current Week"
               class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
-              [attr.aria-label]="text.resetWeekSelection">
+              [attr.aria-label]="text().resetWeekSelection">
               <i class="fas fa-undo-alt"></i>
             </button>
           }
@@ -168,14 +168,14 @@
           <button
             (click)="selectNextWeek()"
             class="access btn sm bg_overlay_rev brdr mar_5 hov_bg"
-            [attr.aria-label]="text.selectNextWeek">
-            <span class="text bold">{{text.nextWeek}}</span><i class="fas fa-chevron-right mar_left5"></i>
+            [attr.aria-label]="text().selectNextWeek">
+            <span class="text bold">{{text().nextWeek}}</span><i class="fas fa-chevron-right mar_left5"></i>
           </button>
         } @else {
           <button disabled
             class="access btn sm mar_5"
-            [attr.aria-label]="text.selectNextWeek">
-            <span class="text bold">{{text.nextWeek}}</span><i class="fas fa-chevron-right mar_left5"></i>
+            [attr.aria-label]="text().selectNextWeek">
+            <span class="text bold">{{text().nextWeek}}</span><i class="fas fa-chevron-right mar_left5"></i>
           </button>
         }
       </div>

@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, OnDestroy} from '@angular/core';
+import { Directive, ElementRef, Input, OnDestroy, inject } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {CarouselOptions} from '../models/carousel-options.model';
 
@@ -48,7 +48,9 @@ export class BackgroundCarouselDirective implements OnDestroy {
    *
    * @param el
    */
-  constructor(el: ElementRef) {
+  constructor() {
+    const el = inject(ElementRef);
+
     this._options.subscribe(
       () => {
         this.initOptions();

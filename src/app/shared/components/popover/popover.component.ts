@@ -1,5 +1,5 @@
 import {animate, AnimationEvent, style, transition, trigger} from '@angular/animations';
-import {Component, EventEmitter, HostListener, Input, OnDestroy, Output, Renderer2} from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, Renderer2, inject, input, output } from '@angular/core';
 import {CdkTrapFocus} from '@angular/cdk/a11y';
 import { NgClass, NgStyle } from '@angular/common';
 
@@ -25,14 +25,15 @@ import { NgClass, NgStyle } from '@angular/common';
     imports: [CdkTrapFocus, NgStyle, NgClass]
 })
 export class PopoverComponent implements OnDestroy {
+  private renderer = inject(Renderer2);
+
 
   protected readonly window = window;
 
   /**
    * The offset of the popover from its target (in pixels)
    */
-  @Input()
-  offset = 5;
+  readonly offset = input(5);
 
   /**
    * Set the width of the popover in pixels (defaults to auto)
@@ -61,32 +62,25 @@ export class PopoverComponent implements OnDestroy {
   /**
    * A class-list to apply to the popover content
    */
-  @Input()
-  classList = 'content_color particle_popover_shadow';
+  readonly classList = input('content_color particle_popover_shadow');
 
-  @Input()
-  targetOverride: EventTarget = null as any;
+  readonly targetOverride = input<EventTarget>(null as any);
 
-  @Input()
-  openDirection: 'above' | 'below' = 'above';
+  readonly openDirection = input<'above' | 'below'>('above');
 
-  @Input()
-  alignment: 'left' | 'center' = 'left';
+  readonly alignment = input<'left' | 'center'>('left');
 
-  @Input()
-  scaleForMobile = '1';
+  readonly scaleForMobile = input('1');
 
   /**
    * Event emitted on popover open
    */
-  @Output()
-  opened = new EventEmitter<void>();
+  readonly opened = output<void>();
 
   /**
    * Event emitted on popover close
    */
-  @Output()
-  closed = new EventEmitter<void>();
+  readonly closed = output<void>();
 
   /**
    * Whether the popover should render
@@ -125,13 +119,6 @@ export class PopoverComponent implements OnDestroy {
    * @private
    */
   private escapeKeyUpUnlisteners: Array<() => void> = [];
-
-  /**
-   * Dependency injection site
-   * @param renderer the Angular renderer
-   */
-  constructor(private renderer: Renderer2) {
-  }
 
   /**
    * Destroy component, clean up event listeners
@@ -179,8 +166,9 @@ export class PopoverComponent implements OnDestroy {
    *              the popover will close
    */
   toggle(event?: Event): void {
-    if (this.targetOverride) {
-      this.target = this.targetOverride;
+    const targetOverride = this.targetOverride();
+    if (targetOverride) {
+      this.target = targetOverride;
     } else {
       if (event) {
         this.target = event.currentTarget ?? event.target as EventTarget;
@@ -248,21 +236,22 @@ export class PopoverComponent implements OnDestroy {
     const popoverBottomLeftAnchor = bottom;
     const availableBottomSpace = window.innerHeight - popoverBottomLeftAnchor;
     const availableTopSpace = top;
-    const offsetListHeight = offsetHeight + this.offset;
+    const offsetListHeight = offsetHeight + this.offset();
     let transformOrigin: string = null as any;
     let positionTop: string = null as any;
 
     const canOpenAbove = availableTopSpace > offsetListHeight;
     const canOpenBelow = availableBottomSpace > offsetListHeight;
 
-    if (canOpenAbove && this.openDirection === 'above') {
+    const openDirection = this.openDirection();
+    if (canOpenAbove && openDirection === 'above') {
       transformOrigin = 'bottom left';
       positionTop = `${top - offsetListHeight}px`;
     }
 
-    if (canOpenBelow && this.openDirection === 'below') {
+    if (canOpenBelow && openDirection === 'below') {
       transformOrigin = 'top left';
-      positionTop = `${popoverBottomLeftAnchor + this.offset}px`;
+      positionTop = `${popoverBottomLeftAnchor + this.offset()}px`;
     }
 
     if (!transformOrigin) {
@@ -271,7 +260,7 @@ export class PopoverComponent implements OnDestroy {
         positionTop = `${top - offsetListHeight}px`;
       } else if (availableBottomSpace > offsetListHeight) {
         transformOrigin = 'top left';
-        positionTop = `${popoverBottomLeftAnchor + this.offset}px`;
+        positionTop = `${popoverBottomLeftAnchor + this.offset()}px`;
       } else {
         if (offsetHeight > window.innerHeight) {
           positionTop = '0px';
@@ -286,7 +275,7 @@ export class PopoverComponent implements OnDestroy {
 
     let leftPosition = left;
 
-    if (this.alignment === 'center') {
+    if (this.alignment() === 'center') {
       leftPosition = (leftPosition - (offsetWidth / 2)) + (width / 2);
     }
 

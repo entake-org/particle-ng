@@ -1,15 +1,15 @@
-<div [ngClass]="showBorder ? backgroundColorClass + ' brdr' : backgroundColorClass"
-  [style.border-radius]="borderRadius + 'px'"
-  [style.height]="height ? height + 'px' : ''"
+<div [ngClass]="showBorder() ? backgroundColorClass() + ' brdr' : backgroundColorClass()"
+  [style.border-radius]="borderRadius() + 'px'"
+  [style.height]="height() ? height() + 'px' : ''"
   >
   <div class="container_progress"
-    [ngClass]="progressColorClass + (showMovement ? ' progress_movement' : '')"
+    [ngClass]="progressColorClass() + (showMovement() ? ' progress_movement' : '')"
     [style.width]="percentComplete + '%'"
-    [style.border-radius]="borderRadius + 'px'"
-    [style.height]="height ? (showBorder ? (height - 2) : height) + 'px' : ''"
-    [style.font-size]="height < 20 ? '65%' : ''"
+    [style.border-radius]="borderRadius() + 'px'"
+    [style.height]="height() ? (showBorder() ? (height() - 2) : height()) + 'px' : ''"
+    [style.font-size]="height() < 20 ? '65%' : ''"
     >
-    @if ((showPercentComplete && height >= 10)) {
+    @if ((showPercentComplete() && height() >= 10)) {
       {{percentComplete}}%
     } @else {
       &nbsp;

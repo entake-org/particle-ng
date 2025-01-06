@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Theme, ThemeFont, Z_INDEX_LAYERS} from '../models/theme.model';
 import {ThemeChangeDetectionService} from './theme-change-detection.service';
@@ -8,6 +8,9 @@ import {LocalStorageService} from './local-storage.service';
   providedIn: 'root'
 })
 export class ThemingService {
+  private localStorageService = inject(LocalStorageService);
+  private themeChangeDetectionService = inject(ThemeChangeDetectionService);
+
 
   // PSA: ORDER MATTERS, DO NOT MOVE ITEMS AROUND
   private readonly defaultZIndexes: Array<string> = [
@@ -39,18 +42,6 @@ export class ThemingService {
    * Key for the product this is deployed into
    */
   protected applicationName: string = null as any;
-
-  /**
-   * Constructor
-   *
-   * @param localStorageService
-   * @param themeChangeDetectionService
-   */
-  constructor(
-    private localStorageService: LocalStorageService,
-    private themeChangeDetectionService: ThemeChangeDetectionService
-  ) {
-  }
 
   /**
    * Converts a JSON property name to snake case

@@ -2,17 +2,18 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  EventEmitter,
   forwardRef,
+  inject,
   Input,
+  input,
   OnDestroy,
-  Output,
+  output,
   ViewChild
 } from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BehaviorSubject, combineLatest, Observable, Subject, Subscription} from 'rxjs';
 import {map, tap, withLatestFrom} from 'rxjs/operators';
-import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
+import {AsyncPipe, NgClass, NgStyle} from '@angular/common';
 import {TooltipDirective} from '../../directives/tooltip.directive';
 import {DialogComponent} from '../dialog/dialog.component';
 import {IconSelectText} from '../../models/particle-component-text.model';
@@ -35,6 +36,9 @@ import {IconsService} from '../../services/icons.service';
     imports: [NgClass, NgStyle, TooltipDirective, DialogComponent, FormsModule, AsyncPipe]
 })
 export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
+  private service = inject(IconsService);
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
 
   /**
    * The number of items to display per page
@@ -57,6 +61,10 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
     }
   }
 
+  get value(): string {
+    return this._value;
+  }
+
   /**
    * Set disabled
    * @param disabled whether or not the icon picker should be disabled
@@ -73,17 +81,14 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
   /**
    * Color class of the button
    */
-  @Input()
-  buttonColorClass: string = null as any;
+  readonly buttonColorClass = input<string>(null as any);
 
   /**
    * The value to set to the button's width, min-width, height and min-height
    */
-  @Input()
-  buttonSizing = '40px';
+  readonly buttonSizing = input('40px');
 
-  @Input()
-  text = {
+  readonly text = input({
     selectAnIcon: 'Select an Icon',
     seeAllIcons: 'See All Icons',
     fontAwesomeIcons: 'Font Awesome Icons',
@@ -103,25 +108,22 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
     confirm: 'Confirm',
     select: 'Select',
     close: 'Close'
-  } as IconSelectText;
+} as IconSelectText);
 
   /**
    * Icon select opened event emitter
    */
-  @Output()
-  opened = new EventEmitter<void>();
+  readonly opened = output<void>();
 
   /**
    * Icon selected event emitter
    */
-  @Output()
-  selected = new EventEmitter();
+  readonly selected = output<any>();
 
   /**
    * Dialog closed event emitter
    */
-  @Output()
-  closed = new EventEmitter<any>();
+  readonly closed = output<any>();
 
   /**
    * The scrollable icon container
@@ -282,7 +284,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    * @param service the IconsService
    * @param changeDetectorRef the Angular ChangeDetectorRef
    */
-  constructor(private service: IconsService, private changeDetectorRef: ChangeDetectorRef) {
+  constructor() {
     this.subscription = this._searchInputEnterKeyup.pipe(
       withLatestFrom(this.canSearch$)
     ).subscribe(results => {
@@ -361,7 +363,7 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
 
     this._internalValue.next(internalValue as any);
     this.showDialog = null;
-    this.closed.emit();
+    this.closed.emit(null as any);
   }
 
   /**

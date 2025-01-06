@@ -1,19 +1,19 @@
 <div #overlay (click)="close()"></div>
 <div
-  [ngClass]="bgClass + ' ' + (slideoverOpen ? 'slideover_active_' + position : 'slideover_inactive_' + position) + ' slideover-panel ' + position"
-  [style.width]="position === 'right' || position === 'left' ? (breakpointExceeded ? '100%' : width) : null"
-  [style.height]="position === 'top' || position === 'bottom' ? (breakpointExceeded ? '100%' : height) : null"
-  [style.left]="position === 'left' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : width) : null"
-  [style.right]="position === 'right' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : width) : null"
-  [style.bottom]="position === 'bottom' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : height) : null"
-  [style.top]="position === 'top' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : height) : null"
+  [ngClass]="bgClass() + ' ' + (slideoverOpen ? 'slideover_active_' + position : 'slideover_inactive_' + position) + ' slideover-panel ' + position"
+  [style.width]="position === 'right' || position === 'left' ? (breakpointExceeded ? '100%' : width()) : null"
+  [style.height]="position === 'top' || position === 'bottom' ? (breakpointExceeded ? '100%' : height()) : null"
+  [style.left]="position === 'left' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : width()) : null"
+  [style.right]="position === 'right' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : width()) : null"
+  [style.bottom]="position === 'bottom' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : height()) : null"
+  [style.top]="position === 'top' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : height()) : null"
   [style.visibility]="!visible ? 'hidden': 'visible'"
   [attr.aria-hidden]="!slideoverOpen"
   >
-  @if (!hideCloseButton) {
+  @if (!hideCloseButton()) {
     <div class="push_close_bar">
       <button class="access btnset clear"
-        [attr.aria-label]="text.close"
+        [attr.aria-label]="text().close"
         (click)="close()">
         <div class="circle_20px ptl_brdr_color ptl_brdr_size ptl_input_bg_color">
           <i class="fas fa-times"></i>

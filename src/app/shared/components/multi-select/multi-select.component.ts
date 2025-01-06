@@ -4,11 +4,13 @@ import {
   Component,
   ContentChild,
   ElementRef,
-  EventEmitter,
   forwardRef,
   HostListener,
+  inject,
   Input,
-  Output,
+  input,
+  model,
+  output,
   QueryList,
   Renderer2,
   TemplateRef,
@@ -56,6 +58,9 @@ declare type MultiSelectOptionInput = Array<MultiSelectOption | MultiSelectOptio
     imports: [NgIf, NgClass, NgTemplateOutlet, NgFor, AsyncPipe]
 })
 export class MultiSelectComponent implements ControlValueAccessor {
+  private renderer = inject(Renderer2);
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
 
   /**
    * Set the value of the multi-select
@@ -152,48 +157,38 @@ export class MultiSelectComponent implements ControlValueAccessor {
   /**
    * Whether the multi-select should be disabled
    */
-  @Input()
-  disabled: boolean = false;
+  disabled = model<boolean>(false);
 
   /**
    * Class list to assign to the multi-select
    */
-  @Input()
-  classList: string = null as any;
+  readonly classList = input<string>(null as any);
 
-  @Input()
-  buttonClassList: string = null as any;
+  readonly buttonClassList = input<string>(null as any);
 
-  @Input()
-  entryClassList: string = null as any;
+  readonly entryClassList = input<string>(null as any);
 
-  @Input()
-  text: MultiSelectText = {
+  readonly text = input<MultiSelectText>({
     placeholder: 'Make a Selection',
     of: 'of',
     optionsSelected: 'options selected'
-  } as MultiSelectText;
+} as MultiSelectText);
 
   /**
    * Style of the multi-select
    */
-  @Input()
-  type: 'input' | 'expanded' = 'input';
+  readonly type = input<'input' | 'expanded'>('input');
 
-  @Input()
-  maxExpandedEntries: number = 0;
+  readonly maxExpandedEntries = input<number>(0);
 
-  @Input()
-  expandedAsGrid: boolean = false;
+  readonly expandedAsGrid = input<boolean>(false);
 
-  @Input()
-  collapsedButtonTemplate: TemplateRef<any> = null as any;
+  readonly collapsedButtonTemplate = input<TemplateRef<any>>(null as any);
 
   /**
    * Event emitted on value change, emits the new value
    */
-  @Output()
-  changed = new EventEmitter<Array<string | number>>();
+  readonly changed = output<Array<string | number>>();
 
   /**
    * BehaviorSubject tracking the input multi-select options/option groups
@@ -370,7 +365,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
    * @param renderer the Angular renderer
    * @param changeDetectorRef reference to the Angular change detector
    */
-  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {
+  constructor() {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
 
@@ -411,7 +406,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
    * @param isDisabled disabled or not
    */
   setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled.set(isDisabled);
     this.changeDetectorRef.markForCheck();
   }
 
@@ -432,7 +427,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
    */
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
-    if (document.activeElement?.id?.includes(this.multiSelectId) && !this.disabled) {
+    if (document.activeElement?.id?.includes(this.multiSelectId) && !this.disabled()) {
       const {key} = event;
 
       if (MultiSelectComponent.ARROW_KEYS.includes(key)) {
@@ -447,7 +442,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
    */
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
-    if (document.activeElement?.id?.includes(this.multiSelectId) && !this.disabled) {
+    if (document.activeElement?.id?.includes(this.multiSelectId) && !this.disabled()) {
       const {key} = event;
 
       if (MultiSelectComponent.ARROW_KEYS.includes(key)) {
@@ -538,7 +533,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
   openMultiSelect(event: MouseEvent): void {
     event.stopImmediatePropagation();
 
-    if (!this.disabled) {
+    if (!this.disabled()) {
       this.render = true;
       this.opened = true;
     }

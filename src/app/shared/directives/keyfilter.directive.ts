@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, inject } from '@angular/core';
 
 /**
  * Directive to apply key filtering to an HTML input element
@@ -8,6 +8,8 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
     standalone: true
 })
 export class KeyfilterDirective {
+  private hostElement = inject<ElementRef<HTMLInputElement>>(ElementRef);
+
 
   /**
    * Array of keyboard key names that are always allowed
@@ -82,12 +84,6 @@ export class KeyfilterDirective {
   private static keyIsUrlToken(key: string): boolean {
     return KeyfilterDirective.URL_TOKEN_KEYS.includes(key.toLowerCase());
   }
-
-  /**
-   * Dependency injection site
-   * @param hostElement
-   */
-  constructor(private hostElement: ElementRef<HTMLInputElement>) { }
 
   /**
    * Filter out keys based on the specified filter type

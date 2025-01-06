@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnChanges, Output,} from '@angular/core';
+import {AfterViewInit, Component, Input, input, OnChanges, output} from '@angular/core';
 import {PaginatorText} from '../../models/particle-component-text.model';
 import {PopoverComponent} from '../popover/popover.component';
 import {FormsModule} from '@angular/forms';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import {NgClass, NgTemplateOutlet} from '@angular/common';
 import {PaginationEvent} from '../../models/pagination-event.model';
 
 /**
@@ -21,8 +21,7 @@ export class PaginatorComponent implements OnChanges, AfterViewInit {
   /**
    * An array of potential page sizes.
    */
-  @Input()
-  pageSizeOptions: Array<number> = null as any;
+  readonly pageSizeOptions = input<Array<number>>(null as any);
 
   /**
    * Current page size
@@ -40,23 +39,17 @@ export class PaginatorComponent implements OnChanges, AfterViewInit {
   /**
    * Total number of items
    */
-  @Input()
-  totalLength: number = null as any;
+  readonly totalLength = input<number>(null as any);
 
-  @Input()
-  showPages = false;
+  readonly showPages = input(false);
 
-  @Input()
-  showFirstLast = false;
+  readonly showFirstLast = input(false);
 
-  @Input()
-  showButtonLabels = true;
+  readonly showButtonLabels = input(true);
 
-  @Input()
-  showResultsPanel = true;
+  readonly showResultsPanel = input(true);
 
-  @Input()
-  text: PaginatorText = {
+  readonly text = input<PaginatorText>({
     itemsPerPage: 'Items Per Page',
     choosePageSize: 'Choose Page Size',
     previousPage: 'Previous',
@@ -69,13 +62,12 @@ export class PaginatorComponent implements OnChanges, AfterViewInit {
     outOf: 'out of',
     of: 'of',
     results: 'Results'
-  } as PaginatorText;
+} as PaginatorText);
 
   /**
    * Event Emitter for pagination or page size change.
    */
-  @Output()
-  paginate = new EventEmitter();
+  readonly paginate = output<PaginationEvent>();
 
   /**
    * Currently active page
@@ -132,7 +124,7 @@ export class PaginatorComponent implements OnChanges, AfterViewInit {
    * Calculates the number of pages
    */
   getNumberOfPages(): number {
-    return Math.ceil(this.totalLength / this.pageSize);
+    return Math.ceil(this.totalLength() / this.pageSize);
   }
 
   /**
@@ -163,7 +155,7 @@ export class PaginatorComponent implements OnChanges, AfterViewInit {
     this.paginate.emit({
       activePage: this.activePage,
       pageSize: this.pageSize,
-      totalLength: this.totalLength
+      totalLength: this.totalLength()
     } as PaginationEvent);
   }
 
@@ -197,7 +189,7 @@ export class PaginatorComponent implements OnChanges, AfterViewInit {
   getEndingValueForPage(pageNumber: number): number {
     // If it's the last page, return the total length
     if (pageNumber === this.getNumberOfPages() - 1) {
-      return this.totalLength;
+      return this.totalLength();
     }
 
     return (pageNumber + 1) * this.pageSize;

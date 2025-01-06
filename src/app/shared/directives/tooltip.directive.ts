@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, Input, OnDestroy, Renderer2} from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnDestroy, Renderer2, inject, input } from '@angular/core';
 
 /**
  * Directive to create a tooltip around the host element
@@ -9,6 +9,9 @@ import {Directive, ElementRef, HostListener, Input, OnDestroy, Renderer2} from '
     standalone: true
 })
 export class TooltipDirective implements OnDestroy {
+  private element = inject<ElementRef<HTMLElement>>(ElementRef);
+  private renderer = inject(Renderer2);
+
 
   /**
    * The number of pixels from the host to offset the tooltip
@@ -38,8 +41,7 @@ export class TooltipDirective implements OnDestroy {
   /**
    * The direction of the tooltip around the host element
    */
-  @Input()
-  tooltipPosition: 'left' | 'right' | 'top' | 'bottom' = 'bottom';
+  readonly tooltipPosition = input<'left' | 'right' | 'top' | 'bottom'>('bottom');
 
   /**
    * Whether to disable the tooltip
@@ -98,13 +100,6 @@ export class TooltipDirective implements OnDestroy {
     const { scrollLeft, clientLeft } = document.documentElement;
     return (window.scrollX ?? scrollLeft) - (clientLeft ?? 0);
   }
-
-  /**
-   * Dependency injection site
-   * @param element the host element
-   * @param renderer the Angular renderer
-   */
-  constructor(private element: ElementRef<HTMLElement>, private renderer: Renderer2) { }
 
   /**
    * Destroy directive, invoke scroll unlisteners
@@ -176,7 +171,7 @@ export class TooltipDirective implements OnDestroy {
    * @private
    */
   private alignTooltip(): void {
-    switch (this.tooltipPosition) {
+    switch (this.tooltipPosition()) {
       case 'left':
         this.renderer.addClass(this.tooltip, 'left');
         this.alignLeft();

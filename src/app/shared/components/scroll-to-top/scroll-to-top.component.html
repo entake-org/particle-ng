@@ -1,12 +1,12 @@
 @if ($scrollTop | async; as scrollTop) {
-  <div [style.visibility]="scrollTop > scrollDistance ? 'visible' : 'hidden'"
-    [style.opacity]="scrollTop > scrollDistance ? '1' : '0'"
-    [style.bottom]="bottomOffset + 'px'"
+  <div [style.visibility]="scrollTop > scrollDistance() ? 'visible' : 'hidden'"
+    [style.opacity]="scrollTop > scrollDistance() ? '1' : '0'"
+    [style.bottom]="bottomOffset() + 'px'"
     class="particle_scroll_button mar_right10 mar_bot15">
     <button (click)="scrollToTop()"
       class="access btn pad_10 brad_3 brdr content_color"
       type="button"
-      [attr.aria-label]="text.scrollToTop">
+      [attr.aria-label]="text().scrollToTop">
       <span class="icon slide_up"><i class="fas fa-chevron-up"></i></span>
     </button>
   </div>

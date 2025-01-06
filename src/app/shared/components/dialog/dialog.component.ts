@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, inject, input, output } from '@angular/core';
 import {DialogService} from '../../services/dialog.service';
 import {fromEvent, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -29,6 +29,8 @@ import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
     imports: [NgClass, CdkTrapFocus, NgStyle, AsyncPipe]
 })
 export class DialogComponent {
+  private dialogService = inject(DialogService);
+
 
   /**
    * Element reference to the dialog close button
@@ -44,14 +46,15 @@ export class DialogComponent {
     map(() => window.innerWidth),
     map(windowWidth => {
       let width: number;
-      if (this.width.includes('px')) {
-        width = parseInt(this.width.substring(0, this.width.length - 2), 10);
+      const widthValue = this.width();
+      if (widthValue.includes('px')) {
+        width = parseInt(widthValue.substring(0, widthValue.length - 2), 10);
         if (width > windowWidth) {
           width = windowWidth;
         }
         return width + 'px';
       }
-      return this.width;
+      return widthValue;
     })
   );
 
@@ -81,70 +84,53 @@ export class DialogComponent {
   /**
    * Title to show at the top of the dialog
    */
-  @Input()
-  title: string = null as any;
+  readonly title = input<string>(null as any);
 
   /**
    * Class to apply to the title of the dialog
    */
-  @Input()
-  titleClass = 'header_color';
+  readonly titleClass = input('header_color');
 
   /**
    * Show or hide the title bar
    */
-  @Input()
-  showTitle = true;
+  readonly showTitle = input(true);
 
   /**
    * Whether to show close button and allow escape to close
    */
-  @Input()
-  allowClose = true;
+  readonly allowClose = input(true);
 
   /**
    * Class to apply to the body of the dialog
    */
-  @Input()
-  bodyClass = 'content_color';
+  readonly bodyClass = input('content_color');
 
   /**
    * Height of the dialog (can use any height measurement)
    */
-  @Input()
-  height = '500px';
+  readonly height = input('500px');
 
   /**
    * Width of the dialog (can use any width measurement)
    */
-  @Input()
-  width = '900px';
+  readonly width = input('900px');
 
-  @Input()
-  borderRadius = '0px';
+  readonly borderRadius = input('0px');
 
-  @Input()
-  text: DialogText = {
+  readonly text = input<DialogText>({
     close: 'Close Dialog'
-  } as DialogText;
+} as DialogText);
 
   /**
    * Event Emitter for when the dialog is closed
    */
-  @Output()
-  closed = new EventEmitter();
+  readonly closed = output();
 
   /**
    * Event emitted when dialog has finished opening
    */
-  @Output()
-  opened = new EventEmitter<void>();
-
-  /**
-   * Dependency injection site
-   * @param dialogService the dialog service
-   */
-  constructor(private dialogService: DialogService) { }
+  readonly opened = output<void>();
 
   /**
    * Null the object to close the dialog, emit the close event.

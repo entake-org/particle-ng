@@ -2,7 +2,7 @@
   <button
     (click)="handleClick()"
     [attr.aria-label]="options.accessibilityLabel"
-    [disabled]="disabled"
+    [disabled]="disabled()"
     [ngClass]="value ? options.affirmativeColorClass : options.negativeColorClass"
     class="access btn sm v_center hov_glow p_toggle_button"
     >

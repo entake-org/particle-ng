@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output, ViewChild} from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, Input, ViewChild, inject, input, output } from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {
   add,
@@ -98,6 +98,8 @@ declare interface MetaWeek {
     imports: [NgClass, PopoverComponent, FormsModule, TooltipDirective, AsyncPipe, DatePipe]
 })
 export class WeekPickerComponent implements ControlValueAccessor {
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
 
   /**
    * Set the value of the week picker
@@ -160,36 +162,30 @@ export class WeekPickerComponent implements ControlValueAccessor {
   /**
    * Class list to apply to the date range input
    */
-  @Input()
-  inputClassList = null as any;
+  readonly inputClassList = input(null as any);
 
   /**
    * Class list to apply to the week picker button
    */
-  @Input()
-  calendarButtonClassList = '';
+  readonly calendarButtonClassList = input('');
 
   /**
    * The aria label to apply to the date range input
    */
-  @Input()
-  ariaLabel = 'Date';
+  readonly ariaLabel = input('Date');
 
   /**
    * Format for the selected date range in the selection preview. Must
    * be a valid Angular DatePipe format
    */
-  @Input()
-  dateFormat = 'MM/dd/y';
+  readonly dateFormat = input('MM/dd/y');
 
   /**
    * Close the picker when a selection is made
    */
-  @Input()
-  closeOnSelect = true;
+  readonly closeOnSelect = input(true);
 
-  @Input()
-  text = {
+  readonly text = input({
     openCalendar: 'open calendar to select week',
     selectWeek: 'Select a week',
     selectYear: 'Select a year',
@@ -218,13 +214,15 @@ export class WeekPickerComponent implements ControlValueAccessor {
     resetWeekSelection: 'Reset week selection to current week',
     selectNextWeek: 'Select next week',
     nextWeek: 'Next Week'
-  } as WeekPickerText;
+} as WeekPickerText);
 
   /**
    * Event emitted on week select
    */
-  @Output()
-  weekSelected = new EventEmitter<{ start: Date, end: Date }>();
+  readonly weekSelected = output<{
+    start: Date;
+    end: Date;
+}>();
 
   /**
    * ViewChild of the calendar popover
@@ -473,7 +471,7 @@ export class WeekPickerComponent implements ControlValueAccessor {
    * Dependency injection site
    * @param changeDetectorRef the Angular ChangeDetectorRef
    */
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
+  constructor() {
     this.currentDate = WeekPickerComponent.getMetaDate(new Date(), false);
   }
 
@@ -553,7 +551,7 @@ export class WeekPickerComponent implements ControlValueAccessor {
 
       this.updateModel(selectedWeek);
 
-      if (this.closeOnSelect) {
+      if (this.closeOnSelect()) {
         setTimeout(() => this.calendarPopover.close(), 200);
       }
     }

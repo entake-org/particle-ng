@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnDestroy, Renderer2} from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, Renderer2, inject, input } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {ScrollToTopText} from '../../models/particle-component-text.model';
 import { AsyncPipe } from '@angular/common';
@@ -9,32 +9,26 @@ import { AsyncPipe } from '@angular/common';
     imports: [AsyncPipe]
 })
 export class ScrollToTopComponent implements OnDestroy, AfterViewInit {
+  renderer = inject(Renderer2);
 
-  @Input()
-  content: HTMLElement = null as any;
 
-  @Input()
-  scrollDistance = 500;
+  readonly content = input<HTMLElement>(null as any);
 
-  @Input()
-  bottomOffset = 50;
+  readonly scrollDistance = input(500);
 
-  @Input()
-  text: ScrollToTopText = {
+  readonly bottomOffset = input(50);
+
+  readonly text = input<ScrollToTopText>({
     scrollToTop: 'Scroll back to the top of the page'
-  } as ScrollToTopText;
+} as ScrollToTopText);
 
   $scrollTop = new BehaviorSubject<number>(0);
 
   private _listener: any;
 
-  constructor(
-    public renderer: Renderer2
-  ) {}
-
   ngAfterViewInit(): void {
-    this._listener = this.renderer.listen(this.content, 'scroll', () => {
-      this.$scrollTop.next(this.content.scrollTop);
+    this._listener = this.renderer.listen(this.content(), 'scroll', () => {
+      this.$scrollTop.next(this.content().scrollTop);
     });
   }
 
@@ -43,8 +37,9 @@ export class ScrollToTopComponent implements OnDestroy, AfterViewInit {
   }
 
   scrollToTop(): void {
-    if (this.content) {
-      this.content.scroll({
+    const content = this.content();
+    if (content) {
+      content.scroll({
         top: 0,
         behavior: 'smooth'
       });

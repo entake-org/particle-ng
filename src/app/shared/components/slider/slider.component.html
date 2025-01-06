@@ -12,7 +12,7 @@
            [ngModel]="_value"
            [min]="_min" [max]="_max" [step]="_step"
            [disabled]="_disabled"
-           [attr.aria-label]="text.selectAValue + (ariaLabel ? ' - ' + ariaLabel : '')"
+           [attr.aria-label]="text().selectAValue + (ariaLabel() ? ' - ' + ariaLabel() : '')"
            (input)="handleInput(+slider.value); input.emit(+slider.value)"
            (change)="handleInput(+slider.value); input.emit(+slider.value)"
            class="access" style="width:100%; z-index: var(--z-frame); margin:10px 0;" />
@@ -26,12 +26,12 @@
            [min]="_min" [max]="_max" [step]="_step"
            [size]="(_max + '').length"
            [disabled]="_disabled"
-           [attr.aria-label]="text.enterAValue + (ariaLabel ? ' - ' + ariaLabel : '')"
+           [attr.aria-label]="text().enterAValue + (ariaLabel() ? ' - ' + ariaLabel() : '')"
            (input)="handleInput(+sliderInput.value); input.emit(+sliderInput.value)"
            (blur)="handleInput(+sliderInput.value)"
            (paste)="preventPaste($event)"
            class="access"
            style="width:auto;" />
-    <div class="text ptl_input_text_size mar_lr10">{{unit}}</div>
+    <div class="text ptl_input_text_size mar_lr10">{{unit()}}</div>
   </div>
 </div>

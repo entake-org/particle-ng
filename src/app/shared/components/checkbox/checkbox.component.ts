@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, Input} from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, Input, inject, input } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {coerceBooleanProperty} from '@angular/cdk/coercion';
 
@@ -18,6 +18,8 @@ import {CheckboxText} from '../../models/particle-component-text.model';
     imports: []
 })
 export class CheckboxComponent implements ControlValueAccessor {
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
 
   _value: boolean = false;
   private _disabled = false;
@@ -54,24 +56,16 @@ export class CheckboxComponent implements ControlValueAccessor {
     return this._value ? 'Y' : 'N';
   }
 
-  @Input()
-  size: number = 30;
+  readonly size = input<number>(30);
 
-  @Input()
-  inputId: string = null as any;
+  readonly inputId = input<string>(null as any);
 
-  @Input()
-  text = {
+  readonly text = input({
     check: 'Check the Box',
     uncheck: 'Uncheck the Box'
-  } as CheckboxText;
+} as CheckboxText);
 
   type: string = 'boolean';
-
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef
-  ) {
-  }
 
   /**
    * Write value

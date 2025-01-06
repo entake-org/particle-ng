@@ -2,15 +2,15 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
   HostListener,
   Input,
+  input,
   OnDestroy,
-  Output,
+  output,
   ViewChild
 } from '@angular/core';
 import {SlideoverText} from '../../models/particle-component-text.model';
-import { NgClass } from '@angular/common';
+import {NgClass} from '@angular/common';
 
 @Component({
     selector: 'particle-slideover',
@@ -38,37 +38,28 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
     return this._position;
   }
 
-  @Input()
-  modal = true;
+  readonly modal = input(true);
 
-  @Input()
-  width = '300px';
+  readonly width = input('300px');
 
-  @Input()
-  height = '100px';
+  readonly height = input('100px');
 
-  @Input()
-  bgClass = 'content_color';
+  readonly bgClass = input('content_color');
 
-  @Input()
-  text: SlideoverText = {
+  readonly text = input<SlideoverText>({
     close: 'Close Slideover'
-  } as SlideoverText;
+} as SlideoverText);
 
   /**
    * Breakpoint that will make the container take over the screen when it's crossed.
    */
-  @Input()
-  breakpoint = 769;
+  readonly breakpoint = input(769);
 
-  @Input()
-  hideCloseButton = false;
+  readonly hideCloseButton = input(false);
 
-  @Output()
-  opened = new EventEmitter<any>();
+  readonly opened = output<any>();
 
-  @Output()
-  closed = new EventEmitter<any>();
+  readonly closed = output<any>();
 
   @ViewChild('overlay')
   overlay: ElementRef = null as any;
@@ -81,8 +72,9 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
   }
 
   private _determineBreakpointExceeded(innerWidth: number): void {
-    if (this.breakpoint) {
-      this.breakpointExceeded = innerWidth < this.breakpoint || innerWidth < +this.width.substring(0, this.width.length - 2);
+    const breakpoint = this.breakpoint();
+    if (breakpoint) {
+      this.breakpointExceeded = innerWidth < breakpoint || innerWidth < +this.width().substring(0, this.width().length - 2);
     }
   }
 
@@ -90,13 +82,13 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
     this.addModalMask();
     this.slideoverOpen = true;
     this.visible = true;
-    this.opened.emit();
+    this.opened.emit(null as any);
   }
 
   close(): void {
     this.removeModalMask();
     this.slideoverOpen = false;
-    this.closed.emit();
+    this.closed.emit(null as any);
 
     setTimeout(() => this.visible = false, 200);
   }
@@ -110,14 +102,14 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
   }
 
   private addModalMask(): void {
-    if (this.modal) {
+    if (this.modal()) {
       this.overlay.nativeElement.classList.add('particle_dialog_overlay');
       document.body.classList.add('scroll_none');
     }
   }
 
   private removeModalMask(): void {
-    if (this.modal) {
+    if (this.modal()) {
       this.overlay.nativeElement.classList.remove('particle_dialog_overlay');
       document.body.classList.remove('scroll_none');
     }

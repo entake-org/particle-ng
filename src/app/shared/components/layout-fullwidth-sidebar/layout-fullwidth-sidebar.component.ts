@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, HostListener, TemplateRef, ViewChild, input} from '@angular/core';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {SlideoverComponent} from '../slideover/slideover.component';
 
@@ -9,48 +9,36 @@ import {SlideoverComponent} from '../slideover/slideover.component';
 })
 export class LayoutFullwidthSidebarComponent {
 
-  @Input()
-  mainContent: TemplateRef<any> = null as any;
+  readonly mainContent = input<TemplateRef<any>>(null as any);
 
-  @Input()
-  rightSidebar: TemplateRef<any> = null as any;
+  readonly rightSidebar = input<TemplateRef<any>>(null as any);
 
-  @Input()
-  mainContentContainerClassList = '';
+  readonly mainContentContainerClassList = input('');
 
-  @Input()
-  rightSidebarContainerClassList = '';
+  readonly rightSidebarContainerClassList = input('');
 
-  @Input()
-  rightSidebarSticky = false;
+  readonly rightSidebarSticky = input(false);
 
-  @Input()
-  headerHeight: string = '0';
+  readonly headerHeight = input<string>('0');
 
-  @Input()
-  footerHeight: string = '0';
+  readonly footerHeight = input<string>('0');
 
-  @Input()
-  rightSidebarWidth: string = '250px';
+  readonly rightSidebarWidth = input<string>('250px');
 
-  @Input()
-  breakpoint: number = 1024;
+  readonly breakpoint = input<number>(1024);
 
-  @Input()
-  rightSidebarCollapsedTabOffset = 150;
+  readonly rightSidebarCollapsedTabOffset = input(150);
 
-  @Input()
-  collapsedClassList = '';
+  readonly collapsedClassList = input('');
 
-  @Input()
-  mobileSidebarEnabled = true;
+  readonly mobileSidebarEnabled = input(true);
 
   @ViewChild('slideover')
   slideover: SlideoverComponent = null as any;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
-    if (this.mobileSidebarEnabled && event.target.innerWidth > 768 && this.slideover && this.slideover.slideoverOpen) {
+    if (this.mobileSidebarEnabled() && event.target.innerWidth > 768 && this.slideover && this.slideover.slideoverOpen) {
       this.slideover.close();
     }
   }
@@ -58,8 +46,8 @@ export class LayoutFullwidthSidebarComponent {
   protected readonly window = window;
 
   get stickySidebarHeight(): string {
-    const offset: number = +this.headerHeight.replace(/\D/g, "") +
-      +this.footerHeight.replace(/\D/g, "");
+    const offset: number = +this.headerHeight().replace(/\D/g, "") +
+      +this.footerHeight().replace(/\D/g, "");
 
     return `calc(100vh - ${offset}px)`;
   }

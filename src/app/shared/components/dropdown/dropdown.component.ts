@@ -4,11 +4,13 @@ import {
   Component,
   ContentChild,
   ElementRef,
-  EventEmitter,
   forwardRef,
   HostListener,
+  inject,
   Input,
-  Output,
+  input,
+  model,
+  output,
   QueryList,
   Renderer2,
   TemplateRef,
@@ -57,6 +59,9 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
     imports: [NgIf, NgClass, NgTemplateOutlet, NgFor, FormsModule, AsyncPipe]
 })
 export class DropdownComponent implements ControlValueAccessor {
+  private renderer = inject(Renderer2);
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
 
   /**
    * Set the value of the dropdown
@@ -89,7 +94,7 @@ export class DropdownComponent implements ControlValueAccessor {
    * @param renderer the Angular renderer
    * @param changeDetectorRef reference to the Angular change detector
    */
-  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {
+  constructor() {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
 
@@ -146,28 +151,27 @@ export class DropdownComponent implements ControlValueAccessor {
   /**
    * Whether the dropdown should be disabled
    */
-  @Input()
-  disabled: boolean = false;
+  readonly disabled = model<boolean>(false);
 
-  @Input()
-  text: DropdownText = {
+  readonly text = input<DropdownText>({
     placeholder: 'Make a selection'
-  }
+}
+/**
+ * Class list to assign to the dropdown
+ */
+);
 
   /**
    * Class list to assign to the dropdown
    */
-  @Input()
-  classList: string = null as any;
+  readonly classList = input<string>(null as any);
 
-  @Input()
-  buttonClassList: string = null as any;
+  readonly buttonClassList = input<string>(null as any);
 
   /**
    * Event emitted on value change, emits the new value
    */
-  @Output()
-  changed = new EventEmitter<string | number>();
+  readonly changed = output<string | number>();
 
   /**
    * BehaviorSubject tracking the input dropdown options/option groups
@@ -404,7 +408,7 @@ export class DropdownComponent implements ControlValueAccessor {
    * @param isDisabled disabled or not
    */
   setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabled.set(isDisabled);
     this.changeDetectorRef.markForCheck();
   }
 
@@ -427,7 +431,7 @@ export class DropdownComponent implements ControlValueAccessor {
    */
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
-    if (document.activeElement?.id?.includes(this.dropdownId) && !this.disabled) {
+    if (document.activeElement?.id?.includes(this.dropdownId) && !this.disabled()) {
       const {key} = event;
 
       if (DropdownComponent.ARROW_KEYS.includes(key)) {
@@ -442,7 +446,7 @@ export class DropdownComponent implements ControlValueAccessor {
    */
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
-    if (document.activeElement?.id?.includes(this.dropdownId) && !this.disabled) {
+    if (document.activeElement?.id?.includes(this.dropdownId) && !this.disabled()) {
       const {key} = event;
 
       if (DropdownComponent.ARROW_KEYS.includes(key)) {
@@ -546,7 +550,7 @@ export class DropdownComponent implements ControlValueAccessor {
   openDropdown(event: MouseEvent): void {
     event.stopImmediatePropagation();
 
-    if (!this.disabled) {
+    if (!this.disabled()) {
       this.render = true;
       this.opened = true;
     }
@@ -620,7 +624,7 @@ export class DropdownComponent implements ControlValueAccessor {
    * @private
    */
   private handleDropdownOptionSelect(value: string | number): void {
-    if (this.value !== value && !this.disabled) {
+    if (this.value !== value && !this.disabled()) {
       this.value = value;
 
       this.onChange(value);

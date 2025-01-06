@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import { ChangeDetectorRef, Component, forwardRef, Input, inject, input, output } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ToggleOptions} from '../../models/toggle-options.model';
 import {BehaviorSubject} from 'rxjs';
@@ -16,6 +16,8 @@ import {AsyncPipe, NgClass, NgTemplateOutlet} from '@angular/common';
     imports: [NgClass, NgTemplateOutlet, AsyncPipe]
 })
 export class ToggleSwitchComponent implements ControlValueAccessor {
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
 
   private _options$ = new BehaviorSubject<ToggleOptions>({
     affirmativeColorClass: 'ok_button_color',
@@ -42,11 +44,9 @@ export class ToggleSwitchComponent implements ControlValueAccessor {
     this._options$.next(options);
   }
 
-  @Input()
-  disabled: boolean = false;
+  readonly disabled = input<boolean>(false);
 
-  @Output()
-  changed = new EventEmitter<boolean>();
+  readonly changed = output<boolean>();
 
   private _value: boolean = null as any;
 
@@ -72,10 +72,6 @@ export class ToggleSwitchComponent implements ControlValueAccessor {
    * Function called on touch
    */
   onTouched: (() => void) | undefined;
-
-  constructor(
-    private changeDetectorRef: ChangeDetectorRef
-  ) { }
 
   handleClick(): void {
     this.value = !this._value;

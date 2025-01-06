@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, forwardRef, Input, Output, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, forwardRef, Input, ViewEncapsulation, input, output} from '@angular/core';
 import {Editor} from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
@@ -29,14 +29,11 @@ export const RICH_TEXT_VALUE_ACCESSOR: any = {
 })
 export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
-  @Input()
-  placeholder = '';
+  readonly placeholder = input('');
 
-  @Input()
-  hideControls = false;
+  readonly hideControls = input(false);
 
-  @Input()
-  height = '100px';
+  readonly height = input('100px');
 
   @Input()
   get readonly(): boolean {
@@ -48,8 +45,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     this.editor.setEditable(this._editable);
   }
 
-  @Input()
-  text: RichTextEditorText = {
+  readonly text = input<RichTextEditorText>({
     heading1: 'Heading 1',
     heading2: 'Heading 2',
     bold: 'Bold',
@@ -70,26 +66,23 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     url: 'URL',
     addImage: 'Add Image',
     modifyImage: 'Modify Image'
-  } as RichTextEditorText;
+} as RichTextEditorText);
 
-  @Input()
-  capabilities = {
+  readonly capabilities = input({
     heading: true,
     textDecoration: true,
     list: true,
     alignment: true,
     link: true,
     images: false
-  } as RichTextCapabilities;
+} as RichTextCapabilities);
 
-  @Input()
-  borderRadius = '0px';
+  readonly borderRadius = input('0px');
 
-  @Output()
-  textChanged = new EventEmitter<{
-    htmlValue: string,
-    textValue: string
-  }>();
+  readonly textChanged = output<{
+    htmlValue: string;
+    textValue: string;
+}>();
 
   showDialog: any = null;
   dialogLink: string = null as any;
@@ -126,7 +119,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
       }),
       Placeholder.configure({
-        placeholder: () => this.placeholder
+        placeholder: () => this.placeholder()
       }),
       Image
     ],

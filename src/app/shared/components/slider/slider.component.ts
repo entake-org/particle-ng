@@ -2,11 +2,12 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  EventEmitter,
   forwardRef,
+  inject,
   Input,
+  input,
   OnInit,
-  Output,
+  output,
   ViewChild
 } from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
@@ -30,6 +31,8 @@ import {NgClass} from '@angular/common';
     imports: [FormsModule, NgClass]
 })
 export class SliderComponent implements ControlValueAccessor, OnInit {
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
 
   /**
    * ViewChild of the slider input
@@ -99,27 +102,23 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
   /**
    * The unit being represented by the slider
    */
-  @Input()
-  unit: string = null as any;
+  readonly unit = input<string>(null as any);
 
   /**
    * The aria-label to append to the slider/input
    */
-  @Input()
-  ariaLabel: string = null as any;
+  readonly ariaLabel = input<string>(null as any);
 
-  @Input()
-  text: SliderText = {
+  readonly text = input<SliderText>({
     selectAValue: 'Select a value',
     enterAValue: 'Enter a value'
-  } as SliderText;
+} as SliderText);
 
   /**
    * Event emitted on slider/slider input input event
    */
-  @Output()
-    // eslint-disable-next-line @angular-eslint/no-output-native
-  input = new EventEmitter<number>();
+  // eslint-disable-next-line @angular-eslint/no-output-native
+  readonly input = output<number>();
 
   /**
    * The internal value of the component
@@ -165,13 +164,6 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouched: () => any = () => {
   };
-
-  /**
-   * Dependency injection site
-   * @param changeDetectorRef the Angular ChangeDetectorRef
-   */
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
-  }
 
   /**
    * Init component

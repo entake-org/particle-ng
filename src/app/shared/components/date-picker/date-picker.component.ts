@@ -3,13 +3,14 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  EventEmitter,
   forwardRef,
   HostListener,
+  inject,
   Input,
+  input,
   OnDestroy,
   OnInit,
-  Output,
+  output,
   Renderer2,
   ViewChild
 } from '@angular/core';
@@ -18,7 +19,7 @@ import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/for
 import {format, isEqual, isValid, isWithinInterval, parse} from 'date-fns';
 import {DatePickerText} from '../../models/particle-component-text.model';
 import {PopoverComponent} from '../popover/popover.component';
-import { NgClass } from '@angular/common';
+import {NgClass} from '@angular/common';
 import {CalendarComponent} from '../calendar/calendar.component';
 
 /**
@@ -50,6 +51,9 @@ import {CalendarComponent} from '../calendar/calendar.component';
     imports: [NgClass, FormsModule, PopoverComponent, CalendarComponent]
 })
 export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnInit {
+  private renderer = inject(Renderer2);
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
 
   /**
    * Allowed keys for date input
@@ -149,41 +153,34 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   /**
    * The ID to set on the input
    */
-  @Input()
-  inputId: string = null as any;
+  readonly inputId = input<string>(null as any);
 
   /**
    * Value to use as the date picker input's aria label
    */
-  @Input()
-  ariaLabel = 'Date';
+  readonly ariaLabel = input('Date');
 
   /**
    * Optional class-list to add to the date picker input
    */
-  @Input()
-  inputClassList = null as any;
+  readonly inputClassList = input(null as any);
 
   /**
    * Optional class-list to add to the calendar button
    */
-  @Input()
-  calendarButtonClassList = '';
+  readonly calendarButtonClassList = input('');
 
   /**
    * Close the picker when a selection is made
    */
-  @Input()
-  closeOnSelect: boolean = true;
+  readonly closeOnSelect = input<boolean>(true);
 
   /**
    * Placeholder override
    */
-  @Input()
-  placeholder = 'mm/dd/yyyy';
+  readonly placeholder = input('mm/dd/yyyy');
 
-  @Input()
-  inputOnly = false;
+  readonly inputOnly = input(false);
 
   private _text = {
     enterInFormat: 'enter in format',
@@ -204,15 +201,13 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   /**
    * Event emitted on date picker input
    */
-  @Output()
-    // eslint-disable-next-line @angular-eslint/no-output-native
-  input = new EventEmitter<void>();
+  // eslint-disable-next-line @angular-eslint/no-output-native
+  readonly input = output<void>();
 
   /**
    * Event emitted on valid date selection/input
    */
-  @Output()
-  dateSelected = new EventEmitter<Date>();
+  readonly dateSelected = output<Date>();
 
   /**
    * ViewChild of the date picker div
@@ -359,14 +354,6 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   onTouched: () => any = () => {
   };
 
-  /**
-   * Dependency injection site
-   * @param renderer the Angular renderer
-   * @param changeDetectorRef the Angular change detector
-   */
-  constructor(private renderer: Renderer2, private changeDetectorRef: ChangeDetectorRef) {
-  }
-
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: any): void {
     this.isMobile = event.target.innerWidth <= 768;
@@ -499,7 +486,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
         if (!isEqual(this.value, valueBeforeUpdate)) {
           this.dateSelected.emit(value);
 
-          if (this.closeOnSelect) {
+          if (this.closeOnSelect()) {
             setTimeout(() => this.handleCalendarClose(), 200);
           }
         }
