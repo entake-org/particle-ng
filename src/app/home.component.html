@@ -281,7 +281,6 @@
       </div>
       <div class="row width100">
         <particle-date-range-picker
-          [inputClassList]="''"
           [(ngModel)]="pickerRange"
           [calendarButtonClassList]="'bg_blue ptl_input_text_size'"
           [disabled]="false"
@@ -416,7 +415,7 @@
 </div>
 </ng-template>
 <ng-template #sidebar>
-  <div class="row wrap v_center">
+  <div class="row column">
     <button (click)="addNotification('success')"
       class="access btn sm bg_overlay brdr bg_green_alt mar_5">
       Show Success
@@ -433,7 +432,8 @@
       class="access btn sm bg_overlay brdr bg_purple_alt mar_5">
       Show Info
     </button>
-    <particle-icon-select #iconSelect></particle-icon-select>
+    <particle-icon-select class="center_center" #iconSelect></particle-icon-select>
+    <particle-loader></particle-loader>
   </div>
 </ng-template>
 <ng-template #footer></ng-template>

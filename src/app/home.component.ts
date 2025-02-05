@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject} from '@angular/core';
 
 import {AsyncPipe} from '@angular/common';
 import {LayoutFullFramingComponent} from './shared/components/layout-full-framing/layout-full-framing.component';
@@ -15,11 +15,12 @@ import {ThemingService} from './shared/services/theming.service';
 import {NotificationService} from './shared/services/notification.service';
 import {Notification} from './shared/models/notification.model';
 import {RichTextComponent} from './shared/components/rich-text/rich-text.component';
+import {LoaderComponent} from './shared/components/loader/loader.component';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe]
+    imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe, LoaderComponent]
 })
 export class HomeComponent {
   private themingService = inject(ThemingService);

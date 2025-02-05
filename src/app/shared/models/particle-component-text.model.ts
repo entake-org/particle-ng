@@ -69,6 +69,8 @@ export interface DateRangePickerText {
 
 export interface DialogText {
   close: string;
+  maximize: string;
+  minimize: string;
 }
 
 export interface DropdownText {

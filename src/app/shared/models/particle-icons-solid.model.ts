@@ -4,7 +4,7 @@
 export class ParticleIconsSolid {
 
   /**
-   * pts fa-divider
+   * fas fa-divider
    */
   static ptsDivider = {
     prefix: 'fas',
@@ -17,7 +17,7 @@ export class ParticleIconsSolid {
   };
 
   /**
-   * pts fa-multi-select
+   * fas fa-multi-select
    */
   static ptsMultiSelect = {
     prefix: 'fas',
@@ -30,7 +30,7 @@ export class ParticleIconsSolid {
   };
 
   /**
-   * pts fa-phone
+   * fas fa-phone
    */
   static ptsPhone = {
     prefix: 'fas',
@@ -43,7 +43,7 @@ export class ParticleIconsSolid {
   };
 
   /**
-   * pts fa-physical-address
+   * fas fa-physical-address
    */
   static ptsPhysicalAddress = {
     prefix: 'fas',
@@ -56,7 +56,7 @@ export class ParticleIconsSolid {
   };
 
   /**
-   * pts fa-radio-buttons
+   * fas fa-radio-buttons
    */
   static ptsRadioButtons = {
     prefix: 'fas',
@@ -69,7 +69,7 @@ export class ParticleIconsSolid {
   };
 
   /**
-   * pts fa-routing-number
+   * fas fa-routing-number
    */
   static ptsRoutingNumber = {
     prefix: 'fas',

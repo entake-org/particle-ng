@@ -1,11 +1,11 @@
-import { Component, ElementRef, Input, ViewChild, inject, input, output } from '@angular/core';
+import {Component, ElementRef, inject, Input, input, output, ViewChild} from '@angular/core';
 import {DialogService} from '../../services/dialog.service';
 import {fromEvent, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {animate, AnimationEvent, state, style, transition, trigger} from '@angular/animations';
 import {DialogText} from '../../models/particle-component-text.model';
 import {CdkTrapFocus} from '@angular/cdk/a11y';
-import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
+import {AsyncPipe, NgClass, NgStyle} from '@angular/common';
 
 /**
  * Component to display a dialog with dynamic content
@@ -31,12 +31,13 @@ import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 export class DialogComponent {
   private dialogService = inject(DialogService);
 
-
   /**
    * Element reference to the dialog close button
    */
   @ViewChild('closeButton')
   closeButton: ElementRef<HTMLButtonElement> = null as any;
+
+  protected isMaximized = false;
 
   /**
    * Observable to update the effective width of the dialog on screen resize
@@ -119,7 +120,9 @@ export class DialogComponent {
   readonly borderRadius = input('0px');
 
   readonly text = input<DialogText>({
-    close: 'Close Dialog'
+    close: 'Close Dialog',
+    maximize: 'Maximize',
+    minimize: 'Minimize'
 } as DialogText);
 
   /**
@@ -132,11 +135,16 @@ export class DialogComponent {
    */
   readonly opened = output<void>();
 
+  toggleMaximize(): void {
+    this.isMaximized = !this.isMaximized;
+  }
+
   /**
    * Null the object to close the dialog, emit the close event.
    */
   close(): void {
     this._object = null;
+    this.isMaximized = false;
     this.dialogService.unregisterDialog(this);
   }
 

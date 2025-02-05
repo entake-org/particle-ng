@@ -7,7 +7,7 @@
       [cdkTrapFocusAutoCapture]="true">
       @if (effectiveWidth$ | async; as effectiveWidth) {
         <div class="col shadow particle_dialog_box" [style.border-radius]="borderRadius()"
-          [ngStyle]="{'width': effectiveWidth, 'height': height()}">
+          [ngStyle]="{'width': isMaximized ? '90vw' : effectiveWidth, 'height': isMaximized ? '90vh' : height()}">
           <!-- dialog header -->
           @if (showTitle()) {
             <div class="col" [ngClass]="titleClass()">
@@ -15,8 +15,15 @@
                 <div class="text lg bold paragraph">
                   {{title()}}
                 </div>
-                <div>
+                <div class="row col rc_gap">
                   @if (allowClose()) {
+                    <button class="access btnset clear"
+                            [attr.aria-label]="isMaximized ? text().minimize : text().maximize"
+                            (click)="isMaximized = !isMaximized">
+                      <div class="circle_20px ptl_brdr_color ptl_brdr_size ptl_input_bg_color">
+                        <i class="fas fa-maximize"></i>
+                      </div>
+                    </button>
                     <button class="access btnset clear"
                       [attr.aria-label]="text().close"
                       (click)="close()">
