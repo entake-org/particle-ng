@@ -256,6 +256,15 @@
         </div>
       </div>
       <div class="row width100">
+        <particle-radio-buttons
+          [(ngModel)]="radioValue"
+          [options]="[{ value: 'a', label: 'Option A' },
+                       { value: 'b', label: 'Disabled Option', disabled: true },
+                       { value: 'c', label: 'Option C' },
+                       { value: 'd', label: 'Option D' }]"
+        ></particle-radio-buttons>
+      </div>
+      <div class="row width100">
         <particle-date-picker
           [(ngModel)]="date"
           [disabled]="false"

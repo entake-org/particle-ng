@@ -16,16 +16,18 @@ import {NotificationService} from './shared/services/notification.service';
 import {Notification} from './shared/models/notification.model';
 import {RichTextComponent} from './shared/components/rich-text/rich-text.component';
 import {LoaderComponent} from './shared/components/loader/loader.component';
+import {RadioButtonsComponent} from './shared/components/radio-buttons/radio-buttons.component';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe, LoaderComponent]
+    imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe, LoaderComponent, RadioButtonsComponent]
 })
 export class HomeComponent {
   private themingService = inject(ThemingService);
   private notificationService = inject(NotificationService);
 
+  radioValue = 'a';
 
   currentTheme$ = this.themingService.selectedTheme;
 

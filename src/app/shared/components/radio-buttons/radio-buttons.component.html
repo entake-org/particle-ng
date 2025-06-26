@@ -1,0 +1,21 @@
+<div class="row column rc_gap">
+  @for (option of options(); track $index) {
+    <div class="col">
+      <button class="access btnset clear"
+              (click)="handleInput(option.value)"
+              [disabled]="disabled() || option.disabled"
+      >
+        <div class="row rc_gap v_center ent_r2l_dir">
+          <div class="col">
+            <div class="circle_30px ptl_brdr_color ptl_brdr_size"
+              [ngClass]="option.value === value() ? 'bg_blue' : 'ptl_input_bg_color'"
+            ></div>
+          </div>
+          <div class="col ptl_input_text_size ent_r2l_txt">
+            {{option.label}}
+          </div>
+        </div>
+      </button>
+    </div>
+  }
+</div>

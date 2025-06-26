@@ -14,7 +14,7 @@
           (keyup.escape)="closed.emit()"
           class="access input sm content_color"
           [attr.aria-label]="text.selectAYear">
-          @for (year of validYearRange$ | async; track year) {
+          @for (year of validYearRange$ | async; track $index) {
             <option
               [value]="year">
               {{year}}
@@ -60,7 +60,7 @@
       </div>
       <!-- days -->
       <div class="row wrap space_between">
-        @for (dayInMonth of fullMonth$ | async; track dayInMonth) {
+        @for (dayInMonth of fullMonth$ | async; track $index) {
           <div [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"
             class="particle_datepicker_day">
             @if (dayInMonth.selectable) {
