@@ -22,7 +22,9 @@ export class RadioButtonsComponent implements ControlValueAccessor {
 
   readonly disabled = signal<boolean>(false);
   readonly value = signal<string>(null as any);
+
   readonly options = input<Array<DropdownOption>>([]);
+  readonly colorClass = input<string>('ok_button_color');
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChange: (value: any) => void = () => {

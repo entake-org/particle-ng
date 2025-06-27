@@ -36,6 +36,7 @@ export * from './app/shared/components/checkbox/checkbox.component';
 export * from './app/shared/components/input-mask/input-mask.component';
 export * from './app/shared/components/progress-bar/progress-bar.component';
 export * from './app/shared/components/loader/loader.component';
+export * from './app/shared/components/radio-buttons/radio-buttons.component';
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';
