@@ -1,4 +1,4 @@
-<div class="row column rc_gap">
+<div class="row rc_gap wrap" [ngClass]="isDisplayColumn() ? 'column' : ''">
   @for (option of options(); track $index) {
     <div class="col">
       <button class="access btnset clear"
