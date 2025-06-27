@@ -9,11 +9,13 @@
       >
         <div class="row rc_gap v_center ent_r2l_dir">
           <div class="col">
-            <div class="circle_30px ptl_brdr_color ptl_brdr_size"
-              [ngClass]="option.value === value() ? colorClass() : 'ptl_input_bg_color'"
-            ></div>
+            <div class="circle_30px ptl_input_bg_color ptl_brdr_color ptl_brdr_size">
+              <div class="circle_20px"
+                   [ngClass]="option.value === value() ? colorClass() : 'ptl_input_bg_color'"
+              ></div>
+            </div>
           </div>
-          <div class="col ptl_input_text_size ent_r2l_txt">
+          <div class="col ptl_input_text_size ent_r2l_txt text text_wrap">
             {{option.label}}
           </div>
         </div>

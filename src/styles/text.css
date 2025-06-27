@@ -8,7 +8,7 @@ PARTICLE STYLES
 }
 
 .rich_text_formatting img {
-  max-width: calc(100% - 20px);
+  width:100%;
   margin: 10px auto;
   display: block;
   border-radius: var(--ptl-brdr-radius);
