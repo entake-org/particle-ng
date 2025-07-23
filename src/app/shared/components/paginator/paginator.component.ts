@@ -49,6 +49,12 @@ export class PaginatorComponent implements OnChanges, AfterViewInit {
 
   readonly showResultsPanel = input(true);
 
+  readonly startingPage = input(0 as any, {
+    transform: (page: number) => {
+      setTimeout(() => this.setActivePage(page, false), 0);
+    }
+  });
+
   readonly text = input<PaginatorText>({
     itemsPerPage: 'Items Per Page',
     choosePageSize: 'Choose Page Size',
@@ -127,13 +133,7 @@ export class PaginatorComponent implements OnChanges, AfterViewInit {
     return Math.ceil(this.totalLength() / this.pageSize);
   }
 
-  /**
-   * Goes to a given page and emits a pagination event
-   *
-   * @param pageNumber
-   * @param inputFocus
-   */
-  goToPage(pageNumber: number, inputFocus?: boolean): void {
+  private _goToPage(pageNumber: number, emit: boolean, inputFocus?: boolean): void {
     this.activePage = pageNumber;
     this.pageStartingValue = this.getStartingValueForPage(this.activePage);
     this.pageEndingValue = this.getEndingValueForPage(this.activePage);
@@ -145,7 +145,28 @@ export class PaginatorComponent implements OnChanges, AfterViewInit {
       }
     }
 
-    this.emitEvent();
+    if (emit) {
+      this.emitEvent();
+    }
+  }
+
+  /**
+   * Goes to a given page and emits a pagination event
+   *
+   * @param pageNumber
+   * @param inputFocus
+   */
+  goToPage(pageNumber: number, inputFocus?: boolean): void {
+    this._goToPage(pageNumber, true, inputFocus);
+  }
+
+  /**
+   * Goes to a given page, but does not emit a pagination event
+   * @param pageNumber
+   * @param inputFocus
+   */
+  setActivePage(pageNumber: number, inputFocus?: boolean): void {
+    this._goToPage(pageNumber, false, inputFocus);
   }
 
   /**
