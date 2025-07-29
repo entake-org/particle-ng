@@ -21,7 +21,7 @@ import {RadioButtonsComponent} from './shared/components/radio-buttons/radio-but
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe, LoaderComponent, RadioButtonsComponent]
+  imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe, LoaderComponent, RadioButtonsComponent]
 })
 export class HomeComponent {
   private themingService = inject(ThemingService);

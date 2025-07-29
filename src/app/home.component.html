@@ -445,7 +445,38 @@
       class="access btn sm bg_overlay brdr bg_purple_alt mar_5">
       Show Info
     </button>
-    <particle-icon-select class="center_center" #iconSelect></particle-icon-select>
+
+    <div class="row width100 space_between" style="max-height:100px;">
+
+      <div class="square_50px">
+        <particle-dropdown
+          [collapsedButtonTemplate]="buttonTemplate"
+          [collapsedButtonTooltipEnabled]="true"
+          [dropdownBoxMinWidth]="250"
+          [text]="{placeholder: 'Select an option...'}"
+          [options]="[
+                         { value: 'a', label: 'Option A' },
+                         { value: 'b', label: 'Disabled Option', disabled: true },
+                         { value: 'c', label: 'Option C' },
+                         {
+                           groupLabel: 'Option Group',
+                           options: [
+                             { value: 'opt-1', label: 'Group Option 1' },
+                             { value: 'opt-$', label: 'Group Option $' },
+                             { value: 'opt-X', label: 'Group Option X' }
+                           ]
+                         }
+                       ]"
+          [disabled]="false">
+        </particle-dropdown>
+      </div>
+      <ng-template #buttonTemplate>
+        <div class="width100 height100 center_center bg_blue text lg"
+        ><i class="fas fa-filter"></i></div>
+      </ng-template>
+      <particle-icon-select class="center_center" #iconSelect></particle-icon-select>
+    </div>
+
     <particle-loader></particle-loader>
   </div>
 </ng-template>

@@ -18,12 +18,12 @@ import {
   ViewChildren
 } from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {map, withLatestFrom} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, map, Observable, of, withLatestFrom} from 'rxjs';
 import {DropdownText} from '../../models/particle-component-text.model';
 import {AsyncPipe, NgClass, NgFor, NgIf, NgTemplateOutlet} from '@angular/common';
 import {DropdownOption} from '../../models/dropdown-option.model';
 import {DropdownOptionGroup} from '../../models/dropdown-option-group.model';
+import {TooltipDirective} from '../../directives/tooltip.directive';
 
 /**
  * Type representing the dropdown component option input
@@ -56,12 +56,11 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
             multi: true
         }
     ],
-    imports: [NgIf, NgClass, NgTemplateOutlet, NgFor, FormsModule, AsyncPipe]
+  imports: [NgIf, NgClass, NgTemplateOutlet, NgFor, FormsModule, AsyncPipe, TooltipDirective]
 })
 export class DropdownComponent implements ControlValueAccessor {
   private renderer = inject(Renderer2);
   private changeDetectorRef = inject(ChangeDetectorRef);
-
 
   /**
    * Set the value of the dropdown
@@ -155,11 +154,7 @@ export class DropdownComponent implements ControlValueAccessor {
 
   readonly text = input<DropdownText>({
     placeholder: 'Make a selection'
-}
-/**
- * Class list to assign to the dropdown
- */
-);
+  });
 
   /**
    * Class list to assign to the dropdown
@@ -167,6 +162,12 @@ export class DropdownComponent implements ControlValueAccessor {
   readonly classList = input<string>(null as any);
 
   readonly buttonClassList = input<string>(null as any);
+
+  readonly collapsedButtonTemplate = input<TemplateRef<any>>(null as any);
+
+  readonly collapsedButtonTooltipEnabled = input<boolean>(true);
+
+  readonly dropdownBoxMinWidth = input<number>(200);
 
   /**
    * Event emitted on value change, emits the new value
@@ -246,6 +247,24 @@ export class DropdownComponent implements ControlValueAccessor {
       return dataContext;
     })
   );
+
+  tooltipData$ = combineLatest([
+    of(this.text().placeholder),
+    this._internalValue.asObservable(),
+    this.dataContextMap$
+  ]).pipe(map(results => {
+    const placeholder = results[0];
+    const value = results[1];
+    const optionMap = results[2];
+
+    if (!value) {
+      return placeholder;
+    }
+
+    const option = optionMap[String(value)];
+
+    return option ? option.$implicit : value;
+  }));
 
   private static getAllOptions(options: DropdownOptionInput): Array<DropdownOption> {
     const allOptions: Array<DropdownOption> = [];
@@ -642,7 +661,11 @@ export class DropdownComponent implements ControlValueAccessor {
    * @private
    */
   private positionDropdownList(): void {
-    const {left, top, bottom} = this.dropdown.nativeElement.getBoundingClientRect();
+    let {left, right, top, bottom} = this.dropdown.nativeElement.getBoundingClientRect();
+    if (right - left < this.dropdownBoxMinWidth()) {
+      left = left - (this.dropdownBoxMinWidth() - (right - left));
+    }
+
     const {offsetHeight} = this.dropdownList.nativeElement;
     const datePickerBottomLeftAnchor = bottom;
     const availableBottomSpace = window.innerHeight - datePickerBottomLeftAnchor;
@@ -678,7 +701,8 @@ export class DropdownComponent implements ControlValueAccessor {
    */
   private resizeDropdownList(): void {
     const {left, right} = this.dropdown.nativeElement.getBoundingClientRect();
-    const width = right - left;
+    let width = right - left;
+    width = width < this.dropdownBoxMinWidth() ? this.dropdownBoxMinWidth() : width;
 
     this.renderer.setStyle(this.dropdownList.nativeElement, 'width', `${width}px`);
   }
