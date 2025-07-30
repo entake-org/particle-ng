@@ -295,7 +295,7 @@
           [disabled]="false"
         ></particle-date-range-picker>
       </div>
-      <div class="row width100">
+      <div class="row" style="width:100px;">
         <particle-dropdown
           [text]="{placeholder: 'Select an option...'}"
           buttonClassList="bg_blue"
@@ -447,7 +447,7 @@
     </button>
 
     <div class="row width100 space_between" style="max-height:100px;">
-
+      <particle-icon-select class="center_center" #iconSelect></particle-icon-select>
       <div class="square_50px">
         <particle-dropdown
           [collapsedButtonTemplate]="buttonTemplate"
@@ -474,7 +474,6 @@
         <div class="width100 height100 center_center bg_blue text lg"
         ><i class="fas fa-filter"></i></div>
       </ng-template>
-      <particle-icon-select class="center_center" #iconSelect></particle-icon-select>
     </div>
 
     <particle-loader></particle-loader>

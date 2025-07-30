@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, forwardRef, Input, ViewEncapsulation, input, output} from '@angular/core';
+import {AfterViewInit, Component, forwardRef, Input, input, output, ViewEncapsulation} from '@angular/core';
 import {Editor} from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
@@ -103,16 +103,36 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
   protected readonly window = window;
 
+  private CustomLink = Link.extend({
+    renderHTML({HTMLAttributes}) {
+      const href = HTMLAttributes.href;
+      if (href) {
+        try {
+          const linkUrl = new URL(href, window.location.origin);
+          const currentHost = window.location.hostname;
+
+          if (linkUrl.hostname !== currentHost) {
+            HTMLAttributes.target = '_blank';
+            HTMLAttributes.rel = 'noopener noreferrer nofollow';
+          } else {
+            HTMLAttributes.target = '_self';
+            HTMLAttributes.rel = undefined;
+          }
+        } catch (e) {
+          console.warn('Invalid URL: ' + href);
+          console.warn(e);
+        }
+      }
+
+      return ['a', HTMLAttributes, 0];
+    }
+  });
+
   editor = new Editor({
     extensions: [
       StarterKit,
-      Link.configure({
-        openOnClick: false,
-        HTMLAttributes: {
-          class: 'rich-text-link',
-          target: '_blank',
-          ref: 'noopener'
-        },
+      this.CustomLink.configure({
+        openOnClick: false
       }),
       TextAlign.configure({
         types: ['heading', 'paragraph'],

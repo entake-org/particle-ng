@@ -661,21 +661,17 @@ export class DropdownComponent implements ControlValueAccessor {
    * @private
    */
   private positionDropdownList(): void {
-    let {left, right, top, bottom} = this.dropdown.nativeElement.getBoundingClientRect();
-    if (right - left < this.dropdownBoxMinWidth()) {
-      left = left - (this.dropdownBoxMinWidth() - (right - left));
-    }
-
+    const {left, right, top, bottom} = this.dropdown.nativeElement.getBoundingClientRect();
     const {offsetHeight} = this.dropdownList.nativeElement;
-    const datePickerBottomLeftAnchor = bottom;
-    const availableBottomSpace = window.innerHeight - datePickerBottomLeftAnchor;
+    const bottomLeftAnchor = bottom;
+    const availableBottomSpace = window.innerHeight - bottomLeftAnchor;
     const availableTopSpace = top;
     const offsetListHeight = offsetHeight + DropdownComponent.DROPDOWN_LIST_OFFSET;
     let transformOrigin: string, positionTop: string;
 
     if (availableBottomSpace > offsetListHeight) {
       transformOrigin = 'top left';
-      positionTop = `${datePickerBottomLeftAnchor + DropdownComponent.DROPDOWN_LIST_OFFSET}px`;
+      positionTop = `${bottomLeftAnchor + DropdownComponent.DROPDOWN_LIST_OFFSET}px`;
     } else if (availableTopSpace > offsetListHeight) {
       transformOrigin = 'bottom left';
       positionTop = `${top - offsetListHeight}px`;
@@ -691,8 +687,16 @@ export class DropdownComponent implements ControlValueAccessor {
     }
 
     this.renderer.setStyle(this.dropdownList.nativeElement, 'transform-origin', transformOrigin);
-    this.renderer.setStyle(this.dropdownList.nativeElement, 'left', `${left}px`);
     this.renderer.setStyle(this.dropdownList.nativeElement, 'top', positionTop);
+
+    const buttonWidth = right - left;
+    const width = buttonWidth < this.dropdownBoxMinWidth() ? this.dropdownBoxMinWidth() : buttonWidth;
+    if (left + width > window.innerWidth) {
+      const newLeft = left - (this.dropdownBoxMinWidth() - buttonWidth);
+      this.renderer.setStyle(this.dropdownList.nativeElement, 'left', `${newLeft}px`);
+    } else {
+      this.renderer.setStyle(this.dropdownList.nativeElement, 'left', `${left}px`);
+    }
   }
 
   /**
