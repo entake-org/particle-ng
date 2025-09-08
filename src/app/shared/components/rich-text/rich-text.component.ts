@@ -104,7 +104,8 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
   protected readonly window = window;
 
   private CustomLink = Link.extend({
-    renderHTML({HTMLAttributes}) {
+    name: 'customLink',
+    renderHTML(HTMLAttributes: any) {
       const href = HTMLAttributes.href;
       if (href) {
         try {
@@ -149,7 +150,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
         spellcheck: 'true',
       },
     },
-    enablePasteRules: [Link, StarterKit, TextAlign]
+    enablePasteRules: [this.CustomLink, StarterKit, TextAlign]
   } as any);
 
   get value(): any {
