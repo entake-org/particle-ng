@@ -6,7 +6,7 @@
       [cdkTrapFocus]="true"
       [cdkTrapFocusAutoCapture]="true">
       @if (effectiveWidth$ | async; as effectiveWidth) {
-        <div class="col shadow particle_dialog_box" [style.border-radius]="borderRadius()"
+        <div class="col shadow particle_dialog_box ptl_brdr_radius"
           [ngStyle]="{'width': isMaximized ? '90vw' : effectiveWidth, 'height': isMaximized ? '90vh' : height()}">
           <!-- dialog header -->
           @if (showTitle()) {
@@ -20,9 +20,9 @@
                     <button class="access btnset clear"
                             [attr.aria-label]="isMaximized ? text().minimize : text().maximize"
                             (click)="isMaximized = !isMaximized">
-                      <div class="circle_20px ptl_brdr_color ptl_brdr_size ptl_input_bg_color">
-                        <i class="fas fa-maximize"></i>
-                      </div>
+                      <div class="circle_20px ptl_brdr_color ptl_brdr_size ptl_input_bg_color"
+                           innerHTML="<i class='fas fa-expand {{isMaximized ? 'text xsm' : ''}}'></i>"
+                      ></div>
                     </button>
                     <button class="access btnset clear"
                       [attr.aria-label]="text().close"

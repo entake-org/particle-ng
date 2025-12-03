@@ -117,6 +117,9 @@ export class DialogComponent {
    */
   readonly width = input('900px');
 
+  /**
+   * @deprecated This is no longer used and will be removed
+   */
   readonly borderRadius = input('0px');
 
   readonly text = input<DialogText>({

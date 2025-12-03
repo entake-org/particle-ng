@@ -66,7 +66,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     url: 'URL',
     addImage: 'Add Image',
     modifyImage: 'Modify Image'
-} as RichTextEditorText);
+  } as RichTextEditorText);
 
   readonly capabilities = input({
     heading: true,
@@ -75,9 +75,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     alignment: true,
     link: true,
     images: false
-} as RichTextCapabilities);
-
-  readonly borderRadius = input('0px');
+  } as RichTextCapabilities);
 
   readonly textChanged = output<{
     htmlValue: string;
@@ -159,7 +157,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
   set value(value: string) {
     if (value === '<p></p>') {
-      return;
+      value = null as any;
     }
 
     if (value !== this._value) {
