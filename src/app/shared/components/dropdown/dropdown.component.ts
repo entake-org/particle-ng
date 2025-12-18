@@ -169,6 +169,8 @@ export class DropdownComponent implements ControlValueAccessor {
 
   readonly dropdownBoxMinWidth = input<number>(200);
 
+  readonly inputId = input<string>();
+
   /**
    * Event emitted on value change, emits the new value
    */
@@ -450,7 +452,7 @@ export class DropdownComponent implements ControlValueAccessor {
    */
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
-    if (document.activeElement?.id?.includes(this.dropdownId) && !this.disabled()) {
+    if (document.activeElement?.id?.includes(this.inputId() ?? this.dropdownId) && !this.disabled()) {
       const {key} = event;
 
       if (DropdownComponent.ARROW_KEYS.includes(key)) {
@@ -465,7 +467,7 @@ export class DropdownComponent implements ControlValueAccessor {
    */
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
-    if (document.activeElement?.id?.includes(this.dropdownId) && !this.disabled()) {
+    if (document.activeElement?.id?.includes(this.inputId() ?? this.dropdownId) && !this.disabled()) {
       const {key} = event;
 
       if (DropdownComponent.ARROW_KEYS.includes(key)) {

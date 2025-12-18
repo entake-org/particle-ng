@@ -6,11 +6,12 @@
        [ngClass]="classList() ? classList() : ''">
     <button #multiSelectButton
             role="combobox"
+            [attr.aria-controls]="(inputId() ?? multiSelectId) + '_listbox'"
             aria-haspopup="listbox"
             type="button"
             (click)="openMultiSelect($event)"
             (keyup.escape)="onEscapeKeyUp($event)"
-            [id]="multiSelectId"
+            [id]="inputId() ?? multiSelectId"
             [disabled]="disabled()"
             [attr.aria-label]="text().placeholder"
             [attr.aria-expanded]="opened"
@@ -93,6 +94,7 @@
          tabindex="-1"
          [attr.aria-label]="text().placeholder"
          [ngClass]="type() === 'expanded' && expandedAsGrid() ? 'particle_multi_select_grid' : ''"
+         [id]="(inputId() ?? multiSelectId) + (type() === 'input' ? '_listbox' : '')"
     >
       <!-- CUSTOM TEMPLATE -->
       <ng-container *ngIf="!!template else defaultOptionTemplate">
@@ -107,7 +109,7 @@
                         (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i + j)"
                         (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i + j)"
                         (keyup.escape)="onEscapeKeyUp($event)"
-                        [id]="multiSelectId + '-' + groupOption.value"
+                        [id]="(inputId() ?? multiSelectId) + '-' + groupOption.value"
                         [ngClass]="(!selectionValueMap['' + groupOption.value] ? 'unselected' : '') + (entryClassList() ? ' ' + entryClassList() : ' particle_multiselect_option')"
                         [attr.aria-selected]="(_internalValue | async)?.includes(groupOption.value)"
                         [attr.data-value]="groupOption.value"
@@ -133,7 +135,7 @@
                         (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i)"
                         (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i)"
                         (keyup.escape)="onEscapeKeyUp($event)"
-                        [id]="multiSelectId + '-' + option.value"
+                        [id]="(inputId() ?? multiSelectId) + '-' + option.value"
                         [attr.aria-selected]="(_internalValue | async)?.includes(option.value)"
                         [attr.data-value]="option.value"
                         [attr.data-dialog-close-override]="true"
@@ -166,7 +168,7 @@
                         (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i + j)"
                         (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i + j)"
                         (keyup.escape)="onEscapeKeyUp($event)"
-                        [id]="multiSelectId + '-' + groupOption.value"
+                        [id]="(inputId() ?? multiSelectId) + '-' + groupOption.value"
                         [attr.aria-label]="groupOption.label"
                         [attr.aria-selected]="(_internalValue | async)?.includes(groupOption.value)"
                         [attr.data-value]="groupOption.value"
@@ -192,7 +194,7 @@
                         (mouseenter)="onMultiSelectOptionMouseEnter(multiSelectOption, i)"
                         (mousemove)="onMultiSelectOptionMouseMove(multiSelectOption, i)"
                         (keyup.escape)="onEscapeKeyUp($event)"
-                        [id]="multiSelectId + '-' + option.value"
+                        [id]="(inputId() ?? multiSelectId) + '-' + option.value"
                         [attr.aria-selected]="(_internalValue | async)?.includes(option.value)"
                         [attr.data-value]="option.value"
                         [attr.data-dialog-close-override]="true"

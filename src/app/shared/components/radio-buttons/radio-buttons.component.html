@@ -6,6 +6,7 @@
               (click)="handleInput(option.value)"
               [disabled]="disabled() || option.disabled"
               [attr.aria-label]="option.label"
+              [id]="$index === 0 && inputId() ? inputId() : ''"
       >
         <div class="row rc_gap v_center ent_r2l_dir">
           <div class="col">

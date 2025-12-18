@@ -185,6 +185,8 @@ export class MultiSelectComponent implements ControlValueAccessor {
 
   readonly collapsedButtonTemplate = input<TemplateRef<any>>(null as any);
 
+  readonly inputId = input<string>();
+
   /**
    * Event emitted on value change, emits the new value
    */
@@ -427,7 +429,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
    */
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
-    if (document.activeElement?.id?.includes(this.multiSelectId) && !this.disabled()) {
+    if (document.activeElement?.id?.includes(this.inputId() ?? this.multiSelectId) && !this.disabled()) {
       const {key} = event;
 
       if (MultiSelectComponent.ARROW_KEYS.includes(key)) {
@@ -442,7 +444,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
    */
   @HostListener('window:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent): void {
-    if (document.activeElement?.id?.includes(this.multiSelectId) && !this.disabled()) {
+    if (document.activeElement?.id?.includes(this.inputId() ?? this.multiSelectId) && !this.disabled()) {
       const {key} = event;
 
       if (MultiSelectComponent.ARROW_KEYS.includes(key)) {

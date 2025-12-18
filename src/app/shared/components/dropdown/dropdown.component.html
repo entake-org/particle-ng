@@ -7,12 +7,13 @@
   @if (tooltipData$ | async; as tooltipData) {
   <button #dropdownButton
           role="combobox"
+          [attr.aria-controls]="(inputId() ?? dropdownId) + '_listbox'"
           aria-haspopup="listbox"
           type="button"
           (click)="openDropdown($event)"
           (focus)="setSelectionIndex()"
           (keyup.escape)="onEscapeKeyUp($event)"
-          [id]="dropdownId"
+          [id]="inputId() ?? dropdownId"
           [disabled]="disabled()"
           [attr.aria-label]="text().placeholder"
           [attr.aria-expanded]="opened"
@@ -61,7 +62,7 @@
        (@openClose.start)="onAnimationStart($event)"
        (@openClose.done)="onAnimationDone($event)"
        class="position_absolute">
-    <div class="particle_dropdown_options content_color ent_r2l_dir">
+    <div class="particle_dropdown_options content_color ent_r2l_dir" [id]="(inputId() ?? dropdownId) + '_listbox'">
       <ng-container *ngIf="_options | async as options">
         <div class="particle_dropdown_list" role="listbox" tabindex="-1" [attr.aria-label]="text().placeholder">
           <!-- CUSTOM TEMPLATE -->
@@ -76,7 +77,7 @@
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
                           (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
                           (keyup.escape)="onEscapeKeyUp($event)"
-                          [id]="dropdownId + '-' + groupOption.value"
+                          [id]="(inputId() ?? dropdownId) + '-' + groupOption.value"
                           [ngClass]="{ 'unselected' : (_internalValue | async) !== groupOption.value }"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
                           [attr.data-value]="groupOption.value"
@@ -96,7 +97,7 @@
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
                           (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
                           (keyup.escape)="onEscapeKeyUp($event)"
-                          [id]="dropdownId + '-' + option.value"
+                          [id]="(inputId() ?? dropdownId) + '-' + option.value"
                           [ngClass]="{ 'unselected' : (_internalValue | async) !== option.value }"
                           [attr.aria-selected]="(_internalValue | async) === option.value"
                           [attr.data-value]="option.value"
@@ -122,7 +123,7 @@
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i + j)"
                           (mousemove)="onDropdownOptionMouseMove(dropdownOption, i + j)"
                           (keyup.escape)="onEscapeKeyUp($event)"
-                          [id]="dropdownId + '-' + groupOption.value"
+                          [id]="(inputId() ?? dropdownId) + '-' + groupOption.value"
                           [ngClass]="{ 'unselected' : (_internalValue | async) !== groupOption.value }"
                           [attr.aria-label]="groupOption.label"
                           [attr.aria-selected]="(_internalValue | async) === groupOption.value"
@@ -144,7 +145,7 @@
                           (mouseenter)="onDropdownOptionMouseEnter(dropdownOption, i)"
                           (mousemove)="onDropdownOptionMouseMove(dropdownOption, i)"
                           (keyup.escape)="onEscapeKeyUp($event)"
-                          [id]="dropdownId + '-' + option.value"
+                          [id]="(inputId() ?? dropdownId) + '-' + option.value"
                           [ngClass]="{ 'unselected' : (_internalValue | async) !== option.value }"
                           [attr.aria-selected]="(_internalValue | async) === option.value"
                           [attr.data-value]="option.value"
@@ -171,7 +172,7 @@
 <ng-template #mobile>
   <select
     class="access ptl_input ptl_input_height ptl_input_text_size ptl_input_padding ptl_input_bg_color ptl_brdr_color ptl_brdr_size ptl_brdr_radius"
-    [id]="dropdownId"
+    [id]="inputId() ?? dropdownId"
     [disabled]="disabled()"
     (ngModelChange)="onModelChangeMobile($event)"
     [(ngModel)]="value">
