@@ -4,5 +4,6 @@ export interface RichTextCapabilities {
   list: boolean;
   alignment: boolean;
   link: boolean;
+  divider: boolean;
   images: boolean;
 }

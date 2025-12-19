@@ -35,6 +35,8 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
   readonly height = input('100px');
 
+  readonly editorClass = input<string>();
+
   @Input()
   get readonly(): boolean {
     return this._editable;
@@ -65,7 +67,8 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     update: 'Update',
     url: 'URL',
     addImage: 'Add Image',
-    modifyImage: 'Modify Image'
+    modifyImage: 'Modify Image',
+    divider: 'Divider'
   } as RichTextEditorText);
 
   readonly capabilities = input({
@@ -74,13 +77,14 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
     list: true,
     alignment: true,
     link: true,
+    divider: true,
     images: false
   } as RichTextCapabilities);
 
   readonly textChanged = output<{
     htmlValue: string;
     textValue: string;
-}>();
+  }>();
 
   showDialog: any = null;
   dialogLink: string = null as any;
@@ -102,20 +106,19 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
   protected readonly window = window;
 
   private CustomLink = Link.extend({
-    name: 'customLink',
-    renderHTML(HTMLAttributes: any) {
-      const href = HTMLAttributes.href;
+    renderHTML(data: any) {
+      const href = data.HTMLAttributes.href;
       if (href) {
         try {
           const linkUrl = new URL(href, window.location.origin);
           const currentHost = window.location.hostname;
 
           if (linkUrl.hostname !== currentHost) {
-            HTMLAttributes.target = '_blank';
-            HTMLAttributes.rel = 'noopener noreferrer nofollow';
+            data.HTMLAttributes.target = '_blank';
+            data.HTMLAttributes.rel = 'noopener noreferrer nofollow';
           } else {
-            HTMLAttributes.target = '_self';
-            HTMLAttributes.rel = undefined;
+            data.HTMLAttributes.target = '_self';
+            data.HTMLAttributes.rel = undefined;
           }
         } catch (e) {
           console.warn('Invalid URL: ' + href);
@@ -123,13 +126,13 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
         }
       }
 
-      return ['a', HTMLAttributes, 0];
+      return ['a', data.HTMLAttributes, 0];
     }
   });
 
   editor = new Editor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({link: false}),
       this.CustomLink.configure({
         openOnClick: false
       }),

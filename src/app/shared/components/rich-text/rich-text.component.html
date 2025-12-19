@@ -127,6 +127,20 @@
           </button>
         </div>
       }
+      @if (capabilities().divider) {
+        <div class="col v_center ptl_brdr_color ptl_brdr_size border_right pad_5">
+          <button
+            id="link"
+            [attr.aria-label]="text().divider"
+            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            [particleTooltip]="text().divider" tooltipPosition="top"
+            (click)="editor.chain().focus().setHorizontalRule().run()"
+            [ngClass]="{ 'ok_button_color': this.editor.isActive('horizontalRule') }"
+          >
+            <i class="fas fa-divide fa-fw"></i>
+          </button>
+        </div>
+      }
       @if (capabilities().link) {
         <div class="col v_center ptl_brdr_color ptl_brdr_size border_right pad_5">
           <button
@@ -179,7 +193,7 @@
       </div>
     </div>
   }
-  <div class="pad_10 ptl_input_text_size scroll_yauto" [style.height]="this.height()">
+  <div class="pad_10 ptl_input_text_size scroll_yauto" [ngClass]="editorClass()" [style.height]="this.height()">
     <tiptap-editor [editor]="editor" [(ngModel)]="value"></tiptap-editor>
   </div>
 </div>

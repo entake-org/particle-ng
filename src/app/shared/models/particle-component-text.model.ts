@@ -159,6 +159,7 @@ export interface RichTextEditorText {
   cancel: string;
   update: string;
   url: string;
+  divider: string;
 }
 
 export interface ScrollToTopText {
