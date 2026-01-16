@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Theme, ThemeFont, Z_INDEX_LAYERS} from '../models/theme.model';
 import {ThemeChangeDetectionService} from './theme-change-detection.service';
@@ -290,6 +290,7 @@ export class ThemingService {
 
       if (theme.stylingVariables.inputBgColor) {
         styleSheet.insertRule(`.${prefix}ptl_input_bg_color{background-color: ${this.addHashmark(theme.stylingVariables.inputBgColor)};color: ${this.getTextColor(theme.stylingVariables.inputBgColor)}}`);
+        styleSheet.insertRule(`:autofill {box-shadow: 0 0 0 40px ${this.addHashmark(theme.stylingVariables.inputBgColor)} inset !important;-webkit-text-fill-color: ${this.getTextColor(theme.stylingVariables.inputBgColor)} !important;}`);
       }
 
       if (theme.stylingVariables.borderColor) {
