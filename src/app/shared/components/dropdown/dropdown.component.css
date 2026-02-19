@@ -141,3 +141,16 @@
 .particle_dropdown_option[disabled] {
   cursor:default;
 }
+
+
+.particle_dropdown_container {
+  transform-origin: top;
+  transform: scaleY(0.5);
+  opacity: 0;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+
+.particle_dropdown_container {
+  transform: scaleY(1);
+  opacity: 1;
+}

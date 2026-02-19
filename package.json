@@ -35,7 +35,6 @@
   },
   "private": false,
   "peerDependencies": {
-    "@angular/cdk": "^20.2.2",
     "@fortawesome/fontawesome-free": "^7.0.1",
     "@tiptap/core": "^3.4.1",
     "@tiptap/extension-bubble-menu": "^3.4.1",
@@ -62,7 +61,7 @@
     "@angular-eslint/schematics": "^20.2.0",
     "@angular-eslint/template-parser": "~20.2.0",
     "@angular/animations": "^21.1.5",
-    "@angular/cdk": "^20.2.2",
+    "@angular/cdk": "^21.1.5",
     "@angular/cli": "^21.1.4",
     "@angular/common": "^21.1.5",
     "@angular/compiler": "^21.1.5",

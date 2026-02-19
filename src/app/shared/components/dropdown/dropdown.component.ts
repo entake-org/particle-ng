@@ -20,7 +20,7 @@ import {
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BehaviorSubject, combineLatest, map, Observable, of, withLatestFrom} from 'rxjs';
 import {DropdownText} from '../../models/particle-component-text.model';
-import {AsyncPipe, NgClass, NgFor, NgIf, NgTemplateOutlet} from '@angular/common';
+import {AsyncPipe, NgClass, NgTemplateOutlet} from '@angular/common';
 import {DropdownOption} from '../../models/dropdown-option.model';
 import {DropdownOptionGroup} from '../../models/dropdown-option-group.model';
 import {TooltipDirective} from '../../directives/tooltip.directive';
@@ -56,7 +56,7 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
             multi: true
         }
     ],
-  imports: [NgIf, NgClass, NgTemplateOutlet, NgFor, FormsModule, AsyncPipe, TooltipDirective]
+  imports: [NgClass, NgTemplateOutlet, FormsModule, AsyncPipe, TooltipDirective]
 })
 export class DropdownComponent implements ControlValueAccessor {
   private renderer = inject(Renderer2);
@@ -88,11 +88,6 @@ export class DropdownComponent implements ControlValueAccessor {
     this.setSelectionIndex();
   }
 
-  /**
-   * Dependency injection site
-   * @param renderer the Angular renderer
-   * @param changeDetectorRef reference to the Angular change detector
-   */
   constructor() {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
