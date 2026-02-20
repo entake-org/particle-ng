@@ -142,15 +142,19 @@
   cursor:default;
 }
 
-
 .particle_dropdown_container {
-  transform-origin: top;
+  position: absolute;
   transform: scaleY(0.5);
   opacity: 0;
-  transition: transform 200ms ease, opacity 200ms ease;
+  pointer-events: none;
+  transition-duration: 200ms;
+  transition-property: transform, opacity;
 }
 
-.particle_dropdown_container {
+.particle_dropdown_container.open {
   transform: scaleY(1);
   opacity: 1;
+  pointer-events: auto;
+  transition-duration: 200ms;
+  transition-property: transform, opacity;
 }

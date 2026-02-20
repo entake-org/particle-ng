@@ -17,7 +17,7 @@
               [id]="inputId() ?? dropdownId"
               [disabled]="disabled()"
               [attr.aria-label]="text().placeholder"
-              [attr.aria-expanded]="opened"
+              [attr.aria-expanded]="isOpen()"
               [attr.data-dialog-close-override]="true"
               class="access btnset clear center_center height100 width100"
               style="outline-offset: -2px;"
@@ -57,11 +57,9 @@
        [attr.aria-hidden]="!render"
        class="particle_dropdown_overlay"
   >
-    <div #dropdownList
-         class="position_absolute"
-         [@openClose]="opened ? 'open' : 'close'"
-         (@openClose.start)="onAnimationStart($event)"
-         (@openClose.done)="onAnimationDone($event)"
+    <div class="particle_dropdown_container"
+         [class.open]="isOpen()"
+         #dropdownList
     >
       <div class="particle_dropdown_options content_color ent_r2l_dir" [id]="(inputId() ?? dropdownId) + '_listbox'">
         @if (_options | async; as options) {
@@ -93,7 +91,6 @@
                     </button>
                   }
                 } @else if (option.type === 'option') {
-
                   <!-- SINGULAR OPTION -->
                   <button #dropdownOption
                           (click)="onDropdownOptionSelect(option.value, option.disabled!)"

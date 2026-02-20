@@ -1,8 +1,7 @@
-import {Component, ElementRef, inject, Input, input, output, ViewChild} from '@angular/core';
+import {Component, inject, Input, input, output} from '@angular/core';
 import {DialogService} from '../../services/dialog.service';
 import {fromEvent, Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {animate, AnimationEvent, state, style, transition, trigger} from '@angular/animations';
 import {DialogText} from '../../models/particle-component-text.model';
 import {CdkTrapFocus} from '@angular/cdk/a11y';
 import {AsyncPipe, NgClass, NgStyle} from '@angular/common';
@@ -14,28 +13,10 @@ import {AsyncPipe, NgClass, NgStyle} from '@angular/common';
     selector: 'particle-dialog',
     templateUrl: 'dialog.component.html',
     styleUrls: ['dialog.component.css'],
-    animations: [
-        trigger('dialog', [
-            state('void', style({ transform: 'scale(0.5)', opacity: '0' })),
-            transition('void => *', [
-                style({ height: '*', width: '*' }),
-                animate('.15s 0ms ease-in-out', style({ transform: 'scale(1)', opacity: '1' }))
-            ]),
-            transition(':leave', [
-                animate('.15s 0ms ease-in-out', style({ transform: 'scale(0.5)', opacity: '0' }))
-            ]),
-        ])
-    ],
     imports: [NgClass, CdkTrapFocus, NgStyle, AsyncPipe]
 })
 export class DialogComponent {
   private dialogService = inject(DialogService);
-
-  /**
-   * Element reference to the dialog close button
-   */
-  @ViewChild('closeButton')
-  closeButton: ElementRef<HTMLButtonElement> = null as any;
 
   protected isMaximized = false;
 
@@ -76,6 +57,7 @@ export class DialogComponent {
       this.dialogService.registerDialog(this);
     }
     this._object = value;
+    this.opened.emit();
   }
 
   get object(): any {
@@ -149,6 +131,7 @@ export class DialogComponent {
     this._object = null;
     this.isMaximized = false;
     this.dialogService.unregisterDialog(this);
+    this.closed.emit();
   }
 
   /**
@@ -156,10 +139,11 @@ export class DialogComponent {
    * @param event
    */
   onAnimationDone(event: AnimationEvent): void {
+    /**
     if (event.fromState === 'void') {
       this.opened.emit();
     } else if (event.toState === 'void') {
       this.closed.emit();
-    }
+    }*/
   }
 }

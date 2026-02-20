@@ -1,8 +1,8 @@
-import {animate, AnimationEvent, style, transition, trigger} from '@angular/animations';
 import {
   ChangeDetectorRef,
   Component,
   ContentChild,
+  effect,
   ElementRef,
   forwardRef,
   HostListener,
@@ -13,6 +13,7 @@ import {
   output,
   QueryList,
   Renderer2,
+  signal,
   TemplateRef,
   ViewChild,
   ViewChildren
@@ -22,7 +23,7 @@ import {BehaviorSubject, map, Observable} from 'rxjs';
 import {MultiSelectOption} from '../../models/multi-select-option.model';
 import {MultiSelectOptionGroup} from '../../models/multi-select-option-group.model';
 import {MultiSelectText} from '../../models/particle-component-text.model';
-import {AsyncPipe, NgClass, NgFor, NgIf, NgTemplateOutlet} from '@angular/common';
+import {AsyncPipe, NgClass, NgTemplateOutlet} from '@angular/common';
 
 /**
  * Type representing the multi-select component option input
@@ -33,29 +34,17 @@ declare type MultiSelectOptionInput = Array<MultiSelectOption | MultiSelectOptio
  * Multi-select component
  */
 @Component({
-    selector: 'particle-multi-select',
-    templateUrl: './multi-select.component.html',
-    styleUrls: ['./multi-select.component.css'],
-    animations: [
-        trigger('openClose', [
-            transition('close => open', [
-                style({ transform: 'scaleY(0.5)', opacity: 0 }),
-                animate('200ms ease', style({ transform: 'scaleY(1)', opacity: 1 }))
-            ]),
-            transition('open => close', [
-                style({ transform: 'scaleY(1)', opacity: 1 }),
-                animate('200ms ease', style({ transform: 'scaleY(0.5)', opacity: 0 }))
-            ]),
-        ])
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => MultiSelectComponent),
-            multi: true
-        }
-    ],
-    imports: [NgIf, NgClass, NgTemplateOutlet, NgFor, AsyncPipe]
+  selector: 'particle-multi-select',
+  templateUrl: './multi-select.component.html',
+  styleUrls: ['./multi-select.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => MultiSelectComponent),
+      multi: true
+    }
+  ],
+  imports: [NgClass, NgTemplateOutlet, AsyncPipe]
 })
 export class MultiSelectComponent implements ControlValueAccessor {
   private renderer = inject(Renderer2);
@@ -362,12 +351,17 @@ export class MultiSelectComponent implements ControlValueAccessor {
   onTouched: () => any = () => {
   };
 
-  /**
-   * Dependency injection site
-   * @param renderer the Angular renderer
-   * @param changeDetectorRef reference to the Angular change detector
-   */
+  isOpen = signal(false);
+
   constructor() {
+    effect(() => {
+      if (this.isOpen()) {
+        this.onAnimationStart();
+      } else {
+        setTimeout(() => this.render = false, 300);
+      }
+    });
+
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
 
@@ -538,6 +532,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
     if (!this.disabled()) {
       this.render = true;
       this.opened = true;
+      setTimeout(() => this.toggleOpen(), 0);
     }
   }
 
@@ -547,43 +542,31 @@ export class MultiSelectComponent implements ControlValueAccessor {
   closeMultiSelect(): void {
     this.opened = false;
     this.selectionIndex = null as any;
+    this.toggleOpen();
   }
 
   /**
    * Position and resize the multi-select list on animation start if toState is open
-   * @param event the Angular AnimationEvent
    */
-  onAnimationStart(event: AnimationEvent): void {
-    if (event.toState === 'open') {
-      this.resizeMultiSelectList();
-      this.selectionIndex = null as any;
+  onAnimationStart(): void {
+    this.resizeMultiSelectList();
+    this.selectionIndex = null as any;
 
-      setTimeout(() => {
-        const option = this.getNextOption();
-        if (option) {
-          option.focus();
-        }
-      });
+    setTimeout(() => {
+      const option = this.getNextOption();
+      if (option) {
+        option.focus();
+      }
+    });
 
-      /*
-        The height of the multi-select list is zero at the point where the above code executes,
-        this is a workaround to align the list after its height is known to avoid a frame
-        or two of the list at origin
-       */
-      this.renderer.setStyle(this.multiSelectList.nativeElement, 'top', '-999px');
-      this.renderer.setStyle(this.multiSelectList.nativeElement, 'left', '-999px');
-      setTimeout(() => this.positionMultiSelectList());
-    }
-  }
-
-  /**
-   * Stop rendering the multi-select list on animation done if toState is close
-   * @param event the Angular AnimationEvent
-   */
-  onAnimationDone(event: AnimationEvent): void {
-    if (event.toState === 'close') {
-      this.render = false;
-    }
+    /*
+      The height of the multi-select list is zero at the point where the above code executes,
+      this is a workaround to align the list after its height is known to avoid a frame
+      or two of the list at origin
+     */
+    this.renderer.setStyle(this.multiSelectList.nativeElement, 'top', '-999px');
+    this.renderer.setStyle(this.multiSelectList.nativeElement, 'left', '-999px');
+    setTimeout(() => this.positionMultiSelectList());
   }
 
   /**
@@ -728,4 +711,11 @@ export class MultiSelectComponent implements ControlValueAccessor {
 
     return previousOption;
   }
+
+
+  toggleOpen(): void {
+    this.isOpen.update((isOpen) => !isOpen);
+  }
+
+
 }

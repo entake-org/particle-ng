@@ -171,3 +171,20 @@
 .particle_multiselect_checkbox.unselected:hover {
   background-color:rgba(128,128,128,0.2);
 }
+
+.particle_multiselect_container {
+  position: absolute;
+  transform: scaleY(0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition-duration: 200ms;
+  transition-property: transform, opacity;
+}
+
+.particle_multiselect_container.open {
+  transform: scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
+  transition-duration: 200ms;
+  transition-property: transform, opacity;
+}

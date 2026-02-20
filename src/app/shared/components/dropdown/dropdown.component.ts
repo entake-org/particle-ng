@@ -1,8 +1,8 @@
-import {animate, AnimationEvent, style, transition, trigger} from '@angular/animations';
 import {
   ChangeDetectorRef,
   Component,
   ContentChild,
+  effect,
   ElementRef,
   forwardRef,
   HostListener,
@@ -13,6 +13,7 @@ import {
   output,
   QueryList,
   Renderer2,
+  signal,
   TemplateRef,
   ViewChild,
   ViewChildren
@@ -34,28 +35,16 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
  * Dropdown component
  */
 @Component({
-    selector: 'particle-dropdown',
-    templateUrl: './dropdown.component.html',
-    styleUrls: ['./dropdown.component.css'],
-    animations: [
-        trigger('openClose', [
-            transition('close => open', [
-                style({ transform: 'scaleY(0.5)', opacity: 0 }),
-                animate('200ms ease', style({ transform: 'scaleY(1)', opacity: 1 }))
-            ]),
-            transition('open => close', [
-                style({ transform: 'scaleY(1)', opacity: 1 }),
-                animate('200ms ease', style({ transform: 'scaleY(0.5)', opacity: 0 }))
-            ]),
-        ])
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => DropdownComponent),
-            multi: true
-        }
-    ],
+  selector: 'particle-dropdown',
+  templateUrl: './dropdown.component.html',
+  styleUrls: ['./dropdown.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DropdownComponent),
+      multi: true
+    }
+  ],
   imports: [NgClass, NgTemplateOutlet, FormsModule, AsyncPipe, TooltipDirective]
 })
 export class DropdownComponent implements ControlValueAccessor {
@@ -88,7 +77,17 @@ export class DropdownComponent implements ControlValueAccessor {
     this.setSelectionIndex();
   }
 
+  isOpen = signal(false);
+
   constructor() {
+    effect(() => {
+      if (this.isOpen()) {
+        this.onAnimationStart();
+      } else {
+        setTimeout(() => this.render = false, 300);
+      }
+    });
+
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
 
@@ -569,6 +568,7 @@ export class DropdownComponent implements ControlValueAccessor {
     if (!this.disabled()) {
       this.render = true;
       this.opened = true;
+      setTimeout(() => this.toggleOpen(), 0);
     }
   }
 
@@ -577,14 +577,13 @@ export class DropdownComponent implements ControlValueAccessor {
    */
   closeDropdown(): void {
     this.opened = false;
+    this.toggleOpen();
   }
 
   /**
    * Position and resize dropdown list on animation start if toState is open
-   * @param event the Angular AnimationEvent
    */
-  onAnimationStart(event: AnimationEvent): void {
-    if (event.toState === 'open') {
+  onAnimationStart(): void {
       this.resizeDropdownList();
       this.setSelectionIndex();
 
@@ -604,17 +603,6 @@ export class DropdownComponent implements ControlValueAccessor {
       this.renderer.setStyle(this.dropdownList.nativeElement, 'top', '-999px');
       this.renderer.setStyle(this.dropdownList.nativeElement, 'left', '-999px');
       setTimeout(() => this.positionDropdownList());
-    }
-  }
-
-  /**
-   * Stop rendering dropdown list on animation done if toState is close
-   * @param event the Angular AnimationEvent
-   */
-  onAnimationDone(event: AnimationEvent): void {
-    if (event.toState === 'close') {
-      this.render = false;
-    }
   }
 
   /**
@@ -785,4 +773,9 @@ export class DropdownComponent implements ControlValueAccessor {
 
     return previousOption;
   }
+
+  toggleOpen(): void {
+    this.isOpen.update((isOpen) => !isOpen);
+  }
+
 }
