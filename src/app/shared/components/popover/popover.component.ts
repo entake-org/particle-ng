@@ -1,7 +1,7 @@
 import {animate, AnimationEvent, style, transition, trigger} from '@angular/animations';
-import { Component, HostListener, Input, OnDestroy, Renderer2, inject, input, output } from '@angular/core';
+import {Component, HostListener, inject, Input, input, OnDestroy, output, Renderer2} from '@angular/core';
 import {CdkTrapFocus} from '@angular/cdk/a11y';
-import { NgClass, NgStyle } from '@angular/common';
+import {NgClass, NgStyle} from '@angular/common';
 
 /**
  * Component to display a popover with custom content

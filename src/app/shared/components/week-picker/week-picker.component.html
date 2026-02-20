@@ -41,7 +41,7 @@
             (change)="_selectedYear.next(+yearSelect.value)"
             class="access input sm content_color"
             [attr.aria-label]="text().selectYear">
-            @for (year of validYearRange$ | async; track year) {
+            @for (year of validYearRange$ | async; track $index) {
               <option
                 [value]="year">
                 {{year}}
@@ -85,7 +85,7 @@
         </div>
         <!-- days -->
         @if (fullMonth$ | async; as fullMonth) {
-          @for (week of fullMonth; track week) {
+          @for (week of fullMonth; track $index) {
             <div class="wwp_week"
               [ngClass]="{ 'currentWeek': week.week === currentDate.week && week.year === currentDate.year }">
               <button (click)="onWeekSelect(week.week, week.selectable)"
@@ -94,7 +94,7 @@
                                     ? 'ok_button_color'
                                     : 'bg_overlay_rev brdr hov_bg'"
                 class="access wwp_week_btn">
-                @for (date of week.dates; track date) {
+                @for (date of week.dates; track $index) {
                   <div class="wwp_day">
                     {{date}}
                   </div>

@@ -274,7 +274,7 @@
       <div #iconScrollContainer class="col size_1 top_left scroll_y pad_5" style="scroll-behavior: smooth">
         @if (paginatedIcons$ | async; as icons) {
           <div class="row wrap top_left" style="align-items:stretch;">
-            @for (icon of paginatedIcons$ | async; track icon) {
+            @for (icon of paginatedIcons$ | async; track $index) {
               <div class="col size_1 min_w75 mar_5">
                 <button class="access wis_icon_btn" (click)="handleIconSelect(icon)"
                         [attr.aria-label]="text().select + ' ' + icon.name">
