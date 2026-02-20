@@ -1,5 +1,17 @@
-import {animate, AnimationEvent, style, transition, trigger} from '@angular/animations';
-import {Component, HostListener, inject, Input, input, OnDestroy, output, Renderer2} from '@angular/core';
+import {
+  Component,
+  effect,
+  ElementRef,
+  HostListener,
+  inject,
+  Input,
+  input,
+  OnDestroy,
+  output,
+  Renderer2,
+  signal,
+  ViewChild
+} from '@angular/core';
 import {CdkTrapFocus} from '@angular/cdk/a11y';
 import {NgClass, NgStyle} from '@angular/common';
 
@@ -7,22 +19,10 @@ import {NgClass, NgStyle} from '@angular/common';
  * Component to display a popover with custom content
  */
 @Component({
-    selector: 'particle-popover',
-    templateUrl: './popover.component.html',
-    styleUrls: ['./popover.component.css'],
-    animations: [
-        trigger('openClose', [
-            transition('void => open', [
-                style({ transform: 'scaleY(0.5)', opacity: 0 }),
-                animate('200ms ease', style({ transform: 'scaleY(1)', opacity: 1 }))
-            ]),
-            transition('open => close', [
-                style({ transform: 'scaleY(1)', opacity: 1 }),
-                animate('200ms ease', style({ transform: 'scaleY(0.5)', opacity: 0 }))
-            ]),
-        ])
-    ],
-    imports: [CdkTrapFocus, NgStyle, NgClass]
+  selector: 'particle-popover',
+  templateUrl: './popover.component.html',
+  styleUrls: ['./popover.component.css'],
+  imports: [CdkTrapFocus, NgStyle, NgClass]
 })
 export class PopoverComponent implements OnDestroy {
   private renderer = inject(Renderer2);
@@ -82,6 +82,9 @@ export class PopoverComponent implements OnDestroy {
    */
   readonly closed = output<void>();
 
+  @ViewChild('container')
+  container: ElementRef<HTMLDivElement> = null as any;
+
   /**
    * Whether the popover should render
    */
@@ -109,16 +112,22 @@ export class PopoverComponent implements OnDestroy {
   private target: EventTarget = null as any;
 
   /**
-   * The popover content container
-   * @private
-   */
-  private container: HTMLDivElement = null as any;
-
-  /**
    * Array of escape keyup unlisten functions
    * @private
    */
   private escapeKeyUpUnlisteners: Array<() => void> = [];
+
+  isOpen = signal(false);
+
+  constructor() {
+    effect(() => {
+      if (this.isOpen() && this.render) {
+        this.onAnimationStart();
+      } else {
+        setTimeout(() => this.onAnimationDone(), 300);
+      }
+    });
+  }
 
   /**
    * Destroy component, clean up event listeners
@@ -137,7 +146,7 @@ export class PopoverComponent implements OnDestroy {
       const {pageX, pageY} = event;
 
       if (pageX > 0 && pageY > 0) {
-        const {left, right, top, bottom} = this.container.getBoundingClientRect();
+        const {left, right, top, bottom} = this.container.nativeElement.getBoundingClientRect();
         const xPositionValid = pageX >= left && pageX <= right;
         const yPositionValid = pageY >= top && pageY <= bottom;
         const shouldClose = !(xPositionValid && yPositionValid);
@@ -187,27 +196,20 @@ export class PopoverComponent implements OnDestroy {
 
   /**
    * Handle animation start
-   * @param event the AnimationEvent
    */
-  onAnimationStart(event: AnimationEvent): void {
-    if (event.toState === 'open') {
-      this.container = event.element;
-      this.addEventListeners();
-      this.positionPopover();
-      this.opened.emit();
-    }
+  onAnimationStart(): void {
+    this.addEventListeners();
+    this.opened.emit();
+    setTimeout(() => this.positionPopover(), 0);
   }
 
   /**
    * Handle animation end
-   * @param event the AnimationEvent
    */
-  onAnimationDone(event: AnimationEvent): void {
-    if (event.toState === 'close') {
-      this.render = false;
-      this.removeEventListeners();
-      this.closed.emit();
-    }
+  onAnimationDone(): void {
+    this.render = false;
+    this.removeEventListeners();
+    this.closed.emit();
   }
 
   /**
@@ -217,6 +219,7 @@ export class PopoverComponent implements OnDestroy {
   private open(): void {
     this.render = true;
     this.visible = true;
+    setTimeout(() => this.toggleOpen(), 0);
   }
 
   /**
@@ -224,6 +227,7 @@ export class PopoverComponent implements OnDestroy {
    */
   public close(): void {
     this.visible = false;
+    this.isOpen.update(() => false);
   }
 
   /**
@@ -232,7 +236,7 @@ export class PopoverComponent implements OnDestroy {
    */
   private positionPopover(): void {
     const {left, top, bottom, width} = (this.target as HTMLElement).getBoundingClientRect();
-    const {offsetHeight, offsetWidth} = this.container;
+    const {offsetHeight, offsetWidth} = this.container.nativeElement;
     const popoverBottomLeftAnchor = bottom;
     const availableBottomSpace = window.innerHeight - popoverBottomLeftAnchor;
     const availableTopSpace = top;
@@ -287,9 +291,9 @@ export class PopoverComponent implements OnDestroy {
       leftPosition = 0;
     }
 
-    this.renderer.setStyle(this.container, 'transform-origin', transformOrigin);
-    this.renderer.setStyle(this.container, 'left', `${leftPosition}px`);
-    this.renderer.setStyle(this.container, 'top', positionTop);
+    this.renderer.setStyle(this.container.nativeElement, 'transform-origin', transformOrigin);
+    this.renderer.setStyle(this.container.nativeElement, 'left', `${leftPosition}px`);
+    this.renderer.setStyle(this.container.nativeElement, 'top', positionTop);
   }
 
   /**
@@ -298,7 +302,7 @@ export class PopoverComponent implements OnDestroy {
    * @private
    */
   private addEventListeners(): void {
-    const focusableElements = this.getFocusableElements(this.container);
+    const focusableElements = this.getFocusableElements(this.container.nativeElement);
 
     for (const element of focusableElements) {
       this.renderer.setAttribute(element, 'data-dialog-close-override', 'true');
@@ -360,6 +364,10 @@ export class PopoverComponent implements OnDestroy {
     }
 
     this.escapeKeyUpUnlisteners = [];
+  }
+
+  toggleOpen(): void {
+    this.isOpen.update((isOpen) => !isOpen);
   }
 
 }

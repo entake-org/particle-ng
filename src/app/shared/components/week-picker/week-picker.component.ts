@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, forwardRef, Input, ViewChild, inject, input, output } from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, inject, Input, input, output, ViewChild} from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {
   add,
@@ -16,7 +16,7 @@ import {BehaviorSubject, combineLatest, map, Observable, shareReplay, withLatest
 import {PopoverComponent} from '../popover/popover.component';
 import {WeekPickerText} from '../../models/particle-component-text.model';
 import {TooltipDirective} from '../../directives/tooltip.directive';
-import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
+import {AsyncPipe, DatePipe, NgClass} from '@angular/common';
 
 /**
  * Interface representing a Date broken down by day/date/week/month/year
@@ -618,8 +618,8 @@ export class WeekPickerComponent implements ControlValueAccessor {
     if (!this.disabled) {
       this.value = value;
 
-      if (!isEqual(valueBeforeUpdate.start, this.value.start) &&
-        !isEqual(valueBeforeUpdate.end, this.value.end)) {
+      if (!isEqual(valueBeforeUpdate?.start, this.value.start) &&
+        !isEqual(valueBeforeUpdate?.end, this.value.end)) {
         this.onChange(this.value);
         this.weekSelected.emit(this.value);
       }

@@ -492,12 +492,14 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @param event the click MouseEvent
    */
   openCalendar(event?: MouseEvent): void {
-    if (event) {
-      event.stopImmediatePropagation();
-    }
+    if (!this.disabled) {
+      if (event) {
+        event.stopImmediatePropagation();
+      }
 
-    this.showCalendar = {currentValue: this.value};
-    this.calendarPopover.toggle(event);
+      this.showCalendar = {currentValue: this.value};
+      this.calendarPopover.toggle(event);
+    }
   }
 
   /**
