@@ -1,10 +1,11 @@
 <div [ngClass]="{'particle_dialog_overlay' : object}">
   @if (object) {
-    <div
-      [@dialog] class="particle_dialog_container"
-      (@dialog.done)="onAnimationDone($event)"
-      [cdkTrapFocus]="true"
-      [cdkTrapFocusAutoCapture]="true">
+    <div class="particle_dialog_container"
+         animate.enter="enter-animation"
+         animate.leave="leave-animation"
+         [cdkTrapFocus]="true"
+         [cdkTrapFocusAutoCapture]="true"
+    >
       @if (effectiveWidth$ | async; as effectiveWidth) {
         <div class="col shadow particle_dialog_box ptl_brdr_radius"
           [ngStyle]="{'width': isMaximized ? '90vw' : effectiveWidth, 'height': isMaximized ? '90vh' : height()}">

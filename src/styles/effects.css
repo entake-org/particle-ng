@@ -238,12 +238,12 @@ PARTICLE STYLES
   }
 }
 
-.exist-animation {
+.exist {
   animation: fadeIn 650ms;
   transition-timing-function: ease-in;
 }
 
-.exist1s-animation {
+.exist1s {
   animation: fadeIn 1s;
   transition-timing-function: ease-in;
 }

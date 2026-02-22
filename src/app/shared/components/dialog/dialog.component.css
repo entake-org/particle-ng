@@ -45,3 +45,33 @@
     max-width:unset !important;
   }
 }
+
+.enter-animation {
+  animation: enter-frames .15s 0ms ease-in-out;
+}
+
+@keyframes enter-frames {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.leave-animation {
+  animation: leave-frames .15s 0ms ease-in-out;
+}
+
+@keyframes leave-frames {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}

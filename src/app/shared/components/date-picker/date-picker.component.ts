@@ -1,4 +1,3 @@
-import {animate, style, transition, trigger} from '@angular/animations';
 import {
   ChangeDetectorRef,
   Component,
@@ -26,34 +25,21 @@ import {CalendarComponent} from '../calendar/calendar.component';
  * Component to allow a user to input/select a date
  */
 @Component({
-    selector: 'particle-date-picker',
-    templateUrl: './date-picker.component.html',
-    styleUrls: ['./date-picker.component.css'],
-    animations: [
-        trigger('openClose', [
-            transition('void => open', [
-                style({ transform: 'scaleY(0.5)', opacity: 0 }),
-                animate('200ms ease', style({ transform: 'scaleY(1)', opacity: 1 }))
-            ]),
-            transition('open => close', [
-                style({ transform: 'scaleY(1)', opacity: 1 }),
-                animate('200ms ease', style({ transform: 'scaleY(0.5)', opacity: 0 }))
-            ]),
-        ])
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => DatePickerComponent),
-            multi: true
-        }
-    ],
-    imports: [NgClass, FormsModule, PopoverComponent, CalendarComponent]
+  selector: 'particle-date-picker',
+  templateUrl: './date-picker.component.html',
+  styleUrls: ['./date-picker.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DatePickerComponent),
+      multi: true
+    }
+  ],
+  imports: [NgClass, FormsModule, PopoverComponent, CalendarComponent]
 })
 export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnInit {
   private renderer = inject(Renderer2);
   private changeDetectorRef = inject(ChangeDetectorRef);
-
 
   /**
    * Allowed keys for date input
@@ -201,7 +187,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
   /**
    * Event emitted on date picker input
    */
-  // eslint-disable-next-line @angular-eslint/no-output-native
+    // eslint-disable-next-line @angular-eslint/no-output-native
   readonly input = output<void>();
 
   /**
@@ -506,12 +492,14 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnI
    * @param event the click MouseEvent
    */
   openCalendar(event?: MouseEvent): void {
-    if (event) {
-      event.stopImmediatePropagation();
-    }
+    if (!this.disabled) {
+      if (event) {
+        event.stopImmediatePropagation();
+      }
 
-    this.showCalendar = {currentValue: this.value};
-    this.calendarPopover.toggle(event);
+      this.showCalendar = {currentValue: this.value};
+      this.calendarPopover.toggle(event);
+    }
   }
 
   /**

@@ -27,30 +27,6 @@
   </button>
 </div>
 
-
-<!-- week picker input
-<div class="wwp_container" style="cursor:default;"
-  [ngClass]="inputClassList"
-  [style.filter]="disabled ? 'brightness(.95)' : ''">
-
-  <button (click)="openCalendar($event)"
-    aria-haspopup="dialog"
-    [disabled]="disabled"
-    [attr.aria-label]="ariaLabel + ', ' + text.openCalendar"
-    [attr.aria-expanded]="calendarPopover.visible"
-    class="access content_color wwp_input">
-    <ng-container *ngIf="_internalValue | async as internalValue else placeholderTemplate">
-      {{internalValue.start | date: dateFormat}} - {{internalValue.end | date: dateFormat}}
-    </ng-container>
-    <ng-template #placeholderTemplate>
-      <div class="wwp_placeholder">{{text.selectWeek}}...</div>
-    </ng-template>
-  </button>
-  <div class="wwp_button" [ngClass]="calendarButtonClassList">
-    <i class="fas fa-calendar-week"></i>
-  </div>
-</div>
--->
 <!-- TODO: instead of offset 1, attach to wwp_container -->
 <!-- calendar widget -->
 <particle-popover [offset]="1" #calendarPopover>
@@ -65,7 +41,7 @@
             (change)="_selectedYear.next(+yearSelect.value)"
             class="access input sm content_color"
             [attr.aria-label]="text().selectYear">
-            @for (year of validYearRange$ | async; track year) {
+            @for (year of validYearRange$ | async; track $index) {
               <option
                 [value]="year">
                 {{year}}
@@ -109,7 +85,7 @@
         </div>
         <!-- days -->
         @if (fullMonth$ | async; as fullMonth) {
-          @for (week of fullMonth; track week) {
+          @for (week of fullMonth; track $index) {
             <div class="wwp_week"
               [ngClass]="{ 'currentWeek': week.week === currentDate.week && week.year === currentDate.year }">
               <button (click)="onWeekSelect(week.week, week.selectable)"
@@ -118,7 +94,7 @@
                                     ? 'ok_button_color'
                                     : 'bg_overlay_rev brdr hov_bg'"
                 class="access wwp_week_btn">
-                @for (date of week.dates; track date) {
+                @for (date of week.dates; track $index) {
                   <div class="wwp_day">
                     {{date}}
                   </div>
