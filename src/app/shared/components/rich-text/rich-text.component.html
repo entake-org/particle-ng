@@ -6,21 +6,21 @@
           <button
             id="heading1"
             [attr.aria-label]="text().heading1"
-            class="access btnset chip_size content_color_dark_1 mar_right5 mar_left5 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right5 mar_left5 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().heading1" tooltipPosition="top"
             (click)="editor.chain().focus().toggleHeading({ level: 1 }).run()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive('heading', { level: 1 }) }"
-            >
+            [ngClass]="this.editor.isActive('heading', { level: 1 }) ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="fas fa-header fa-fw"></i>1
           </button>
           <button
             id="heading2"
             [attr.aria-label]="text().heading2"
-            class="access btnset chip_size content_color_dark_1 mar_right5 mar_left5 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right5 mar_left5 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().heading2" tooltipPosition="top"
             (click)="editor.chain().focus().toggleHeading({ level: 2 }).run()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive('heading', { level: 2 }) }"
-            >
+            [ngClass]="this.editor.isActive('heading', { level: 2 }) ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="fas fa-header fa-fw"></i>2
           </button>
         </div>
@@ -30,31 +30,31 @@
           <button
             id="bold"
             [attr.aria-label]="text().bold"
-            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().bold" tooltipPosition="top"
             (click)="editor.chain().focus().toggleBold().run()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive('bold') }"
-            >
+            [ngClass]="this.editor.isActive('bold') ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="fas fa-bold fa-fw"></i>
           </button>
           <button
             id="italic"
             [attr.aria-label]="text().italic"
-            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().italic" tooltipPosition="top"
             (click)="editor.chain().focus().toggleItalic().run()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive('italic') }"
-            >
+            [ngClass]="this.editor.isActive('italic') ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="fas fa-italic fa-fw"></i>
           </button>
           <button
             id="strike"
             [attr.aria-label]="text().strike"
-            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().strike" tooltipPosition="top"
             (click)="editor.chain().focus().toggleStrike().run()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive('strike') }"
-            >
+            [ngClass]="this.editor.isActive('strike') ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="fas fa-strikethrough fa-fw"></i>
           </button>
         </div>
@@ -64,21 +64,21 @@
           <button
             id="bullet-list"
             [attr.aria-label]="text().bulletedList"
-            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().bulletedList" tooltipPosition="top"
             (click)="editor.chain().focus().toggleBulletList().run()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive('bullet-list') }"
-            >
+            [ngClass]="this.editor.isActive('bullet-list') ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="fas fa-list fa-fw"></i>
           </button>
           <button
             id="ordered-list"
             [attr.aria-label]="text().orderedList"
-            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().orderedList" tooltipPosition="top"
             (click)="editor.chain().focus().toggleOrderedList().run()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive('ordered-list') }"
-            >
+            [ngClass]="this.editor.isActive('ordered-list') ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="fas fa-list-ol fa-fw"></i>
           </button>
         </div>
@@ -88,41 +88,41 @@
           <button
             id="left-align"
             [attr.aria-label]="text().leftAlign"
-            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().leftAlign" tooltipPosition="top"
             (click)="editor.chain().focus().setTextAlign('left').run()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'left' }) }"
-            >
+            [ngClass]="this.editor.isActive({textAlign: 'left'}) ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="fas fa-align-left fa-fw"></i>
           </button>
           <button
             id="center-align"
             [attr.aria-label]="text().centerAlign"
-            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().centerAlign" tooltipPosition="top"
             (click)="editor.chain().focus().setTextAlign('center').run()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'center' }) }"
-            >
+            [ngClass]="this.editor.isActive({textAlign: 'center'}) ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="fas fa-align-center fa-fw"></i>
           </button>
           <button
             id="right-align"
             [attr.aria-label]="text().rightAlign"
-            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().rightAlign" tooltipPosition="top"
             (click)="editor.chain().focus().setTextAlign('right').run()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'right' }) }"
-            >
+            [ngClass]="this.editor.isActive({textAlign: 'right'}) ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="fas fa-align-right fa-fw"></i>
           </button>
           <button
             id="justify-align"
             [attr.aria-label]="text().justifyAlign"
-            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().justifyAlign" tooltipPosition="top"
             (click)="editor.chain().focus().setTextAlign('justify').run()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive({ textAlign: 'justify' }) }"
-            >
+            [ngClass]="this.editor.isActive({textAlign: 'justify'}) ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="fas fa-align-justify fa-fw"></i>
           </button>
         </div>
@@ -132,10 +132,10 @@
           <button
             id="link"
             [attr.aria-label]="text().divider"
-            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().divider" tooltipPosition="top"
             (click)="editor.chain().focus().setHorizontalRule().run()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive('horizontalRule') }"
+            [ngClass]="this.editor.isActive('horizontalRule') ? 'ok_button_color' : 'content_color_dark_1'"
           >
             <i class="fas fa-divide fa-fw"></i>
           </button>
@@ -146,11 +146,11 @@
           <button
             id="link"
             [attr.aria-label]="text().setLink"
-            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken"
             [particleTooltip]="text().setLink" tooltipPosition="top"
             (click)="openLinkDialog()"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive('link') }"
-            >
+            [ngClass]="this.editor.isActive('link') ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="fas fa-link fa-fw"></i>
           </button>
           <button
@@ -160,7 +160,7 @@
             [particleTooltip]="text().removeLink" tooltipPosition="top"
             (click)="this.editor.isActive('link') ? changeEditorLink('remove') : null"
             [disabled]="!this.editor.isActive('link')"
-            >
+          >
             <i class="fas fa-unlink fa-fw"></i>
           </button>
         </div>
@@ -170,12 +170,12 @@
           <button
             id="image"
             [attr.aria-label]="this.editor.isActive('image') ? text().modifyImage : text().addImage"
-            class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
+            class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken"
             (click)="openImageDialog()"
             [particleTooltip]="this.editor.isActive('image') ? text().modifyImage : text().addImage"
             tooltipPosition="top"
-            [ngClass]="{ 'ok_button_color': this.editor.isActive('image') }"
-            >
+            [ngClass]="this.editor.isActive('image') ? 'ok_button_color' : 'content_color_dark_1'"
+          >
             <i class="far fa-image fa-fw"></i>
           </button>
         </div>
@@ -187,7 +187,7 @@
           class="access btnset chip_size content_color_dark_1 mar_right3 mar_left3 ptl_brdr_radius hov_darken"
           [particleTooltip]="text().clearFormat" tooltipPosition="top"
           (click)="editor.chain().focus().clearNodes().unsetAllMarks().run()"
-          >
+        >
           <i class="fas fa-text-slash fa-fw"></i>
         </button>
       </div>

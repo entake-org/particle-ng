@@ -60,7 +60,9 @@ export class ProfilePicComponent {
    */
   @Input()
   set imageUrl(imageUrl: string) {
-    this.url = `url(${imageUrl})`;
+    if (imageUrl) {
+      this.url = `url(${imageUrl})`;
+    }
   }
 
   url: string = null as any;
