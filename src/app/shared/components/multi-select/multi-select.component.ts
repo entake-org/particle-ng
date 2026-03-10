@@ -358,7 +358,10 @@ export class MultiSelectComponent implements ControlValueAccessor {
       if (this.isOpen()) {
         this.onAnimationStart();
       } else {
-        setTimeout(() => this.render = false, 300);
+        setTimeout(() => {
+          this.render = false;
+          this.changeDetectorRef.markForCheck();
+        }, 300);
       }
     });
 

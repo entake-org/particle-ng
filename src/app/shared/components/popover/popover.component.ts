@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   effect,
   ElementRef,
@@ -26,7 +27,7 @@ import {NgClass, NgStyle} from '@angular/common';
 })
 export class PopoverComponent implements OnDestroy {
   private renderer = inject(Renderer2);
-
+  private changeDetectorRef = inject(ChangeDetectorRef);
 
   protected readonly window = window;
 
@@ -124,7 +125,10 @@ export class PopoverComponent implements OnDestroy {
       if (this.isOpen() && this.render) {
         this.onAnimationStart();
       } else {
-        setTimeout(() => this.onAnimationDone(), 300);
+        setTimeout(() => {
+          this.onAnimationDone();
+          this.changeDetectorRef.markForCheck();
+        }, 300);
       }
     });
   }
