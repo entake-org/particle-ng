@@ -1,10 +1,11 @@
 <particle-dialog
   [object]="dialogOpen"
   [showTitle]="false"
-  [allowClose]="true"
+  [allowClose]="false"
   [width]="width()"
   [height]="height()"
   (closed)="checkClose()"
+  (closeAttempt)="checkClose()"
   #dialog
 >
   <div class="row_block width100 height100 body_color">

@@ -22,11 +22,12 @@ import {ProfilePicComponent} from "./shared/components/profile-pic/profile-pic.c
 import {BehaviorSubject, filter, mergeMap, Observable, of} from "rxjs";
 import {tap} from "rxjs/operators";
 import {PaginatedContainer} from "./shared/models/paginated-container.model";
+import {TemplatedDialog} from "./shared/components/templated-dialog/templated-dialog";
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-  imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe, LoaderComponent, RadioButtonsComponent, AutoCompleteInput, ProfilePicComponent]
+  imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe, LoaderComponent, RadioButtonsComponent, AutoCompleteInput, ProfilePicComponent, TemplatedDialog]
 })
 export class HomeComponent {
   private themingService = inject(ThemingService);
@@ -52,7 +53,11 @@ export class HomeComponent {
   @ViewChild('autoComplete')
   autoComplete: AutoCompleteInput = null as any;
 
-  private _users = ['nick@entake.io', 'terry@entake.io'];
+  @ViewChild('dialog')
+  dialog: TemplatedDialog<any> = null as any;
+
+  protected selectedUser: any;
+  private _users = ['nick@entake.io', 'terry@entake.io', 'sales@entake.io', 'nick@pixlbit.com', 'staff@pixlbit.com'];
   private _searchTerm$ = new BehaviorSubject<string>(null as any);
   searchUsers$ = this._searchTerm$.asObservable().pipe(
     filter(term => !!term && term.length > 2),
@@ -85,7 +90,10 @@ export class HomeComponent {
 
   protected handleUserSelection(user: string): void {
     this.notificationService.add({severity: 'success', summary: `You found user: ${user}!`});
-    this.autoComplete.closePopover();
+    this.autoComplete.closePopover(true);
+    this.autoComplete.resetSearchText();
+    this.selectedUser = {user};
+    this.dialog.open();
   }
 
   addNotification(severity: 'success' | 'warn' | 'error' | 'info'): void {

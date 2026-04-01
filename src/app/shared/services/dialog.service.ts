@@ -25,6 +25,8 @@ export class DialogService {
             this.dialogs.pop();
             topDialog.close();
             event.stopPropagation();
+          } else {
+            topDialog.closeAttempt.emit();
           }
         }
       }

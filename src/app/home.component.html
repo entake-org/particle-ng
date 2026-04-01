@@ -30,8 +30,7 @@
       >
         @if (searchUsers$ | async; as container) {
           @for (result of container.results; track $index) {
-            <button [tabindex]="0"
-                    class="particle_autocomplete_option access row rc_gap hov_darken"
+            <button class="particle_autocomplete_option access row rc_gap hov_darken"
                     (click)="handleUserSelection(result)"
             >
               <particle-profile-pic
@@ -511,3 +510,25 @@
 </particle-layout-full-framing>
 }
 
+<particle-templated-dialog
+  icon="fas fa-user"
+  title="Edit User"
+  description="Edit the User below"
+  [checkUnsavedChanges]="true"
+  [contentTemplate]="content"
+  [footerTemplate]="footer"
+  [showMaximize]="false"
+  [data]="selectedUser"
+  height="480px"
+  width="640px"
+  #dialog
+>
+  <ng-template #content>
+    @if (selectedUser) {
+      <input type="text" [(ngModel)]="selectedUser.user"/>
+    }
+  </ng-template>
+  <ng-template #footer>
+
+  </ng-template>
+</particle-templated-dialog>

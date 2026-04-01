@@ -35,6 +35,7 @@ export class AutoCompleteInput {
   );
 
   protected searchText = '';
+  private preventFocus = false;
 
   doSearch(): void {
     this._search$.next(this.searchText);
@@ -46,7 +47,8 @@ export class AutoCompleteInput {
     }
   }
 
-  closePopover(): void {
+  closePopover(preventFocus?: boolean): void {
+    this.preventFocus = !!preventFocus;
     if (this.popover.isOpen()) {
       this.popover.toggle();
     }
@@ -63,6 +65,26 @@ export class AutoCompleteInput {
       this.inputField.nativeElement.focus();
       setTimeout(() => this.popover.close(), 0);
     }
+  }
+
+  handlePopoverClose(): void {
+    if (!this.preventFocus) {
+      this.inputField.nativeElement.focus();
+    }
+  }
+
+  onArrowUpDown(): void {
+    if (this.popover.isOpen()) {
+      this.popover.focusOnFirstElement();
+    }
+  }
+
+  tabNext(): void {
+    this.popover.focusOnNextElement();
+  }
+
+  tabPrevious(): void {
+    this.popover.focusOnPreviousElement();
   }
 
 }

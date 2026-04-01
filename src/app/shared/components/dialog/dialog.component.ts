@@ -115,6 +115,8 @@ export class DialogComponent {
    */
   readonly closed = output();
 
+  readonly closeAttempt = output();
+
   /**
    * Event emitted when dialog has finished opening
    */
@@ -134,16 +136,4 @@ export class DialogComponent {
     this.closed.emit();
   }
 
-  /**
-   * Emit closed/opened events based on state when dialog animation ends
-   * @param event
-   */
-  onAnimationDone(event: AnimationEvent): void {
-    /**
-    if (event.fromState === 'void') {
-      this.opened.emit();
-    } else if (event.toState === 'void') {
-      this.closed.emit();
-    }*/
-  }
 }

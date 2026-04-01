@@ -1,6 +1,6 @@
 {
   "name": "@entake/particle",
-  "version": "21.0.2",
+  "version": "21.1.0",
   "license": "MIT",
   "description": "Reusable Angular components from the team at Entake",
   "repository": {
@@ -20,7 +20,7 @@
   "homepage": "https://github.com/entake-org/particle-ng#readme",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4242",
     "build": "ng build --prod",
     "test": "ng test",
     "eslint": "eslint",
