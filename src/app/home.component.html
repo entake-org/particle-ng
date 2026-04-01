@@ -17,10 +17,36 @@
         <div class="square_40px">
           <i class="fab fa-entake fa-xl"></i>
         </div>
-        <div class="text xlg">Particle by Entake</div>
+        <div class="text xlg col size_1">Particle by Entake</div>
+        <div class="col mar_right20">
+          <particle-icon-select value="fab fa-entake" class="center_center" tooltipPosition="left" #iconSelect></particle-icon-select>
+        </div>
       </div>
     </ng-template>
     <ng-template #mainContent>
+      <particle-auto-complete-input
+        (searchString)="handleSearch($event)"
+        #autoComplete
+      >
+        @if (searchUsers$ | async; as container) {
+          @for (result of container.results; track $index) {
+            <button [tabindex]="0"
+                    class="particle_autocomplete_option access row rc_gap hov_darken"
+                    (click)="handleUserSelection(result)"
+            >
+              <particle-profile-pic
+                size="24px"
+                [gravatarEmail]="result"
+                [tooltipDisabled]="true"
+              ></particle-profile-pic>
+              <div class="text lg">
+                {{result}}
+              </div>
+            </button>
+          }
+        }
+      </particle-auto-complete-input>
+
       <div class="row rc_gap center_center min_h100"
         animate.enter="exist1s"
       >
@@ -450,7 +476,6 @@
     </button>
 
     <div class="row width100 space_between" style="max-height:100px;">
-      <particle-icon-select class="center_center" #iconSelect></particle-icon-select>
       <div class="square_50px">
         <particle-dropdown
           [collapsedButtonTemplate]="buttonTemplate"

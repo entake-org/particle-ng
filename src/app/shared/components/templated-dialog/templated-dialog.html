@@ -1,0 +1,89 @@
+<particle-dialog
+  [object]="dialogOpen"
+  [showTitle]="false"
+  [allowClose]="true"
+  [width]="width()"
+  [height]="height()"
+  (closed)="checkClose()"
+  #dialog
+>
+  <div class="row_block width100 height100 body_color">
+    <div class="row column height100">
+      <div class="col">
+        <div class="row header_color ptl_brdr_color border_bottom min_h50 v_center pad_right10 pad_left5 hide_element">
+          <div class="col size_1 v_center pad_lr5">
+            <div class="square_40px" innerHTML="<i class='{{icon()}}'></i>"></div>
+            <div class="row_block mar_lr5">
+              <div class="min_h10 min_w2 bg_logo_1"></div>
+              <div class="min_h10 min_w2 bg_logo_2"></div>
+              <div class="min_h10 min_w2 bg_logo_3"></div>
+            </div>
+            <div class="text lg text_left text_wrap bold pad_lr5">
+              {{title()}}
+            </div>
+          </div>
+          <div class="col row rc_gap min_w30 top_center">
+            @if (showMaximize()) {
+              <button class="access btn clear"
+                      [attr.aria-label]="text().maximize"
+                      (click)="dialog.toggleMaximize()"
+              >
+                <div class="circle_26px cancel_button_color ptl_brdr_color ptl_brdr_size"><i class="fas fa-expand"></i></div>
+              </button>
+            }
+            <button class="access btn clear" [attr.aria-label]="text().close" (click)="checkClose()" >
+              <div class="circle_26px cancel_button_color ptl_brdr_color ptl_brdr_size"><i class="fas fa-xmark"></i></div>
+            </button>
+          </div>
+        </div>
+        <div class="row header_color min_h50 v_center pad_right10 pad_tb5 pad_left5 mobile_only_flex">
+          <div class="col size_1 v_center pad_lr5">
+            <div class="square_30px" innerHTML="<i class='{{icon()}}'></i>"></div>
+            <div class="row_block mar_lr5">
+              <div class="min_h5 min_w2 bg_logo_1"></div>
+              <div class="min_h5 min_w2 bg_logo_2"></div>
+              <div class="min_h5 min_w2 bg_logo_3"></div>
+            </div>
+            <div class="text md text_left text_wrap bold pad_lr5">
+              {{title()}}
+            </div>
+          </div>
+          <div class="col row rc_gap min_w30 top_center">
+            <button class="access btn clear" [attr.aria-label]="text().close" (click)="checkClose()" >
+              <div class="circle_30px cancel_button_color ptl_brdr_color ptl_brdr_size"><i class="fas fa-xmark"></i></div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="col size_1 body_color" style="height: calc(100% - 50px);">
+        <div class="row_block width100 height100">
+          <div class="row_block width100 body_color height100">
+            <div class="row column content_color height100">
+              <div class="col ptl_brdr_color border_bottom pad_10 body_color_dark_2 min_h25 v_center">
+                @if (subheaderTemplate()) {
+                  <ng-container *ngTemplateOutlet="subheaderTemplate()"></ng-container>
+                } @else {
+                  <div class="text md text_left text_wrap">
+                    {{description()}}
+                  </div>
+                }
+              </div>
+              <div class="col size_1 column scroll_yauto body_color pad_10">
+                <div class="col size_1 column rc_gap ptl_brdr_color ptl_brdr_radius ptl_brdr_size pad_10 content_color">
+                  <ng-container *ngTemplateOutlet="contentTemplate()"></ng-container>
+                </div>
+              </div>
+              <div class="col min_h50 ptl_brdr_color border_top pad_tb5 pad_lr10 footer_color">
+                <ng-container *ngTemplateOutlet="footerTemplate()"></ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</particle-dialog>
+
+<particle-confirmation-dialog (confirmed)="close()" #confirmationDialog></particle-confirmation-dialog>

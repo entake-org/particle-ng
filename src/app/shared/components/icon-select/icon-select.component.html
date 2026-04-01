@@ -9,6 +9,7 @@
         (click)="openDialog()"
         [particleTooltip]="(_internalValue | async)?.prefix + ' ' + (_internalValue | async)?.name"
         [tooltipDisabled]="(_internalValue | async) === null"
+        [tooltipPosition]="tooltipPosition()"
         [disabled]="disabled"
         class="btnset access wis_button bg_overlay brdr brad_3"
         [attr.aria-label]="text().selectAnIcon">

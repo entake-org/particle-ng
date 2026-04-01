@@ -211,6 +211,7 @@ export class PopoverComponent implements OnDestroy {
    * Handle animation end
    */
   onAnimationDone(): void {
+    (document.activeElement as any)?.blur();
     this.render = false;
     this.removeEventListeners();
     this.closed.emit();

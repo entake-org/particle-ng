@@ -175,10 +175,6 @@ export interface SliderText {
   enterAValue: string;
 }
 
-export interface ThemingText {
-  placeholder: string;
-}
-
 export interface WeekPickerText {
   openCalendar: string;
   selectWeek: string;
@@ -208,4 +204,19 @@ export interface WeekPickerText {
   resetWeekSelection: string;
   selectNextWeek: string;
   nextWeek: string;
+}
+
+export interface TemplatedDialogText {
+  confirmationDialogText?: ConfirmationDialogText;
+  unsavedChanges: string;
+  continue: string;
+  close: string;
+  maximize: string;
+}
+
+export interface ConfirmationDialogText {
+  defaultTitle: string;
+  close: string;
+  yes: string;
+  no: string;
 }
