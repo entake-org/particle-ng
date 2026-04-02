@@ -130,6 +130,7 @@ export class DialogComponent {
    * Null the object to close the dialog, emit the close event.
    */
   close(): void {
+    (document.activeElement as any)?.blur();
     this._object = null;
     this.isMaximized = false;
     this.dialogService.unregisterDialog(this);

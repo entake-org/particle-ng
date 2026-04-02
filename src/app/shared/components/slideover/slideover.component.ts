@@ -86,6 +86,7 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
   }
 
   close(): void {
+    (document.activeElement as any)?.blur();
     this.removeModalMask();
     this.slideoverOpen = false;
     this.closed.emit(null as any);
