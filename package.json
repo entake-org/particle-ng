@@ -1,6 +1,6 @@
 {
   "name": "@entake/particle",
-  "version": "21.1.0",
+  "version": "21.1.1",
   "license": "MIT",
   "description": "Reusable Angular components from the team at Entake",
   "repository": {
@@ -28,7 +28,7 @@
     "package": "npm run css-build && ng-packagr -p ng-package.json",
     "compodoc": "npx compodoc -p src/tsconfig.app.json",
     "lint": "ng lint",
-    "css-concat": "concat-glob-cli -f ./src/styles/*.css -o ./dist/particle.css",
+    "css-concat": "concat-glob-cli -f ./src/styles/**/*.css -o ./dist/particle.css",
     "css-minify": "postcss ./dist/particle.css --replace",
     "css-copy": "copyfiles -f ./dist/particle.css ./",
     "css-build": "npm run css-concat && npm run css-minify && npm run css-copy"
