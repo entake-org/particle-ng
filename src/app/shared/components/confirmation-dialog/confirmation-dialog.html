@@ -1,0 +1,78 @@
+<particle-dialog
+  [object]="isOpen"
+  [showTitle]="false"
+  [allowClose]="true"
+  [width]="width()"
+  [height]="height()"
+  (closed)="close()"
+>
+  <div class="row_block width100 height100 body_color">
+    <div class="row column height100">
+      <div class="col">
+        <div class="row header_color ptl_brdr_color border_bottom min_h50 v_center pad_lr10">
+          <div class="col size_1 v_center">
+            <div class="square_40px" innerHTML="<i class='{{iconClass()}}'></i>">
+            </div>
+            <div class="row_block mar_lr5">
+              <div class="min_h10 min_w2 bg_logo_1"></div>
+              <div class="min_h10 min_w2 bg_logo_2"></div>
+              <div class="min_h10 min_w2 bg_logo_3"></div>
+            </div>
+            <div class="text lg text_left" style="white-space: break-spaces;line-height: 1">
+              {{title}}
+            </div>
+          </div>
+          <div class="col min_w30 top_center">
+            <button class="access btn clear" [attr.aria-label]="text().close" (click)="close()" >
+              <div class="circle_26px cancel_button_color ptl_brdr_color ptl_brdr_size hov_glow"><i class="fas fa-xmark"></i></div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- CONTENT -->
+      <div class="col size_1 scroll_yauto">
+        <div class="row column pad_10 body_color">
+          <div class="row column center_center rc_gap width100 pad_10 content_color ptl_brdr_radius ptl_brdr_color ptl_brdr_size">
+            <div class="col">
+              <div class="row center_center">
+                <div class="text md bold text_center text_wrap">{{message}}</div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="row center_center rc_gap">
+                <button
+                  class="access btnset clear" (click)="close()"
+                  [attr.aria-label]="text().no"
+                >
+                  <div class="row v_center rc_meta_gap pad_lr15 pad_tb5 cancel_button_color ptl_brdr_radius hov_glow">
+                    <div class="col">
+                      <div class="text lg">{{text().no}}</div>
+                    </div>
+                    <div class="col">
+                      <i class="fas fa-xmark"></i>
+                    </div>
+                  </div>
+                </button>
+                <div class="min_h20 ptl_brdr_color border_right"></div>
+                <button
+                  class="access btnset clear"
+                  (click)="handleOk()"
+                  [attr.aria-label]="text().yes"
+                >
+                  <div class="row v_center rc_meta_gap pad_lr15 pad_tb5 ok_button_color ptl_brdr_radius hov_glow">
+                    <div class="col">
+                      <div class="text lg">{{text().yes}}</div>
+                    </div>
+                    <div class="col">
+                      <i class="fas fa-check"></i>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</particle-dialog>

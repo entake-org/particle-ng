@@ -1,0 +1,28 @@
+<input type="text"
+       [placeholder]="placeholder()"
+       [ngClass]="classList()"
+       [(ngModel)]="searchText"
+       (ngModelChange)="doSearch()"
+       (keyup.escape)="onEscapeKeyUp($event)"
+       (keyup.arrowUp)="onArrowUpDown()"
+       (keyup.arrowDown)="onArrowUpDown()"
+       #input
+/>
+<particle-popover
+  height="150"
+  width="{{input?.getBoundingClientRect()?.width ?? 200}}"
+  openDirection="below"
+  alignment="center"
+  classList="body_color particle_popover_shadow"
+  [targetOverride]="input"
+  (closed)="handlePopoverClose()"
+  (arrowDown)="tabNext()"
+  (arrowUp)="tabPrevious()"
+  #popover
+>
+  @if (search$ | async) {
+    <div role="listbox" tabindex="-1">
+      <ng-content></ng-content>
+    </div>
+  }
+</particle-popover>

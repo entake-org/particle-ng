@@ -1,6 +1,6 @@
 {
   "name": "@entake/particle",
-  "version": "21.0.2",
+  "version": "21.1.0",
   "license": "MIT",
   "description": "Reusable Angular components from the team at Entake",
   "repository": {
@@ -20,7 +20,7 @@
   "homepage": "https://github.com/entake-org/particle-ng#readme",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4242",
     "build": "ng build --prod",
     "test": "ng test",
     "eslint": "eslint",
@@ -48,6 +48,7 @@
     "core-js": "^3.48.0",
     "date-fns": "^4.1.0",
     "intl": "^1.2.5",
+    "lodash": "^4.17.21",
     "md5-typescript": "^1.0.5",
     "ngx-tiptap": "^14.0.1",
     "rxjs": "^7.8.2",
@@ -86,6 +87,7 @@
     "@types/dompurify": "^3.2.0",
     "@types/jasmine": "~5.1.9",
     "@types/jasminewd2": "~2.0.13",
+    "@types/lodash": "^4.17.20",
     "@types/node": "^24.3.1",
     "@typescript-eslint/eslint-plugin": "^8.42.0",
     "angular-eslint": "^20.2.0",

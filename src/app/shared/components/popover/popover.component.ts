@@ -83,6 +83,9 @@ export class PopoverComponent implements OnDestroy {
    */
   readonly closed = output<void>();
 
+  readonly arrowDown = output<void>();
+  readonly arrowUp = output<void>();
+
   @ViewChild('container')
   container: ElementRef<HTMLDivElement> = null as any;
 
@@ -117,6 +120,8 @@ export class PopoverComponent implements OnDestroy {
    * @private
    */
   private escapeKeyUpUnlisteners: Array<() => void> = [];
+
+  private _elements: Array<any> = [];
 
   isOpen = signal(false);
 
@@ -211,6 +216,7 @@ export class PopoverComponent implements OnDestroy {
    * Handle animation end
    */
   onAnimationDone(): void {
+    (document.activeElement as any)?.blur();
     this.render = false;
     this.removeEventListeners();
     this.closed.emit();
@@ -307,6 +313,7 @@ export class PopoverComponent implements OnDestroy {
    */
   private addEventListeners(): void {
     const focusableElements = this.getFocusableElements(this.container.nativeElement);
+    this._elements = focusableElements;
 
     for (const element of focusableElements) {
       this.renderer.setAttribute(element, 'data-dialog-close-override', 'true');
@@ -319,6 +326,14 @@ export class PopoverComponent implements OnDestroy {
 
             if (key === 'Esc' || key === 'Escape') {
               this.close();
+            }
+
+            if (key === 'ArrowDown') {
+              this.arrowDown.emit();
+            }
+
+            if (key === 'ArrowUp') {
+              this.arrowUp.emit();
             }
           }
         })
@@ -372,6 +387,46 @@ export class PopoverComponent implements OnDestroy {
 
   toggleOpen(): void {
     this.isOpen.update((isOpen) => !isOpen);
+  }
+
+  focusOnFirstElement(): void {
+    this._elements[0]?.focus();
+  }
+
+  focusOnNextElement(): void {
+    let index = 0;
+    for (const element of this._elements) {
+      if (element === document.activeElement) {
+        break;
+      }
+      index++;
+    }
+
+    if (index + 1 > this._elements.length - 1) {
+      index = 0;
+    } else {
+      index++;
+    }
+
+    this._elements[index]?.focus();
+  }
+
+  focusOnPreviousElement(): void {
+    let index = 0;
+    for (const element of this._elements) {
+      if (element === document.activeElement) {
+        break;
+      }
+      index++;
+    }
+
+    if (index - 1 < 0) {
+      index = this._elements.length - 1;
+    } else {
+      index--;
+    }
+
+    this._elements[index]?.focus();
   }
 
 }

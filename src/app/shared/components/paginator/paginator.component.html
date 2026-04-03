@@ -185,7 +185,7 @@
       <div class="text sm text_center ent_r2l_txt" style="text-align: center !important;"><label for="pageJump">{{text().jumpToPage}} ({{text().outOf}} {{numberOfPages}}):</label></div>
       <div class="row rc_gap center_center mar_top10 ent_r2l_dir">
         <div class="col">
-          <input class="access fullwidth_input sm" style="width:50px;" maxlength="4" id="pageJump"
+          <input class="access fullwidth_input sm" style="width:50px;" maxlength="4" id="pageJump" (keydown.enter)="jumpPage();op.close();config.close();"
             type="text" [attr.aria-label]="text().page" name="pagejump" [placeholder]="text().page" [(ngModel)]="pageJumpInput" />
           </div>
           <div class="col">

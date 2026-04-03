@@ -46,6 +46,8 @@ export class IconSelectComponent implements ControlValueAccessor, OnDestroy {
    */
   private static readonly PAGE_SIZE = 48;
 
+  readonly tooltipPosition = input<'left' | 'right' | 'top' | 'bottom'>('top');
+
   /**
    * Set the value of the icon select
    * @param value the value to set

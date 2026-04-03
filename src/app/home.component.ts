@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ViewChild} from '@angular/core';
 
 import {AsyncPipe} from '@angular/common';
 import {LayoutFullFramingComponent} from './shared/components/layout-full-framing/layout-full-framing.component';
@@ -17,11 +17,17 @@ import {Notification} from './shared/models/notification.model';
 import {RichTextComponent} from './shared/components/rich-text/rich-text.component';
 import {LoaderComponent} from './shared/components/loader/loader.component';
 import {RadioButtonsComponent} from './shared/components/radio-buttons/radio-buttons.component';
+import {AutoCompleteInput} from "./shared/components/auto-complete-input/auto-complete-input";
+import {ProfilePicComponent} from "./shared/components/profile-pic/profile-pic.component";
+import {BehaviorSubject, filter, mergeMap, Observable, of} from "rxjs";
+import {tap} from "rxjs/operators";
+import {PaginatedContainer} from "./shared/models/paginated-container.model";
+import {TemplatedDialog} from "./shared/components/templated-dialog/templated-dialog";
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-  imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe, LoaderComponent, RadioButtonsComponent]
+  imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe, LoaderComponent, RadioButtonsComponent, AutoCompleteInput, ProfilePicComponent, TemplatedDialog]
 })
 export class HomeComponent {
   private themingService = inject(ThemingService);
@@ -43,6 +49,52 @@ export class HomeComponent {
   textEditorValue = '<h2 style="text-align: center">Beautiful <b>BOLD</b> <em>rich</em> text!</h2><p>Visit <a href="https://www.entake.io" target="_blank">entake.io</a> for more cool stuff!</p><img src="https://media.entake.io/images/masthead/57d44b23-b872-4f29-a2b5-dc39551d2bec.jpg"/>';
 
   pickerRange: any = {};
+
+  @ViewChild('autoComplete')
+  autoComplete: AutoCompleteInput = null as any;
+
+  @ViewChild('dialog')
+  dialog: TemplatedDialog<any> = null as any;
+
+  protected selectedUser: any;
+  private _users = ['nick@entake.io', 'terry@entake.io', 'sales@entake.io', 'nick@pixlbit.com', 'staff@pixlbit.com'];
+  private _searchTerm$ = new BehaviorSubject<string>(null as any);
+  searchUsers$ = this._searchTerm$.asObservable().pipe(
+    filter(term => !!term && term.length > 2),
+    mergeMap(term => this.filterUsers(term)),
+    tap(container => {
+      if (container.results.length > 0) {
+        this.autoComplete.openPopover();
+      }
+    })
+  );
+
+  private filterUsers(searchTerm: string): Observable<PaginatedContainer<string>> {
+    const cleanSearch = searchTerm.trim().toLowerCase();
+    const results = this._users.filter(user => user.toLowerCase().includes(cleanSearch));
+    return of({
+      results,
+      pageNumber: 0,
+      pageSize: 20,
+      totalCount: results.length
+    });
+  }
+
+  protected handleSearch(search: string): void {
+    if (search && search.length > 2) {
+      this._searchTerm$.next(search);
+    } else {
+      this.autoComplete.closePopover();
+    }
+  }
+
+  protected handleUserSelection(user: string): void {
+    this.notificationService.add({severity: 'success', summary: `You found user: ${user}!`});
+    this.autoComplete.closePopover(true);
+    this.autoComplete.resetSearchText();
+    this.selectedUser = {user};
+    this.dialog.open();
+  }
 
   addNotification(severity: 'success' | 'warn' | 'error' | 'info'): void {
     const notification = { severity } as Notification;
