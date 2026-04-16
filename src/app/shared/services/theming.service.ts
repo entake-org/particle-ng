@@ -391,7 +391,7 @@ export class ThemingService {
         if (font.source === 'adobe') {
           element.setAttribute('href', `https://use.typekit.net/${font.id}.css`);
         } else {
-          element.setAttribute('href', `https://fonts.googleapis.com/css?family=${font.name.replace(' ', '+')}&display=swap`);
+          element.setAttribute('href', `https://fonts.googleapis.com/css2?family=${font.name.replace(' ', '+')}:ital,wght@0,100..900;1,100..900&display=swap`);
         }
         element.setAttribute('rel', 'stylesheet');
         head.appendChild(element);

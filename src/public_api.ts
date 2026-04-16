@@ -40,6 +40,7 @@ export * from './app/shared/components/radio-buttons/radio-buttons.component';
 export * from './app/shared/components/auto-complete-input/auto-complete-input';
 export * from './app/shared/components/templated-dialog/templated-dialog';
 export * from './app/shared/components/confirmation-dialog/confirmation-dialog';
+export * from './app/shared/components/context-menu/context-menu.component';
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';
@@ -72,4 +73,5 @@ export * from './app/shared/models/multi-select-option-group.model';
 export * from './app/shared/models/notification.model';
 export * from './app/shared/models/toggle-options.model';
 export * from './app/shared/models/paginated-container.model';
+export * from './app/shared/models/context-menu-entry.model';
 

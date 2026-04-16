@@ -1,0 +1,45 @@
+<particle-popover
+  [width]="window.innerWidth > 768 ? width() : mobileWidth"
+  [height]="window.innerWidth > 768 ? height() : mobileHeight"
+  classList="footer_color particle_popover_shadow"
+  [openDirection]="openDirection()"
+  alignment="center"
+  (closed)="closed.emit()"
+  #popover
+>
+  <div class="row column rc_meta_gap width100 height100 footer_color pad_bot10"
+       style="cursor: default;user-select: none;"
+  >
+    <div class="col">
+      <div class="row v_center header_color min_h30 ent_r2l_dir">
+        <div class="text bold text_wrap text_left ent_r2l_txt"
+             [ngClass]="window.innerWidth > 768 ? 'md pad_lr10' : 'lg pad_10'">{{ title() }}
+        </div>
+      </div>
+    </div>
+    @if (entries()) {
+      @for (entry of entries(); track $index) {
+        <button class="access btnset clear width100 hov_glow"
+                [style.cursor]="entry.disabled ? 'not-allowed' : ''"
+                [disabled]="entry.disabled"
+                (click)="handleSelection($event, entry.key)"
+        >
+          <div class="row rc_meta_gap min_h25 v_center ent_r2l_dir">
+            @if (entry.icon) {
+              <div class="col square_20px mar_left5 ent_r2l_ico"
+                   innerHTML="<i class='{{entry.icon}}'></i>"
+              ></div>
+            }
+            <div class="col size_1" [ngClass]="!entry.icon ? 'mar_left5' : ''">
+              <div class="text text_left text_wrap ent_r2l_txt"
+                   [ngClass]="window.innerWidth > 768 ? 'md' : 'lg pad_tb5'"
+              >
+                {{ entry.text }}
+              </div>
+            </div>
+          </div>
+        </button>
+      }
+    }
+  </div>
+</particle-popover>
