@@ -3,10 +3,161 @@
 PARTICLE STYLES
 .......
 */
-.rich_text_formatting{
-  line-height: 1.4;
+/* RESPONSIVE HEADERS */
+h1 {
+  font-size: 32pt;
+  margin: 0;
+  line-height: 1.1;
+}
+@media screen and (max-width: 728px) {
+  h1 {
+    font-size: 18pt;
+    line-height: 1.2;
+  }
+}
+h2 {
+  font-size: 24pt;
+  line-height: 1.2;
+  margin: 0;
+}
+@media screen and (max-width: 728px) {
+  h2 {
+    font-size: 16pt;
+  }
+}
+h3 {
+  font-size: 20pt;
+  line-height: 1.2;
+  margin: 0;
+}
+@media screen and (max-width: 728px) {
+  h3 {
+    font-size: 16pt;
+  }
+}
+h4 {
+  font-size: 14pt;
+  margin: 0;
+}
+@media screen and (max-width: 728px) {
+  h4 {
+    font-size: 13pt;
+    line-height: 1.4;
+  }
+}
+h5 {
+  font-size: 14pt;
+  line-height: 1.2;
+  margin: 0;
+}
+@media screen and (max-width: 728px) {
+  h5 {
+    font-size: 13pt;
+    line-height: 1.4;
+  }
 }
 
+/* GLOBAL FONT WEIGHTS */
+.thin {
+  font-weight: 100;
+}
+.extralight {
+  font-weight: 200;
+}
+.light {
+  font-weight: 300;
+}
+.regular {
+  font-weight: 400;
+}
+.medium {
+  font-weight: 500;
+}
+.semibold {
+  font-weight: 600;
+}
+.bold {
+  font-weight: 700;
+}
+.extrabold, heavy, bolder {
+  font-weight: 800;
+}
+.black {
+  font-weight: 900;
+}
+
+
+
+
+
+/* RICH TEXT EDITOR */
+.rich_text_formatting {
+  line-height: 1.4;
+}
+.rich_text_formatting a {
+  cursor: pointer;
+  font-size: 11pt;
+  font-weight: 600;
+  color: var(--bg-blue-alt);
+  text-decoration: none;
+  text-decoration-style: solid;
+}
+.rich_text_formatting a:hover {
+  cursor: pointer;
+  font-size: 11pt;
+  font-weight: 600;
+  color: var(--bg-blue-alt);
+  text-decoration: underline;
+  text-decoration-style: solid;
+}
+.rich_text_formatting hr {
+  border: none;
+  height: var(--ptl-brdr-size);
+  background-color: var(--ptl-brdr-color);
+  margin: 5px 0;
+}
+.rich_text_formatting p {
+  padding: 5px 0;
+  font-size: 11pt;
+}
+.rich_text_formatting h1 {
+  font-size: 15pt;
+  margin:  0;
+  padding: 5px 0 0 0;
+  font-weight: 600;
+}
+.rich_text_formatting h2 {
+  font-size: 13pt;
+  margin:  0;
+  padding: 5px 0 0 0;
+  font-weight: 600;
+}
+.rich_text_formatting h3 {
+  font-size: 13pt;
+  margin:  0;
+  padding: 5px 0 0 0;
+  font-weight: 200;
+}
+.rich_text_formatting ol {
+  font-size: 11pt;
+  margin: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 30px;
+}
+.rich_text_formatting ul {
+  font-size: 11pt;
+  margin: 0;
+  padding:0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 30px;
+}
+.rich_text_formatting li {
+  font-size: 11pt;
+  margin: 0;
+  line-height: 1.2;
+}
 .rich_text_formatting img {
   width:100%;
   margin: 10px auto;
@@ -16,6 +167,41 @@ PARTICLE STYLES
   border-style: solid;
   border-color: var(--ptl-brdr-color);
 }
+
+
+
+
+
+
+
+/* TEXT COLORS */
+
+.text_orange {
+  color: var(--bg-orange-alt);
+}
+.text_yellow {
+  color: var(--bg-yellow-alt);
+}
+.text_red {
+  color: var(--bg-red-alt);
+}
+.text_blue {
+  color: var(--bg-blue-alt);
+}
+.text_purple {
+  color: var(--bg-purple-alt);
+}
+.text_green {
+  color: var(--bg-green-alt);
+}
+.text_grey {
+  color: var(--bg-grey-alt);
+}
+
+
+
+
+
 
 /* BASIC TEXT ALIGNMENTS */
 .text_center {
