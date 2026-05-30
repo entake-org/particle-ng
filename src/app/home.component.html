@@ -515,14 +515,30 @@
   title="Edit User"
   description="Edit the User below"
   [checkUnsavedChanges]="true"
-  [contentTemplate]="content"
+  [leftSidebarTemplate]="sidebar"
+  [mainAreaTemplate]="content"
   [footerTemplate]="footer"
   [showMaximize]="false"
   [data]="selectedUser"
   height="480px"
   width="640px"
+  leftSidebarClassList="header_color"
   #dialog
 >
+  <ng-template #sidebar>
+    <div class="row column rc_gap header_color pad_5">
+      <div class="col">Item 1</div>
+      <div class="col">Item 2</div>
+      <div class="col">Item 3</div>
+      <div class="col">Item 4</div>
+      <div class="col">Item 5</div>
+      <div class="col">Item 6</div>
+      <div class="col">Item 7</div>
+      <div class="col">Item 8</div>
+      <div class="col">Item 9</div>
+      <div class="col">Item 10</div>
+    </div>
+  </ng-template>
   <ng-template #content>
     @if (selectedUser) {
       <input type="text" [(ngModel)]="selectedUser.user"/>

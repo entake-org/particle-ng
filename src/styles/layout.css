@@ -92,6 +92,39 @@ PARTICLE STYLES
   column-gap: 10px;
 }
 
+.rc_gap5 {
+  column-gap: 5px;
+  row-gap: 5px
+}
+.rc_gap10 {
+  column-gap: 10px;
+  row-gap: 10px
+}
+.rc_gap20 {
+  column-gap: 20px;
+  row-gap: 20px
+}
+.rc_gap30 {
+  column-gap: 30px;
+  row-gap: 30px
+}
+.rc_gap40 {
+  column-gap: 40px;
+  row-gap: 40px
+}
+.rc_gap40_20 {
+  column-gap: 40px;
+  row-gap: 40px
+}
+@media screen and (max-width: 728px) {
+  .rc_gap40_20 {
+    column-gap: 20px;
+    row-gap: 20px
+  }
+}
+
+
+
 .rc_meta_gap {
   column-gap: 5px;
   row-gap: 5px

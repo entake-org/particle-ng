@@ -71,11 +71,26 @@
                   </div>
                 }
               </div>
-              <div class="col size_1 column scroll_yauto body_color pad_10">
-                <div class="col size_1 column rc_gap ptl_brdr_color ptl_brdr_radius ptl_brdr_size pad_10 content_color">
-                  <ng-container *ngTemplateOutlet="contentTemplate()"></ng-container>
+              @if (!!contentTemplate()) {
+                <div class="col size_1 column scroll_yauto body_color pad_10">
+                  <div class="col size_1 column rc_gap ptl_brdr_color ptl_brdr_radius ptl_brdr_size pad_10 content_color">
+                    <ng-container *ngTemplateOutlet="contentTemplate()"></ng-container>
+                  </div>
                 </div>
-              </div>
+              } @else {
+                <div class="col size_1 row scroll_yauto">
+                  <div class="col ptl_brdr_color ptl_brdr_size border_right min_w200 scroll_yauto">
+                    <div class="row_block width100 height_100" [ngClass]="leftSidebarClassList()">
+                      <ng-container *ngTemplateOutlet="leftSidebarTemplate()"></ng-container>
+                    </div>
+                  </div>
+                  <div class="col size_1 column scroll_yauto body_color pad_10">
+                    <div class="col size_1 column rc_gap ptl_brdr_color ptl_brdr_radius ptl_brdr_size pad_10 content_color">
+                      <ng-container *ngTemplateOutlet="mainAreaTemplate()"></ng-container>
+                    </div>
+                  </div>
+                </div>
+              }
               <div class="col min_h50 ptl_brdr_color border_top pad_tb5 pad_lr10 footer_color">
                 <ng-container *ngTemplateOutlet="footerTemplate()"></ng-container>
               </div>

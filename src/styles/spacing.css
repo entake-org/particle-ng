@@ -412,6 +412,22 @@ PARTICLE STYLES
     padding-left:20px;
     padding-right:20px;
 }
+.pad_lr25 {
+  padding-left:25px;
+  padding-right:25px;
+}
+.pad_lr30 {
+  padding-left:30px;
+  padding-right:30px;
+}
+.pad_lr35 {
+  padding-left:35px;
+  padding-right:35px;
+}
+.pad_lr40 {
+  padding-left:40px;
+  padding-right:40px;
+}
 .pad_tb0 {
     padding-top:0;
     padding-bottom:0;
@@ -446,6 +462,22 @@ PARTICLE STYLES
 .pad_tb20 {
     padding-top:20px;
     padding-bottom:20px;
+}
+.pad_tb25 {
+  padding-top:25px;
+  padding-bottom:25px;
+}
+.pad_tb30 {
+  padding-top:30px;
+  padding-bottom:30px;
+}
+.pad_tb35 {
+  padding-top:35px;
+  padding-bottom:35px;
+}
+.pad_tb40 {
+  padding-top:40px;
+  padding-bottom:40px;
 }
 
 /*PADDING TOP */
