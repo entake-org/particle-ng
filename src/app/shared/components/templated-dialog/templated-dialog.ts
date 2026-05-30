@@ -1,7 +1,7 @@
 import {Component, input, Input, output, TemplateRef, ViewChild} from '@angular/core';
 import {ConfirmationDialog} from '../confirmation-dialog/confirmation-dialog';
 import _ from 'lodash';
-import {NgTemplateOutlet} from '@angular/common';
+import {NgClass, NgTemplateOutlet} from '@angular/common';
 import {DialogComponent} from "../dialog/dialog.component";
 import {TemplatedDialogText} from "../../models/particle-component-text.model";
 
@@ -10,7 +10,8 @@ import {TemplatedDialogText} from "../../models/particle-component-text.model";
   imports: [
     ConfirmationDialog,
     DialogComponent,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    NgClass
   ],
   templateUrl: './templated-dialog.html',
 })
@@ -38,24 +39,18 @@ export class TemplatedDialog<T> {
   } as TemplatedDialogText);
 
   readonly height = input<string>('480px');
-
   readonly width = input<string>('854px');
-
   readonly icon = input<string>('fas fa-cog');
-
   readonly title = input<string>(null as any);
-
   readonly description = input<string>(null as any);
-
   readonly checkUnsavedChanges = input<boolean>(false);
-
   readonly showMaximize = input<boolean>(true);
-
   readonly subheaderTemplate = input<TemplateRef<any>>(null as any);
-
   readonly contentTemplate = input<TemplateRef<any>>(null as any);
-
+  readonly leftSidebarTemplate = input<TemplateRef<any>>(null as any);
+  readonly mainAreaTemplate = input<TemplateRef<any>>(null as any);
   readonly footerTemplate = input<TemplateRef<any>>(null as any);
+  readonly leftSidebarClassList = input<string>(null as any);
 
   readonly closed = output<void>();
 
