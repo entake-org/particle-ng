@@ -35,7 +35,7 @@ export class AutoCompleteInput {
   );
 
   protected searchText = '';
-  private preventFocus = false;
+  private preventFocus = true;
 
   doSearch(): void {
     this._search$.next(this.searchText);
@@ -71,6 +71,7 @@ export class AutoCompleteInput {
     if (!this.preventFocus) {
       this.inputField.nativeElement.focus();
     }
+    this.preventFocus = false;
   }
 
   onArrowUpDown(): void {
