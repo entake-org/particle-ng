@@ -51,7 +51,6 @@ export * from './app/shared/services/local-storage.service';
 export * from './app/shared/services/dialog.service';
 export * from './app/shared/services/notification.service';
 export * from './app/shared/services/theming.service';
-export * from './app/shared/services/theme-change-detection.service';
 
 /** PIPES */
 export * from './app/shared/pipes/ordinal-number.pipe';
