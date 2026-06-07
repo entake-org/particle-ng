@@ -277,9 +277,11 @@
           </div>
         </div>
         <div class="col">
-          <div class="square_60px ptl_brdr_color ptl_brdr_size bg_purple ptl_brdr_radius">
-            <i class="fa-solid fa-xmark"></i>
-          </div>
+          <button class="access btnset clear" (click)="slideover.open()">
+            <div class="square_60px ptl_brdr_color ptl_brdr_size bg_purple ptl_brdr_radius">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+          </button>
         </div>
       </div>
       <div class="row width100">
@@ -548,3 +550,5 @@
 
   </ng-template>
 </particle-templated-dialog>
+
+<particle-slideover position="left" #slideover></particle-slideover>

@@ -1,6 +1,9 @@
 <div [ngClass]="{'particle_dialog_overlay' : object}">
   @if (object) {
     <div class="particle_dialog_container"
+         role="dialog"
+         aria-modal="true"
+         [attr.aria-labelledby]="showTitle() ? 'dialog-title-' + dialogId : null"
          animate.enter="enter-animation"
          animate.leave="leave-animation"
          [cdkTrapFocus]="true"
@@ -8,12 +11,11 @@
     >
       @if (effectiveWidth$ | async; as effectiveWidth) {
         <div class="col shadow particle_dialog_box ptl_brdr_radius"
-          [ngStyle]="{'width': isMaximized ? '90vw' : effectiveWidth, 'height': isMaximized ? '90vh' : height()}">
-          <!-- dialog header -->
+             [ngStyle]="{'width': isMaximized ? '90vw' : effectiveWidth, 'height': isMaximized ? '90vh' : height()}">
           @if (showTitle()) {
             <div class="col" [ngClass]="titleClass()">
               <div class="row v_center pad_5 space_between">
-                <div class="text lg bold paragraph">
+                <div class="text lg bold paragraph" [id]="'dialog-title-' + dialogId">
                   {{title()}}
                 </div>
                 <div class="row col rc_gap">
@@ -26,8 +28,8 @@
                       ></div>
                     </button>
                     <button class="access btnset clear"
-                      [attr.aria-label]="text().close"
-                      (click)="close()">
+                            [attr.aria-label]="text().close"
+                            (click)="close()">
                       <div class="circle_20px ptl_brdr_color ptl_brdr_size ptl_input_bg_color">
                         <i class="fas fa-times"></i>
                       </div>
@@ -37,10 +39,8 @@
               </div>
             </div>
           }
-          <!-- dialog container -->
           <div class="row scroll_yauto center_center" [ngClass]="bodyClass()">
             <div class="row_block width100 height100">
-              <!-- content -->
               <ng-content></ng-content>
             </div>
           </div>
@@ -49,4 +49,3 @@
     </div>
   }
 </div>
-

@@ -20,9 +20,8 @@ export class DialogComponent {
 
   protected isMaximized = false;
 
-  /**
-   * Observable to update the effective width of the dialog on screen resize
-   */
+  protected readonly dialogId = Math.random().toString(36).substring(2, 9);
+
   effectiveWidth$: Observable<string> = fromEvent(window, 'resize').pipe(
     startWith(window.innerWidth),
     map(() => window.innerWidth),
@@ -40,14 +39,8 @@ export class DialogComponent {
     })
   );
 
-  /**
-   * Object to operate whether the dialog is open/closed
-   */
   private _object: any;
 
-  /**
-   * Object to operate whether the dialog is open/closed
-   */
   @Input()
   set object(value: any) {
     if (this._object && !value) {
@@ -55,82 +48,39 @@ export class DialogComponent {
     }
     if (!this._object && value) {
       this.dialogService.registerDialog(this);
+      setTimeout(() => this.opened.emit(), 0);
     }
     this._object = value;
-    this.opened.emit();
   }
 
   get object(): any {
     return this._object;
   }
 
-  /**
-   * Title to show at the top of the dialog
-   */
   readonly title = input<string>(null as any);
-
-  /**
-   * Class to apply to the title of the dialog
-   */
   readonly titleClass = input('header_color');
-
-  /**
-   * Show or hide the title bar
-   */
   readonly showTitle = input(true);
-
-  /**
-   * Whether to show close button and allow escape to close
-   */
   readonly allowClose = input(true);
-
-  /**
-   * Class to apply to the body of the dialog
-   */
   readonly bodyClass = input('content_color');
-
-  /**
-   * Height of the dialog (can use any height measurement)
-   */
   readonly height = input('500px');
-
-  /**
-   * Width of the dialog (can use any width measurement)
-   */
   readonly width = input('900px');
-
-  /**
-   * @deprecated This is no longer used and will be removed
-   */
   readonly borderRadius = input('0px');
 
   readonly text = input<DialogText>({
     close: 'Close Dialog',
     maximize: 'Maximize',
     minimize: 'Minimize'
-} as DialogText);
+  } as DialogText);
 
-  /**
-   * Event Emitter for when the dialog is closed
-   */
   readonly closed = output();
-
   readonly closeAttempt = output();
-
-  /**
-   * Event emitted when dialog has finished opening
-   */
   readonly opened = output<void>();
 
   toggleMaximize(): void {
     this.isMaximized = !this.isMaximized;
   }
 
-  /**
-   * Null the object to close the dialog, emit the close event.
-   */
   close(): void {
-    (document.activeElement as any)?.blur();
     this._object = null;
     this.isMaximized = false;
     this.dialogService.unregisterDialog(this);

@@ -11,23 +11,27 @@ import {
 } from '@angular/core';
 import {SlideoverText} from '../../models/particle-component-text.model';
 import {NgClass} from '@angular/common';
+import {CdkTrapFocus} from "@angular/cdk/a11y";
+import {debounceTime, fromEvent, Subject, takeUntil} from "rxjs";
 
 @Component({
-    selector: 'particle-slideover',
-    templateUrl: './slideover.component.html',
-    styleUrls: ['./slideover.component.css'],
-    imports: [NgClass]
+  selector: 'particle-slideover',
+  templateUrl: './slideover.component.html',
+  styleUrls: ['./slideover.component.css'],
+  imports: [NgClass, CdkTrapFocus]
 })
 export class SlideoverComponent implements AfterViewInit, OnDestroy {
-
   private _position = 'right';
+  private destroy$ = new Subject<void>();
+  private originatingFocusElement: HTMLElement | null = null;
 
   slideoverOpen = false;
   visible = false;
+  breakpointExceeded = false;
 
   @Input()
   set position(position: string) {
-    if (position && ['left', 'right', 'top', 'bottom'].indexOf(position.toLowerCase()) > -1) {
+    if (position && ['left', 'right', 'top', 'bottom'].includes(position.toLowerCase())) {
       this._position = position.toLowerCase();
     } else {
       this._position = 'right';
@@ -39,57 +43,67 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
   }
 
   readonly modal = input(true);
-
   readonly width = input('300px');
-
   readonly height = input('100px');
-
   readonly bgClass = input('content_color');
-
-  readonly text = input<SlideoverText>({
-    close: 'Close Slideover'
-} as SlideoverText);
-
-  /**
-   * Breakpoint that will make the container take over the screen when it's crossed.
-   */
+  readonly text = input<SlideoverText>({ close: 'Close Slideover' } as SlideoverText);
   readonly breakpoint = input(769);
-
   readonly hideCloseButton = input(false);
 
-  readonly opened = output<any>();
-
-  readonly closed = output<any>();
+  readonly opened = output<void>();
+  readonly closed = output<void>();
 
   @ViewChild('overlay')
-  overlay: ElementRef = null as any;
+  overlay: ElementRef<HTMLDivElement> = null as any;
 
-  breakpointExceeded = false;
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any): void {
-    this._determineBreakpointExceeded(event.target.innerWidth);
+  constructor() {
+    // Debounce resize events to prevent performance thrashing
+    fromEvent(window, 'resize')
+      .pipe(
+        debounceTime(100),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this._determineBreakpointExceeded(window.innerWidth);
+      });
   }
 
-  private _determineBreakpointExceeded(innerWidth: number): void {
-    const breakpoint = this.breakpoint();
-    if (breakpoint) {
-      this.breakpointExceeded = innerWidth < breakpoint || innerWidth < +this.width().substring(0, this.width().length - 2);
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscape(event: Event): void {
+    if (this.slideoverOpen) {
+      event.stopPropagation();
+      this.close();
     }
   }
 
+  private _determineBreakpointExceeded(innerWidth: number): void {
+    const currentBreakpoint = this.breakpoint();
+    if (!currentBreakpoint) return;
+
+    const widthString = this.width();
+    const parsedWidth = parseFloat(widthString.replace(/[^0-9.]/g, '')) || 0;
+
+    this.breakpointExceeded = innerWidth < currentBreakpoint || innerWidth < parsedWidth;
+  }
+
   open(): void {
+    this.originatingFocusElement = document.activeElement as HTMLElement;
+
     this.addModalMask();
     this.slideoverOpen = true;
     this.visible = true;
-    this.opened.emit(null as any);
+    this.opened.emit();
   }
 
   close(): void {
-    (document.activeElement as any)?.blur();
     this.removeModalMask();
     this.slideoverOpen = false;
-    this.closed.emit(null as any);
+    this.closed.emit();
+
+    if (this.originatingFocusElement && typeof this.originatingFocusElement.focus === 'function') {
+      this.originatingFocusElement.focus();
+    }
+    this.originatingFocusElement = null;
 
     setTimeout(() => this.visible = false, 200);
   }
@@ -103,27 +117,30 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
   }
 
   private addModalMask(): void {
-    if (this.modal()) {
+    if (this.modal() && this.overlay) {
       this.overlay.nativeElement.classList.add('particle_dialog_overlay');
       document.body.classList.add('scroll_none');
     }
   }
 
   private removeModalMask(): void {
-    if (this.modal()) {
+    if (this.modal() && this.overlay) {
       this.overlay.nativeElement.classList.remove('particle_dialog_overlay');
       document.body.classList.remove('scroll_none');
     }
   }
 
-  ngOnDestroy(): void {
-    this.removeModalMask();
+  ngAfterViewInit(): void {
+    // Allow initial render to settle before running layout math
+    setTimeout(() => {
+      this._determineBreakpointExceeded(window.innerWidth);
+    }, 0);
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this._determineBreakpointExceeded(window.innerWidth)
-    }, 100);
+  ngOnDestroy(): void {
+    this.removeModalMask();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

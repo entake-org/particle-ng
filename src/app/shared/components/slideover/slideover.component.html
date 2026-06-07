@@ -1,5 +1,14 @@
-<div #overlay (click)="close()"></div>
+<div #overlay
+     (click)="modal() ? close() : null"
+     aria-hidden="true"
+     [class.cursor_pointer]="modal()">
+</div>
+
 <div
+  role="dialog"
+  [attr.aria-modal]="modal()"
+  [cdkTrapFocus]="modal() && slideoverOpen"
+  [cdkTrapFocusAutoCapture]="modal()"
   [ngClass]="bgClass() + ' ' + (slideoverOpen ? 'slideover_active_' + position : 'slideover_inactive_' + position) + ' slideover-panel ' + position"
   [style.width]="position === 'right' || position === 'left' ? (breakpointExceeded ? '100%' : width()) : null"
   [style.height]="position === 'top' || position === 'bottom' ? (breakpointExceeded ? '100%' : height()) : null"
@@ -9,12 +18,12 @@
   [style.top]="position === 'top' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : height()) : null"
   [style.visibility]="!visible ? 'hidden': 'visible'"
   [attr.aria-hidden]="!slideoverOpen"
-  >
+>
   @if (!hideCloseButton()) {
     <div class="push_close_bar">
       <button class="access btnset clear"
-        [attr.aria-label]="text().close"
-        (click)="close()">
+              [attr.aria-label]="text().close"
+              (click)="close()">
         <div class="circle_20px ptl_brdr_color ptl_brdr_size ptl_input_bg_color">
           <i class="fas fa-times"></i>
         </div>
