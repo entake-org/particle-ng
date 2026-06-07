@@ -7,7 +7,6 @@ import {
   inject,
   Input,
   input,
-  OnDestroy,
   output,
   Renderer2,
   signal,
@@ -25,32 +24,20 @@ import {NgClass, NgStyle} from '@angular/common';
   styleUrls: ['./popover.component.css'],
   imports: [CdkTrapFocus, NgStyle, NgClass]
 })
-export class PopoverComponent implements OnDestroy {
+export class PopoverComponent {
   private renderer = inject(Renderer2);
   private changeDetectorRef = inject(ChangeDetectorRef);
 
   protected readonly window = window;
 
-  /**
-   * The offset of the popover from its target (in pixels)
-   */
   readonly offset = input(5);
 
-  /**
-   * Set the width of the popover in pixels (defaults to auto)
-   */
   @Input()
   set width(width: string) {
     this._width = !width ? 'auto' : `${width}px`;
   }
+  get width(): string { return this._width; }
 
-  get width(): string {
-    return this._width;
-  }
-
-  /**
-   * Set the height of the popover in pixels (defaults to auto)
-   */
   @Input()
   set height(height: string) {
     this._height = !height ? 'auto' : `${height}px`;
@@ -60,70 +47,30 @@ export class PopoverComponent implements OnDestroy {
     return this._height;
   }
 
-  /**
-   * A class-list to apply to the popover content
-   */
   readonly classList = input('content_color particle_popover_shadow');
-
   readonly targetOverride = input<EventTarget>(null as any);
-
   readonly openDirection = input<'above' | 'below'>('above');
-
   readonly alignment = input<'left' | 'center'>('left');
-
   readonly scaleForMobile = input('1');
 
-  /**
-   * Event emitted on popover open
-   */
   readonly opened = output<void>();
-
-  /**
-   * Event emitted on popover close
-   */
   readonly closed = output<void>();
-
   readonly arrowDown = output<void>();
   readonly arrowUp = output<void>();
 
   @ViewChild('container')
   container: ElementRef<HTMLDivElement> = null as any;
 
-  /**
-   * Whether the popover should render
-   */
   render: boolean = false;
-
-  /**
-   * Whether the popover is visible
-   */
   visible: boolean = false;
 
-  /**
-   * The width of the popover
-   */
   private _width = 'auto';
-
-  /**
-   * The height of the popover
-   */
   private _height = 'auto';
-
-  /**
-   * The element to target
-   * @private
-   */
   private target: EventTarget = null as any;
-
-  /**
-   * Array of escape keyup unlisten functions
-   * @private
-   */
-  private escapeKeyUpUnlisteners: Array<() => void> = [];
-
   private _elements: Array<any> = [];
 
   isOpen = signal(false);
+  isPositioned = signal(false);
 
   constructor() {
     effect(() => {
@@ -138,38 +85,22 @@ export class PopoverComponent implements OnDestroy {
     });
   }
 
-  /**
-   * Destroy component, clean up event listeners
-   */
-  ngOnDestroy(): void {
-    this.removeEventListeners();
-  }
-
-  /**
-   * Close popover on click
-   * @param event the click MouseEvent
-   */
   @HostListener('window:click', ['$event'])
   onClick(event: MouseEvent): void {
     if (this.visible) {
       const {pageX, pageY} = event;
-
       if (pageX > 0 && pageY > 0) {
         const {left, right, top, bottom} = this.container.nativeElement.getBoundingClientRect();
         const xPositionValid = pageX >= left && pageX <= right;
         const yPositionValid = pageY >= top && pageY <= bottom;
-        const shouldClose = !(xPositionValid && yPositionValid);
 
-        if (shouldClose) {
+        if (!(xPositionValid && yPositionValid)) {
           this.close();
         }
       }
     }
   }
 
-  /**
-   * Re-position popover on window resize
-   */
   @HostListener('window:resize')
   onWindowResize(): void {
     if (this.visible) {
@@ -177,12 +108,22 @@ export class PopoverComponent implements OnDestroy {
     }
   }
 
-  /**
-   * Toggle the popover from open to closed or closed to open
-   * @param event the event whose target element will act as
-   *              the popover target. If an event is not provided,
-   *              the popover will close
-   */
+  @HostListener('keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    if (!this.visible) return;
+
+    const { key } = event;
+
+    if (key === 'Escape' || key === 'Esc') {
+      event.stopPropagation(); // Prevent dialog beneath from closing
+      this.close();
+    } else if (key === 'ArrowDown') {
+      this.arrowDown.emit();
+    } else if (key === 'ArrowUp') {
+      this.arrowUp.emit();
+    }
+  }
+
   toggle(event?: Event): void {
     const targetOverride = this.targetOverride();
     if (targetOverride) {
@@ -203,47 +144,31 @@ export class PopoverComponent implements OnDestroy {
     }
   }
 
-  /**
-   * Handle animation start
-   */
   onAnimationStart(): void {
-    this.addEventListeners();
+    this._elements = this.getFocusableElements(this.container.nativeElement);
     this.opened.emit();
     setTimeout(() => this.positionPopover(), 0);
   }
 
-  /**
-   * Handle animation end
-   */
   onAnimationDone(): void {
     (document.activeElement as any)?.blur();
     this.render = false;
-    this.removeEventListeners();
     this.closed.emit();
   }
 
-  /**
-   * Open the popover
-   * @private
-   */
   private open(): void {
+    this.isPositioned.set(false); // Reset position buffer
     this.render = true;
     this.visible = true;
     setTimeout(() => this.toggleOpen(), 0);
   }
 
-  /**
-   * Close the popover
-   */
   public close(): void {
     this.visible = false;
     this.isOpen.update(() => false);
+    this.isPositioned.set(false); // Hide immediately to prevent visual artifacts
   }
 
-  /**
-   * Position the popover
-   * @private
-   */
   private positionPopover(): void {
     const {left, top, bottom, width} = (this.target as HTMLElement).getBoundingClientRect();
     const {offsetHeight, offsetWidth} = this.container.nativeElement;
@@ -282,7 +207,6 @@ export class PopoverComponent implements OnDestroy {
           const availableSpace = window.innerHeight - offsetHeight;
           positionTop = `${String(availableSpace / 2)}px`;
         }
-
         transformOrigin = 'top left';
       }
     }
@@ -304,85 +228,25 @@ export class PopoverComponent implements OnDestroy {
     this.renderer.setStyle(this.container.nativeElement, 'transform-origin', transformOrigin);
     this.renderer.setStyle(this.container.nativeElement, 'left', `${leftPosition}px`);
     this.renderer.setStyle(this.container.nativeElement, 'top', positionTop);
+
+    this.isPositioned.set(true);
   }
 
-  /**
-   * Add escape keyup listeners to all focusable elements to close
-   * the popover
-   * @private
-   */
-  private addEventListeners(): void {
-    const focusableElements = this.getFocusableElements(this.container.nativeElement);
-    this._elements = focusableElements;
-
-    for (const element of focusableElements) {
-      this.renderer.setAttribute(element, 'data-dialog-close-override', 'true');
-      this.escapeKeyUpUnlisteners.push(
-        this.renderer.listen(element, 'keyup', (event: KeyboardEvent) => {
-          if (this.visible) {
-            event.stopImmediatePropagation();
-
-            const {key} = event;
-
-            if (key === 'Esc' || key === 'Escape') {
-              this.close();
-            }
-
-            if (key === 'ArrowDown') {
-              this.arrowDown.emit();
-            }
-
-            if (key === 'ArrowUp') {
-              this.arrowUp.emit();
-            }
-          }
-        })
-      );
-    }
-  }
-
-  /**
-   * Get all focusable child elements of the input node
-   * @param node the node to query for focusable children
-   * @param elements the found focusable elements
-   * @private
-   */
   private getFocusableElements(node: Node, elements: Array<Element> = []): Array<any> {
     if (node.hasChildNodes()) {
       node.childNodes.forEach(child => elements.concat(this.getFocusableElements(child, elements)));
-
       if ('tabIndex' in node) {
         const {tabIndex} = node as unknown as HTMLOrSVGElement;
-
-        if (tabIndex >= 0) {
-          elements.push(node as any);
-        }
+        if (tabIndex >= 0) elements.push(node as any);
       }
-
       return elements;
     } else {
       if ('tabIndex' in node) {
         const {tabIndex} = node as unknown as HTMLOrSVGElement;
-
-        if (tabIndex >= 0) {
-          elements.push(node as any);
-        }
+        if (tabIndex >= 0) elements.push(node as any);
       }
-
       return elements;
     }
-  }
-
-  /**
-   * Invoke escape keyup unlisten functions
-   * @private
-   */
-  private removeEventListeners(): void {
-    for (const unlistener of this.escapeKeyUpUnlisteners) {
-      unlistener();
-    }
-
-    this.escapeKeyUpUnlisteners = [];
   }
 
   toggleOpen(): void {
@@ -396,36 +260,20 @@ export class PopoverComponent implements OnDestroy {
   focusOnNextElement(): void {
     let index = 0;
     for (const element of this._elements) {
-      if (element === document.activeElement) {
-        break;
-      }
+      if (element === document.activeElement) break;
       index++;
     }
-
-    if (index + 1 > this._elements.length - 1) {
-      index = 0;
-    } else {
-      index++;
-    }
-
+    index = (index + 1 > this._elements.length - 1) ? 0 : index + 1;
     this._elements[index]?.focus();
   }
 
   focusOnPreviousElement(): void {
     let index = 0;
     for (const element of this._elements) {
-      if (element === document.activeElement) {
-        break;
-      }
+      if (element === document.activeElement) break;
       index++;
     }
-
-    if (index - 1 < 0) {
-      index = this._elements.length - 1;
-    } else {
-      index--;
-    }
-
+    index = (index - 1 < 0) ? this._elements.length - 1 : index - 1;
     this._elements[index]?.focus();
   }
 

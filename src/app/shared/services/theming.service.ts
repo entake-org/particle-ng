@@ -1,7 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Theme, ThemeFont, Z_INDEX_LAYERS} from '../models/theme.model';
-import {ThemeChangeDetectionService} from './theme-change-detection.service';
 import {LocalStorageService} from './local-storage.service';
 
 @Injectable({
@@ -9,8 +8,6 @@ import {LocalStorageService} from './local-storage.service';
 })
 export class ThemingService {
   private localStorageService = inject(LocalStorageService);
-  private themeChangeDetectionService = inject(ThemeChangeDetectionService);
-
 
   // PSA: ORDER MATTERS, DO NOT MOVE ITEMS AROUND
   private readonly defaultZIndexes: Array<string> = [
@@ -366,9 +363,6 @@ export class ThemingService {
 
     rootVars += '}';
     styleSheet.insertRule(rootVars);
-
-
-    this.themeChangeDetectionService.changeTheme();
   }
 
   private addHashmark(color: string): string {

@@ -8,47 +8,58 @@ export class DialogService {
 
   dialogs: DialogComponent[] = [];
 
-  private escapeListener: (event: any) => void = event => {
+  private focusTriggers = new Map<DialogComponent, HTMLElement | null>();
+
+  private escapeListener = (event: KeyboardEvent): void => {
     if (event.key === 'Esc' || event.key === 'Escape') {
-      if (this.dialogs && this.dialogs.length) {
-        let closeOverride = null;
-        if ('getAttribute' in event.target) {
-          closeOverride = (event.target as HTMLElement).getAttribute(
-            'data-dialog-close-override'
-          );
-        }
+      if (this.dialogs.length > 0) {
+        // Only target the top-most dialog in the stack
+        const topDialog = this.dialogs[this.dialogs.length - 1];
 
-        if (closeOverride === null || closeOverride === '') {
-          const topDialog = this.dialogs[this.dialogs.length - 1];
-
-          if (topDialog.allowClose()) {
-            this.dialogs.pop();
-            topDialog.close();
-            event.stopPropagation();
-          } else {
-            topDialog.closeAttempt.emit();
-          }
+        if (topDialog.allowClose()) {
+          // Calling close() triggers the component's object setter,
+          // which naturally calls unregisterDialog() and cleans up the array.
+          topDialog.close();
+          event.stopPropagation();
+          event.preventDefault();
+        } else {
+          topDialog.closeAttempt.emit();
         }
       }
     }
   }
 
   registerDialog(dialog: DialogComponent): void {
-    if (dialog) {
-      if (this.dialogs.length === 0) {
-        window.addEventListener( 'keyup', this.escapeListener);
-        document.body.classList.add('scroll_none');
-      }
-      this.dialogs.push(dialog);
+    if (!dialog || this.dialogs.includes(dialog)) return;
+
+    // Snapshot the currently focused element (e.g., the button clicked to open the dialog)
+    this.focusTriggers.set(dialog, document.activeElement as HTMLElement);
+
+    if (this.dialogs.length === 0) {
+      window.addEventListener('keydown', this.escapeListener);
+      document.body.classList.add('scroll_none');
     }
+
+    this.dialogs.push(dialog);
   }
 
   unregisterDialog(dialog: DialogComponent): void {
-    if (this.dialogs.includes(dialog)) {
-      this.dialogs = this.dialogs.filter(d => d !== dialog);
+    const index = this.dialogs.indexOf(dialog);
+    if (index > -1) {
+      this.dialogs.splice(index, 1);
     }
+
+    // Restore focus back to the originating element
+    const triggerElement = this.focusTriggers.get(dialog);
+    if (triggerElement && typeof triggerElement.focus === 'function') {
+      triggerElement.focus();
+    }
+
+    // Clean up memory
+    this.focusTriggers.delete(dialog);
+
     if (this.dialogs.length === 0) {
-      window.removeEventListener( 'keyup', this.escapeListener);
+      window.removeEventListener('keydown', this.escapeListener);
       document.body.classList.remove('scroll_none');
     }
   }

@@ -1,5 +1,6 @@
 <div class="particle_popover_overlay"
      [style.display]="render ? '' : 'none'"
+     [style.visibility]="isPositioned() ? 'visible' : 'hidden'"
      [attr.aria-hidden]="!render"
      [style.scale]="window.innerWidth > 768 ? 1 : scaleForMobile()"
 >
