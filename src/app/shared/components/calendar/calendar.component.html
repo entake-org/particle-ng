@@ -1,35 +1,29 @@
 <div #calendarWidgetDiv
-  cdkTrapFocus
-  cdkTrapFocusAutoCapture
-  class="particle_datepicker_options"
-  role="application">
-  <!-- month / year select -->
+     cdkTrapFocus
+     cdkTrapFocusAutoCapture
+     class="particle_datepicker_options"
+     role="group"
+     [attr.aria-label]="text.select"
+     (keydown)="onKeyDown($event)">
   <div class="content_color pad_5 pad_bot0">
     <div class="row space_between">
       <div class="col size_1 mar_5">
         <select #yearSelect
-          [ngModel]="_selectedYear | async"
-          [attr.data-dialog-close-override]="true"
-          (change)="_selectedYear.next(+yearSelect.value)"
-          (keyup.escape)="closed.emit()"
-          class="access input sm content_color"
-          [attr.aria-label]="text.selectAYear">
+                [ngModel]="_selectedYear | async"
+                (change)="_selectedYear.next(+yearSelect.value)"
+                class="access input sm content_color"
+                [attr.aria-label]="text.selectAYear">
           @for (year of validYearRange$ | async; track $index) {
-            <option
-              [value]="year">
-              {{year}}
-            </option>
+            <option [value]="year">{{year}}</option>
           }
         </select>
       </div>
       <div class="col size_2 mar_5">
         <select #monthSelect
-          [ngModel]="_selectedMonth | async"
-          (change)="_selectedMonth.next(+monthSelect.value)"
-          (keyup.escape)="closed.emit()"
-          [attr.data-dialog-close-override]="true"
-          class="access input sm content_color"
-          [attr.aria-label]="text.selectAMonth">
+                [ngModel]="_selectedMonth | async"
+                (change)="_selectedMonth.next(+monthSelect.value)"
+                class="access input sm content_color"
+                [attr.aria-label]="text.selectAMonth">
           <option value="0">{{text.january}}</option>
           <option value="1">{{text.february}}</option>
           <option value="2">{{text.march}}</option>
@@ -47,7 +41,6 @@
     </div>
   </div>
   <div class="content_color pad_5">
-    <!-- weekdays -->
     <div class="mar_5 mar_bot10 ent_l2r_dir">
       <div class="row wrap space_between ptl_input_bg_color ptl_brdr_color border_bottom brad_3 mar_bot5">
         <div class="particle_datepicker_weekday">{{text.sundayAbbr}}</div>
@@ -58,23 +51,20 @@
         <div class="particle_datepicker_weekday">{{text.fridayAbbr}}</div>
         <div class="particle_datepicker_weekday">{{text.saturdayAbbr}}</div>
       </div>
-      <!-- days -->
       <div class="row wrap space_between">
         @for (dayInMonth of fullMonth$ | async; track $index) {
           <div [ngClass]="{'today': (dayInMonth.date === currentDate.date && dayInMonth.month === currentDate.month && dayInMonth.year === currentDate.year)}"
-            class="particle_datepicker_day">
+               class="particle_datepicker_day">
             @if (dayInMonth.selectable) {
               <button #calendarDate
-                (click)="handleDateSelection(dayInMonth)"
-                (keyup.escape)="closed.emit()"
-                [attr.data-date]="dayInMonth.date"
-                [attr.data-dialog-close-override]="true"
-                [attr.aria-label]="text.select + ' ' + weekDays[dayInMonth.day] + ' ' + text.the + ' ' + (dayInMonth.date | ordinalNumber)"
+                      (click)="handleDateSelection(dayInMonth)"
+                      [attr.data-date]="dayInMonth.date"
+                      [attr.aria-label]="text.select + ' ' + weekDays[dayInMonth.day] + ' ' + text.the + ' ' + (dayInMonth.date | ordinalNumber)"
                       [ngClass]="{
-                        'ok_button_color': (dayInMonth.date === selectedDate?.date && dayInMonth.month === selectedDate?.month && dayInMonth.year === selectedDate?.year),
-                        'bg_overlay_rev brdr hov_bg': (dayInMonth.date !== selectedDate?.date || dayInMonth.month !== selectedDate?.month || dayInMonth.year !== selectedDate?.year)
-                      }"
-                class="access day_button">
+                            'ok_button_color': (dayInMonth.date === selectedDate?.date && dayInMonth.month === selectedDate?.month && dayInMonth.year === selectedDate?.year),
+                            'bg_overlay_rev brdr hov_bg': (dayInMonth.date !== selectedDate?.date || dayInMonth.month !== selectedDate?.month || dayInMonth.year !== selectedDate?.year)
+                          }"
+                      class="access day_button">
                 {{dayInMonth.date}}
               </button>
             } @else {
@@ -91,28 +81,23 @@
       <div class="row space_between">
         @if (currentDate.selectable) {
           @if ((currentDate.date === selectedDate?.date && currentDate.month === selectedDate?.month && currentDate.year === selectedDate?.year)) {
-            <button
-              disabled
-              class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
-              [attr.aria-label]="text.resetDateToToday">
+            <button disabled
+                    class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
+                    [attr.aria-label]="text.resetDateToToday">
               <span class="text bold">{{text.selectToday}}</span>
             </button>
           } @else {
-            <button (keyup.escape)="closed.emit()"
-              (click)="selectToday()"
-              [attr.data-dialog-close-override]="true"
-              class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
-              [attr.aria-label]="text.resetDateToToday">
+            <button (click)="selectToday()"
+                    class="access btn sm bg_overlay_rev brdr hov_bg mar_5"
+                    [attr.aria-label]="text.resetDateToToday">
               <span class="text bold">{{text.selectToday}}</span>
             </button>
           }
         }
         <button #doneButton
-          (keyup.escape)="closed.emit()"
-          (click)="closed.emit()"
-          [attr.data-dialog-close-override]="true"
-          class="access btn sm bg_overlay_rev brdr mar_5 hov_bg"
-          [attr.aria-label]="text.saveDate">
+                (click)="closed.emit()"
+                class="access btn sm bg_overlay_rev brdr mar_5 hov_bg"
+                [attr.aria-label]="text.saveDate">
           <i class="fas fa-check mar_right5"></i><span class="text bold">{{text.done}}</span>
         </button>
       </div>

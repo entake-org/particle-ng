@@ -24,6 +24,7 @@ import {tap} from "rxjs/operators";
 import {PaginatedContainer} from "./shared/models/paginated-container.model";
 import {TemplatedDialog} from "./shared/components/templated-dialog/templated-dialog";
 import {SlideoverComponent} from "./shared/components/slideover/slideover.component";
+import {IdleTimeoutComponent} from "./shared/components/idle-timeout/idle-timeout.component";
 
 @Component({
     selector: 'app-home',

@@ -1,4 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {DialogComponent} from '../dialog/dialog.component';
 import {IdleTimeoutText} from '../../models/particle-component-text.model';
 import {IdleTimer} from '../../services/idle-timer';
@@ -6,13 +16,10 @@ import {IdleTimer} from '../../services/idle-timer';
 @Component({
     selector: 'particle-idle-timeout',
     templateUrl: './idle-timeout.component.html',
-    standalone: true,
     imports: [DialogComponent]
 })
-export class IdleTimeoutComponent implements OnInit {
-
-  @Input()
-  borderRadius: string = '0px';
+export class IdleTimeoutComponent implements OnInit, OnDestroy {
+  private cd = inject(ChangeDetectorRef);
 
   @Input()
   timeoutInSeconds = 600;
@@ -28,66 +35,112 @@ export class IdleTimeoutComponent implements OnInit {
   @Output()
   timerEnd: EventEmitter<any> = new EventEmitter<any>();
 
-  /**
-   * Timeout Dialog - shows when the inactivity timer has 1 minute left, giving the user the ability to confirm they're still active.
-   */
   @ViewChild('timeoutDialog')
   timeoutDialog: DialogComponent = null as any;
 
-  /**
-   * Used for the countdown to user auto-logout
-   */
   count = 0;
-
-  /**
-   * Controls showing the dialog
-   */
   showDialog: any;
-
   idleTimer: IdleTimer = null as any;
 
   private readonly COUNTDOWN_LENGTH = 60;
-
   private finalCountdown: any;
-
   private timerReset = false;
+  private targetTime: number = 0;
+  private channel: BroadcastChannel = null as any;
 
   ngOnInit(): void {
+    this.channel = new BroadcastChannel('particle_idle_sync');
+
+    // Listen for the external event and explicitly mark for check
+    this.channel.onmessage = (event) => {
+      if (event.data === 'RESET') {
+        this.localReset();
+      } else if (event.data === 'LOGOUT') {
+        this.localTimerEnd();
+      }
+
+      // Tell zoneless Angular that the state has mutated
+      this.cd.detectChanges();
+    };
+
     this.idleTimer = new IdleTimer(this.timeoutInSeconds - 60, () => {this.openDialog()});
+  }
+
+  ngOnDestroy(): void {
+    if (this.finalCountdown) {
+      clearInterval(this.finalCountdown);
+    }
+    if (this.channel) {
+      this.channel.close();
+    }
   }
 
   openDialog(): void {
     this.showDialog = {};
     this.timerReset = false;
     this.setupFinalCountdown();
+    this.cd.detectChanges();
   }
 
   private setupFinalCountdown(): void {
-    this.count = this.COUNTDOWN_LENGTH;
+    if (this.finalCountdown) {
+      clearInterval(this.finalCountdown);
+    }
+
+    this.targetTime = Date.now() + (this.COUNTDOWN_LENGTH * 1000);
+
     this.finalCountdown = setInterval(() => {
-      this.count--;
-      if (this.count === 0 || !this.idleTimer.isTimerExpired()) {
+      if (!this.idleTimer.isTimerExpired()) {
+        this.resetTimer();
+        return;
+      }
+
+      const remainingMillis = this.targetTime - Date.now();
+      this.count = Math.max(0, Math.ceil(remainingMillis / 1000));
+
+      this.cd.detectChanges();
+
+      if (this.count <= 0) {
         this.handleTimerEnd();
       }
     }, 1000);
   }
 
   private handleTimerEnd(): void {
-    clearInterval(this.finalCountdown);
-    this.showDialog = null;
-    this.timeoutDialog.close();
+    this.channel.postMessage('LOGOUT');
+    this.localTimerEnd();
+  }
 
-    if (this.idleTimer.isTimerExpired()) {
-      this.timerEnd.emit();
+  private localTimerEnd(): void {
+    if (this.finalCountdown) {
+      clearInterval(this.finalCountdown);
     }
+    this.showDialog = null;
+
+    if (this.timeoutDialog) {
+      this.timeoutDialog.close();
+    }
+
+    this.timerEnd.emit();
   }
 
   resetTimer(): void {
     if (!this.timerReset) {
-      this.timerReset = true;
+      this.channel.postMessage('RESET');
+      this.localReset();
+    }
+  }
+
+  private localReset(): void {
+    this.timerReset = true;
+    if (this.finalCountdown) {
       clearInterval(this.finalCountdown);
-      this.idleTimer.resetTimer();
-      this.showDialog = null;
+    }
+    this.idleTimer.resetTimer();
+    this.showDialog = null;
+
+    if (this.timeoutDialog) {
+      this.timeoutDialog.close();
     }
   }
 
