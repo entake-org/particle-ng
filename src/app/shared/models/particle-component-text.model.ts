@@ -167,6 +167,7 @@ export interface ScrollToTopText {
 }
 
 export interface SlideoverText {
+  title: string;
   close: string;
 }
 
