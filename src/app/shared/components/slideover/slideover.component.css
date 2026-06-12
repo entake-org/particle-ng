@@ -1,22 +1,14 @@
-/* =========================================
-   1. BASE PANEL STYLES
-   ========================================= */
 .slideover-panel {
   position: fixed;
   display: flex;
   flex-direction: column;
-  /* Elevate the panel slightly above the overlay */
-  z-index: calc(var(--z-dialog) + 1);
-  /* Use a modern ease-out curve for a snappy, app-like slide */
+  z-index: var(--z-notification);
+}
+
+.transitions_enabled {
   transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* =========================================
-   2. STATIC ANCHORS
-   These lock the panel to the screen edges.
-   We no longer animate these layout properties
-   to save browser repaints.
-   ========================================= */
 .slideover-panel.left {
   top: 0;
   left: 0;
@@ -41,32 +33,38 @@
   width: 100%;
 }
 
-/* =========================================
-   3. GPU-ACCELERATED ANIMATIONS
-   Using translate3d forces hardware
-   acceleration on mobile devices (60fps).
-   100% refers to the element's own dimensions.
-   ========================================= */
+.slideover_inactive_left {
+  transform: translate3d(-100%, 0, 0);
+}
 
-/* Left */
-.slideover_inactive_left { transform: translate3d(-100%, 0, 0); }
-.slideover_active_left { transform: translate3d(0, 0, 0); }
+.slideover_active_left {
+  transform: translate3d(0, 0, 0);
+}
 
-/* Right */
-.slideover_inactive_right { transform: translate3d(100%, 0, 0); }
-.slideover_active_right { transform: translate3d(0, 0, 0); }
+.slideover_inactive_right {
+  transform: translate3d(100%, 0, 0);
+}
 
-/* Top */
-.slideover_inactive_top { transform: translate3d(0, -100%, 0); }
-.slideover_active_top { transform: translate3d(0, 0, 0); }
+.slideover_active_right {
+  transform: translate3d(0, 0, 0);
+}
 
-/* Bottom */
-.slideover_inactive_bottom { transform: translate3d(0, 100%, 0); }
-.slideover_active_bottom { transform: translate3d(0, 0, 0); }
+.slideover_inactive_top {
+  transform: translate3d(0, -100%, 0);
+}
 
-/* =========================================
-   4. CLOSE BUTTON & BAR
-   ========================================= */
+.slideover_active_top {
+  transform: translate3d(0, 0, 0);
+}
+
+.slideover_inactive_bottom {
+  transform: translate3d(0, 100%, 0);
+}
+
+.slideover_active_bottom {
+  transform: translate3d(0, 0, 0);
+}
+
 .push_close_bar {
   position: absolute;
   right: 0;
@@ -104,9 +102,6 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* =========================================
-   5. SMOOTH-FADING OVERLAY
-   ========================================= */
 .particle_dialog_overlay {
   position: fixed;
   display: block;
@@ -116,7 +111,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* Base state is completely transparent and unclickable */
   background-color: rgba(120, 120, 120, 0);
   pointer-events: none;
   transition: background-color 0.2s ease-in-out;
@@ -124,7 +118,6 @@
 }
 
 .particle_dialog_overlay.overlay_active {
-  /* Active state fades in the dark background and catches clicks */
   background-color: rgba(120, 120, 120, 0.4);
   pointer-events: auto;
 }

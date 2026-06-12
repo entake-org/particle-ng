@@ -5,13 +5,13 @@ import {
   HostListener,
   input,
   output,
-  viewChild,
+  viewChild
 } from '@angular/core';
-import {SlideoverText} from '../../models/particle-component-text.model';
-import {NgClass} from '@angular/common';
-import {CdkTrapFocus} from "@angular/cdk/a11y";
-import {debounceTime, fromEvent} from "rxjs";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import { NgClass } from '@angular/common';
+import { CdkTrapFocus } from "@angular/cdk/a11y";
+import { debounceTime, fromEvent } from "rxjs";
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SlideoverText } from '../../models/particle-component-text.model';
 
 @Component({
   selector: 'particle-slideover',
@@ -20,12 +20,11 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
   imports: [NgClass, CdkTrapFocus]
 })
 export class SlideoverComponent implements AfterViewInit {
-  // State
   slideoverOpen = false;
   breakpointExceeded = false;
+  isInitialized = false;
   private originatingFocusElement: HTMLElement | null = null;
 
-  // Signal Inputs with Transform Validation
   readonly position = input('right', {
     transform: (value: string | undefined | null) => {
       const normalized = value?.toLowerCase();
@@ -39,24 +38,16 @@ export class SlideoverComponent implements AfterViewInit {
   readonly width = input('300px');
   readonly height = input('100px');
   readonly bgClass = input('content_color');
-
-  readonly text = input<SlideoverText>({
-    close: 'Close Slideover',
-    title: 'Slideover'
-  } as SlideoverText);
-
+  readonly text = input<SlideoverText>({close: 'Close Slideover', title: 'Slideover'} as SlideoverText);
   readonly breakpoint = input(769);
   readonly hideCloseButton = input(false);
 
-  // Signal Outputs
   readonly opened = output<void>();
   readonly closed = output<void>();
 
-  // Signal ViewChild
   readonly overlay = viewChild<ElementRef<HTMLDivElement>>('overlay');
 
   constructor() {
-    // Automatically cleans up the resize listener when component dies
     fromEvent(window, 'resize')
       .pipe(
         debounceTime(100),
@@ -76,10 +67,10 @@ export class SlideoverComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Allow initial render to settle before running layout math
     setTimeout(() => {
       this._determineBreakpointExceeded(window.innerWidth);
-    }, 0);
+      this.isInitialized = true;
+    }, 50);
   }
 
   private _determineBreakpointExceeded(innerWidth: number): void {
