@@ -3,16 +3,15 @@ import {
   Component,
   ElementRef,
   HostListener,
-  Input,
   input,
-  OnDestroy,
   output,
-  ViewChild
+  viewChild,
 } from '@angular/core';
 import {SlideoverText} from '../../models/particle-component-text.model';
 import {NgClass} from '@angular/common';
 import {CdkTrapFocus} from "@angular/cdk/a11y";
-import {debounceTime, fromEvent, Subject, takeUntil} from "rxjs";
+import {debounceTime, fromEvent} from "rxjs";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'particle-slideover',
@@ -20,48 +19,48 @@ import {debounceTime, fromEvent, Subject, takeUntil} from "rxjs";
   styleUrls: ['./slideover.component.css'],
   imports: [NgClass, CdkTrapFocus]
 })
-export class SlideoverComponent implements AfterViewInit, OnDestroy {
-  private _position = 'right';
-  private destroy$ = new Subject<void>();
+export class SlideoverComponent implements AfterViewInit {
+  // State
+  slideoverOpen = false;
+  breakpointExceeded = false;
   private originatingFocusElement: HTMLElement | null = null;
 
-  slideoverOpen = false;
-  visible = false;
-  breakpointExceeded = false;
-
-  @Input()
-  set position(position: string) {
-    if (position && ['left', 'right', 'top', 'bottom'].includes(position.toLowerCase())) {
-      this._position = position.toLowerCase();
-    } else {
-      this._position = 'right';
+  // Signal Inputs with Transform Validation
+  readonly position = input('right', {
+    transform: (value: string | undefined | null) => {
+      const normalized = value?.toLowerCase();
+      return normalized && ['left', 'right', 'top', 'bottom'].includes(normalized)
+        ? normalized
+        : 'right';
     }
-  }
-
-  get position(): string {
-    return this._position;
-  }
+  });
 
   readonly modal = input(true);
   readonly width = input('300px');
   readonly height = input('100px');
   readonly bgClass = input('content_color');
-  readonly text = input<SlideoverText>({ close: 'Close Slideover' } as SlideoverText);
+
+  readonly text = input<SlideoverText>({
+    close: 'Close Slideover',
+    title: 'Slideover'
+  } as SlideoverText);
+
   readonly breakpoint = input(769);
   readonly hideCloseButton = input(false);
 
+  // Signal Outputs
   readonly opened = output<void>();
   readonly closed = output<void>();
 
-  @ViewChild('overlay')
-  overlay: ElementRef<HTMLDivElement> = null as any;
+  // Signal ViewChild
+  readonly overlay = viewChild<ElementRef<HTMLDivElement>>('overlay');
 
   constructor() {
-    // Debounce resize events to prevent performance thrashing
+    // Automatically cleans up the resize listener when component dies
     fromEvent(window, 'resize')
       .pipe(
         debounceTime(100),
-        takeUntil(this.destroy$)
+        takeUntilDestroyed()
       )
       .subscribe(() => {
         this._determineBreakpointExceeded(window.innerWidth);
@@ -74,6 +73,13 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
       event.stopPropagation();
       this.close();
     }
+  }
+
+  ngAfterViewInit(): void {
+    // Allow initial render to settle before running layout math
+    setTimeout(() => {
+      this._determineBreakpointExceeded(window.innerWidth);
+    }, 0);
   }
 
   private _determineBreakpointExceeded(innerWidth: number): void {
@@ -89,14 +95,19 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
   open(): void {
     this.originatingFocusElement = document.activeElement as HTMLElement;
 
-    this.addModalMask();
+    if (this.modal()) {
+      document.body.classList.add('scroll_none');
+    }
+
     this.slideoverOpen = true;
-    this.visible = true;
     this.opened.emit();
   }
 
   close(): void {
-    this.removeModalMask();
+    if (this.modal()) {
+      document.body.classList.remove('scroll_none');
+    }
+
     this.slideoverOpen = false;
     this.closed.emit();
 
@@ -104,8 +115,6 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
       this.originatingFocusElement.focus();
     }
     this.originatingFocusElement = null;
-
-    setTimeout(() => this.visible = false, 200);
   }
 
   toggle(): void {
@@ -114,33 +123,6 @@ export class SlideoverComponent implements AfterViewInit, OnDestroy {
     } else {
       this.open();
     }
-  }
-
-  private addModalMask(): void {
-    if (this.modal() && this.overlay) {
-      this.overlay.nativeElement.classList.add('particle_dialog_overlay');
-      document.body.classList.add('scroll_none');
-    }
-  }
-
-  private removeModalMask(): void {
-    if (this.modal() && this.overlay) {
-      this.overlay.nativeElement.classList.remove('particle_dialog_overlay');
-      document.body.classList.remove('scroll_none');
-    }
-  }
-
-  ngAfterViewInit(): void {
-    // Allow initial render to settle before running layout math
-    setTimeout(() => {
-      this._determineBreakpointExceeded(window.innerWidth);
-    }, 0);
-  }
-
-  ngOnDestroy(): void {
-    this.removeModalMask();
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
 }

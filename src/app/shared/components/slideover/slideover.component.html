@@ -1,24 +1,24 @@
 <div #overlay
      (click)="modal() ? close() : null"
      aria-hidden="true"
-     [class.cursor_pointer]="modal()">
+     class="particle_dialog_overlay"
+     [class.cursor_pointer]="modal()"
+     [class.overlay_active]="modal() && slideoverOpen">
 </div>
 
 <div
   role="dialog"
+  aria-labelledby="slideover-title"
   [attr.aria-modal]="modal()"
   [cdkTrapFocus]="modal() && slideoverOpen"
   [cdkTrapFocusAutoCapture]="modal()"
-  [ngClass]="bgClass() + ' ' + (slideoverOpen ? 'slideover_active_' + position : 'slideover_inactive_' + position) + ' slideover-panel ' + position"
-  [style.width]="position === 'right' || position === 'left' ? (breakpointExceeded ? '100%' : width()) : null"
-  [style.height]="position === 'top' || position === 'bottom' ? (breakpointExceeded ? '100%' : height()) : null"
-  [style.left]="position === 'left' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : width()) : null"
-  [style.right]="position === 'right' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : width()) : null"
-  [style.bottom]="position === 'bottom' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : height()) : null"
-  [style.top]="position === 'top' && !slideoverOpen ? '-' + (breakpointExceeded ? '100%' : height()) : null"
-  [style.visibility]="!visible ? 'hidden': 'visible'"
-  [attr.aria-hidden]="!slideoverOpen"
+  [ngClass]="bgClass() + ' ' + (slideoverOpen ? 'slideover_active_' + position() : 'slideover_inactive_' + position()) + ' slideover-panel ' + position()"
+  [style.width]="position() === 'right' || position() === 'left' ? (breakpointExceeded ? '100%' : width()) : null"
+  [style.height]="position() === 'top' || position() === 'bottom' ? (breakpointExceeded ? '100%' : height()) : null"
+  [attr.inert]="!slideoverOpen ? '' : null"
 >
+  <span id="slideover-title" style="display: none;">{{ text().title }}</span>
+
   @if (!hideCloseButton()) {
     <div class="push_close_bar">
       <button class="access btnset clear"
