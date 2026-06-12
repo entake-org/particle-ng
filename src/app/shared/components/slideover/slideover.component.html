@@ -9,6 +9,7 @@
 <div
   role="dialog"
   aria-labelledby="slideover-title"
+  [class.transitions_enabled]="isInitialized"
   [attr.aria-modal]="modal()"
   [cdkTrapFocus]="modal() && slideoverOpen"
   [cdkTrapFocusAutoCapture]="modal()"
@@ -17,7 +18,7 @@
   [style.height]="position() === 'top' || position() === 'bottom' ? (breakpointExceeded ? '100%' : height()) : null"
   [attr.inert]="!slideoverOpen ? '' : null"
 >
-  <span id="slideover-title" style="display: none;">{{ text().title }}</span>
+  <span id="slideover-title" style="display: none;">{{ text().title || 'Slideover' }}</span>
 
   @if (!hideCloseButton()) {
     <div class="push_close_bar">
