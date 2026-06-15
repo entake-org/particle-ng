@@ -41,6 +41,7 @@ export * from './app/shared/components/auto-complete-input/auto-complete-input';
 export * from './app/shared/components/templated-dialog/templated-dialog';
 export * from './app/shared/components/confirmation-dialog/confirmation-dialog';
 export * from './app/shared/components/context-menu/context-menu.component';
+export * from './app/shared/components/tooltip/tooltip.component';
 
 /** INTERCEPTORS */
 export * from './app/shared/interceptors/json.interceptor';

@@ -2,7 +2,7 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  z-index: var(--z-notification);
+  z-index: var(--z-dialog);
 }
 
 .transitions_enabled {
@@ -114,7 +114,7 @@
   background-color: rgba(120, 120, 120, 0);
   pointer-events: none;
   transition: background-color 0.2s ease-in-out;
-  z-index: var(--z-dialog);
+  z-index: var(--z-overlay);
 }
 
 .particle_dialog_overlay.overlay_active {
