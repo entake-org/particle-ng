@@ -1,10 +1,13 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable, PLATFORM_ID} from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
 import {DialogComponent} from '../components/dialog/dialog.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   dialogs: DialogComponent[] = [];
 
@@ -27,6 +30,10 @@ export class DialogService {
   }
 
   registerDialog(dialog: DialogComponent): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
     if (!dialog || this.dialogs.includes(dialog)) return;
 
     this.focusTriggers.set(dialog, document.activeElement as HTMLElement);
@@ -40,6 +47,10 @@ export class DialogService {
   }
 
   unregisterDialog(dialog: DialogComponent): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
     const index = this.dialogs.indexOf(dialog);
     if (index > -1) {
       this.dialogs.splice(index, 1);
