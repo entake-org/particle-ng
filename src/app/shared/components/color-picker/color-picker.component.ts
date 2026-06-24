@@ -17,7 +17,6 @@ import { NgClass } from '@angular/common';
       multi: true
     }
   ],
-  standalone: true,
   imports: [NgClass, FormsModule]
 })
 export class ColorPickerComponent implements ControlValueAccessor, OnInit {

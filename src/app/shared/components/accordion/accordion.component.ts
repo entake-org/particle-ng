@@ -17,7 +17,6 @@ import {AccordionItemDirective} from '../../directives/accordion-item.directive'
   templateUrl: './accordion.component.html',
   styleUrls: ['./accordion.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [NgClass, NgTemplateOutlet, AccordionItemDirective]
 })
 export class AccordionComponent implements AfterContentInit, AfterViewInit {

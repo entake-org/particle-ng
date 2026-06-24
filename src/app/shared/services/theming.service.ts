@@ -1,4 +1,5 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Injectable, PLATFORM_ID} from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Theme, ThemeFont, Z_INDEX_LAYERS} from '../models/theme.model';
 import {LocalStorageService} from './local-storage.service';
@@ -8,6 +9,9 @@ import {LocalStorageService} from './local-storage.service';
 })
 export class ThemingService {
   private localStorageService = inject(LocalStorageService);
+  private platformId = inject(PLATFORM_ID);
+
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   // PSA: ORDER MATTERS, DO NOT MOVE ITEMS AROUND
   private readonly defaultZIndexes: Array<string> = [
@@ -130,13 +134,13 @@ export class ThemingService {
    * @param themes
    */
   appInit(applicationName: string, themes: Theme[]): void {
-      if (!applicationName) {
-        throw new Error('Application Name was not supplied.');
-      }
+    if (!applicationName) {
+      throw new Error('Application Name was not supplied.');
+    }
 
-      this.applicationName = applicationName;
-      this.themes.next(themes);
-      this.applySettings();
+    this.applicationName = applicationName;
+    this.themes.next(themes);
+    this.applySettings();
   }
 
   /**
@@ -188,6 +192,10 @@ export class ThemingService {
    * @param prefix
    */
   changeColors(theme: Theme, prefix?: string): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
     if (!prefix) {
       prefix = '';
     }
@@ -370,7 +378,7 @@ export class ThemingService {
   }
 
   private addFonts(theme: Theme, head: HTMLHeadElement, styleSheet: CSSStyleSheet): void {
-    if (!theme.fonts) {
+    if (!this.isBrowser || !theme.fonts) {
       return;
     }
 
@@ -396,6 +404,7 @@ export class ThemingService {
   }
 
   private fontExists(head: HTMLHeadElement, font: ThemeFont): boolean {
+    if (!this.isBrowser) return false;
     for (const child of head.childNodes as any) {
       if (child.href && font.source === 'adobe' && child.href.indexOf(font.id) > -1) {
         return true;
@@ -408,6 +417,7 @@ export class ThemingService {
   }
 
   removeThemeFromHeader(prefix: string): void {
+    if (!this.isBrowser) return;
     const head = document.head || document.getElementsByTagName('head')[0];
 
     for (const child of head.childNodes as any) {
@@ -498,7 +508,7 @@ export class ThemingService {
    * @param className
    */
   private generateColors(styleSheet: CSSStyleSheet, color: string, className: string): void {
-    if (!color) {
+    if (!this.isBrowser || !color) {
       return;
     }
 

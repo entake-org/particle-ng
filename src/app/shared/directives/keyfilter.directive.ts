@@ -1,15 +1,16 @@
-import { Directive, ElementRef, HostListener, Input, inject } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 /**
  * Directive to apply key filtering to an HTML input element
  */
 @Directive({
-    selector: '[particleKeyfilter]',
-    standalone: true
+  selector: '[particleKeyfilter]'
 })
 export class KeyfilterDirective {
   private hostElement = inject<ElementRef<HTMLInputElement>>(ElementRef);
-
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   /**
    * Array of keyboard key names that are always allowed
@@ -131,7 +132,7 @@ export class KeyfilterDirective {
 
       if (event.clipboardData) {
         clipboardData = event.clipboardData;
-      } else if ('clipboardData' in window) {
+      } else if (this.isBrowser && 'clipboardData' in window) {
         clipboardData = (window as any).clipboardData.getData('text');
       }
 
@@ -161,6 +162,10 @@ export class KeyfilterDirective {
 
   @HostListener('blur')
   onBlur(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
     if (this.filterType === 'numeric' && !KeyfilterDirective.valueIsNumeric(this.hostElement.nativeElement.value)) {
       this.hostElement.nativeElement.value = '';
     }

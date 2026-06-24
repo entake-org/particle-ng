@@ -1,4 +1,5 @@
-import { Directive, ElementRef, HostListener, OnDestroy, inject, input, effect } from '@angular/core';
+import { Directive, ElementRef, HostListener, OnDestroy, inject, input, effect, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Overlay, OverlayPositionBuilder, OverlayRef, ConnectedPosition, FlexibleConnectedPositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { TooltipComponent } from '../components/tooltip/tooltip.component';
@@ -8,6 +9,9 @@ import { Subscription } from 'rxjs';
   selector: '[particleTooltip]'
 })
 export class TooltipDirective implements OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
+
   particleTooltip = input<string>('');
   tooltipPosition = input<'left' | 'right' | 'top' | 'bottom'>('bottom');
   tooltipDisabled = input<boolean>(false);
@@ -22,6 +26,10 @@ export class TooltipDirective implements OnDestroy {
 
   constructor() {
     effect(() => {
+      if (!this.isBrowser) {
+        return;
+      }
+
       if (this.tooltipDisabled() || !this.particleTooltip()) {
         this.closeTooltip();
       } else if (this.overlayRef?.hasAttached()) {
@@ -32,7 +40,7 @@ export class TooltipDirective implements OnDestroy {
 
   @HostListener('mouseenter')
   show(): void {
-    if (this.tooltipDisabled() || !this.particleTooltip()) return;
+    if (!this.isBrowser || this.tooltipDisabled() || !this.particleTooltip()) return;
 
     let positionStrategy = this.getPositionStrategy();
 
@@ -64,13 +72,17 @@ export class TooltipDirective implements OnDestroy {
   @HostListener('mouseleave')
   @HostListener('click')
   hide(): void {
-    this.closeTooltip();
+    if (this.isBrowser) {
+      this.closeTooltip();
+    }
   }
 
   ngOnDestroy(): void {
-    this.closeTooltip();
-    if (this.overlayRef) {
-      this.overlayRef.dispose();
+    if (this.isBrowser) {
+      this.closeTooltip();
+      if (this.overlayRef) {
+        this.overlayRef.dispose();
+      }
     }
   }
 
@@ -120,4 +132,5 @@ export class TooltipDirective implements OnDestroy {
     if (pair.originX === 'end' && pair.overlayX === 'start') return 'right';
     return 'bottom';
   }
+
 }

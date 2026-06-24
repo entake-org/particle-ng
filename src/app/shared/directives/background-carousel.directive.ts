@@ -1,4 +1,5 @@
-import { Directive, ElementRef, Input, OnDestroy, inject } from '@angular/core';
+import {Directive, ElementRef, Input, OnDestroy, inject, PLATFORM_ID} from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
 import {CarouselOptions} from '../models/carousel-options.model';
 
@@ -6,19 +7,20 @@ import {CarouselOptions} from '../models/carousel-options.model';
  * This directive when applied to a div will hijack its background and apply a carousel of images.
  */
 @Directive({
-    selector: '[particleCarousel]',
-    standalone: true
+  selector: '[particleCarousel]'
 })
 export class BackgroundCarouselDirective implements OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
 
   /**
    * Carousel Options
    */
   private _options = new BehaviorSubject<CarouselOptions>({
-   images: [],
-   transitionTime: 2,
-   viewTime: 10,
-   resetInterval: false
+    images: [],
+    transitionTime: 2,
+    viewTime: 10,
+    resetInterval: false
   } as CarouselOptions);
 
   /**
@@ -51,32 +53,34 @@ export class BackgroundCarouselDirective implements OnDestroy {
   constructor() {
     const el = inject(ElementRef);
 
-    this._options.subscribe(
-      () => {
-        this.initOptions();
+    if (this.isBrowser) {
+      this._options.subscribe(
+        () => {
+          this.initOptions();
 
-        if (this.options.resetInterval) {
-          clearInterval(this._interval);
-          el.nativeElement.style.backgroundImage = null;
-          this._interval = null;
-        }
+          if (this.options.resetInterval) {
+            clearInterval(this._interval);
+            el.nativeElement.style.backgroundImage = null;
+            this._interval = null;
+          }
 
-        if (this.options.images.length > 0 && !this._interval) {
-          let imagePointer = 0;
-          el.nativeElement.style.backgroundSize = 'cover';
-          el.nativeElement.style.backgroundPosition = 'center center';
-          el.nativeElement.style.backgroundRepeat = 'no-repeat';
-          el.nativeElement.style.transition = `all ${this.options.transitionTime}s ease`;
-          el.nativeElement.style.backgroundImage = `url(${this.options.images[imagePointer++]})`;
+          if (this.options.images.length > 0 && !this._interval) {
+            let imagePointer = 0;
+            el.nativeElement.style.backgroundSize = 'cover';
+            el.nativeElement.style.backgroundPosition = 'center center';
+            el.nativeElement.style.backgroundRepeat = 'no-repeat';
+            el.nativeElement.style.transition = `all ${this.options.transitionTime}s ease`;
+            el.nativeElement.style.backgroundImage = `url(${this.options.images[imagePointer++]})`;
 
-          if (!this._interval) {
-            this._interval = setInterval(() => {
-              el.nativeElement.style.backgroundImage = `url(${this.options.images[imagePointer++ % this.options.images.length]})`;
-            }, this.options.viewTime * 1000);
+            if (!this._interval) {
+              this._interval = setInterval(() => {
+                el.nativeElement.style.backgroundImage = `url(${this.options.images[imagePointer++ % this.options.images.length]})`;
+              }, this.options.viewTime * 1000);
+            }
           }
         }
-      }
-    );
+      );
+    }
   }
 
   /**
@@ -100,6 +104,9 @@ export class BackgroundCarouselDirective implements OnDestroy {
    * Clears the interval when the component is destroyed.
    */
   ngOnDestroy(): void {
-    clearInterval(this._interval);
+    if (this.isBrowser) {
+      clearInterval(this._interval);
+    }
   }
+
 }
