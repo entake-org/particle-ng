@@ -1,4 +1,5 @@
 import {
+  afterNextRender,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -18,7 +19,7 @@ import {IdleTimer} from '../../services/idle-timer';
     templateUrl: './idle-timeout.component.html',
     imports: [DialogComponent]
 })
-export class IdleTimeoutComponent implements OnInit, OnDestroy {
+export class IdleTimeoutComponent implements OnDestroy {
   private cd = inject(ChangeDetectorRef);
 
   @Input()
@@ -48,18 +49,21 @@ export class IdleTimeoutComponent implements OnInit, OnDestroy {
   private targetTime: number = 0;
   private channel: BroadcastChannel = null as any;
 
-  ngOnInit(): void {
+  constructor() {
+    afterNextRender(() => {
+      this.initializeBrowserServices();
+    });
+  }
+
+  initializeBrowserServices(): void {
     this.channel = new BroadcastChannel('particle_idle_sync');
 
-    // Listen for the external event and explicitly mark for check
     this.channel.onmessage = (event) => {
       if (event.data === 'RESET') {
         this.localReset();
       } else if (event.data === 'LOGOUT') {
         this.localTimerEnd();
       }
-
-      // Tell zoneless Angular that the state has mutated
       this.cd.detectChanges();
     };
 
@@ -72,6 +76,9 @@ export class IdleTimeoutComponent implements OnInit, OnDestroy {
     }
     if (this.channel) {
       this.channel.close();
+    }
+    if (this.idleTimer) {
+      this.idleTimer.cleanUp();
     }
   }
 
