@@ -10,7 +10,7 @@ import {
   Input,
   input,
   model,
-  output,
+  output, PLATFORM_ID,
   QueryList,
   Renderer2,
   signal,
@@ -21,7 +21,7 @@ import {
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {BehaviorSubject, combineLatest, map, Observable, of, withLatestFrom} from 'rxjs';
 import {DropdownText} from '../../models/particle-component-text.model';
-import {AsyncPipe, NgClass, NgTemplateOutlet} from '@angular/common';
+import {AsyncPipe, isPlatformBrowser, NgClass, NgTemplateOutlet} from '@angular/common';
 import {DropdownOption} from '../../models/dropdown-option.model';
 import {DropdownOptionGroup} from '../../models/dropdown-option-group.model';
 import {TooltipDirective} from '../../directives/tooltip.directive';
@@ -50,6 +50,7 @@ declare type DropdownOptionInput = Array<DropdownOption | DropdownOptionGroup>;
 export class DropdownComponent implements ControlValueAccessor {
   private renderer = inject(Renderer2);
   private changeDetectorRef = inject(ChangeDetectorRef);
+  private platformId = inject(PLATFORM_ID);
 
   /**
    * Set the value of the dropdown
@@ -305,7 +306,7 @@ export class DropdownComponent implements ControlValueAccessor {
   /**
    * In mobile (screen width is less than 768), swap to a native input
    */
-  isMobile = window.innerWidth <= 768;
+  isMobile = isPlatformBrowser(this.platformId) ? window.innerWidth <= 768 : false;
 
   /**
    * The current value of the dropdown
@@ -385,16 +386,14 @@ export class DropdownComponent implements ControlValueAccessor {
   /**
    * Function to call on change
    */
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: (value: any) => void = () => {
-  };
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onChange: (value: any) => void = () => {};
 
   /**
    * Function to call on touch
    */
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onTouched: () => any = () => {
-  };
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onTouched: () => any = () => {};
 
   /**
    * Write value
@@ -587,25 +586,27 @@ export class DropdownComponent implements ControlValueAccessor {
    * Position and resize dropdown list on animation start if toState is open
    */
   onAnimationStart(): void {
-      this.resizeDropdownList();
-      this.setSelectionIndex();
+    if (!isPlatformBrowser(this.platformId)) {return;}
 
-      if (this.selectionIndex !== null) {
-        setTimeout(() => {
-          this.dropdownOptions.toArray()[this.selectionIndex]
-            .nativeElement
-            .focus();
-        });
-      }
+    this.resizeDropdownList();
+    this.setSelectionIndex();
 
-      /*
-        The height of the dropdown list is zero at the point where the above code executes,
-        this is a workaround to align the list after its height is known to avoid a frame
-        or two of the list at origin
-       */
-      this.renderer.setStyle(this.dropdownList.nativeElement, 'top', '-999px');
-      this.renderer.setStyle(this.dropdownList.nativeElement, 'left', '-999px');
-      setTimeout(() => this.positionDropdownList());
+    if (this.selectionIndex !== null) {
+      setTimeout(() => {
+        this.dropdownOptions.toArray()[this.selectionIndex]
+          .nativeElement
+          .focus();
+      });
+    }
+
+    /*
+      The height of the dropdown list is zero at the point where the above code executes,
+      this is a workaround to align the list after its height is known to avoid a frame
+      or two of the list at origin
+     */
+    this.renderer.setStyle(this.dropdownList.nativeElement, 'top', '-999px');
+    this.renderer.setStyle(this.dropdownList.nativeElement, 'left', '-999px');
+    setTimeout(() => this.positionDropdownList());
   }
 
   /**
@@ -649,6 +650,10 @@ export class DropdownComponent implements ControlValueAccessor {
    * @private
    */
   private positionDropdownList(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const {left, right, top, bottom} = this.dropdown.nativeElement.getBoundingClientRect();
     const {offsetHeight} = this.dropdownList.nativeElement;
     const bottomLeftAnchor = bottom;

@@ -10,10 +10,11 @@ import {
   output,
   Renderer2,
   signal,
-  ViewChild
+  ViewChild,
+  PLATFORM_ID
 } from '@angular/core';
-import {CdkTrapFocus} from '@angular/cdk/a11y';
-import {NgClass, NgStyle} from '@angular/common';
+import { CdkTrapFocus } from '@angular/cdk/a11y';
+import { NgClass, NgStyle, isPlatformBrowser } from '@angular/common';
 
 /**
  * Component to display a popover with custom content
@@ -27,8 +28,7 @@ import {NgClass, NgStyle} from '@angular/common';
 export class PopoverComponent {
   private renderer = inject(Renderer2);
   private changeDetectorRef = inject(ChangeDetectorRef);
-
-  protected readonly window = window;
+  private platformId = inject(PLATFORM_ID);
 
   readonly offset = input(5);
 
@@ -64,6 +64,8 @@ export class PopoverComponent {
   render: boolean = false;
   visible: boolean = false;
 
+  protected isDesktop = isPlatformBrowser(this.platformId) ? window.innerWidth > 768 : true;
+
   private _width = 'auto';
   private _height = 'auto';
   private target: EventTarget = null as any;
@@ -77,10 +79,12 @@ export class PopoverComponent {
       if (this.isOpen() && this.render) {
         this.onAnimationStart();
       } else {
-        setTimeout(() => {
-          this.onAnimationDone();
-          this.changeDetectorRef.markForCheck();
-        }, 300);
+        if (isPlatformBrowser(this.platformId)) {
+          setTimeout(() => {
+            this.onAnimationDone();
+            this.changeDetectorRef.markForCheck();
+          }, 300);
+        }
       }
     });
   }
@@ -103,8 +107,11 @@ export class PopoverComponent {
 
   @HostListener('window:resize')
   onWindowResize(): void {
-    if (this.visible) {
-      this.positionPopover();
+    if (isPlatformBrowser(this.platformId)) {
+      this.isDesktop = window.innerWidth > 768;
+      if (this.visible) {
+        this.positionPopover();
+      }
     }
   }
 
@@ -115,7 +122,7 @@ export class PopoverComponent {
     const { key } = event;
 
     if (key === 'Escape' || key === 'Esc') {
-      event.stopPropagation(); // Prevent dialog beneath from closing
+      event.stopPropagation();
       this.close();
     } else if (key === 'ArrowDown') {
       this.arrowDown.emit();
@@ -145,19 +152,23 @@ export class PopoverComponent {
   }
 
   onAnimationStart(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     this._elements = this.getFocusableElements(this.container.nativeElement);
     this.opened.emit();
     setTimeout(() => this.positionPopover(), 0);
   }
 
   onAnimationDone(): void {
-    (document.activeElement as any)?.blur();
+    if (isPlatformBrowser(this.platformId)) {
+      (document.activeElement as any)?.blur();
+    }
     this.render = false;
     this.closed.emit();
   }
 
   private open(): void {
-    this.isPositioned.set(false); // Reset position buffer
+    this.isPositioned.set(false);
     this.render = true;
     this.visible = true;
     setTimeout(() => this.toggleOpen(), 0);
@@ -165,11 +176,16 @@ export class PopoverComponent {
 
   public close(): void {
     this.visible = false;
-    this.isOpen.update(() => false);
-    this.isPositioned.set(false); // Hide immediately to prevent visual artifacts
+    this.isOpen.set(false);
+    this.isPositioned.set(false);
   }
 
   private positionPopover(): void {
+    // CRITICAL: Prevent execution if compiling on the Node server
+    if (!isPlatformBrowser(this.platformId) || !this.target) {
+      return;
+    }
+
     const {left, top, bottom, width} = (this.target as HTMLElement).getBoundingClientRect();
     const {offsetHeight, offsetWidth} = this.container.nativeElement;
     const popoverBottomLeftAnchor = bottom;

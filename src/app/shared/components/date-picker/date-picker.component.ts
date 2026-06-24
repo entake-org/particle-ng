@@ -7,19 +7,17 @@ import {
   inject,
   Input,
   input,
-  OnDestroy,
-  OnInit,
   output,
-  Renderer2,
-  ViewChild
+  ViewChild,
+  PLATFORM_ID
 } from '@angular/core';
-import {coerceBooleanProperty} from '@angular/cdk/coercion';
-import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {format, isEqual, isValid, isWithinInterval, parse} from 'date-fns';
-import {DatePickerText} from '../../models/particle-component-text.model';
-import {PopoverComponent} from '../popover/popover.component';
-import {NgClass} from '@angular/common';
-import {CalendarComponent} from '../calendar/calendar.component';
+import { isPlatformBrowser, NgClass } from '@angular/common';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { format, isEqual, isValid, isWithinInterval, parse } from 'date-fns';
+import { DatePickerText } from '../../models/particle-component-text.model';
+import { PopoverComponent } from '../popover/popover.component';
+import { CalendarComponent } from '../calendar/calendar.component';
 
 /**
  * Component to allow a user to input/select a date
@@ -39,6 +37,7 @@ import {CalendarComponent} from '../calendar/calendar.component';
 })
 export class DatePickerComponent implements ControlValueAccessor {
   private changeDetectorRef = inject(ChangeDetectorRef);
+  private platformId = inject(PLATFORM_ID);
 
   private static readonly ALLOWED_KEYS = [
     '0', '1', '2', '3', '4', '5', '6', '7',
@@ -63,7 +62,6 @@ export class DatePickerComponent implements ControlValueAccessor {
       this.mobileDateString = null as any;
     } else if (!isEqual(value, this._value)) {
       this._value = value;
-      // FIX 4: Removed double assignment
       this.dateString = DatePickerComponent.parseDate(value);
       this.setMobileValue();
     }
@@ -135,7 +133,8 @@ export class DatePickerComponent implements ControlValueAccessor {
   dateString = '';
   mobileDateString = '';
   showCalendar: { currentValue: Date } = null as any;
-  isMobile = window.innerWidth <= 768;
+
+  isMobile = isPlatformBrowser(this.platformId) ? window.innerWidth <= 768 : false;
 
   validSelectionInterval = {
     start: new Date(this.currentDate.getFullYear() - 100, 0, 1),
@@ -303,5 +302,4 @@ export class DatePickerComponent implements ControlValueAccessor {
       this.calendarPopover.close();
     }
   }
-
 }
