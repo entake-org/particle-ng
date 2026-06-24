@@ -11,6 +11,7 @@ import {
   input,
   model,
   output,
+  PLATFORM_ID,
   QueryList,
   Renderer2,
   signal,
@@ -18,12 +19,12 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {BehaviorSubject, map, Observable} from 'rxjs';
-import {MultiSelectOption} from '../../models/multi-select-option.model';
-import {MultiSelectOptionGroup} from '../../models/multi-select-option-group.model';
-import {MultiSelectText} from '../../models/particle-component-text.model';
-import {AsyncPipe, NgClass, NgTemplateOutlet} from '@angular/common';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { MultiSelectOption } from '../../models/multi-select-option.model';
+import { MultiSelectOptionGroup } from '../../models/multi-select-option-group.model';
+import { MultiSelectText } from '../../models/particle-component-text.model';
+import { NgClass, NgTemplateOutlet, isPlatformBrowser, AsyncPipe } from '@angular/common';
 
 /**
  * Type representing the multi-select component option input
@@ -49,7 +50,7 @@ declare type MultiSelectOptionInput = Array<MultiSelectOption | MultiSelectOptio
 export class MultiSelectComponent implements ControlValueAccessor {
   private renderer = inject(Renderer2);
   private changeDetectorRef = inject(ChangeDetectorRef);
-
+  private platformId = inject(PLATFORM_ID);
 
   /**
    * Set the value of the multi-select
@@ -100,95 +101,33 @@ export class MultiSelectComponent implements ControlValueAccessor {
     this._options.next(MultiSelectComponent.sanitizeOptionInput(options));
   }
 
-  /**
-   * The amount of offset (in pixels) to place between the multi-select
-   * and its list overlay
-   * @private
-   */
   private static readonly LIST_OFFSET = 0;
-
-  /**
-   * List of arrow key keycodes
-   * @private
-   */
   private static readonly ARROW_KEYS = ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'];
 
-  /**
-   * ViewChild of the multi-select
-   */
-  @ViewChild('multiSelect')
-  multiSelect: ElementRef<HTMLDivElement> = null as any;
+  @ViewChild('multiSelect') multiSelect: ElementRef<HTMLDivElement> = null as any;
+  @ViewChild('multiSelectButton') multiSelectButton: ElementRef<HTMLButtonElement> = null as any;
+  @ViewChild('multiSelectList') multiSelectList: ElementRef<HTMLDivElement> = null as any;
+  @ViewChildren('multiSelectOption') multiSelectOptions: QueryList<ElementRef<HTMLButtonElement>> = null as any;
+  @ContentChild(TemplateRef) template: TemplateRef<HTMLElement> = null as any;
 
-  /**
-   * ViewChild of the multi-select button
-   */
-  @ViewChild('multiSelectButton')
-  multiSelectButton: ElementRef<HTMLButtonElement> = null as any;
-
-  /**
-   * ViewChild of the multi-select list
-   */
-  @ViewChild('multiSelectList')
-  multiSelectList: ElementRef<HTMLDivElement> = null as any;
-
-  /**
-   * QueryList of multi-select option ViewChildren
-   */
-  @ViewChildren('multiSelectOption')
-  multiSelectOptions: QueryList<ElementRef<HTMLButtonElement>> = null as any;
-
-  /**
-   * ContentChild of the multi-select option template
-   */
-  @ContentChild(TemplateRef)
-  template: TemplateRef<HTMLElement> = null as any;
-
-  /**
-   * Whether the multi-select should be disabled
-   */
   disabled = model<boolean>(false);
-
-  /**
-   * Class list to assign to the multi-select
-   */
   readonly classList = input<string>(null as any);
-
   readonly buttonClassList = input<string>(null as any);
-
   readonly entryClassList = input<string>(null as any);
-
   readonly text = input<MultiSelectText>({
     placeholder: 'Make a Selection',
     of: 'of',
     optionsSelected: 'options selected'
-} as MultiSelectText);
-
-  /**
-   * Style of the multi-select
-   */
+  } as MultiSelectText);
   readonly type = input<'input' | 'expanded'>('input');
-
   readonly maxExpandedEntries = input<number>(0);
-
   readonly expandedAsGrid = input<boolean>(false);
-
   readonly collapsedButtonTemplate = input<TemplateRef<any>>(null as any);
-
   readonly inputId = input<string>();
 
-  /**
-   * Event emitted on value change, emits the new value
-   */
   readonly changed = output<Array<string | number>>();
 
-  /**
-   * BehaviorSubject tracking the input multi-select options/option groups
-   */
   readonly _options = new BehaviorSubject<MultiSelectOptionInput>(null as any);
-
-  /**
-   * BehaviorSubject tracking the current value of the multi-select
-   */
   readonly _internalValue = new BehaviorSubject<Array<number | string>>(null as any);
 
   /**
@@ -240,40 +179,40 @@ export class MultiSelectComponent implements ControlValueAccessor {
     map(values => values?.length ?? 0)
   );
 
-  /**
-   * Unique ID to assign to the multiSelect
-   */
   readonly multiSelectId;
-
-  /**
-   * Whether to render the multi-select list
-   */
   render = false;
-
-  /**
-   * Whether the multi-select is open
-   */
   opened = false;
-
-  /**
-   * The index of the focused option in the multiSelect list
-   */
   selectionIndex: number = null as any;
-
   optionCount: number = 0;
 
-  /**
-   * The current value of the multiSelect
-   * @private
-   */
   private _value: Array<string | number> = null as any;
+  isOpen = signal(false);
 
-  /**
-   * Removes options that do not have both a label and a value,
-   * also removes empty groups (or groups that have no valid options)
-   * @param options the options to sanitize
-   * @private
-   */
+  constructor() {
+    effect(() => {
+      if (this.isOpen()) {
+        this.onAnimationStart();
+      } else {
+        // Protect macroeconomic browser tracking calls from firing on server threads
+        if (isPlatformBrowser(this.platformId)) {
+          setTimeout(() => {
+            this.render = false;
+            this.changeDetectorRef.markForCheck();
+          }, 300);
+        }
+      }
+    });
+
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+
+    for (let i = 0; i < 10; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+
+    this.multiSelectId = `multiselect-${result}${new Date().getTime()}`;
+  }
+
   private static sanitizeOptionInput(options: MultiSelectOptionInput): MultiSelectOptionInput {
     const sanitizedOptions: MultiSelectOptionInput = [];
 
@@ -341,44 +280,14 @@ export class MultiSelectComponent implements ControlValueAccessor {
    * Function to call on change
    */
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: (value: any) => void = () => {
-  };
+  onChange: (value: any) => void = () => {};
 
   /**
    * Function to call on touch
    */
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onTouched: () => any = () => {
-  };
+  onTouched: () => any = () => {};
 
-  isOpen = signal(false);
-
-  constructor() {
-    effect(() => {
-      if (this.isOpen()) {
-        this.onAnimationStart();
-      } else {
-        setTimeout(() => {
-          this.render = false;
-          this.changeDetectorRef.markForCheck();
-        }, 300);
-      }
-    });
-
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-
-    for (let i = 0; i < 10; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-
-    this.multiSelectId = `multiselect-${result}${new Date().getTime()}`;
-  }
-
-  /**
-   * Write value
-   * @param value the value to write
-   */
   writeValue(value: Array<string | number>): void {
     this.value = value;
     this.changeDetectorRef.markForCheck();
@@ -414,7 +323,7 @@ export class MultiSelectComponent implements ControlValueAccessor {
    */
   @HostListener('window:resize')
   onWindowResize(): void {
-    if (this.opened) {
+    if (this.opened && isPlatformBrowser(this.platformId)) {
       this.positionMultiSelectList();
       this.resizeMultiSelectList();
     }
@@ -552,6 +461,10 @@ export class MultiSelectComponent implements ControlValueAccessor {
    * Position and resize the multi-select list on animation start if toState is open
    */
   onAnimationStart(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     this.resizeMultiSelectList();
     this.selectionIndex = null as any;
 
@@ -602,6 +515,10 @@ export class MultiSelectComponent implements ControlValueAccessor {
    * @private
    */
   private positionMultiSelectList(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const {left, top, bottom} = this.multiSelect.nativeElement.getBoundingClientRect();
     const {offsetHeight} = this.multiSelectList.nativeElement;
     const datePickerBottomLeftAnchor = bottom;
@@ -637,6 +554,9 @@ export class MultiSelectComponent implements ControlValueAccessor {
    * @private
    */
   private resizeMultiSelectList(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
     const {left, right} = this.multiSelect.nativeElement.getBoundingClientRect();
     const width = right - left;
 
@@ -715,10 +635,8 @@ export class MultiSelectComponent implements ControlValueAccessor {
     return previousOption;
   }
 
-
   toggleOpen(): void {
     this.isOpen.update((isOpen) => !isOpen);
   }
-
 
 }

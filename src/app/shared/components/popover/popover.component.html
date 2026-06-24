@@ -2,7 +2,7 @@
      [style.display]="render ? '' : 'none'"
      [style.visibility]="isPositioned() ? 'visible' : 'hidden'"
      [attr.aria-hidden]="!render"
-     [style.scale]="window.innerWidth > 768 ? 1 : scaleForMobile()"
+     [style.scale]="isDesktop ? 1 : scaleForMobile()"
 >
   <div class="particle_popover"
        [class.open]="isOpen()"

@@ -1,17 +1,17 @@
-import {AfterViewInit, Component, forwardRef, Input, input, output, ViewEncapsulation} from '@angular/core';
-import {Editor} from '@tiptap/core';
+import { AfterViewInit, Component, forwardRef, inject, Input, input, OnDestroy, output, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { isPlatformBrowser, NgClass } from '@angular/common';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { RichTextEditorText } from '../../models/particle-component-text.model';
+import { DialogComponent } from '../dialog/dialog.component';
+import { TiptapEditorDirective } from 'ngx-tiptap';
+import { TooltipDirective } from '../../directives/tooltip.directive';
+import { RichTextCapabilities } from '../../models/rich-text-capabilities.model';
+import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
-import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {RichTextEditorText} from '../../models/particle-component-text.model';
-import {DialogComponent} from '../dialog/dialog.component';
-import {TiptapEditorDirective} from 'ngx-tiptap';
-import {TooltipDirective} from '../../directives/tooltip.directive';
-import {NgClass} from '@angular/common';
-import {RichTextCapabilities} from '../../models/rich-text-capabilities.model';
 
 export const RICH_TEXT_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -20,21 +20,19 @@ export const RICH_TEXT_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-    selector: 'particle-rich-text',
-    templateUrl: './rich-text.component.html',
-    styleUrls: ['./rich-text.component.css'],
-    providers: [RICH_TEXT_VALUE_ACCESSOR],
-    encapsulation: ViewEncapsulation.None,
-    imports: [TooltipDirective, NgClass, TiptapEditorDirective, FormsModule, DialogComponent]
+  selector: 'particle-rich-text',
+  templateUrl: './rich-text.component.html',
+  styleUrls: ['./rich-text.component.css'],
+  providers: [RICH_TEXT_VALUE_ACCESSOR],
+  encapsulation: ViewEncapsulation.None,
+  imports: [TooltipDirective, NgClass, TiptapEditorDirective, FormsModule, DialogComponent]
 })
-export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
+export class RichTextComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
 
   readonly placeholder = input('');
-
   readonly hideControls = input(false);
-
   readonly height = input('100px');
-
   readonly editorClass = input<string>();
 
   @Input()
@@ -44,7 +42,9 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
 
   set readonly(readonly: boolean) {
     this._editable = !readonly;
-    this.editor.setEditable(this._editable);
+    if (this.editor) {
+      this.editor.setEditable(this._editable);
+    }
   }
 
   readonly text = input<RichTextEditorText>({
@@ -90,69 +90,71 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
   dialogLink: string = null as any;
   dialogType: string = null as any;
 
-  /**
-   * Function called on change
-   */
   onChange: ((value: string) => void) | undefined;
-
-  /**
-   * Function called on touch
-   */
   onTouched: (() => void) | undefined;
 
   private _value: string = null as any;
   private _editable = true;
 
-  protected readonly window = window;
+  protected isBrowser = isPlatformBrowser(this.platformId);
 
-  private CustomLink = Link.extend({
-    renderHTML(data: any) {
-      const href = data.HTMLAttributes.href;
-      if (href) {
-        try {
-          const linkUrl = new URL(href, window.location.origin);
-          const currentHost = window.location.hostname;
+  editor!: Editor;
 
-          if (linkUrl.hostname !== currentHost) {
-            data.HTMLAttributes.target = '_blank';
-            data.HTMLAttributes.rel = 'noopener noreferrer nofollow';
-          } else {
-            data.HTMLAttributes.target = '_self';
-            data.HTMLAttributes.rel = undefined;
-          }
-        } catch (e) {
-          console.warn('Invalid URL: ' + href);
-          console.warn(e);
-        }
-      }
+  private CustomLink: any;
 
-      return ['a', data.HTMLAttributes, 0];
+  protected isDesktop = isPlatformBrowser(this.platformId) ? window.innerWidth > 768 : true;
+
+  constructor() {
+    if (this.isBrowser) {
+      this.initializeCustomExtensions();
+      this.initializeEditor();
     }
-  });
+  }
 
-  editor = new Editor({
-    extensions: [
-      StarterKit.configure({link: false}),
-      this.CustomLink.configure({
-        openOnClick: false
-      }),
-      TextAlign.configure({
-        types: ['heading', 'paragraph'],
+  private initializeCustomExtensions(): void {
+    this.CustomLink = Link.extend({
+      renderHTML(data: any) {
+        const href = data.HTMLAttributes.href;
+        if (href) {
+          try {
+            const linkUrl = new URL(href, window.location.origin);
+            const currentHost = window.location.hostname;
 
-      }),
-      Placeholder.configure({
-        placeholder: () => this.placeholder()
-      }),
-      Image
-    ],
-    editorProps: {
-      attributes: {
-        class: '',
-        spellcheck: 'true',
+            if (linkUrl.hostname !== currentHost) {
+              data.HTMLAttributes.target = '_blank';
+              data.HTMLAttributes.rel = 'noopener noreferrer nofollow';
+            } else {
+              data.HTMLAttributes.target = '_self';
+              data.HTMLAttributes.rel = undefined;
+            }
+          } catch (e) {
+            console.warn('Invalid URL: ' + href);
+            console.warn(e);
+          }
+        }
+        return ['a', data.HTMLAttributes, 0];
+      }
+    });
+  }
+
+  private initializeEditor(): void {
+    this.editor = new Editor({
+      extensions: [
+        StarterKit.configure({ link: false }),
+        this.CustomLink.configure({ openOnClick: false }),
+        TextAlign.configure({ types: ['heading', 'paragraph'] }),
+        Placeholder.configure({ placeholder: () => this.placeholder() }),
+        Image
+      ],
+      editorProps: {
+        attributes: {
+          class: '',
+          spellcheck: 'true',
+        },
       },
-    },
-    enablePasteRules: [this.CustomLink, StarterKit, TextAlign]
-  } as any);
+      enablePasteRules: [this.CustomLink, StarterKit, TextAlign]
+    } as any);
+  }
 
   get value(): any {
     return this._value;
@@ -172,14 +174,22 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.editor.setEditable(this._editable);
+    if (this.isBrowser && this.editor) {
+      this.editor.setEditable(this._editable);
 
-    this.editor.on('update', ({editor}) => {
-      this.textChanged.emit({
-        textValue: editor.getText(),
-        htmlValue: this._value
+      this.editor.on('update', ({ editor }) => {
+        this.textChanged.emit({
+          textValue: editor.getText(),
+          htmlValue: this._value
+        });
       });
-    });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.editor) {
+      this.editor.destroy();
+    }
   }
 
   writeValue(value: string): void {
@@ -197,7 +207,9 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.editor.setEditable(isDisabled);
+    if (this.editor) {
+      this.editor.setEditable(isDisabled);
+    }
   }
 
   openLinkDialog(): void {
@@ -226,11 +238,9 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
             target: this.dialogLink && !this.dialogLink.startsWith('/') ? '_blank' : '_self'
           }).run();
         } else if (this.dialogType === 'image') {
-          this.editor.chain().focus().setImage({ src: this.dialogLink }).run()
+          this.editor.chain().focus().setImage({ src: this.dialogLink }).run();
         }
         break;
-      default:
-        //console.log(action);
     }
 
     this.dialogLink = null as any;
@@ -239,11 +249,12 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit {
   }
 
   focus(position?: any): void {
-    if (!position) {
-      position = 'start';
+    if (this.editor) {
+      if (!position) {
+        position = 'start';
+      }
+      this.editor.commands.focus(position);
     }
-
-    this.editor.commands.focus(position);
   }
 
 }

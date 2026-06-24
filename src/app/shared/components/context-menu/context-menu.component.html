@@ -1,6 +1,6 @@
 <particle-popover
-  [width]="window.innerWidth > 768 ? width() : mobileWidth"
-  [height]="window.innerWidth > 768 ? height() : mobileHeight"
+  [width]="isDesktop ? width() : mobileWidth"
+  [height]="isDesktop ? height() : mobileHeight"
   classList="footer_color particle_popover_shadow"
   [openDirection]="openDirection()"
   alignment="center"
@@ -13,7 +13,7 @@
     <div class="col">
       <div class="row v_center header_color min_h30 ent_r2l_dir">
         <div class="text bold text_wrap text_left ent_r2l_txt"
-             [ngClass]="window.innerWidth > 768 ? 'md pad_lr10' : 'lg pad_10'">{{ title() }}
+             [ngClass]="isDesktop ? 'md pad_lr10' : 'lg pad_10'">{{ title() }}
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
             }
             <div class="col size_1" [ngClass]="!entry.icon ? 'mar_left5' : ''">
               <div class="text text_left text_wrap ent_r2l_txt"
-                   [ngClass]="window.innerWidth > 768 ? 'md' : 'lg pad_tb5'"
+                   [ngClass]="isDesktop ? 'md' : 'lg pad_tb5'"
               >
                 {{ entry.text }}
               </div>
