@@ -44,6 +44,7 @@ export class TemplatedDialog<T> {
   readonly title = input<string>(null as any);
   readonly description = input<string>(null as any);
   readonly checkUnsavedChanges = input<boolean>(false);
+  readonly allowClose = input<boolean>(true);
   readonly showMaximize = input<boolean>(true);
   readonly subheaderTemplate = input<TemplateRef<any>>(null as any);
   readonly contentTemplate = input<TemplateRef<any>>(null as any);

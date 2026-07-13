@@ -167,8 +167,20 @@ h5 {
   border-style: solid;
   border-color: var(--ptl-brdr-color);
 }
-
-
+.rendered_text > div > iframe {
+  width: 100%;
+  height: unset;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--ptl-brdr-color);
+  border-radius: var(--ptl-brdr-radius);
+}
+.rendered_text > p > iframe {
+  width: 100%;
+  height: unset;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--ptl-brdr-color);
+  border-radius: var(--ptl-brdr-radius);
+}
 
 
 
