@@ -12,6 +12,7 @@ import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
+import Youtube from "@tiptap/extension-youtube";
 
 export const RICH_TEXT_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -68,7 +69,9 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit, O
     url: 'URL',
     addImage: 'Add Image',
     modifyImage: 'Modify Image',
-    divider: 'Divider'
+    divider: 'Divider',
+    addVideo: 'YouTube Video',
+    modifyVideo: 'Modify Video'
   } as RichTextEditorText);
 
   readonly capabilities = input({
@@ -89,6 +92,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit, O
   showDialog: any = null;
   dialogLink: string = null as any;
   dialogType: string = null as any;
+  dialogTitle: string = null as any;
 
   onChange: ((value: string) => void) | undefined;
   onTouched: (() => void) | undefined;
@@ -144,7 +148,10 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit, O
         this.CustomLink.configure({ openOnClick: false }),
         TextAlign.configure({ types: ['heading', 'paragraph'] }),
         Placeholder.configure({ placeholder: () => this.placeholder() }),
-        Image
+        Image,
+        Youtube.configure({
+          modestBranding: true,
+        }),
       ],
       editorProps: {
         attributes: {
@@ -217,6 +224,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit, O
     this.showDialog = {};
     this.dialogLink = previousUrl;
     this.dialogType = 'link';
+    this.dialogTitle = this.text().modifyLink;
   }
 
   openImageDialog(): void {
@@ -224,6 +232,14 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit, O
     this.showDialog = {};
     this.dialogLink = previousUrl;
     this.dialogType = 'image';
+    this.dialogTitle = this.text().modifyImage;
+  }
+
+  openVideoDialog(): void {
+    this.showDialog = {};
+    this.dialogLink = '';
+    this.dialogType = 'video';
+    this.dialogTitle = this.text().modifyVideo;
   }
 
   changeEditorLink(action: string): void {
@@ -239,6 +255,12 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit, O
           }).run();
         } else if (this.dialogType === 'image') {
           this.editor.chain().focus().setImage({ src: this.dialogLink }).run();
+        } else if (this.dialogType === 'video') {
+          this.editor.commands.setYoutubeVideo({
+            src: this.dialogLink,
+            width: 640,
+            height: 400,
+          });
         }
         break;
     }
@@ -246,6 +268,7 @@ export class RichTextComponent implements ControlValueAccessor, AfterViewInit, O
     this.dialogLink = null as any;
     this.dialogType = null as any;
     this.showDialog = null as any;
+    this.dialogTitle = null as any;
   }
 
   focus(position?: any): void {

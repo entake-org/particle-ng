@@ -160,6 +160,8 @@ export interface RichTextEditorText {
   update: string;
   url: string;
   divider: string;
+  addVideo: string;
+  modifyVideo: string;
 }
 
 export interface ScrollToTopText {

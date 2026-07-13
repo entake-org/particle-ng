@@ -1,13 +1,25 @@
-import {Injectable} from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 /**
- * Wrapper around interactions with Local Storage. Handles serializing things to JSON to make it easier to push more complex data into
- * local storage.
+ * Wrapper around interactions with Local Storage. Handles serializing things to JSON to make it easier to push
+ * more complex data into local storage.
  */
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
+  private platformId = inject(PLATFORM_ID);
+
+  private storage!: Storage;
+
+  constructor() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.storage = window.localStorage;
+    } else {
+      this.storage = this.createMockStorage();
+    }
+  }
 
   /**
    * Retrieve an object from LocalStorage
@@ -15,11 +27,14 @@ export class LocalStorageService {
    * @param key
    */
   getObject<T>(key: string): T | null {
-    const obj: any = localStorage.getItem(key);
+    const obj = this.storage.getItem(key);
     if (obj) {
-      return JSON.parse(obj) as T;
+      try {
+        return JSON.parse(obj) as T;
+      } catch (e) {
+        return null;
+      }
     }
-
     return null;
   }
 
@@ -29,7 +44,8 @@ export class LocalStorageService {
    * @param key
    */
   getText(key: string): string {
-    return localStorage.getItem(key) + '';
+    const value = this.storage.getItem(key);
+    return value !== null ? value : '';
   }
 
   /**
@@ -39,7 +55,7 @@ export class LocalStorageService {
    * @param object
    */
   putObject(key: string, object: any): void {
-    localStorage.setItem(key, JSON.stringify(object));
+    this.storage.setItem(key, JSON.stringify(object));
   }
 
   /**
@@ -49,7 +65,7 @@ export class LocalStorageService {
    * @param value
    */
   putText(key: string, value: string): void {
-    localStorage.setItem(key, value);
+    this.storage.setItem(key, value);
   }
 
   /**
@@ -58,7 +74,22 @@ export class LocalStorageService {
    * @param key
    */
   remove(key: string): void {
-    localStorage.removeItem(key);
+    this.storage.removeItem(key);
+  }
+
+  /**
+   * Creates a safe, transient in-memory Storage implementation for Node.js
+   */
+  private createMockStorage(): Storage {
+    const cache = new Map<string, string>();
+    return {
+      length: 0,
+      clear: () => cache.clear(),
+      getItem: (key: string) => cache.get(key) ?? null,
+      key: (index: number) => Array.from(cache.keys())[index] ?? null,
+      removeItem: (key: string) => cache.delete(key),
+      setItem: (key: string, value: string) => cache.set(key, value)
+    };
   }
 
 }

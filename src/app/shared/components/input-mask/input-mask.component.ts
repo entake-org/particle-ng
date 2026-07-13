@@ -20,7 +20,6 @@ export const INPUTMASK_VALUE_ACCESSOR: any = {
     '[class.ui-inputwrapper-focus]': 'focus'
   },
   providers: [INPUTMASK_VALUE_ACCESSOR],
-  standalone: true,
   imports: [NgStyle, NgClass]
 })
 export class InputMaskComponent implements OnInit, ControlValueAccessor {

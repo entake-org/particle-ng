@@ -18,7 +18,6 @@ import {TooltipDirective} from '../../directives/tooltip.directive';
          [tooltipDisabled]="tooltipDisabled"
          tooltipPosition="top">
     </div>`,
-    standalone: true,
     imports: [TooltipDirective]
 })
 export class ProfilePicComponent {

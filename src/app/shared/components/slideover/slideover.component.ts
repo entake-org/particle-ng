@@ -3,11 +3,13 @@ import {
   Component,
   ElementRef,
   HostListener,
+  inject,
   input,
   output,
+  PLATFORM_ID,
   viewChild
 } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { isPlatformBrowser, NgClass } from '@angular/common';
 import { CdkTrapFocus } from "@angular/cdk/a11y";
 import { debounceTime, fromEvent } from "rxjs";
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -20,6 +22,9 @@ import { SlideoverText } from '../../models/particle-component-text.model';
   imports: [NgClass, CdkTrapFocus]
 })
 export class SlideoverComponent implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
+
   slideoverOpen = false;
   breakpointExceeded = false;
   isInitialized = false;
@@ -48,14 +53,16 @@ export class SlideoverComponent implements AfterViewInit {
   readonly overlay = viewChild<ElementRef<HTMLDivElement>>('overlay');
 
   constructor() {
-    fromEvent(window, 'resize')
-      .pipe(
-        debounceTime(100),
-        takeUntilDestroyed()
-      )
-      .subscribe(() => {
-        this._determineBreakpointExceeded(window.innerWidth);
-      });
+    if (this.isBrowser) {
+      fromEvent(window, 'resize')
+        .pipe(
+          debounceTime(100),
+          takeUntilDestroyed()
+        )
+        .subscribe(() => {
+          this._determineBreakpointExceeded(window.innerWidth);
+        });
+    }
   }
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -67,10 +74,14 @@ export class SlideoverComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this._determineBreakpointExceeded(window.innerWidth);
+    if (this.isBrowser) {
+      setTimeout(() => {
+        this._determineBreakpointExceeded(window.innerWidth);
+        this.isInitialized = true;
+      }, 50);
+    } else {
       this.isInitialized = true;
-    }, 50);
+    }
   }
 
   private _determineBreakpointExceeded(innerWidth: number): void {
@@ -84,6 +95,8 @@ export class SlideoverComponent implements AfterViewInit {
   }
 
   open(): void {
+    if (!this.isBrowser) return;
+
     this.originatingFocusElement = document.activeElement as HTMLElement;
 
     if (this.modal()) {
@@ -95,6 +108,8 @@ export class SlideoverComponent implements AfterViewInit {
   }
 
   close(): void {
+    if (!this.isBrowser) return;
+
     if (this.modal()) {
       document.body.classList.remove('scroll_none');
     }

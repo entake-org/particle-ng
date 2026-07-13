@@ -6,7 +6,6 @@ import {LoaderText} from '../../models/particle-component-text.model';
     selector: 'particle-loader',
     templateUrl: './loader.component.html',
     styleUrls: ['./loader.component.css'],
-    standalone: true,
     imports: []
 })
 export class LoaderComponent {

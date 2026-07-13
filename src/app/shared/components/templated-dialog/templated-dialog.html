@@ -1,7 +1,7 @@
 <particle-dialog
   [object]="dialogOpen"
   [showTitle]="false"
-  [allowClose]="false"
+  [allowClose]="allowClose()"
   [width]="width()"
   [height]="height()"
   (closed)="checkClose()"
@@ -32,9 +32,11 @@
                 <div class="circle_26px cancel_button_color ptl_brdr_color ptl_brdr_size"><i class="fas fa-expand"></i></div>
               </button>
             }
-            <button class="access btn clear" [attr.aria-label]="text().close" (click)="checkClose()" >
-              <div class="circle_26px cancel_button_color ptl_brdr_color ptl_brdr_size"><i class="fas fa-xmark"></i></div>
-            </button>
+            @if (allowClose()) {
+              <button class="access btn clear" [attr.aria-label]="text().close" (click)="checkClose()" >
+                <div class="circle_26px cancel_button_color ptl_brdr_color ptl_brdr_size"><i class="fas fa-xmark"></i></div>
+              </button>
+            }
           </div>
         </div>
         <div class="row header_color min_h50 v_center pad_right10 pad_tb5 pad_left5 mobile_only_flex">
@@ -49,11 +51,13 @@
               {{title()}}
             </div>
           </div>
-          <div class="col row rc_gap min_w30 top_center">
-            <button class="access btn clear" [attr.aria-label]="text().close" (click)="checkClose()" >
-              <div class="circle_30px cancel_button_color ptl_brdr_color ptl_brdr_size"><i class="fas fa-xmark"></i></div>
-            </button>
-          </div>
+          @if (allowClose()) {
+            <div class="col row rc_gap min_w30 top_center">
+              <button class="access btn clear" [attr.aria-label]="text().close" (click)="checkClose()" >
+                <div class="circle_30px cancel_button_color ptl_brdr_color ptl_brdr_size"><i class="fas fa-xmark"></i></div>
+              </button>
+            </div>
+          }
         </div>
       </div>
 

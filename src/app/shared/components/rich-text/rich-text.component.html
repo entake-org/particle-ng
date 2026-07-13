@@ -167,7 +167,7 @@
           </div>
         }
         @if (capabilities().images) {
-          <div class="col v_center ptl_brdr_color ptl_brdr_size border_right pad_5">
+          <div class="col v_center pad_5">
             <button
               id="image"
               [attr.aria-label]="this.editor.isActive('image') ? text().modifyImage : text().addImage"
@@ -178,6 +178,18 @@
               [ngClass]="this.editor.isActive('image') ? 'ok_button_color' : 'content_color_dark_1'"
             >
               <i class="far fa-image fa-fw"></i>
+            </button>
+          </div>
+          <div class="col v_center ptl_brdr_color ptl_brdr_size border_right pad_5">
+            <button
+              id="video"
+              [attr.aria-label]="text().addVideo"
+              class="access btnset chip_size mar_right3 mar_left3 ptl_brdr_radius hov_darken content_color_dark_1"
+              (click)="openVideoDialog()"
+              [particleTooltip]="text().addVideo"
+              tooltipPosition="top"
+            >
+              <i class="fab fa-youtube fa-fw"></i>
             </button>
           </div>
         }
@@ -200,7 +212,7 @@
   </div>
 
   <particle-dialog
-    [title]="dialogType === 'link' ? text().modifyLink : text().modifyImage"
+    [title]="dialogTitle"
     titleClass="header_color min_h40"
     [object]="showDialog"
     [allowClose]="false"
