@@ -25,11 +25,12 @@ import {PaginatedContainer} from "./shared/models/paginated-container.model";
 import {TemplatedDialog} from "./shared/components/templated-dialog/templated-dialog";
 import {SlideoverComponent} from "./shared/components/slideover/slideover.component";
 import {IdleTimeoutComponent} from "./shared/components/idle-timeout/idle-timeout.component";
+import {PopoverComponent} from "./shared/components/popover/popover.component";
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-  imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe, LoaderComponent, RadioButtonsComponent, AutoCompleteInput, ProfilePicComponent, TemplatedDialog, SlideoverComponent]
+  imports: [LayoutFullFramingComponent, DatePickerComponent, RichTextComponent, FormsModule, WeekPickerComponent, DateRangePickerComponent, DropdownComponent, MultiSelectComponent, SliderComponent, PaginatorComponent, IconSelectComponent, AsyncPipe, LoaderComponent, RadioButtonsComponent, AutoCompleteInput, ProfilePicComponent, TemplatedDialog, SlideoverComponent, PopoverComponent]
 })
 export class HomeComponent {
   private themingService = inject(ThemingService);

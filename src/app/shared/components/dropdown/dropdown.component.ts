@@ -654,42 +654,61 @@ export class DropdownComponent implements ControlValueAccessor {
       return;
     }
 
-    const {left, right, top, bottom} = this.dropdown.nativeElement.getBoundingClientRect();
-    const {offsetHeight} = this.dropdownList.nativeElement;
-    const bottomLeftAnchor = bottom;
-    const availableBottomSpace = window.innerHeight - bottomLeftAnchor;
-    const availableTopSpace = top;
-    const offsetListHeight = offsetHeight + DropdownComponent.DROPDOWN_LIST_OFFSET;
-    let transformOrigin: string, positionTop: string;
+    const dropdownEl = this.dropdown.nativeElement;
+    const listEl = this.dropdownList.nativeElement;
+
+    const dropdownRect = dropdownEl.getBoundingClientRect();
+    const listRect = listEl.getBoundingClientRect();
+
+    let parentTop = 0;
+    let parentLeft = 0;
+
+    const offsetParent = listEl.offsetParent as HTMLElement;
+    if (offsetParent) {
+      const parentRect = offsetParent.getBoundingClientRect();
+      parentTop = parentRect.top;
+      parentLeft = parentRect.left;
+    }
+
+    const relativeTop = dropdownRect.top - parentTop;
+    const relativeLeft = dropdownRect.left - parentLeft;
+
+    const availableBottomSpace = window.innerHeight - dropdownRect.bottom - 16;
+    const availableTopSpace = dropdownRect.top;
+    const offsetListHeight = listRect.height + DropdownComponent.DROPDOWN_LIST_OFFSET;
+
+    let transformOrigin: string;
+    let finalTop: number;
 
     if (availableBottomSpace > offsetListHeight) {
       transformOrigin = 'top left';
-      positionTop = `${bottomLeftAnchor + DropdownComponent.DROPDOWN_LIST_OFFSET}px`;
+      finalTop = relativeTop + dropdownRect.height + DropdownComponent.DROPDOWN_LIST_OFFSET;
     } else if (availableTopSpace > offsetListHeight) {
       transformOrigin = 'bottom left';
-      positionTop = `${top - offsetListHeight}px`;
+      finalTop = relativeTop - offsetListHeight;
     } else {
-      if (offsetHeight > window.innerHeight) {
-        positionTop = '0px';
-      } else {
-        const availableSpace = window.innerHeight - offsetHeight;
-        positionTop = `${String(availableSpace / 2)}px`;
-      }
-
       transformOrigin = 'top left';
+      finalTop = relativeTop + dropdownRect.height + DropdownComponent.DROPDOWN_LIST_OFFSET;
     }
 
-    this.renderer.setStyle(this.dropdownList.nativeElement, 'transform-origin', transformOrigin);
-    this.renderer.setStyle(this.dropdownList.nativeElement, 'top', positionTop);
+    const buttonWidth = dropdownRect.width;
+    const width = Math.max(buttonWidth, this.dropdownBoxMinWidth());
+    let finalLeft = relativeLeft;
 
-    const buttonWidth = right - left;
-    const width = buttonWidth < this.dropdownBoxMinWidth() ? this.dropdownBoxMinWidth() : buttonWidth;
-    if (left + width > window.innerWidth) {
-      const newLeft = left - (this.dropdownBoxMinWidth() - buttonWidth);
-      this.renderer.setStyle(this.dropdownList.nativeElement, 'left', `${newLeft}px`);
-    } else {
-      this.renderer.setStyle(this.dropdownList.nativeElement, 'left', `${left}px`);
+    if (dropdownRect.left + width > window.innerWidth) {
+      finalLeft = relativeLeft - (width - buttonWidth);
     }
+
+    const listOptionsEl = this.dropdownList.nativeElement.querySelector('.particle_dropdown_options');
+    if (listOptionsEl) {
+      const safeMaxHeight = Math.min(250, Math.max(availableBottomSpace, 120));
+      this.renderer.setStyle(listOptionsEl, 'max-height', `${safeMaxHeight}px`);
+    }
+
+    this.renderer.setStyle(listEl, 'transform-origin', transformOrigin);
+    this.renderer.setStyle(listEl, 'top', `${finalTop}px`);
+    this.renderer.setStyle(listEl, 'left', `${finalLeft}px`);
+    this.renderer.setStyle(listEl, 'width', `${width}px`);
   }
 
   /**

@@ -519,8 +519,11 @@ export class MultiSelectComponent implements ControlValueAccessor {
       return;
     }
 
-    const {left, top, bottom} = this.multiSelect.nativeElement.getBoundingClientRect();
-    const {offsetHeight} = this.multiSelectList.nativeElement;
+    const multiSelectEl = this.multiSelect.nativeElement;
+    const listEl = this.multiSelectList.nativeElement;
+
+    const { left, top, bottom } = multiSelectEl.getBoundingClientRect();
+    const { offsetHeight } = listEl;
     const datePickerBottomLeftAnchor = bottom;
     const availableBottomSpace = window.innerHeight - datePickerBottomLeftAnchor;
     const availableTopSpace = top;
@@ -544,9 +547,16 @@ export class MultiSelectComponent implements ControlValueAccessor {
       transformOrigin = 'top left';
     }
 
-    this.renderer.setStyle(this.multiSelectList.nativeElement, 'transform-origin', transformOrigin);
-    this.renderer.setStyle(this.multiSelectList.nativeElement, 'left', `${left}px`);
-    this.renderer.setStyle(this.multiSelectList.nativeElement, 'top', positionTop);
+    const safeBottomSpace = availableBottomSpace - 16; // 16px safe margin from viewport edge
+    const listOptionsEl = listEl.querySelector('.particle_multiselect_options') || listEl;
+    if (listOptionsEl) {
+      const safeMaxHeight = Math.min(250, Math.max(safeBottomSpace, 120));
+      this.renderer.setStyle(listOptionsEl, 'max-height', `${safeMaxHeight}px`);
+    }
+
+    this.renderer.setStyle(listEl, 'transform-origin', transformOrigin);
+    this.renderer.setStyle(listEl, 'left', `${left}px`);
+    this.renderer.setStyle(listEl, 'top', positionTop);
   }
 
   /**
