@@ -9,7 +9,8 @@
 
 .particle_popover {
   border-radius: 3px;
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: auto;
   font-size: 12px;
   font-weight: normal;
   z-index: var(--z-notification);

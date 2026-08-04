@@ -15,7 +15,7 @@
         </div>
         <div class="col center_center pad_lr5">
           <button class="access btn clear circle_20px " tabindex="0" [attr.aria-label]="text().jumpToPage"
-            (click)="config.toggle($event)">
+            (click)="op.toggle($event)">
             <i class="fas fa-cog"></i>
           </button>
         </div>
@@ -172,11 +172,9 @@
 <!-- Jump to popover -->
 <particle-popover #op>
   <ng-container *ngTemplateOutlet="jumpTo"></ng-container>
-</particle-popover>
-
-<particle-popover #config>
-  <ng-container *ngTemplateOutlet="jumpTo"></ng-container>
-  <ng-container *ngTemplateOutlet="pageSizeTemplate"></ng-container>
+  @if (!showPages() && showResultsPanel()) {
+    <ng-container *ngTemplateOutlet="pageSizeTemplate"></ng-container>
+  }
 </particle-popover>
 
 <ng-template #jumpTo>
@@ -185,12 +183,12 @@
       <div class="text sm text_center ent_r2l_txt" style="text-align: center !important;"><label for="pageJump">{{text().jumpToPage}} ({{text().outOf}} {{numberOfPages}}):</label></div>
       <div class="row rc_gap center_center mar_top10 ent_r2l_dir">
         <div class="col">
-          <input class="access fullwidth_input sm" style="width:50px;" maxlength="4" id="pageJump" (keydown.enter)="jumpPage();op.close();config.close();"
+          <input class="access fullwidth_input sm" style="width:50px;" maxlength="4" id="pageJump" (keydown.enter)="jumpPage();op.close();"
             type="text" [attr.aria-label]="text().page" name="pagejump" [placeholder]="text().page" [(ngModel)]="pageJumpInput" />
           </div>
           <div class="col">
             <button class="access btn clear" [attr.aria-label]="text().jumpToPage"
-              (click)="jumpPage();op.close();config.close();">
+              (click)="jumpPage();op.close();">
               <i class="fas fa-chevron-right ent_r2l_ico"></i>
             </button>
           </div>
@@ -205,7 +203,7 @@
       <div class="row rc_gap center_center mar_top10 ent_r2l_dir">
         <div class="col">
           <select class="access fullwidth_input content_color text sm" style="width:50px;"
-            [(ngModel)]="pageSize" (ngModelChange)="pageSizeChange();config.close();" [title]="text().choosePageSize" id="pageSize">
+            [(ngModel)]="pageSize" (ngModelChange)="pageSizeChange();op.close();" [title]="text().choosePageSize" id="pageSize">
             @for (option of pageSizeOptions(); track option) {
               <option [value]="option" [attr.aria-label]="option">
                 {{option}}

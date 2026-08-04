@@ -251,4 +251,5 @@ export class PaginatorComponent implements OnChanges, AfterViewInit {
     this.pageJumpInput = '';
   }
 
+  protected readonly opener = opener;
 }
