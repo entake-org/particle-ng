@@ -25,6 +25,10 @@ export class BaseDataService {
     return false;
   }
 
+  protected isServer(): boolean {
+    return false;
+  }
+
   /**
    * Takes an HTTPClient object so that it can make REST calls.
    *
@@ -62,7 +66,7 @@ export class BaseDataService {
    */
   handleGetList(url: string): Observable<any> {
     return this.handleGet(url).pipe(
-      map(d => d.data),
+      map(d => d?.data ?? []),
       catchError(error => this.handleError(error, this.ignoreNoResultsError(), []))
     );
   }
@@ -198,21 +202,12 @@ export class BaseDataService {
    * @param ignoreNoResultsError
    */
   handleError(error: HttpErrorResponse, ignoreNoResultsError: boolean, noResultsResponse?: any): Observable<any> {
-    if (ignoreNoResultsError && error.status === 404) {
+    if (ignoreNoResultsError && error.status === 404 || this.isServer()) {
       return of(noResultsResponse ?? {});
     }
 
     console.error(error);
     return throwError(() => error);
-  }
-
-  /**
-   * Performs a deep copy of a JS object.
-   *
-   * @param o
-   */
-  deepCopy<T>(o: T): T {
-    return <T> JSON.parse(JSON.stringify(o));
   }
 
   /**
