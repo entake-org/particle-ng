@@ -9,15 +9,15 @@
 
 .particle_popover {
   border-radius: 3px;
-  overflow-x:hidden;
-  overflow-y:auto;
-  font-size:12px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 12px;
   font-weight: normal;
   z-index: var(--z-notification);
-  width: auto; /* set as an input, default auto */
-  min-width:10px;
-  height: auto; /* set as an input, default auto */
-  min-height:10px;
+  width: auto;
+  min-width: 10px;
+  height: auto;
+  min-height: 10px;
 
   position: absolute;
   transform: scaleY(0.5);
@@ -29,14 +29,13 @@
 }
 
 .particle_popover.open {
-  transform: scaleY(1);
+  transform: none;
   opacity: 1;
   pointer-events: auto;
   transition-duration: 200ms;
   transition-property: transform, opacity;
   transition-timing-function: ease;
 }
-
 
 .particle_popover_shadow {
   box-shadow:

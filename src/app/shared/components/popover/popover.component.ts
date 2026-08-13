@@ -91,16 +91,23 @@ export class PopoverComponent {
 
   @HostListener('window:click', ['$event'])
   onClick(event: MouseEvent): void {
-    if (this.visible) {
-      const {pageX, pageY} = event;
-      if (pageX > 0 && pageY > 0) {
-        const {left, right, top, bottom} = this.container.nativeElement.getBoundingClientRect();
-        const xPositionValid = pageX >= left && pageX <= right;
-        const yPositionValid = pageY >= top && pageY <= bottom;
+    if (!this.visible) {
+      return;
+    }
 
-        if (!(xPositionValid && yPositionValid)) {
-          this.close();
-        }
+    const { pageX, pageY } = event;
+
+    if (pageX > 0 && pageY > 0) {
+      const path = event.composedPath();
+
+      const isInsidePopover = path.includes(this.container.nativeElement);
+
+      const isCloseOverride = path.some((el: any) =>
+        el?.getAttribute && el.getAttribute('data-dialog-close-override') === 'true'
+      );
+
+      if (!isInsidePopover && !isCloseOverride) {
+        this.close();
       }
     }
   }

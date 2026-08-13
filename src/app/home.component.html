@@ -174,11 +174,11 @@
             <i class="fa-solid fa-xmark"></i>
           </div>
         </div>
-        <div class="col">
+        <button class="col btnset access clear" (click)="popover.toggle($event)">
           <div class="circle_100px ptl_brdr_color ptl_brdr_size bg_blue">
             <i class="fa-solid fa-xmark"></i>
           </div>
-        </div>
+        </button>
       </div>
       <div class="row rc_gap wrap center_center min_h100">
         <div class="col">
@@ -552,3 +552,45 @@
 </particle-templated-dialog>
 
 <particle-slideover position="left" #slideover></particle-slideover>
+<particle-popover
+  width="400" height="200"
+  #popover
+>
+  <div class="row column rc_gap mar_20">
+    <particle-dropdown
+      [text]="{placeholder: 'Select an option...'}"
+      buttonClassList="bg_blue"
+      [options]="[
+                   { value: 'a', label: 'Option A' },
+                   { value: 'b', label: 'Disabled Option', disabled: true },
+                   { value: 'c', label: 'Option C' },
+                   {
+                     groupLabel: 'Option Group',
+                     options: [
+                       { value: 'opt-1', label: 'Group Option 1' },
+                       { value: 'opt-$', label: 'Group Option $' },
+                       { value: 'opt-X', label: 'Group Option X' }
+                     ]
+                   }
+                 ]"
+      [disabled]="false">
+    </particle-dropdown>
+    <particle-multi-select
+    buttonClassList="bg_blue"
+    [options]="[
+                 { value: 'a', label: 'Option A' },
+                 { value: 'b', label: 'Disabled Option', disabled: true },
+                 { value: 'c', label: 'Option C' },
+                 {
+                   groupLabel: 'Option Group',
+                   options: [
+                     { value: '1', label: 'Group Option 1' },
+                     { value: '2', label: 'Group Option $' },
+                     { value: '3', label: 'Group Option X' }
+                   ]
+                 }
+               ]"
+    [classList]="''" [disabled]="false">
+  </particle-multi-select>
+  </div>
+</particle-popover>
