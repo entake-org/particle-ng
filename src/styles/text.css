@@ -145,7 +145,7 @@ ul li::marker {
   font-size: 18px;
 }
 .rich_text_formatting strong {
-  font-weight: 500;
+  font-weight: 600;
 }
 .rich_text_formatting img {
   width:100%;
@@ -164,7 +164,7 @@ ul li::marker {
     font-size: 18px;
   }
   .rich_text_formatting {
-    line-height: 1.6;
+    line-height: 1.5;
   }
 }
 

@@ -13,7 +13,14 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser, NgClass } from '@angular/common';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator
+} from '@angular/forms';
 import { format, isEqual, isValid, isWithinInterval, parse } from 'date-fns';
 import { DatePickerText } from '../../models/particle-component-text.model';
 import { PopoverComponent } from '../popover/popover.component';
@@ -31,11 +38,16 @@ import { CalendarComponent } from '../calendar/calendar.component';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DatePickerComponent),
       multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => DatePickerComponent),
+      multi: true
     }
   ],
   imports: [NgClass, FormsModule, PopoverComponent, CalendarComponent]
 })
-export class DatePickerComponent implements ControlValueAccessor {
+export class DatePickerComponent implements ControlValueAccessor, Validator {
   private changeDetectorRef = inject(ChangeDetectorRef);
   private platformId = inject(PLATFORM_ID);
 
@@ -188,6 +200,9 @@ export class DatePickerComponent implements ControlValueAccessor {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouched: () => any = () => {};
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onValidatorChange: () => void = () => {};
+
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: any): void {
     this.isMobile = event.target.innerWidth <= 768;
@@ -211,13 +226,25 @@ export class DatePickerComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
+  registerOnValidatorChange(fn: () => void): void {
+    this.onValidatorChange = fn;
+  }
+
+  validate(): ValidationErrors | null {
+    if ((this.dateString && !this.value) || (this.value && !isWithinInterval(this.value, this.validSelectionInterval))) {
+      return { invalid: true };
+    }
+
+    return null;
+  }
+
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
     this.changeDetectorRef.markForCheck();
   }
 
   filterInput(event: KeyboardEvent): void {
-    const {key} = event;
+    const { key } = event;
 
     if (!DatePickerComponent.ALLOWED_KEYS.includes(key) && !event.ctrlKey && !event.metaKey) {
       event.preventDefault();
@@ -229,9 +256,13 @@ export class DatePickerComponent implements ControlValueAccessor {
   }
 
   handleBlur(): void {
-    try {
-      this.updateModel(DatePickerComponent.parseDateString(this.dateString));
-    } catch (e) {
+    const parsedDate = DatePickerComponent.parseDateString(this.dateString);
+
+    if (parsedDate !== null && isWithinInterval(parsedDate, this.validSelectionInterval)) {
+      this.updateModel(parsedDate);
+    } else {
+      this.dateString = null as any;
+      this.mobileDateString = null as any;
       this.updateModel(null as any);
     }
   }
@@ -275,12 +306,14 @@ export class DatePickerComponent implements ControlValueAccessor {
           }
         }
       } else {
-        this.value = null as any;
+        this._value = null as any;
       }
 
-      if (!isEqual(this.value, valueBeforeUpdate)) {
-        this.onChange(this.value);
-        this.setMobileValue();
+      this.onChange(this._value);
+      this.setMobileValue();
+
+      if (this.onValidatorChange) {
+        this.onValidatorChange();
       }
     }
   }

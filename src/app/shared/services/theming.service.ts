@@ -489,7 +489,7 @@ export class ThemingService {
     let textRgb = this.hexToRgb('#FFFFFF');
     const whiteContrast = this.contrast(textRgb, rgb);
 
-    textRgb = this.hexToRgb('#222222');
+    textRgb = this.hexToRgb('#444444');
     const blackContrast = this.contrast(textRgb, rgb);
 
     // 7 is the contrast ratio for WCAG AAA, if we're less than that, go full black for max contrast
@@ -497,7 +497,7 @@ export class ThemingService {
       return '#000000';
     }
 
-    return whiteContrast > blackContrast ? '#FFFFFF' : '#222222';
+    return whiteContrast > blackContrast ? '#FFFFFF' : '#444444';
   }
 
   /**

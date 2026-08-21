@@ -10,7 +10,8 @@ import {
   Input,
   input,
   model,
-  output, PLATFORM_ID,
+  output,
+  PLATFORM_ID,
   QueryList,
   Renderer2,
   signal,
@@ -18,13 +19,13 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {BehaviorSubject, combineLatest, map, Observable, of, withLatestFrom} from 'rxjs';
-import {DropdownText} from '../../models/particle-component-text.model';
-import {AsyncPipe, isPlatformBrowser, NgClass, NgTemplateOutlet} from '@angular/common';
-import {DropdownOption} from '../../models/dropdown-option.model';
-import {DropdownOptionGroup} from '../../models/dropdown-option-group.model';
-import {TooltipDirective} from '../../directives/tooltip.directive';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BehaviorSubject, combineLatest, map, Observable, of, withLatestFrom } from 'rxjs';
+import { DropdownText } from '../../models/particle-component-text.model';
+import { AsyncPipe, isPlatformBrowser, NgClass, NgTemplateOutlet } from '@angular/common';
+import { DropdownOption } from '../../models/dropdown-option.model';
+import { DropdownOptionGroup } from '../../models/dropdown-option-group.model';
+import { TooltipDirective } from '../../directives/tooltip.directive';
 
 /**
  * Type representing the dropdown component option input
@@ -196,7 +197,6 @@ export class DropdownComponent implements ControlValueAccessor {
    * @private
    */
   private _timeout = null as any;
-
 
   /**
    * BehaviorSubject tracking the current value of the dropdown
@@ -386,13 +386,13 @@ export class DropdownComponent implements ControlValueAccessor {
   /**
    * Function to call on change
    */
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChange: (value: any) => void = () => {};
 
   /**
    * Function to call on touch
    */
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouched: () => any = () => {};
 
   /**
@@ -490,24 +490,19 @@ export class DropdownComponent implements ControlValueAccessor {
   }
 
   /**
-   * Close the dropdown list (if opened) on click if outside the list
+   * Close the dropdown list (if opened) on click if outside the list and trigger button
    * @param event the click MouseEvent
    */
   @HostListener('window:click', ['$event'])
   onClick(event: MouseEvent): void {
     if (this.opened) {
-      const {pageX, pageY} = event;
+      const target = event.target as Node;
 
-      if (pageX > 0 && pageY > 0) {
-        const {left, right, top, bottom} = this.dropdownList.nativeElement.getBoundingClientRect();
-        const xPositionValid = pageX >= left && pageX <= right;
-        const yPositionValid = pageY >= top && pageY <= bottom;
-        const shouldClose = !(xPositionValid && yPositionValid);
+      const clickedInsideButton = this.dropdownButton?.nativeElement.contains(target);
+      const clickedInsideList = this.dropdownList?.nativeElement.contains(target);
 
-        if (shouldClose) {
-          this.closeDropdown();
-          this.dropdownButton.nativeElement.focus();
-        }
+      if (!clickedInsideButton && !clickedInsideList) {
+        this.closeDropdown();
       }
     }
   }
@@ -565,12 +560,19 @@ export class DropdownComponent implements ControlValueAccessor {
    * @param event the click MouseEvent
    */
   openDropdown(event: MouseEvent): void {
-    event.stopImmediatePropagation();
+    event.stopPropagation();
 
     if (!this.disabled()) {
-      this.render = true;
-      this.opened = true;
-      setTimeout(() => this.toggleOpen(), 0);
+      if (this.isOpen()) {
+        this.closeDropdown();
+      } else {
+        this.render = true;
+        this.opened = true;
+
+        requestAnimationFrame(() => {
+          this.isOpen.set(true);
+        });
+      }
     }
   }
 
@@ -579,7 +581,7 @@ export class DropdownComponent implements ControlValueAccessor {
    */
   closeDropdown(): void {
     this.opened = false;
-    this.toggleOpen();
+    this.isOpen.set(false);
   }
 
   /**
@@ -594,8 +596,8 @@ export class DropdownComponent implements ControlValueAccessor {
     if (this.selectionIndex !== null) {
       setTimeout(() => {
         this.dropdownOptions.toArray()[this.selectionIndex]
-          .nativeElement
-          .focus();
+          ?.nativeElement
+          ?.focus();
       });
     }
 
