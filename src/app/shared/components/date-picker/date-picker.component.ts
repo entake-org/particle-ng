@@ -297,8 +297,33 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
   }
 
   handleMobileInput(): void {
-    this.dateString = this.mobileDateString;
-    this.handleInput();
+    if (!this.mobileDateString) {
+      this.dateString = null as any;
+      this.updateModel(null as any);
+    } else {
+      const parts = this.mobileDateString.split('-');
+      if (parts.length === 3) {
+        const [year, month, day] = parts;
+        this.dateString = `${month}/${day}/${year}`;
+      } else {
+        this.dateString = this.mobileDateString;
+      }
+
+      const [year, month, day] = parts.map(p => parseInt(p, 10));
+      const parsedDate = new Date(year, month - 1, day);
+
+      if (isValid(parsedDate) && isWithinInterval(parsedDate, this.validSelectionInterval)) {
+        this.updateModel(parsedDate);
+      } else {
+        this.updateModel(null as any);
+      }
+    }
+
+    this.input.emit();
+
+    if (this.onValidatorChange) {
+      this.onValidatorChange();
+    }
   }
 
   setMobileValue(): void {
@@ -325,14 +350,17 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
         }
       } else {
         this._value = null as any;
+        this.dateString = null as any;
+        this.mobileDateString = null as any;
       }
 
       this.onChange(this._value);
-      this.setMobileValue();
 
       if (this.onValidatorChange) {
         this.onValidatorChange();
       }
+
+      this.changeDetectorRef.markForCheck();
     }
   }
 
