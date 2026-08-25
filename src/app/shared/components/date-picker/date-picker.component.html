@@ -50,7 +50,7 @@
     <div class="col size_1 height100 width100">
       <input [(ngModel)]="mobileDateString"
              [id]="inputId()"
-             (input)="handleMobileInput()"
+             (ngModelChange)="handleMobileInput(); onTouched()"
              (blur)="onTouched()"
              type="date"
              [placeholder]="placeholder()"
@@ -58,7 +58,7 @@
              [disabled]="disabled"
              [ngClass]="inputClassList() ? inputClassList() : 'ptl_input_text_size ptl_input_padding border_none'"
              style="outline-offset: -2px;"
-             class="access height100 width100"/>
+             class="access height100 width100 particle_mobile_date"/>
     </div>
   </div>
 }

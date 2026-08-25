@@ -161,6 +161,10 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
   }
 
   private static parseDateString(dateString: string): Date {
+    if (!dateString) {
+      return null as any;
+    }
+
     let parsedDate: Date;
     try {
       parsedDate = parse(dateString, DatePickerComponent.getDateFormat(dateString), this.referenceDate);
@@ -231,7 +235,9 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
   }
 
   validate(): ValidationErrors | null {
-    if ((this.dateString && !this.value) || (this.value && !isWithinInterval(this.value, this.validSelectionInterval))) {
+    const hasValidDate = this.value && isWithinInterval(this.value, this.validSelectionInterval);
+
+    if (!hasValidDate) {
       return { invalid: true };
     }
 
@@ -268,13 +274,23 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
   }
 
   handleInput(): void {
-    try {
-      const parsedDate = DatePickerComponent.parseDateString(this.dateString);
-      if (parsedDate !== null && isWithinInterval(parsedDate, this.validSelectionInterval)) {
-        this.updateModel(parsedDate);
+    if (!this.dateString) {
+      this.updateModel(null as any);
+    } else {
+      try {
+        const parsedDate = DatePickerComponent.parseDateString(this.dateString);
+        if (parsedDate !== null && isWithinInterval(parsedDate, this.validSelectionInterval)) {
+          this.updateModel(parsedDate);
+        } else {
+          this.updateModel(null as any);
+        }
+      } catch (e) {
+        this.updateModel(null as any);
       }
-    } catch (e) {
-      // console.log(e);
+    }
+
+    if (this.onValidatorChange) {
+      this.onValidatorChange();
     }
 
     this.input.emit();
@@ -288,6 +304,8 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
   setMobileValue(): void {
     if (this.value) {
       this.mobileDateString = format(this.value, 'yyyy-MM-dd');
+    } else {
+      this.mobileDateString = null as any;
     }
   }
 

@@ -53,3 +53,13 @@
   font-size:inherit;
   margin:-1px;
 }
+
+.particle_mobile_date {
+  text-align: left;
+}
+
+.particle_mobile_date::-webkit-date-and-time-value,
+.particle_mobile_date::-webkit-datetime-edit {
+  text-align: left;
+  justify-content: flex-start;
+}
