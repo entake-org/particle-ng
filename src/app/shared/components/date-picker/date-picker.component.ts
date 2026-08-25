@@ -282,48 +282,40 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
         if (parsedDate !== null && isWithinInterval(parsedDate, this.validSelectionInterval)) {
           this.updateModel(parsedDate);
         } else {
-          this.updateModel(null as any);
+          this._value = null as any;
+          this.mobileDateString = null as any;
+          this.onChange(this._value);
+          if (this.onValidatorChange) this.onValidatorChange();
         }
-      } catch (e) {
-        this.updateModel(null as any);
-      }
-    }
-
-    if (this.onValidatorChange) {
-      this.onValidatorChange();
+      } catch (e) {}
     }
 
     this.input.emit();
   }
 
   handleMobileInput(): void {
+    this.onTouched();
+
     if (!this.mobileDateString) {
       this.dateString = null as any;
       this.updateModel(null as any);
     } else {
       const parts = this.mobileDateString.split('-');
       if (parts.length === 3) {
-        const [year, month, day] = parts;
-        this.dateString = `${month}/${day}/${year}`;
-      } else {
-        this.dateString = this.mobileDateString;
-      }
+        const [year, month, day] = parts.map(p => parseInt(p, 10));
+        const parsedDate = new Date(year, month - 1, day);
 
-      const [year, month, day] = parts.map(p => parseInt(p, 10));
-      const parsedDate = new Date(year, month - 1, day);
-
-      if (isValid(parsedDate) && isWithinInterval(parsedDate, this.validSelectionInterval)) {
-        this.updateModel(parsedDate);
+        if (isValid(parsedDate) && isWithinInterval(parsedDate, this.validSelectionInterval)) {
+          this.updateModel(parsedDate);
+        } else {
+          this.updateModel(null as any);
+        }
       } else {
         this.updateModel(null as any);
       }
     }
 
     this.input.emit();
-
-    if (this.onValidatorChange) {
-      this.onValidatorChange();
-    }
   }
 
   setMobileValue(): void {
@@ -339,11 +331,12 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
 
     if (!this.disabled) {
       if (value !== null && isWithinInterval(value, this.validSelectionInterval)) {
-        this.value = value;
+        this._value = value;
+        this.dateString = DatePickerComponent.parseDate(value);
+        this.setMobileValue();
 
-        if (!isEqual(this.value, valueBeforeUpdate)) {
+        if (!isEqual(this._value, valueBeforeUpdate)) {
           this.dateSelected.emit(value);
-
           if (this.closeOnSelect()) {
             setTimeout(() => this.handleCalendarClose(), 200);
           }
@@ -355,11 +348,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
       }
 
       this.onChange(this._value);
-
-      if (this.onValidatorChange) {
-        this.onValidatorChange();
-      }
-
+      if (this.onValidatorChange) this.onValidatorChange();
       this.changeDetectorRef.markForCheck();
     }
   }
