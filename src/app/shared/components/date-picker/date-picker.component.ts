@@ -80,7 +80,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
   }
 
   get value(): Date {
-    return DatePickerComponent.parseDateString(this.dateString);
+    return this._value;
   }
 
   @Input()
@@ -248,7 +248,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
   }
 
   validate(): ValidationErrors | null {
-    const hasValidDate = this.value && isWithinInterval(this.value, this.validSelectionInterval);
+    const hasValidDate = this._value && isValid(this._value) && isWithinInterval(this._value, this.validSelectionInterval);
 
     if (!hasValidDate) {
       return { invalid: true };
