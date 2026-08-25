@@ -212,9 +212,22 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     this.isMobile = event.target.innerWidth <= 768;
   }
 
-  writeValue(value: Date): void {
-    if (value !== null && isWithinInterval(value, this.validSelectionInterval)) {
-      this.value = value;
+  writeValue(value: any): void {
+    let dateValue = value;
+
+    if (typeof value === 'string') {
+      dateValue = DatePickerComponent.parseDateString(value);
+
+      if (!dateValue && value.includes('-')) {
+        const parts = value.split('-');
+        if (parts.length === 3) {
+          dateValue = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+        }
+      }
+    }
+
+    if (dateValue !== null && isValid(dateValue) && isWithinInterval(dateValue, this.validSelectionInterval)) {
+      this.value = dateValue;
     } else {
       this.value = null as any;
     }
@@ -326,17 +339,28 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     }
   }
 
-  updateModel(value: Date): void {
+  updateModel(value: any): void {
     const valueBeforeUpdate = this._value;
 
     if (!this.disabled) {
-      if (value !== null && isWithinInterval(value, this.validSelectionInterval)) {
-        this._value = value;
-        this.dateString = DatePickerComponent.parseDate(value);
+      let safeDate = value;
+
+      if (typeof value === 'string') {
+        const parts = value.split('-');
+        if (parts.length === 3) {
+          safeDate = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+        } else {
+          safeDate = DatePickerComponent.parseDateString(value);
+        }
+      }
+
+      if (safeDate !== null && isValid(safeDate) && isWithinInterval(safeDate, this.validSelectionInterval)) {
+        this._value = safeDate;
+        this.dateString = DatePickerComponent.parseDate(safeDate);
         this.setMobileValue();
 
         if (!isEqual(this._value, valueBeforeUpdate)) {
-          this.dateSelected.emit(value);
+          this.dateSelected.emit(safeDate);
           if (this.closeOnSelect()) {
             setTimeout(() => this.handleCalendarClose(), 200);
           }
