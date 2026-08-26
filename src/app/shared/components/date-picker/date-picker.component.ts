@@ -75,7 +75,7 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     } else if (!isEqual(value, this._value)) {
       this._value = value;
       this.dateString = DatePickerComponent.parseDate(value);
-      this.setMobileValue();
+      this.mobileDateString = format(this._value, 'yyyy-MM-dd');
     }
   }
 
@@ -331,50 +331,43 @@ export class DatePickerComponent implements ControlValueAccessor, Validator {
     this.input.emit();
   }
 
-  setMobileValue(): void {
-    if (this.value) {
-      this.mobileDateString = format(this.value, 'yyyy-MM-dd');
-    } else {
-      this.mobileDateString = null as any;
-    }
-  }
-
   updateModel(value: any): void {
     const valueBeforeUpdate = this._value;
 
-    if (!this.disabled) {
-      let safeDate = value;
-
-      if (typeof value === 'string') {
-        const parts = value.split('-');
-        if (parts.length === 3) {
-          safeDate = new Date(+parts[0], +parts[1] - 1, +parts[2]);
-        } else {
-          safeDate = DatePickerComponent.parseDateString(value);
-        }
-      }
-
-      if (safeDate !== null && isValid(safeDate) && isWithinInterval(safeDate, this.validSelectionInterval)) {
-        this._value = safeDate;
-        this.dateString = DatePickerComponent.parseDate(safeDate);
-        this.setMobileValue();
-
-        if (!isEqual(this._value, valueBeforeUpdate)) {
-          this.dateSelected.emit(safeDate);
-          if (this.closeOnSelect()) {
-            setTimeout(() => this.handleCalendarClose(), 200);
-          }
-        }
-      } else {
-        this._value = null as any;
-        this.dateString = null as any;
-        this.mobileDateString = null as any;
-      }
-
-      this.onChange(this._value);
-      if (this.onValidatorChange) this.onValidatorChange();
-      this.changeDetectorRef.markForCheck();
+    if (this.disabled) {
+      return;
     }
+
+    let safeDate = value;
+
+    if (typeof value === 'string') {
+      const parts = value.split('-');
+      if (parts.length === 3) {
+        safeDate = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+      } else {
+        safeDate = DatePickerComponent.parseDateString(value);
+      }
+    }
+
+    if (safeDate !== null && isValid(safeDate) && isWithinInterval(safeDate, this.validSelectionInterval)) {
+      this._value = safeDate;
+      this.dateString = DatePickerComponent.parseDate(safeDate);
+      this.mobileDateString = format(this._value, 'yyyy-MM-dd');
+
+      if (!isEqual(this._value, valueBeforeUpdate)) {
+        this.dateSelected.emit(safeDate);
+        if (this.closeOnSelect()) {
+          setTimeout(() => this.handleCalendarClose(), 200);
+        }
+      }
+    } else {
+      this._value = null as any;
+      this.dateString = null as any;
+      this.mobileDateString = null as any;
+    }
+
+    this.onChange(this._value);
+    this.changeDetectorRef.detectChanges();
   }
 
   openCalendar(event?: MouseEvent): void {
