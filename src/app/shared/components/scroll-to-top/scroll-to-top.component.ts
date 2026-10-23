@@ -28,11 +28,18 @@ export class ScrollToTopComponent implements OnDestroy, AfterViewInit {
   private _listener: any;
 
   ngAfterViewInit(): void {
-    if (this.isBrowser && this.content()) {
-      this._listener = this.renderer.listen(this.content(), 'scroll', () => {
-        this.$scrollTop.next(this.content().scrollTop);
-      });
+    if (!this.isBrowser) {
+      return;
     }
+
+    const scrollTarget = this.content() || window;
+
+    this._listener = this.renderer.listen(scrollTarget, 'scroll', () => {
+      const currentScroll = this.content() ? this.content().scrollTop
+        : (window.scrollY || document.documentElement.scrollTop);
+
+      this.$scrollTop.next(currentScroll);
+    });
   }
 
   ngOnDestroy(): void {
@@ -42,14 +49,14 @@ export class ScrollToTopComponent implements OnDestroy, AfterViewInit {
   }
 
   scrollToTop(): void {
-    if (!this.isBrowser) return;
+    if (!this.isBrowser) {
+      return;
+    }
 
-    const content = this.content();
-    if (content) {
-      content.scroll({
-        top: 0,
-        behavior: 'smooth'
-      });
+    if (this.content()) {
+      this.content().scroll({ top: 0, behavior: 'smooth' });
+    } else {
+      window.scroll({ top: 0, behavior: 'smooth' });
     }
   }
 }

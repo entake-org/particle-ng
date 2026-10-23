@@ -1,5 +1,6 @@
 <input type="text"
        [placeholder]="placeholder()"
+       [attr.aria-label]="placeholder()"
        [ngClass]="classList()"
        [(ngModel)]="searchText"
        (ngModelChange)="doSearch()"
